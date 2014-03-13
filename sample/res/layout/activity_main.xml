@@ -1,6 +1,29 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+    <!-- Body -->
+    <com.github.pedrovgs.DraggableView android:layout_width="fill_parent"
+                                       android:layout_height="fill_parent"
+                                       android:orientation="vertical">
 
-</LinearLayout>
+        <LinearLayout
+                android:id="@+id/dragView"
+                android:layout_width="40dip"
+                android:orientation="vertical"
+                android:layout_height="200dip"
+                android:background="#000000"
+                android:paddingRight="4dip"
+                android:paddingLeft="4dip">
+
+        </LinearLayout>
+
+        <View
+                android:id="@+id/viewDesc"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#dddddd"/>
+
+
+    </com.github.pedrovgs.DraggableView>
+
+</RelativeLayout>
