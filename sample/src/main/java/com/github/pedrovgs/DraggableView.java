@@ -103,7 +103,7 @@ public class DraggableView extends RelativeLayout {
 
 
     private void changeSecondViewAlpha() {
-
+        ViewHelper.setAlpha(secondView, 1 - getVerticalDragOffset());
     }
 
     private float getVerticalDragOffset() {

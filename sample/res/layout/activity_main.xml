@@ -12,7 +12,7 @@
                 android:layout_below="@+id/dragView"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:background="#dddddd"/>
+                android:background="#ff0000"/>
 
         <LinearLayout
                 android:id="@+id/dragView"
