@@ -90,6 +90,10 @@ public class DraggableView extends LinearLayout {
             return left;
         }
 
+        @Override
+        public int clampViewPositionVertical(View child, int top, int dy) {
+            return top;
+        }
     }
 
 
