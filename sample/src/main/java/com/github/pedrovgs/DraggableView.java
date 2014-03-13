@@ -169,6 +169,15 @@ public class DraggableView extends RelativeLayout {
             invalidate();
         }
 
+        @Override
+        public void onViewReleased(View releasedChild, float xvel, float yvel) {
+            super.onViewReleased(releasedChild, xvel, yvel);
+            if (isHeaderAboveTheMiddle()) {
+                maximize();
+            } else {
+                minimize();
+            }
+        }
         
         @Override
         public boolean tryCaptureView(View view, int pointerId) {
