@@ -27,7 +27,7 @@ public class DraggableView extends RelativeLayout {
     public static final int SCALE_FACTOR = 2;
     private static final int DRAG_VIEW_MARGIN_RIGHT = 30;
     private static final int DRAG_VIEW_MARGIN_BOTTOM = 30;
-    private static final boolean DIRECTION_RIGHT = false;
+    private static final boolean RIGHT_DIRECTION = true;
 
 
     /*
@@ -80,16 +80,16 @@ public class DraggableView extends RelativeLayout {
     }
 
     private void changeDragViewXPosition() {
-        ViewHelper.setPivotX(dragView, dragView.getWidth() - getDragViewMarginRight());
+        ViewHelper.setPivotX(dragView, dragView.getWidth() * getDirection() - getDragViewMarginRight());
         ViewHelper.setPivotY(dragView, dragView.getHeight() - getDragViewMarginBottom());
     }
 
     private float getDirection() {
-        return DIRECTION_RIGHT ? 1 : -1;
+        return RIGHT_DIRECTION ? 1 : 0;
     }
 
     private int getDragViewMarginRight() {
-        return DRAG_VIEW_MARGIN_RIGHT;
+        return RIGHT_DIRECTION ? DRAG_VIEW_MARGIN_RIGHT : -DRAG_VIEW_MARGIN_RIGHT;
     }
 
     public int getDragViewMarginBottom() {
