@@ -20,10 +20,14 @@ import com.nineoldandroids.view.ViewHelper;
 public class DraggableView extends RelativeLayout {
 
     /*
-         * Constants
-         */
+     * Constants
+     */
     private static final String LOGTAG = "DraggableView";
+
     public static final int SCALE_FACTOR = 2;
+    private static final int DRAG_VIEW_MARGIN_RIGHT = 30;
+    private static final int DRAG_VIEW_MARGIN_BOTTOM = 30;
+    private static final boolean DIRECTION_RIGHT = false;
 
 
     /*
@@ -75,9 +79,31 @@ public class DraggableView extends RelativeLayout {
         }
     }
 
+    private void changeDragViewXPosition() {
+        ViewHelper.setPivotX(dragView, dragView.getWidth() - getDragViewMarginRight());
+        ViewHelper.setPivotY(dragView, dragView.getHeight() - getDragViewMarginBottom());
+    }
+
+    private float getDirection() {
+        return DIRECTION_RIGHT ? 1 : -1;
+    }
+
+    private int getDragViewMarginRight() {
+        return DRAG_VIEW_MARGIN_RIGHT;
+    }
+
+    public int getDragViewMarginBottom() {
+        return DRAG_VIEW_MARGIN_BOTTOM;
+    }
+
     private void changeDragViewScale() {
         ViewHelper.setScaleX(dragView, 1 - getVerticalDragOffset() / SCALE_FACTOR);
         ViewHelper.setScaleY(dragView, 1 - getVerticalDragOffset() / SCALE_FACTOR);
+    }
+
+
+    private void changeSecondViewAlpha() {
+
     }
 
     private float getVerticalDragOffset() {
@@ -88,12 +114,6 @@ public class DraggableView extends RelativeLayout {
         return getHeight() - dragView.getHeight();
     }
 
-    private void changeSecondViewAlpha() {
-
-    }
-
-
-
     /*
      * DragHelperCallback
      */
@@ -101,9 +121,9 @@ public class DraggableView extends RelativeLayout {
     private class DragHelperCallback extends ViewDragHelper.Callback {
         @Override
         public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
-            changeSecondViewAlpha();
             changeDragViewScale();
-
+            changeDragViewXPosition();
+            changeSecondViewAlpha();
             invalidate();
         }
 
