@@ -8,6 +8,7 @@ import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -21,14 +22,16 @@ import com.nineoldandroids.view.ViewHelper;
 public class DraggableView extends RelativeLayout {
 
     /*
-     * Constants
-     */
+             * Constants
+             */
     private static final String LOGTAG = "DraggableView";
 
     public static final int SCALE_FACTOR = 2;
     private static final int DRAG_VIEW_MARGIN_RIGHT = 30;
     private static final int DRAG_VIEW_MARGIN_BOTTOM = 30;
     private static final boolean RIGHT_DIRECTION = true;
+    public static final float SLIDE_TOP = 0f;
+    public static final float SLIDE_BOTTOM = 1f;
 
 
     /*
@@ -116,11 +119,40 @@ public class DraggableView extends RelativeLayout {
     }
 
     private float getVerticalDragOffset() {
-        return dragView.getTop() / getDragRange();
+        return dragView.getTop() / getVierticalDragRange();
     }
 
-    private float getDragRange() {
+    private float getVierticalDragRange() {
         return getHeight() - dragView.getHeight();
+    }
+
+    private boolean isHeaderAboveTheMiddle() {
+        Log.d(LOGTAG, "isHeaderAboveTheMiddle");
+        int viewHeight = getHeight();
+        float viewHeaderY = ViewHelper.getY(dragView) + (dragView.getHeight() / 2);
+        return viewHeaderY < (viewHeight * 0.5f);
+    }
+
+    public void maximize() {
+        Log.d(LOGTAG, "maximize");
+        smoothSlideTo(SLIDE_TOP);
+    }
+
+    public void minimize() {
+        Log.d(LOGTAG, "minimize");
+        smoothSlideTo(SLIDE_BOTTOM);
+    }
+
+
+    private boolean smoothSlideTo(float slideOffset) {
+        final int topBound = getPaddingTop();
+        int y = (int) (topBound + slideOffset * getVierticalDragRange());
+
+        if (dragHelper.smoothSlideViewTo(dragView, dragView.getLeft(), y)) {
+            ViewCompat.postInvalidateOnAnimation(this);
+            return true;
+        }
+        return false;
     }
 
     /*
@@ -137,6 +169,7 @@ public class DraggableView extends RelativeLayout {
             invalidate();
         }
 
+        
         @Override
         public boolean tryCaptureView(View view, int pointerId) {
             return view == dragView;
