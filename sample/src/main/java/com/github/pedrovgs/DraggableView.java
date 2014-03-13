@@ -9,28 +9,31 @@ import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import com.nineoldandroids.view.ViewHelper;
 
 /**
  * Class created to extends a ViewGroup and simulate the YoutubeLayoutComponent
  *
  * @author "Pedro Vicente Gómez Sánchez"
  */
-public class DraggableView extends LinearLayout {
+public class DraggableView extends RelativeLayout {
 
     /*
-     * Constants
-     */
+         * Constants
+         */
     private static final String LOGTAG = "DraggableView";
+    public static final int SCALE_FACTOR = 2;
 
 
     /*
      * Attributes
      */
 
-    private ViewDragHelper dragHelper;
     private View dragView;
+    private View secondView;
 
+    private ViewDragHelper dragHelper;
 
     /*
      * Constructors
@@ -61,7 +64,9 @@ public class DraggableView extends LinearLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
         dragView = findViewById(R.id.dragView);
+        secondView = findViewById(R.id.secondView);
     }
+
 
     @Override
     public void computeScroll() {
@@ -70,6 +75,25 @@ public class DraggableView extends LinearLayout {
         }
     }
 
+    private void changeDragViewScale() {
+        ViewHelper.setScaleX(dragView, 1 - getVerticalDragOffset() / SCALE_FACTOR);
+        ViewHelper.setScaleY(dragView, 1 - getVerticalDragOffset() / SCALE_FACTOR);
+    }
+
+    private float getVerticalDragOffset() {
+        return dragView.getTop() / getDragRange();
+    }
+
+    private float getDragRange() {
+        return getHeight() - dragView.getHeight();
+    }
+
+    private void changeSecondViewAlpha() {
+
+    }
+
+
+
     /*
      * DragHelperCallback
      */
@@ -77,6 +101,9 @@ public class DraggableView extends LinearLayout {
     private class DragHelperCallback extends ViewDragHelper.Callback {
         @Override
         public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
+            changeSecondViewAlpha();
+            changeDragViewScale();
+
             invalidate();
         }
 
@@ -87,12 +114,17 @@ public class DraggableView extends LinearLayout {
 
         @Override
         public int clampViewPositionHorizontal(View child, int left, int dx) {
-            return left;
+            return 0;
         }
+
 
         @Override
         public int clampViewPositionVertical(View child, int top, int dy) {
-            return top;
+            final int topBound = getPaddingTop();
+            final int bottomBound = getHeight() - child.getHeight() - child.getPaddingBottom();
+
+            final int newTop = Math.min(Math.max(top, topBound), bottomBound);
+            return newTop;
         }
     }
 

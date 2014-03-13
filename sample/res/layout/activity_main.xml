@@ -2,27 +2,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
     <!-- Body -->
-    <com.github.pedrovgs.DraggableView android:layout_width="fill_parent"
-                                       android:layout_height="fill_parent"
-                                       android:orientation="vertical">
+    <com.github.pedrovgs.DraggableView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
 
-        <LinearLayout
-                android:id="@+id/dragView"
-                android:layout_width="40dip"
-                android:orientation="vertical"
-                android:layout_height="200dip"
-                android:background="#000000"
-                android:paddingRight="4dip"
-                android:paddingLeft="4dip">
-
-        </LinearLayout>
 
         <View
-                android:id="@+id/viewDesc"
+                android:id="@+id/secondView"
+                android:layout_below="@+id/dragView"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:background="#dddddd"/>
 
+        <LinearLayout
+                android:id="@+id/dragView"
+                android:orientation="vertical"
+                android:layout_height="200dip"
+                android:layout_width="fill_parent"
+                android:background="#000000"
+                android:paddingRight="4dip"
+                android:paddingLeft="4dip"
+                android:layout_alignParentTop="true">
+
+        </LinearLayout>
 
     </com.github.pedrovgs.DraggableView>
 
