@@ -2,6 +2,7 @@ package com.github.pedrovgs;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.ViewCompat;
@@ -92,13 +93,21 @@ public class DraggableView extends RelativeLayout {
         return RIGHT_DIRECTION ? DRAG_VIEW_MARGIN_RIGHT : -DRAG_VIEW_MARGIN_RIGHT;
     }
 
-    public int getDragViewMarginBottom() {
+    private int getDragViewMarginBottom() {
         return DRAG_VIEW_MARGIN_BOTTOM;
     }
 
     private void changeDragViewScale() {
         ViewHelper.setScaleX(dragView, 1 - getVerticalDragOffset() / SCALE_FACTOR);
         ViewHelper.setScaleY(dragView, 1 - getVerticalDragOffset() / SCALE_FACTOR);
+    }
+
+    private void changeBackgroundAlpha() {
+        Drawable background = getBackground();
+        if (background != null) {
+            int newAlpha = (int) (100 * (1 - getVerticalDragOffset()));
+            background.setAlpha(newAlpha);
+        }
     }
 
 
@@ -124,6 +133,7 @@ public class DraggableView extends RelativeLayout {
             changeDragViewScale();
             changeDragViewXPosition();
             changeSecondViewAlpha();
+            changeBackgroundAlpha();
             invalidate();
         }
 
@@ -147,7 +157,6 @@ public class DraggableView extends RelativeLayout {
             return newTop;
         }
     }
-
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
