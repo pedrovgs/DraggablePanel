@@ -41,7 +41,7 @@ public class DraggableView extends RelativeLayout {
     private View dragView;
     private View secondView;
 
-    private ViewDragHelper dragHelper;
+    private ViewDragHelper viewDragHelper;
 
     /*
      * Constructors
@@ -65,7 +65,7 @@ public class DraggableView extends RelativeLayout {
     }
 
     private void initializeView() {
-        dragHelper = ViewDragHelper.create(this, 1f, new DragHelperCallback());
+        viewDragHelper = ViewDragHelper.create(this, 1f, new DragPanelCallback());
     }
 
     @Override
@@ -78,7 +78,7 @@ public class DraggableView extends RelativeLayout {
 
     @Override
     public void computeScroll() {
-        if (dragHelper.continueSettling(true)) {
+        if (viewDragHelper.continueSettling(true)) {
             ViewCompat.postInvalidateOnAnimation(this);
         }
     }
@@ -148,7 +148,7 @@ public class DraggableView extends RelativeLayout {
         final int topBound = getPaddingTop();
         int y = (int) (topBound + slideOffset * getVierticalDragRange());
 
-        if (dragHelper.smoothSlideViewTo(dragView, dragView.getLeft(), y)) {
+        if (viewDragHelper.smoothSlideViewTo(dragView, dragView.getLeft(), y)) {
             ViewCompat.postInvalidateOnAnimation(this);
             return true;
         }
@@ -156,10 +156,10 @@ public class DraggableView extends RelativeLayout {
     }
 
     /*
-     * DragHelperCallback
+     * DragPanelCallback
      */
 
-    private class DragHelperCallback extends ViewDragHelper.Callback {
+    private class DragPanelCallback extends ViewDragHelper.Callback {
         @Override
         public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
             changeDragViewScale();
@@ -178,7 +178,7 @@ public class DraggableView extends RelativeLayout {
                 minimize();
             }
         }
-        
+
         @Override
         public boolean tryCaptureView(View view, int pointerId) {
             return view == dragView;
@@ -204,15 +204,15 @@ public class DraggableView extends RelativeLayout {
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         final int action = MotionEventCompat.getActionMasked(ev);
         if (action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_UP) {
-            dragHelper.cancel();
+            viewDragHelper.cancel();
             return false;
         }
-        return dragHelper.shouldInterceptTouchEvent(ev);
+        return viewDragHelper.shouldInterceptTouchEvent(ev);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        dragHelper.processTouchEvent(ev);
+        viewDragHelper.processTouchEvent(ev);
         return true;
     }
 
