@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 import com.nineoldandroids.view.ViewHelper;
 
 /**
@@ -71,11 +72,27 @@ public class DraggableView extends RelativeLayout {
         viewDragHelper = ViewDragHelper.create(this, 1f, new DragPanelCallback());
     }
 
+    private void hookListeners() {
+        dragView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Drag View touched", Toast.LENGTH_SHORT).show();
+            }
+        });
+        secondView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Second View touched", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
         dragView = findViewById(R.id.dragView);
         secondView = findViewById(R.id.secondView);
+        hookListeners();
     }
 
 
