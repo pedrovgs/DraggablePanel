@@ -22,16 +22,19 @@ import com.nineoldandroids.view.ViewHelper;
 public class DraggableView extends RelativeLayout {
 
     /*
-             * Constants
-             */
+     * Constants
+     */
+
     private static final String LOGTAG = "DraggableView";
 
-    public static final int SCALE_FACTOR = 2;
+    private static final int SCALE_FACTOR = 2;
     private static final int DRAG_VIEW_MARGIN_RIGHT = 30;
     private static final int DRAG_VIEW_MARGIN_BOTTOM = 30;
     private static final boolean RIGHT_DIRECTION = true;
-    public static final float SLIDE_TOP = 0f;
-    public static final float SLIDE_BOTTOM = 1f;
+    private static final float SLIDE_TOP = 0f;
+    private static final float SLIDE_BOTTOM = 1f;
+    private static final int MINIMUM_DY_FOR_VERTICAL_DRAG = 10;
+    private static final int MINIMUN_DX_FOR_HORIZONTAL_DRAG = 10;
 
 
     /*
@@ -156,6 +159,24 @@ public class DraggableView extends RelativeLayout {
     }
 
     private boolean isMinimized() {
+        return isDragViewAtBottom() && isDragViewAtRight();
+    }
+
+    private boolean isMaximized() {
+        return isDragViewAtTop();
+    }
+
+    private boolean isDragViewAtTop() {
+        return dragView.getTop() == 0;
+    }
+
+    private boolean isDragViewAtRight() {
+        return dragView.getRight() >= (getWidth() - MINIMUN_DX_FOR_HORIZONTAL_DRAG);
+    }
+
+    private boolean isDragViewAtBottom() {
+        Log.e("DEPURAR", "TOP " + dragView.getTop());
+        Log.e("DEPURAR", "HEIGHT - HEIGHT " + (getHeight() - dragView.getHeight()));
         return dragView.getTop() == (getHeight() - dragView.getHeight());
     }
 
@@ -164,23 +185,28 @@ public class DraggableView extends RelativeLayout {
      */
 
     private class DragPanelCallback extends ViewDragHelper.Callback {
+
         @Override
         public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
-            changeDragViewScale();
-            changeDragViewXPosition();
-            changeSecondViewAlpha();
-            changeBackgroundAlpha();
+            if (isDragViewAtBottom()) {
+                super.onViewPositionChanged(changedView, left, top, dx, dy);
+            } else {
+                changeDragViewScale();
+                changeDragViewXPosition();
+                changeSecondViewAlpha();
+                changeBackgroundAlpha();
+            }
             invalidate();
         }
 
         @Override
         public void onViewReleased(View releasedChild, float xvel, float yvel) {
             super.onViewReleased(releasedChild, xvel, yvel);
-            if (isHeaderAboveTheMiddle()) {
+            /*if (isHeaderAboveTheMiddle()) {
                 maximize();
             } else {
                 minimize();
-            }
+            }*/
         }
 
         @Override
@@ -190,16 +216,27 @@ public class DraggableView extends RelativeLayout {
 
         @Override
         public int clampViewPositionHorizontal(View child, int left, int dx) {
-            return 0;
+            int newLeft = 0;
+            if (((isMinimized() && (dx > MINIMUN_DX_FOR_HORIZONTAL_DRAG || dx < -MINIMUN_DX_FOR_HORIZONTAL_DRAG))) || (isDragViewAtBottom())) {
+                Log.e("DEPURAR", "-> LEFT " + left);
+                Log.e("DEPURAR", "-> dx " + dx);
+                newLeft = left;
+            }
+            return newLeft;
         }
 
 
         @Override
         public int clampViewPositionVertical(View child, int top, int dy) {
-            final int topBound = getPaddingTop();
-            final int bottomBound = getHeight() - child.getHeight() - child.getPaddingBottom();
+            int newTop = 0;
+            if (isMinimized() && dy >= MINIMUM_DY_FOR_VERTICAL_DRAG || (!isMinimized() && !isDragViewAtBottom())) {
+                final int topBound = getPaddingTop();
+                final int bottomBound = getHeight() - child.getHeight() - child.getPaddingBottom();
 
-            final int newTop = Math.min(Math.max(top, topBound), bottomBound);
+                newTop = Math.min(Math.max(top, topBound), bottomBound);
+            } else {
+                newTop = getHeight() - dragView.getHeight();
+            }
             return newTop;
         }
     }
