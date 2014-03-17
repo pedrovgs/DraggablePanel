@@ -121,6 +121,14 @@ public class DraggableView extends RelativeLayout {
         ViewHelper.setAlpha(secondView, 1 - getVerticalDragOffset());
     }
 
+    private void changeDragViewViewAlpha() {
+        ViewHelper.setAlpha(dragView, 1 - getHorizontalDragOffset());
+    }
+
+    private float getHorizontalDragOffset() {
+        return (float) Math.abs(dragView.getLeft()) / (float) getWidth();
+    }
+
     private float getVerticalDragOffset() {
         return dragView.getTop() / getVierticalDragRange();
     }
@@ -198,8 +206,6 @@ public class DraggableView extends RelativeLayout {
     }
 
     private boolean isDragViewAtBottom() {
-        Log.e("DEPURAR", "TOP " + dragView.getTop());
-        Log.e("DEPURAR", "HEIGHT - HEIGHT " + (getHeight() - dragView.getHeight()));
         return dragView.getTop() == (getHeight() - dragView.getHeight());
     }
 
@@ -212,7 +218,7 @@ public class DraggableView extends RelativeLayout {
         @Override
         public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
             if (isDragViewAtBottom()) {
-                super.onViewPositionChanged(changedView, left, top, dx, dy);
+                changeDragViewViewAlpha();
             } else {
                 changeDragViewScale();
                 changeDragViewXPosition();
