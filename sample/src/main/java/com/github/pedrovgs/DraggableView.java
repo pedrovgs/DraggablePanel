@@ -155,6 +155,10 @@ public class DraggableView extends RelativeLayout {
         return false;
     }
 
+    private boolean isMinimized() {
+        return dragView.getTop() == (getHeight() - dragView.getHeight());
+    }
+
     /*
      * DragPanelCallback
      */
