@@ -177,6 +177,18 @@ public class DraggableView extends RelativeLayout {
         return isDragViewAtTop();
     }
 
+    private boolean isNextToLeftBound() {
+        if (RIGHT_DIRECTION) {
+            return (dragView.getRight() - getDragViewMarginRight()) < getWidth() / 2;
+        } else {
+            return (dragView.getLeft() - getDragViewMarginRight()) > getWidth() / 2;
+        }
+    }
+
+    private boolean isNextToRightBound() {
+        return (dragView.getLeft() - getDragViewMarginRight()) > getWidth() * 0.25;
+    }
+
     private boolean isDragViewAtTop() {
         return dragView.getTop() == 0;
     }
@@ -239,8 +251,6 @@ public class DraggableView extends RelativeLayout {
         public int clampViewPositionHorizontal(View child, int left, int dx) {
             int newLeft = 0;
             if (((isMinimized() && (dx > MINIMUN_DX_FOR_HORIZONTAL_DRAG || dx < -MINIMUN_DX_FOR_HORIZONTAL_DRAG))) || (isDragViewAtBottom())) {
-                Log.e("DEPURAR", "-> LEFT " + left);
-                Log.e("DEPURAR", "-> dx " + dx);
                 newLeft = left;
             }
             return newLeft;
@@ -260,18 +270,6 @@ public class DraggableView extends RelativeLayout {
             }
             return newTop;
         }
-    }
-
-    private boolean isNextToLeftBound() {
-        if (RIGHT_DIRECTION) {
-            return (dragView.getRight() - getDragViewMarginRight()) < getWidth() / 2;
-        } else {
-            return (dragView.getLeft() - getDragViewMarginRight()) > getWidth() / 2;
-        }
-    }
-
-    private boolean isNextToRightBound() {
-        return (dragView.getLeft() - getDragViewMarginRight()) > getWidth() * 0.25;
     }
 
     @Override
