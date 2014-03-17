@@ -146,16 +146,27 @@ public class DraggableView extends RelativeLayout {
         smoothSlideTo(SLIDE_BOTTOM);
     }
 
-
     private boolean smoothSlideTo(float slideOffset) {
         final int topBound = getPaddingTop();
         int y = (int) (topBound + slideOffset * getVierticalDragRange());
 
-        if (viewDragHelper.smoothSlideViewTo(dragView, dragView.getLeft(), y)) {
+        if (viewDragHelper.smoothSlideViewTo(dragView, 0, y)) {
             ViewCompat.postInvalidateOnAnimation(this);
             return true;
         }
         return false;
+    }
+
+    private void closeToRight() {
+        if (viewDragHelper.smoothSlideViewTo(dragView, dragView.getWidth(), getHeight() - dragView.getHeight())) {
+            ViewCompat.postInvalidateOnAnimation(this);
+        }
+    }
+
+    private void closeToLeft() {
+        if (viewDragHelper.smoothSlideViewTo(dragView, -dragView.getWidth(), getHeight() - dragView.getHeight())) {
+            ViewCompat.postInvalidateOnAnimation(this);
+        }
     }
 
     private boolean isMinimized() {
@@ -209,7 +220,13 @@ public class DraggableView extends RelativeLayout {
                     minimize();
                 }
             } else {
-
+                if (isNextToLeftBound()) {
+                    closeToLeft();
+                } else if (isNextToRightBound()) {
+                    closeToRight();
+                } else {
+                    minimize();
+                }
             }
         }
 
@@ -243,6 +260,18 @@ public class DraggableView extends RelativeLayout {
             }
             return newTop;
         }
+    }
+
+    private boolean isNextToLeftBound() {
+        if (RIGHT_DIRECTION) {
+            return (dragView.getRight() - getDragViewMarginRight()) < getWidth() / 2;
+        } else {
+            return (dragView.getLeft() - getDragViewMarginRight()) > getWidth() / 2;
+        }
+    }
+
+    private boolean isNextToRightBound() {
+        return (dragView.getLeft() - getDragViewMarginRight()) > getWidth() * 0.25;
     }
 
     @Override
