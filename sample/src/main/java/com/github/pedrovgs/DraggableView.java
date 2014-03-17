@@ -34,7 +34,7 @@ public class DraggableView extends RelativeLayout {
     private static final float SLIDE_TOP = 0f;
     private static final float SLIDE_BOTTOM = 1f;
     private static final int MINIMUM_DY_FOR_VERTICAL_DRAG = 10;
-    private static final int MINIMUN_DX_FOR_HORIZONTAL_DRAG = 10;
+    private static final int MINIMUN_DX_FOR_HORIZONTAL_DRAG = 20;
 
 
     /*
@@ -202,11 +202,15 @@ public class DraggableView extends RelativeLayout {
         @Override
         public void onViewReleased(View releasedChild, float xvel, float yvel) {
             super.onViewReleased(releasedChild, xvel, yvel);
-            /*if (isHeaderAboveTheMiddle()) {
-                maximize();
+            if (!isDragViewAtBottom()) {
+                if (isHeaderAboveTheMiddle()) {
+                    maximize();
+                } else {
+                    minimize();
+                }
             } else {
-                minimize();
-            }*/
+
+            }
         }
 
         @Override
@@ -229,7 +233,7 @@ public class DraggableView extends RelativeLayout {
         @Override
         public int clampViewPositionVertical(View child, int top, int dy) {
             int newTop = 0;
-            if (isMinimized() && dy >= MINIMUM_DY_FOR_VERTICAL_DRAG || (!isMinimized() && !isDragViewAtBottom())) {
+            if (isMinimized() && (dy >= MINIMUM_DY_FOR_VERTICAL_DRAG || dy >= -MINIMUM_DY_FOR_VERTICAL_DRAG) || (!isMinimized() && !isDragViewAtBottom())) {
                 final int topBound = getPaddingTop();
                 final int bottomBound = getHeight() - child.getHeight() - child.getPaddingBottom();
 
