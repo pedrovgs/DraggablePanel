@@ -20,7 +20,7 @@ import com.nineoldandroids.view.ViewHelper;
  *
  * @author "Pedro Vicente Gómez Sánchez"
  */
-public class DraggableView extends RelativeLayout {
+class DraggableView extends RelativeLayout {
 
     /*
      * Constants
@@ -75,21 +75,6 @@ public class DraggableView extends RelativeLayout {
         viewDragHelper = ViewDragHelper.create(this, 1f, new DragPanelCallback());
     }
 
-    private void hookListeners() {
-        dragView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(), "Drag View touched", Toast.LENGTH_SHORT).show();
-            }
-        });
-        secondView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(), "Second View touched", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
@@ -105,6 +90,22 @@ public class DraggableView extends RelativeLayout {
             ViewCompat.postInvalidateOnAnimation(this);
         }
     }
+
+    private void hookListeners() {
+        dragView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Drag View touched", Toast.LENGTH_SHORT).show();
+            }
+        });
+        secondView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Second View touched", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
     private void changeDragViewPosition() {
         ViewHelper.setPivotX(dragView, dragView.getWidth() * getDirection() - getDragViewMarginRight());

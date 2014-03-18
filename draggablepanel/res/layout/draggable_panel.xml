@@ -1,0 +1,32 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+    <!-- Body -->
+    <com.github.pedrovgs.DraggableView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#000000">
+
+
+        <View
+                android:id="@+id/secondView"
+                android:layout_below="@+id/dragView"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#ff0000"/>
+
+        <LinearLayout
+                android:id="@+id/dragView"
+                android:orientation="vertical"
+                android:layout_height="200dip"
+                android:layout_width="fill_parent"
+                android:background="#000000"
+                android:paddingRight="4dip"
+                android:paddingLeft="4dip"
+                android:layout_alignParentTop="true">
+
+        </LinearLayout>
+
+    </com.github.pedrovgs.DraggableView>
+
+</merge>

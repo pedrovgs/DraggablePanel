@@ -29,20 +29,6 @@
             <type>apklib</type>
         </dependency>
 
-
-        <dependency>
-            <groupId>com.nineoldandroids</groupId>
-            <artifactId>library</artifactId>
-            <version>2.4.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.android</groupId>
-            <artifactId>support-v4</artifactId>
-            <version>13</version>
-        </dependency>
-
-
     </dependencies>
 
 
