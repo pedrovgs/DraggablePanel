@@ -1,28 +1,22 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
+<com.github.pedrovgs.DraggableView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/draggableView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
-    <com.github.pedrovgs.DraggableView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/draggableView"
+    <FrameLayout
+            android:id="@+id/secondView"
+            android:layout_below="@+id/dragView"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:background="#000000"/>
 
-        <FrameLayout
-                android:id="@+id/secondView"
-                android:layout_below="@+id/dragView"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#000000"/>
+    <FrameLayout
+            android:id="@+id/dragView"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_alignParentTop="true"
+            android:background="#FF6666"/>
 
-        <FrameLayout
-                android:id="@+id/dragView"
-                android:orientation="vertical"
-                android:layout_height="wrap_content"
-                android:layout_width="fill_parent"
-                android:layout_alignParentTop="true"
-                android:background="#FF6666"/>
-
-    </com.github.pedrovgs.DraggableView>
-
-</RelativeLayout>
+</com.github.pedrovgs.DraggableView>
