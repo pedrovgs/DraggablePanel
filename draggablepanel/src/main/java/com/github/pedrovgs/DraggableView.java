@@ -4,6 +4,8 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ViewDragHelper;
@@ -45,6 +47,7 @@ class DraggableView extends RelativeLayout {
     private View dragView;
     private View secondView;
 
+    private FragmentManager fragmentManager;
     private ViewDragHelper viewDragHelper;
 
     private int lastActionMotionEvent = -1;
@@ -71,6 +74,22 @@ class DraggableView extends RelativeLayout {
         initializeView();
     }
 
+    public void setFragmentManager(FragmentManager fragmentManager) {
+        this.fragmentManager = fragmentManager;
+    }
+
+    public void attachTopFragment(Fragment topFragment) {
+        addFragmentToView(R.id.dragView, topFragment);
+    }
+
+    public void attachBottomFragment(Fragment bottomFragment) {
+        addFragmentToView(R.id.secondView, bottomFragment);
+    }
+
+    private void addFragmentToView(final int viewId, final Fragment fragment) {
+        fragmentManager.beginTransaction().replace(viewId, fragment).commit();
+    }
+
     private void initializeView() {
         viewDragHelper = ViewDragHelper.create(this, 1f, new DragPanelCallback());
     }
@@ -78,15 +97,17 @@ class DraggableView extends RelativeLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        dragView = findViewById(R.id.dragView);
-        secondView = findViewById(R.id.secondView);
-        hookListeners();
+        if (!isInEditMode()) {
+            dragView = findViewById(R.id.dragView);
+            secondView = findViewById(R.id.secondView);
+            hookListeners();
+        }
     }
 
 
     @Override
     public void computeScroll() {
-        if (viewDragHelper.continueSettling(true)) {
+        if (!isInEditMode() && viewDragHelper.continueSettling(true)) {
             ViewCompat.postInvalidateOnAnimation(this);
         }
     }

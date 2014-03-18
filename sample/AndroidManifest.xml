@@ -3,8 +3,7 @@
           package="com.github.pedrovgs">
 
     <uses-sdk android:minSdkVersion="8"
-              android:targetSdkVersion="19"
-              android:maxSdkVersion="19"/>
+              android:targetSdkVersion="19"/>
 
     <application
             android:allowBackup="true"

@@ -1,32 +1,76 @@
 package com.github.pedrovgs;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.AttributeSet;
-import android.widget.RelativeLayout;
+import android.widget.FrameLayout;
 
 /**
  * @author Pedro Vicente Gómez Sánchez.
  */
-public class DraggablePanel extends RelativeLayout {
+public class DraggablePanel extends FrameLayout {
+
+    private Fragment topFragment;
+    private Fragment bottomFragment;
+    private FragmentManager fragmentManager;
 
     public DraggablePanel(Context context) {
         super(context);
-        initializeView();
+        initializeEditMode();
     }
 
     public DraggablePanel(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initializeView();
+        initializeEditMode();
     }
+
 
     public DraggablePanel(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        initializeView();
+        initializeEditMode();
     }
 
-    private void initializeView() {
+    private void initializeEditMode() {
+        if (isInEditMode()) {
+            inflate(getContext(), R.layout.draggable_panel, this);
+        }
+    }
+
+    public void setTopFragment(Fragment topFragment) {
+        this.topFragment = topFragment;
+    }
+
+    public void setBottomFragment(Fragment bottomFragment) {
+        this.bottomFragment = bottomFragment;
+    }
+
+    public void setFragmentManager(FragmentManager fragmentManager) {
+        this.fragmentManager = fragmentManager;
+    }
+
+    public void initializeView() {
+        checkFragmentConsistency();
+        checkSupportFragmentmanagerConsistency();
+
         inflate(getContext(), R.layout.draggable_panel, this);
+        DraggableView draggableView = (DraggableView) findViewById(R.id.draggableView);
+
+        draggableView.setFragmentManager(fragmentManager);
+        draggableView.attachTopFragment(topFragment);
+        draggableView.attachBottomFragment(bottomFragment);
     }
 
+    private void checkSupportFragmentmanagerConsistency() {
+        if (fragmentManager == null) {
+            throw new IllegalStateException("You have to set the support FragmentManager before initialize DraggablePanel");
+        }
+    }
+
+    private void checkFragmentConsistency() {
+        if (topFragment == null || bottomFragment == null) {
+            throw new IllegalStateException("You have to set top and bottom fragment before initialize DraggablePanel");
+        }
+    }
 
 }

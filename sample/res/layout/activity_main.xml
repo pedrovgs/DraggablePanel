@@ -3,7 +3,9 @@
                 android:layout_height="match_parent">
     <!-- Body -->
     <com.github.pedrovgs.DraggablePanel
+            android:id="@+id/draggablePanel"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"/>
+            android:layout_height="fill_parent"
+            android:background="#55000000"/>
 
 </RelativeLayout>
