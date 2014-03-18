@@ -106,9 +106,13 @@ public class DraggableView extends RelativeLayout {
         }
     }
 
-    private void changeDragViewXPosition() {
+    private void changeDragViewPosition() {
         ViewHelper.setPivotX(dragView, dragView.getWidth() * getDirection() - getDragViewMarginRight());
         ViewHelper.setPivotY(dragView, dragView.getHeight() - getDragViewMarginBottom());
+    }
+
+    private void changeSeondViewPosition() {
+        ViewHelper.setY(secondView, dragView.getTop() + dragView.getHeight());
     }
 
     private float getDirection() {
@@ -241,8 +245,9 @@ public class DraggableView extends RelativeLayout {
                 changeDragViewViewAlpha();
             } else {
                 changeDragViewScale();
-                changeDragViewXPosition();
+                changeDragViewPosition();
                 changeSecondViewAlpha();
+                changeSeondViewPosition();
                 changeBackgroundAlpha();
             }
             invalidate();
