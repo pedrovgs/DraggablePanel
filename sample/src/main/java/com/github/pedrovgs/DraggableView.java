@@ -47,6 +47,9 @@ public class DraggableView extends RelativeLayout {
 
     private ViewDragHelper viewDragHelper;
 
+    private int lastActionMotionEvent = -1;
+
+
     /*
      * Constructors
      */
@@ -282,7 +285,7 @@ public class DraggableView extends RelativeLayout {
 
         @Override
         public int clampViewPositionVertical(View child, int top, int dy) {
-            int newTop = 0;
+            int newTop;
             if (isMinimized() && (dy >= MINIMUM_DY_FOR_VERTICAL_DRAG || dy >= -MINIMUM_DY_FOR_VERTICAL_DRAG) || (!isMinimized() && !isDragViewAtBottom())) {
                 final int topBound = getPaddingTop();
                 final int bottomBound = getHeight() - child.getHeight() - child.getPaddingBottom();
@@ -298,17 +301,62 @@ public class DraggableView extends RelativeLayout {
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         final int action = MotionEventCompat.getActionMasked(ev);
+        Log.d(LOGTAG, "onInterceptTouchEvent " + action);
+
+        if ((action != MotionEvent.ACTION_DOWN)) {
+            Log.d(LOGTAG, "ACTION_DOWN");
+            viewDragHelper.cancel();
+            return super.onInterceptTouchEvent(ev);
+        }
+
         if (action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_UP) {
+            Log.d(LOGTAG, "ACTION_CANCEL || ACTION_UP");
             viewDragHelper.cancel();
             return false;
         }
-        return viewDragHelper.shouldInterceptTouchEvent(ev);
+
+        final float x = ev.getX();
+        final float y = ev.getY();
+        boolean interceptTap = false;
+
+        switch (action) {
+            case MotionEvent.ACTION_DOWN:
+                interceptTap = viewDragHelper.isViewUnder(dragView, (int) x, (int) y);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                interceptTap = false;
+        }
+
+        return viewDragHelper.shouldInterceptTouchEvent(ev) || interceptTap;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
+        Log.d(LOGTAG, "onTouchEvent");
         viewDragHelper.processTouchEvent(ev);
+        boolean dragViewTouched = isViewHit(dragView, (int) ev.getX(), (int) ev.getY()) && ev.getAction() == MotionEvent.ACTION_UP && lastActionMotionEvent != MotionEvent.ACTION_MOVE;
+        if (dragViewTouched) {
+            dragView.performClick();
+        }
+        boolean secondViewTouched = isViewHit(secondView, (int) ev.getX(), (int) ev.getY()) && ev.getAction() == MotionEvent.ACTION_UP && lastActionMotionEvent != MotionEvent.ACTION_MOVE;
+        if (secondViewTouched && !dragViewTouched) {
+            secondView.performClick();
+        }
+        lastActionMotionEvent = ev.getAction();
         return true;
     }
+
+    private boolean isViewHit(View view, int x, int y) {
+        Log.d(LOGTAG, "isViewHit");
+        int[] viewLocation = new int[2];
+        view.getLocationOnScreen(viewLocation);
+        int[] parentLocation = new int[2];
+        this.getLocationOnScreen(parentLocation);
+        int screenX = parentLocation[0] + x;
+        int screenY = parentLocation[1] + y;
+        return screenX >= viewLocation[0] && screenX < viewLocation[0] + view.getWidth() &&
+                screenY >= viewLocation[1] && screenY < viewLocation[1] + view.getHeight();
+    }
+
 
 }
