@@ -373,17 +373,7 @@ class DraggableView extends RelativeLayout {
         boolean isHeaderViewUnder = viewDragHelper.isViewUnder(dragView, (int) x, (int) y);
         boolean isHeaderViewHit = isViewHit(dragView, (int) x, (int) y);
         boolean isDescViewHit = isViewHit(secondView, (int) x, (int) y);
-        /*
-         * Check if is under view and hitting header view to perform click on ACTION_UP motion event
-         * This event is executed if when the ACTION_UP is called the finger is over the headerView
-         * we have pending improve this check to avoid stop or play the video when drag and drop
-         * the view header
-         */
-
-        if (isHeaderViewHit && isHeaderViewUnder && ev.getAction() == MotionEvent.ACTION_UP) {
-            dragView.performClick();
-        }
-
+     
         for (int i = 0; i < dragView.getChildCount(); i++) {
             dragView.getChildAt(i).dispatchTouchEvent(ev);
         }
