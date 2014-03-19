@@ -245,9 +245,9 @@ class DraggableView extends RelativeLayout {
         return dragView.getTop() == (getHeight() - dragView.getHeight());
     }
 
-    public void setTopViewHeight(final int topFragmentHeight) {
+    public void setTopViewHeight(float topFragmentHeight) {
         LayoutParams layoutParams = (LayoutParams) dragView.getLayoutParams();
-        layoutParams.height = topFragmentHeight;
+        layoutParams.height = (int) topFragmentHeight;
         dragView.setLayoutParams(layoutParams);
     }
 

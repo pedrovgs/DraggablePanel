@@ -19,8 +19,8 @@ public class MainActivity extends FragmentActivity {
 
         draggablePanel.setFragmentManager(getSupportFragmentManager());
         draggablePanel.setTopFragment(new RedFragment());
-        int topFragmentHeight = (int) getResources().getDimension(R.dimen.top_fragment_height);
-        draggablePanel.setTopViewHeight(topFragmentHeight);
+        //int topFragmentHeight = (int) getResources().getDimension(R.dimen.top_fragment_height);
+        //draggablePanel.setTopViewHeight(topFragmentHeight);
         draggablePanel.setBottomFragment(new BlackFragment());
         draggablePanel.setBackgroundColor(getResources().getColor(R.color.black));
         draggablePanel.setScaleFactor(2);
