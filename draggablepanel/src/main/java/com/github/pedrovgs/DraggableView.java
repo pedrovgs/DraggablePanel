@@ -13,6 +13,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import com.nineoldandroids.view.ViewHelper;
 
@@ -42,8 +43,8 @@ class DraggableView extends RelativeLayout {
      * Attributes
      */
 
-    private View dragView;
-    private View secondView;
+    private ViewGroup dragView;
+    private ViewGroup secondView;
 
     private FragmentManager fragmentManager;
     private ViewDragHelper viewDragHelper;
@@ -96,8 +97,8 @@ class DraggableView extends RelativeLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
         if (!isInEditMode()) {
-            dragView = findViewById(R.id.dragView);
-            secondView = findViewById(R.id.secondView);
+            dragView = (ViewGroup) findViewById(R.id.dragView);
+            secondView = (ViewGroup) findViewById(R.id.secondView);
         }
     }
 
@@ -343,14 +344,22 @@ class DraggableView extends RelativeLayout {
         viewDragHelper.processTouchEvent(ev);
         boolean dragViewTouched = isViewHit(dragView, (int) ev.getX(), (int) ev.getY()) && ev.getAction() == MotionEvent.ACTION_UP && lastActionMotionEvent != MotionEvent.ACTION_MOVE;
         if (dragViewTouched) {
-            dragView.performClick();
+            propagateTouchEventToChildViews(dragView);
+            return false;
         }
         boolean secondViewTouched = isViewHit(secondView, (int) ev.getX(), (int) ev.getY()) && ev.getAction() == MotionEvent.ACTION_UP && lastActionMotionEvent != MotionEvent.ACTION_MOVE;
         if (secondViewTouched && !dragViewTouched) {
-            secondView.performClick();
+            propagateTouchEventToChildViews(secondView);
         }
         lastActionMotionEvent = ev.getAction();
         return true;
+    }
+
+    private void propagateTouchEventToChildViews(ViewGroup viewGroup) {
+        for (int i = 0; i < viewGroup.getChildCount(); i++) {
+            View view = viewGroup.getChildAt(i);
+            view.performClick();
+        }
     }
 
     private boolean isViewHit(View view, int x, int y) {
