@@ -30,7 +30,7 @@ class DraggableView extends RelativeLayout {
 
     private static final String LOGTAG = "DraggableView";
 
-    private static final int SCALE_FACTOR = 2;
+    private static final int DEFAULT_SCALE_FACTOR = 2;
     private static final int DRAG_VIEW_MARGIN_RIGHT = 30;
     private static final int DRAG_VIEW_MARGIN_BOTTOM = 30;
     private static final float SLIDE_TOP = 0f;
@@ -50,6 +50,8 @@ class DraggableView extends RelativeLayout {
     private ViewDragHelper viewDragHelper;
 
     private int lastActionMotionEvent = -1;
+
+    private int scaleFactor = DEFAULT_SCALE_FACTOR;
 
 
     /*
@@ -83,6 +85,10 @@ class DraggableView extends RelativeLayout {
 
     public void attachBottomFragment(Fragment bottomFragment) {
         addFragmentToView(R.id.secondView, bottomFragment);
+    }
+
+    public void setScaleFactor(int scaleFactor) {
+        this.scaleFactor = scaleFactor;
     }
 
     private void addFragmentToView(final int viewId, final Fragment fragment) {
@@ -129,8 +135,8 @@ class DraggableView extends RelativeLayout {
     }
 
     private void changeDragViewScale() {
-        ViewHelper.setScaleX(dragView, 1 - getVerticalDragOffset() / SCALE_FACTOR);
-        ViewHelper.setScaleY(dragView, 1 - getVerticalDragOffset() / SCALE_FACTOR);
+        ViewHelper.setScaleX(dragView, 1 - getVerticalDragOffset() / scaleFactor);
+        ViewHelper.setScaleY(dragView, 1 - getVerticalDragOffset() / scaleFactor);
     }
 
     private void changeBackgroundAlpha() {

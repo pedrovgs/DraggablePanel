@@ -15,6 +15,7 @@ public class DraggablePanel extends FrameLayout {
     private Fragment bottomFragment;
     private FragmentManager fragmentManager;
     private int topFragmentHeight;
+    private int scaleFactor;
 
     public DraggablePanel(Context context) {
         super(context);
@@ -55,6 +56,10 @@ public class DraggablePanel extends FrameLayout {
         this.fragmentManager = fragmentManager;
     }
 
+    public void setScaleFactor(int scaleFactor) {
+        this.scaleFactor = scaleFactor;
+    }
+
     public void initializeView() {
         checkFragmentConsistency();
         checkSupportFragmentmanagerConsistency();
@@ -66,6 +71,7 @@ public class DraggablePanel extends FrameLayout {
         draggableView.attachTopFragment(topFragment);
         draggableView.setBackground(getBackground());
         setBackground(null);
+        draggableView.setScaleFactor(scaleFactor);
         draggableView.attachBottomFragment(bottomFragment);
     }
 
@@ -80,4 +86,5 @@ public class DraggablePanel extends FrameLayout {
             throw new IllegalStateException("You have to set top and bottom fragment before initialize DraggablePanel");
         }
     }
+
 }
