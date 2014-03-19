@@ -2,5 +2,6 @@
 <resources>
     <declare-styleable name="draggable_panel">
         <attr name="top_fragment_height" format="dimension"/>
+        <attr name="scale_factor" format="float"/>
     </declare-styleable>
 </resources>

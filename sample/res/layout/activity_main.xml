@@ -7,6 +7,7 @@
             android:id="@+id/draggablePanel"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            draggable_panel:top_fragment_height="@dimen/top_fragment_height"/>
+            draggable_panel:top_fragment_height="@dimen/top_fragment_height"
+            draggable_panel:scale_factor="@integer/scale_factor"/>
 
 </RelativeLayout>

@@ -13,13 +13,14 @@ import android.widget.FrameLayout;
 public class DraggablePanel extends FrameLayout {
 
     private static final float DEFAULT_TOP_FRAGMENT_HEIGHT = 200;
+    private static final float DEFAULT_SCALE_FACTOR = 2;
 
     private Fragment topFragment;
     private Fragment bottomFragment;
     private FragmentManager fragmentManager;
     private float topFragmentHeight;
     private float topFragmentMarginRight;
-    private int scaleFactor;
+    private float scaleFactor;
     private float topFragmentMarginBottom;
 
     public DraggablePanel(Context context) {
@@ -43,6 +44,7 @@ public class DraggablePanel extends FrameLayout {
     private void initializeAttrs(AttributeSet attrs) {
         TypedArray attributes = getContext().obtainStyledAttributes(attrs, R.styleable.draggable_panel);
         this.topFragmentHeight = attributes.getDimension(R.styleable.draggable_panel_top_fragment_height, DEFAULT_TOP_FRAGMENT_HEIGHT);
+        this.scaleFactor = attributes.getFloat(R.styleable.draggable_panel_scale_factor, DEFAULT_SCALE_FACTOR);
     }
 
     private void initializeEditMode() {

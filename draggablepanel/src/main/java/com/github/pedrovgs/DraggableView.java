@@ -50,7 +50,7 @@ class DraggableView extends RelativeLayout {
 
     private int lastActionMotionEvent = -1;
 
-    private int scaleFactor = DEFAULT_SCALE_FACTOR;
+    private float scaleFactor = DEFAULT_SCALE_FACTOR;
     private float topFragmentMarginRight = DEFAULT_TOP_FRAGMENT_MARGIN;
     private float topFragmentMarginBottom = DEFAULT_TOP_FRAGMENT_MARGIN;
 
@@ -88,7 +88,7 @@ class DraggableView extends RelativeLayout {
         addFragmentToView(R.id.secondView, bottomFragment);
     }
 
-    public void setScaleFactor(int scaleFactor) {
+    public void setScaleFactor(float scaleFactor) {
         this.scaleFactor = scaleFactor;
     }
 
