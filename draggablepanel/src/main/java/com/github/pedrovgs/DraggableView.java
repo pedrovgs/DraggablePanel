@@ -33,7 +33,6 @@ class DraggableView extends RelativeLayout {
     private static final int SCALE_FACTOR = 2;
     private static final int DRAG_VIEW_MARGIN_RIGHT = 30;
     private static final int DRAG_VIEW_MARGIN_BOTTOM = 30;
-    private static final boolean RIGHT_DIRECTION = true;
     private static final float SLIDE_TOP = 0f;
     private static final float SLIDE_BOTTOM = 1f;
     private static final int MINIMUM_DY_FOR_VERTICAL_DRAG = 10;
@@ -129,7 +128,7 @@ class DraggableView extends RelativeLayout {
 
 
     private void changeDragViewPosition() {
-        ViewHelper.setPivotX(dragView, dragView.getWidth() * getDirection() - getDragViewMarginRight());
+        ViewHelper.setPivotX(dragView, dragView.getWidth() - getDragViewMarginRight());
         ViewHelper.setPivotY(dragView, dragView.getHeight() - getDragViewMarginBottom());
     }
 
@@ -137,12 +136,8 @@ class DraggableView extends RelativeLayout {
         ViewHelper.setY(secondView, dragView.getTop() + dragView.getHeight());
     }
 
-    private float getDirection() {
-        return RIGHT_DIRECTION ? 1 : 0;
-    }
-
     private int getDragViewMarginRight() {
-        return RIGHT_DIRECTION ? DRAG_VIEW_MARGIN_RIGHT : -DRAG_VIEW_MARGIN_RIGHT;
+        return DRAG_VIEW_MARGIN_RIGHT;
     }
 
     private int getDragViewMarginBottom() {
@@ -232,11 +227,7 @@ class DraggableView extends RelativeLayout {
     }
 
     private boolean isNextToLeftBound() {
-        if (RIGHT_DIRECTION) {
-            return (dragView.getRight() - getDragViewMarginRight()) < getWidth() / 2;
-        } else {
-            return (dragView.getLeft() - getDragViewMarginRight()) > getWidth() / 2;
-        }
+        return (dragView.getRight() - getDragViewMarginRight()) < getWidth() / 2;
     }
 
     private boolean isNextToRightBound() {
