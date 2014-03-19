@@ -1,3 +1,4 @@
 <resources>
     <dimen name="top_fragment_height">200dip</dimen>
+    <dimen name="top_fragment_margin_right">10dip</dimen>
 </resources>

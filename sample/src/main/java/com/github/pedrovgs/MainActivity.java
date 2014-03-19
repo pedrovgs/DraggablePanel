@@ -24,6 +24,7 @@ public class MainActivity extends FragmentActivity {
         draggablePanel.setBottomFragment(new BlackFragment());
         draggablePanel.setBackgroundColor(getResources().getColor(R.color.black));
         draggablePanel.setScaleFactor(2);
+        draggablePanel.setTopFragmentMarginRight(getResources().getDimension(R.dimen.top_fragment_margin_right));
         draggablePanel.initializeView();
     }
 }
