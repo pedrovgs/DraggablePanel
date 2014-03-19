@@ -15,7 +15,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import com.github.pedrovgs.R;
 import com.nineoldandroids.view.ViewHelper;
 
 /**
@@ -54,6 +53,8 @@ class DraggableView extends RelativeLayout {
     private float scaleFactor = DEFAULT_SCALE_FACTOR;
     private float topFragmentMarginRight = DEFAULT_TOP_FRAGMENT_MARGIN;
     private float topFragmentMarginBottom = DEFAULT_TOP_FRAGMENT_MARGIN;
+    private float initialMotionX;
+    private float initialMotionY;
 
 
     /*
@@ -325,16 +326,13 @@ class DraggableView extends RelativeLayout {
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         final int action = MotionEventCompat.getActionMasked(ev);
-        Log.d(LOGTAG, "onInterceptTouchEvent " + action);
 
         if ((action != MotionEvent.ACTION_DOWN)) {
-            Log.d(LOGTAG, "ACTION_DOWN");
             viewDragHelper.cancel();
             return super.onInterceptTouchEvent(ev);
         }
 
         if (action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_UP) {
-            Log.d(LOGTAG, "ACTION_CANCEL || ACTION_UP");
             viewDragHelper.cancel();
             return false;
         }
@@ -344,11 +342,22 @@ class DraggableView extends RelativeLayout {
         boolean interceptTap = false;
 
         switch (action) {
-            case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_DOWN: {
+                initialMotionX = x;
+                initialMotionY = y;
                 interceptTap = viewDragHelper.isViewUnder(dragView, (int) x, (int) y);
                 break;
-            case MotionEvent.ACTION_MOVE:
-                interceptTap = false;
+            }
+
+            case MotionEvent.ACTION_MOVE: {
+                final float adx = Math.abs(x - initialMotionX);
+                final float ady = Math.abs(y - initialMotionY);
+                final int slop = viewDragHelper.getTouchSlop();
+                if (ady > slop && adx > ady) {
+                    viewDragHelper.cancel();
+                    return false;
+                }
+            }
         }
 
         return viewDragHelper.shouldInterceptTouchEvent(ev) || interceptTap;
@@ -356,27 +365,32 @@ class DraggableView extends RelativeLayout {
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        Log.d(LOGTAG, "onTouchEvent");
         viewDragHelper.processTouchEvent(ev);
-        boolean dragViewTouched = isViewHit(dragView, (int) ev.getX(), (int) ev.getY()) && ev.getAction() == MotionEvent.ACTION_UP && lastActionMotionEvent != MotionEvent.ACTION_MOVE;
-        if (dragViewTouched) {
-            propagateTouchEventToChildViews(dragView);
-            return false;
+
+        final float x = ev.getX();
+        final float y = ev.getY();
+
+        boolean isHeaderViewUnder = viewDragHelper.isViewUnder(dragView, (int) x, (int) y);
+        boolean isHeaderViewHit = isViewHit(dragView, (int) x, (int) y);
+        boolean isDescViewHit = isViewHit(secondView, (int) x, (int) y);
+        /*
+         * Check if is under view and hitting header view to perform click on ACTION_UP motion event
+         * This event is executed if when the ACTION_UP is called the finger is over the headerView
+         * we have pending improve this check to avoid stop or play the video when drag and drop
+         * the view header
+         */
+
+        if (isHeaderViewHit && isHeaderViewUnder && ev.getAction() == MotionEvent.ACTION_UP) {
+            dragView.performClick();
         }
-        boolean secondViewTouched = isViewHit(secondView, (int) ev.getX(), (int) ev.getY()) && ev.getAction() == MotionEvent.ACTION_UP && lastActionMotionEvent != MotionEvent.ACTION_MOVE;
-        if (secondViewTouched && !dragViewTouched) {
-            propagateTouchEventToChildViews(secondView);
+
+        for (int i = 0; i < dragView.getChildCount(); i++) {
+            dragView.getChildAt(i).dispatchTouchEvent(ev);
         }
-        lastActionMotionEvent = ev.getAction();
-        return true;
+
+        return isHeaderViewUnder && isHeaderViewHit || isDescViewHit;
     }
 
-    private void propagateTouchEventToChildViews(ViewGroup viewGroup) {
-        for (int i = 0; i < viewGroup.getChildCount(); i++) {
-            View view = viewGroup.getChildAt(i);
-            view.performClick();
-        }
-    }
 
     private boolean isViewHit(View view, int x, int y) {
         Log.d(LOGTAG, "isViewHit");
