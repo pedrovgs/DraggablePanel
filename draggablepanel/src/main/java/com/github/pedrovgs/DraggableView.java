@@ -31,8 +31,7 @@ class DraggableView extends RelativeLayout {
     private static final String LOGTAG = "DraggableView";
 
     private static final int DEFAULT_SCALE_FACTOR = 2;
-    private static final int DEFAULT_TOP_FRAGMENT_MARGIN_RIGHT = 30;
-    private static final int DRAG_VIEW_MARGIN_BOTTOM = 30;
+    private static final int DEFAULT_TOP_FRAGMENT_MARGIN = 30;
     private static final float SLIDE_TOP = 0f;
     private static final float SLIDE_BOTTOM = 1f;
     private static final int MINIMUM_DY_FOR_VERTICAL_DRAG = 10;
@@ -52,7 +51,8 @@ class DraggableView extends RelativeLayout {
     private int lastActionMotionEvent = -1;
 
     private int scaleFactor = DEFAULT_SCALE_FACTOR;
-    private float topFragmentMarginRight = DEFAULT_TOP_FRAGMENT_MARGIN_RIGHT;
+    private float topFragmentMarginRight = DEFAULT_TOP_FRAGMENT_MARGIN;
+    private float topFragmentMarginBottom = DEFAULT_TOP_FRAGMENT_MARGIN;
 
 
     /*
@@ -96,6 +96,10 @@ class DraggableView extends RelativeLayout {
         this.topFragmentMarginRight = topFragmentMarginRight;
     }
 
+    public void setTopFragmentMarginBottom(float topFragmentMarginBottom) {
+        this.topFragmentMarginBottom = topFragmentMarginBottom;
+    }
+
     private void addFragmentToView(final int viewId, final Fragment fragment) {
         fragmentManager.beginTransaction().replace(viewId, fragment).commit();
     }
@@ -135,8 +139,8 @@ class DraggableView extends RelativeLayout {
         return topFragmentMarginRight;
     }
 
-    private int getDragViewMarginBottom() {
-        return DRAG_VIEW_MARGIN_BOTTOM;
+    private float getDragViewMarginBottom() {
+        return topFragmentMarginBottom;
     }
 
     private void changeDragViewScale() {
@@ -246,7 +250,6 @@ class DraggableView extends RelativeLayout {
         layoutParams.height = topFragmentHeight;
         dragView.setLayoutParams(layoutParams);
     }
-
 
     /*
      * DragPanelCallback
