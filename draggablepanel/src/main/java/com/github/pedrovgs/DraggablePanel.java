@@ -14,6 +14,7 @@ public class DraggablePanel extends FrameLayout {
 
     private static final float DEFAULT_TOP_FRAGMENT_HEIGHT = 200;
     private static final float DEFAULT_SCALE_FACTOR = 2;
+    private static final float DEFAULT_TOP_FRAGMENT_MARGIN_RIGHT = 0;
 
     private Fragment topFragment;
     private Fragment bottomFragment;
@@ -45,6 +46,7 @@ public class DraggablePanel extends FrameLayout {
         TypedArray attributes = getContext().obtainStyledAttributes(attrs, R.styleable.draggable_panel);
         this.topFragmentHeight = attributes.getDimension(R.styleable.draggable_panel_top_fragment_height, DEFAULT_TOP_FRAGMENT_HEIGHT);
         this.scaleFactor = attributes.getFloat(R.styleable.draggable_panel_scale_factor, DEFAULT_SCALE_FACTOR);
+        this.topFragmentMarginRight = attributes.getDimension(R.styleable.draggable_panel_top_fragment_margin_right, DEFAULT_TOP_FRAGMENT_MARGIN_RIGHT);
     }
 
     private void initializeEditMode() {
