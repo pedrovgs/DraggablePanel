@@ -4,5 +4,6 @@
         <attr name="top_fragment_height" format="dimension"/>
         <attr name="scale_factor" format="float"/>
         <attr name="top_fragment_margin_right" format="dimension"/>
+        <attr name="top_fragment_margin_bottom" format="dimension"/>
     </declare-styleable>
 </resources>
