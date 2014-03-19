@@ -2,5 +2,7 @@
 <resources>
 
     <string name="app_name">Draggable Panel</string>
+    <string name="youtube_sample_button">Youtube Sample</string>
+    <string name="youtube_sample_activity_title">Youtube sample</string>
 
 </resources>

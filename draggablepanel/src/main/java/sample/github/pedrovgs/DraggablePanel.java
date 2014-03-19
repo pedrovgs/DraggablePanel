@@ -1,4 +1,4 @@
-package com.github.pedrovgs;
+package sample.github.pedrovgs;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
+import com.github.pedrovgs.R;
 
 /**
  * @author Pedro Vicente Gómez Sánchez.

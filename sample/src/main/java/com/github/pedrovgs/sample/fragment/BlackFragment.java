@@ -1,4 +1,4 @@
-package com.github.pedrovgs.fragment;
+package com.github.pedrovgs.sample.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,16 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-import com.github.pedrovgs.R;
+import com.github.pedrovgs.sample.R;
 
 /**
  * @author Pedro Vicente Gómez Sánchez.
  */
-public class RedFragment extends Fragment {
+public class BlackFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_red, container, false);
+        return inflater.inflate(R.layout.fragment_black, container, false);
     }
 
     @Override
@@ -24,8 +24,9 @@ public class RedFragment extends Fragment {
         getView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Click on red fragment", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Click on black fragment", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 }

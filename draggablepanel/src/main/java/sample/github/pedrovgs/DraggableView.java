@@ -1,4 +1,4 @@
-package com.github.pedrovgs;
+package sample.github.pedrovgs;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -15,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import com.github.pedrovgs.R;
 import com.nineoldandroids.view.ViewHelper;
 
 /**
