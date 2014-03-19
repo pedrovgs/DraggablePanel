@@ -1,4 +1,4 @@
-package sample.github.pedrovgs;
+package com.github.pedrovgs;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
-import com.github.pedrovgs.R;
 
 /**
  * @author Pedro Vicente Gómez Sánchez.
@@ -58,7 +57,7 @@ public class DraggablePanel extends FrameLayout {
     }
 
 
-    public void setTopViewHeight(int topFragmentHeight) {
+    public void setTopViewHeight(float topFragmentHeight) {
         this.topFragmentHeight = topFragmentHeight;
     }
 

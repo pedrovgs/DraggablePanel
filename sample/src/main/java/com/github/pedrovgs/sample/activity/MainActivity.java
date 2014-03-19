@@ -20,6 +20,12 @@ public class MainActivity extends Activity {
         ButterKnife.inject(this);
     }
 
+    @OnClick(R.id.bt_simple_sample)
+    void openSimpleSampleActivity() {
+        Intent intent = new Intent(this, SimpleSampleActivity.class);
+        startActivity(intent);
+    }
+
     @OnClick(R.id.bt_youtube_sample)
     void openYoutubeSampleActivity() {
         Intent intent = new Intent(this, YoutubeSampleActivity.class);

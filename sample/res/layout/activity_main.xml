@@ -6,6 +6,14 @@
 
     <!-- Buttons -->
 
+    <!-- Simple fragment usage sample -->
+    <Button
+            android:id="@+id/bt_simple_sample"
+            android:text="@string/simple_sample_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    <!-- Youtube sample -->
+
     <Button
             android:id="@+id/bt_youtube_sample"
             android:text="@string/youtube_sample_button"

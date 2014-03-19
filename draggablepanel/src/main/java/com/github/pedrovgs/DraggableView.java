@@ -1,4 +1,4 @@
-package sample.github.pedrovgs;
+package com.github.pedrovgs;
 
 import android.annotation.TargetApi;
 import android.content.Context;
