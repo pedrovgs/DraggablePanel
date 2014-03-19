@@ -64,6 +64,8 @@ public class DraggablePanel extends FrameLayout {
         draggableView.setTopViewHeight(topFragmentHeight);
         draggableView.setFragmentManager(fragmentManager);
         draggableView.attachTopFragment(topFragment);
+        draggableView.setBackground(getBackground());
+        setBackground(null);
         draggableView.attachBottomFragment(bottomFragment);
     }
 
