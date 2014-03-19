@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 import com.nineoldandroids.view.ViewHelper;
 
 /**
@@ -99,7 +98,6 @@ class DraggableView extends RelativeLayout {
         if (!isInEditMode()) {
             dragView = findViewById(R.id.dragView);
             secondView = findViewById(R.id.secondView);
-            hookListeners();
         }
     }
 
@@ -109,21 +107,6 @@ class DraggableView extends RelativeLayout {
         if (!isInEditMode() && viewDragHelper.continueSettling(true)) {
             ViewCompat.postInvalidateOnAnimation(this);
         }
-    }
-
-    private void hookListeners() {
-        dragView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(), "Drag View touched", Toast.LENGTH_SHORT).show();
-            }
-        });
-        secondView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(), "Second View touched", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
 
