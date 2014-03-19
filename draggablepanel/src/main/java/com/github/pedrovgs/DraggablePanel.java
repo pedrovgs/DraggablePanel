@@ -14,6 +14,7 @@ public class DraggablePanel extends FrameLayout {
     private Fragment topFragment;
     private Fragment bottomFragment;
     private FragmentManager fragmentManager;
+    private int topFragmentHeight;
 
     public DraggablePanel(Context context) {
         super(context);
@@ -37,6 +38,11 @@ public class DraggablePanel extends FrameLayout {
         }
     }
 
+
+    public void setTopViewHeight(int topFragmentHeight) {
+        this.topFragmentHeight = topFragmentHeight;
+    }
+
     public void setTopFragment(Fragment topFragment) {
         this.topFragment = topFragment;
     }
@@ -55,7 +61,7 @@ public class DraggablePanel extends FrameLayout {
 
         inflate(getContext(), R.layout.draggable_panel, this);
         DraggableView draggableView = (DraggableView) findViewById(R.id.draggableView);
-
+        draggableView.setTopViewHeight(topFragmentHeight);
         draggableView.setFragmentManager(fragmentManager);
         draggableView.attachTopFragment(topFragment);
         draggableView.attachBottomFragment(bottomFragment);
@@ -72,5 +78,4 @@ public class DraggablePanel extends FrameLayout {
             throw new IllegalStateException("You have to set top and bottom fragment before initialize DraggablePanel");
         }
     }
-
 }

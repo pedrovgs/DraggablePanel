@@ -1,6 +1,5 @@
 package com.github.pedrovgs;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import com.github.pedrovgs.fragment.BlackFragment;
@@ -20,6 +19,8 @@ public class MainActivity extends FragmentActivity {
 
         draggablePanel.setFragmentManager(getSupportFragmentManager());
         draggablePanel.setTopFragment(new RedFragment());
+        int topFragmentHeight = (int) getResources().getDimension(R.dimen.top_fragment_height);
+        draggablePanel.setTopViewHeight(topFragmentHeight);
         draggablePanel.setBottomFragment(new BlackFragment());
         draggablePanel.initializeView();
     }
