@@ -53,6 +53,11 @@
             <optional>true</optional>
         </dependency>
 
+        <dependency>
+            <groupId>com.youtube.player</groupId>
+            <artifactId>youtube-player-api</artifactId>
+            <version>1</version>
+        </dependency>
 
     </dependencies>
 

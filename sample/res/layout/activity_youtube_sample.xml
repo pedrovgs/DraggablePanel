@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:draggable_panel="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
 
     <!-- ListView videos -->
 
@@ -12,4 +12,16 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"/>
 
-</LinearLayout>
+    <!-- DraggablePanel -->
+
+    <com.github.pedrovgs.DraggablePanel
+            android:id="@+id/draggable_panel"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            draggable_panel:scale_factor="@integer/scale_factor"
+            draggable_panel:top_fragment_height="@dimen/top_fragment_height"
+            draggable_panel:top_fragment_margin_right="@dimen/top_fragment_margin"
+            draggable_panel:top_fragment_margin_bottom="@dimen/top_fragment_margin"
+            android:background="@color/black"/>
+
+</FrameLayout>
