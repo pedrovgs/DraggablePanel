@@ -386,6 +386,7 @@ public class DraggableView extends RelativeLayout {
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         viewDragHelper.processTouchEvent(ev);
+        int action = ev.getAction();
 
         final float x = ev.getX();
         final float y = ev.getY();
@@ -399,8 +400,10 @@ public class DraggableView extends RelativeLayout {
             for (int i = 0; i < viewGroup.getChildCount(); i++) {
                 viewGroup.getChildAt(i).dispatchTouchEvent(ev);
             }
+        } else if (action == MotionEvent.ACTION_UP && lastActionMotionEvent != MotionEvent.ACTION_MOVE) {
+            dragView.performClick();
         }
-
+        lastActionMotionEvent = action;
         return isHeaderViewUnder && isHeaderViewHit || isDescViewHit;
     }
 
