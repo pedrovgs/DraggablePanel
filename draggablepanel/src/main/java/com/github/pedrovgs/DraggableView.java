@@ -2,6 +2,7 @@ package com.github.pedrovgs;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.app.Fragment;
@@ -55,6 +56,8 @@ class DraggableView extends RelativeLayout {
     private float topFragmentMarginBottom = DEFAULT_TOP_FRAGMENT_MARGIN;
     private float initialMotionX;
     private float initialMotionY;
+    private int dragViewId;
+    private int secondViewId;
 
 
     /*
@@ -68,13 +71,14 @@ class DraggableView extends RelativeLayout {
 
     public DraggableView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        initializeAttributes(attrs);
         initializeView();
     }
-
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public DraggableView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        initializeAttributes(attrs);
         initializeView();
     }
 
@@ -110,12 +114,19 @@ class DraggableView extends RelativeLayout {
         viewDragHelper = ViewDragHelper.create(this, 1f, new DragPanelCallback());
     }
 
+    private void initializeAttributes(AttributeSet attrs) {
+        TypedArray attributes = getContext().obtainStyledAttributes(attrs, R.styleable.draggable_view);
+        this.dragViewId = attributes.getResourceId(R.styleable.draggable_view_top_view_id, R.id.dragView);
+        this.secondViewId = attributes.getResourceId(R.styleable.draggable_view_bottom_view_id, R.id.secondView);
+    }
+
+
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
         if (!isInEditMode()) {
-            dragView = (ViewGroup) findViewById(R.id.dragView);
-            secondView = (ViewGroup) findViewById(R.id.secondView);
+            dragView = (ViewGroup) findViewById(dragViewId);
+            secondView = (ViewGroup) findViewById(secondViewId);
         }
     }
 
@@ -373,7 +384,7 @@ class DraggableView extends RelativeLayout {
         boolean isHeaderViewUnder = viewDragHelper.isViewUnder(dragView, (int) x, (int) y);
         boolean isHeaderViewHit = isViewHit(dragView, (int) x, (int) y);
         boolean isDescViewHit = isViewHit(secondView, (int) x, (int) y);
-     
+
         for (int i = 0; i < dragView.getChildCount(); i++) {
             dragView.getChildAt(i).dispatchTouchEvent(ev);
         }

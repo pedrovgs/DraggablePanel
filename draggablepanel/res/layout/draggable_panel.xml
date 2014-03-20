@@ -1,8 +1,11 @@
 <com.github.pedrovgs.DraggableView
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:draggable_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/draggableView"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        draggable_view:top_view_id="@+id/dragView"
+        draggable_view:bottom_view_id="@+id/secondView">
 
     <FrameLayout
             android:id="@+id/secondView"

@@ -6,4 +6,10 @@
         <attr name="top_fragment_margin_right" format="dimension"/>
         <attr name="top_fragment_margin_bottom" format="dimension"/>
     </declare-styleable>
+
+    <declare-styleable name="draggable_view">
+        <attr name="top_view_id" format="reference"/>
+        <attr name="bottom_view_id" format="reference"/>
+    </declare-styleable>
+
 </resources>
