@@ -10,6 +10,10 @@
     <declare-styleable name="draggable_view">
         <attr name="top_view_id" format="reference"/>
         <attr name="bottom_view_id" format="reference"/>
+        <attr name="top_view_height" format="dimension"/>
+        <attr name="top_view_scale_factor" format="float"/>
+        <attr name="top_view_margin_right" format="dimension"/>
+        <attr name="top_view_margin_bottom" format="dimension"/>
     </declare-styleable>
 
 </resources>

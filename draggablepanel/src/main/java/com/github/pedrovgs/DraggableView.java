@@ -23,7 +23,7 @@ import com.nineoldandroids.view.ViewHelper;
  *
  * @author "Pedro Vicente Gómez Sánchez"
  */
-class DraggableView extends RelativeLayout {
+public class DraggableView extends RelativeLayout {
 
     /*
      * Constants
@@ -32,6 +32,7 @@ class DraggableView extends RelativeLayout {
     private static final String LOGTAG = "DraggableView";
 
     private static final int DEFAULT_SCALE_FACTOR = 2;
+    private static final float DEFAULT_TOP_VIEW_HEIGHT = 200;
     private static final int DEFAULT_TOP_FRAGMENT_MARGIN = 30;
     private static final float SLIDE_TOP = 0f;
     private static final float SLIDE_BOTTOM = 1f;
@@ -43,8 +44,8 @@ class DraggableView extends RelativeLayout {
      * Attributes
      */
 
-    private ViewGroup dragView;
-    private ViewGroup secondView;
+    private View dragView;
+    private View secondView;
 
     private FragmentManager fragmentManager;
     private ViewDragHelper viewDragHelper;
@@ -52,6 +53,7 @@ class DraggableView extends RelativeLayout {
     private int lastActionMotionEvent = -1;
 
     private float scaleFactor = DEFAULT_SCALE_FACTOR;
+    private float topViewHeight;
     private float topFragmentMarginRight = DEFAULT_TOP_FRAGMENT_MARGIN;
     private float topFragmentMarginBottom = DEFAULT_TOP_FRAGMENT_MARGIN;
     private float initialMotionX;
@@ -94,15 +96,15 @@ class DraggableView extends RelativeLayout {
         addFragmentToView(R.id.secondView, bottomFragment);
     }
 
-    public void setScaleFactor(float scaleFactor) {
+    public void setTopViewScaleFactor(float scaleFactor) {
         this.scaleFactor = scaleFactor;
     }
 
-    public void setTopFragmentMarginRight(float topFragmentMarginRight) {
+    public void setTopViewMarginRight(float topFragmentMarginRight) {
         this.topFragmentMarginRight = topFragmentMarginRight;
     }
 
-    public void setTopFragmentMarginBottom(float topFragmentMarginBottom) {
+    public void setTopViewMarginBottom(float topFragmentMarginBottom) {
         this.topFragmentMarginBottom = topFragmentMarginBottom;
     }
 
@@ -118,6 +120,11 @@ class DraggableView extends RelativeLayout {
         TypedArray attributes = getContext().obtainStyledAttributes(attrs, R.styleable.draggable_view);
         this.dragViewId = attributes.getResourceId(R.styleable.draggable_view_top_view_id, R.id.dragView);
         this.secondViewId = attributes.getResourceId(R.styleable.draggable_view_bottom_view_id, R.id.secondView);
+        this.topViewHeight = attributes.getDimension(R.styleable.draggable_view_top_view_height, DEFAULT_TOP_VIEW_HEIGHT);
+        this.scaleFactor = attributes.getFloat(R.styleable.draggable_view_top_view_scale_factor, DEFAULT_SCALE_FACTOR);
+        this.topFragmentMarginRight = attributes.getDimension(R.styleable.draggable_view_top_view_margin_right, DEFAULT_TOP_FRAGMENT_MARGIN);
+        this.topFragmentMarginBottom = attributes.getDimension(R.styleable.draggable_view_top_view_margin_bottom, DEFAULT_TOP_FRAGMENT_MARGIN);
+
     }
 
 
@@ -125,8 +132,9 @@ class DraggableView extends RelativeLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
         if (!isInEditMode()) {
-            dragView = (ViewGroup) findViewById(dragViewId);
-            secondView = (ViewGroup) findViewById(secondViewId);
+            dragView = findViewById(dragViewId);
+            secondView = findViewById(secondViewId);
+            setTopViewHeight(topViewHeight);
         }
     }
 
@@ -259,6 +267,7 @@ class DraggableView extends RelativeLayout {
     }
 
     public void setTopViewHeight(float topFragmentHeight) {
+        this.topViewHeight = topFragmentHeight;
         LayoutParams layoutParams = (LayoutParams) dragView.getLayoutParams();
         layoutParams.height = (int) topFragmentHeight;
         dragView.setLayoutParams(layoutParams);
@@ -385,8 +394,11 @@ class DraggableView extends RelativeLayout {
         boolean isHeaderViewHit = isViewHit(dragView, (int) x, (int) y);
         boolean isDescViewHit = isViewHit(secondView, (int) x, (int) y);
 
-        for (int i = 0; i < dragView.getChildCount(); i++) {
-            dragView.getChildAt(i).dispatchTouchEvent(ev);
+        if (dragView instanceof ViewGroup) {
+            ViewGroup viewGroup = (ViewGroup) dragView;
+            for (int i = 0; i < viewGroup.getChildCount(); i++) {
+                viewGroup.getChildAt(i).dispatchTouchEvent(ev);
+            }
         }
 
         return isHeaderViewUnder && isHeaderViewHit || isDescViewHit;
