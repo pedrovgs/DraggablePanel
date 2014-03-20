@@ -31,4 +31,10 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(this, YoutubeSampleActivity.class);
         startActivity(intent);
     }
+
+    @OnClick(R.id.bt_video_sample)
+    void openVideoSampleActivity(){
+        Intent intent = new Intent(this, VideoSampleActivity.class);
+        startActivity(intent);
+    }
 }

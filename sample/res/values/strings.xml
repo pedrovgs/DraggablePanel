@@ -6,9 +6,11 @@
     <!-- Activity name -->
     <string name="simple_sample_activity_title">Simple Sample</string>
     <string name="youtube_sample_activity_title">Youtube Sample</string>
+    <string name="video_sample_activity_title">Video Sample</string>
 
     <!-- Buttons -->
     <string name="simple_sample_button">Simple Sample</string>
     <string name="youtube_sample_button">Youtube Sample</string>
+    <string name="video_sample_button">Video Sample</string>
 
 </resources>

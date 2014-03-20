@@ -32,7 +32,6 @@
         <activity
                 android:name=".activity.SimpleSampleActivity"
                 android:label="@string/simple_sample_activity_title">
-
         </activity>
 
         <!-- Youtube Sample -->
@@ -40,7 +39,14 @@
         <activity
                 android:name=".activity.YoutubeSampleActivity"
                 android:label="@string/youtube_sample_activity_title">
+        </activity>
 
+
+        <!-- Video Sample -->
+
+        <activity
+                android:name=".activity.VideoSampleActivity"
+                android:label="@string/video_sample_activity_title">
         </activity>
 
 
