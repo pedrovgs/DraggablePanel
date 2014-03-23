@@ -24,6 +24,8 @@ public class DraggablePanel extends FrameLayout {
     private float scaleFactor;
     private float topFragmentMarginBottom;
 
+    private DraggableListener draggableListener;
+
     public DraggablePanel(Context context) {
         super(context);
         initializeEditMode();
@@ -85,6 +87,13 @@ public class DraggablePanel extends FrameLayout {
         this.topFragmentMarginBottom = topFragmentMarginBottom;
     }
 
+    public void setDraggableListener(DraggableListener draggableListener){
+        this.draggableListener = draggableListener;
+    }
+
+    /**
+     * TODO we have to remove this mehtod and use initializeView as part of creation flow.
+     */
     public void initializeView() {
         checkFragmentConsistency();
         checkSupportFragmentmanagerConsistency();
@@ -102,6 +111,8 @@ public class DraggablePanel extends FrameLayout {
         draggableView.setTopViewMarginRight(topFragmentMarginRight);
         draggableView.setTopViewMarginBottom(topFragmentMarginBottom);
         draggableView.attachBottomFragment(bottomFragment);
+
+        draggableView.setDraggableListener(draggableListener);
     }
 
     private void checkSupportFragmentmanagerConsistency() {

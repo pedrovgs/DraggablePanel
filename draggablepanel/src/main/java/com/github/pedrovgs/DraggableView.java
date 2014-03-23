@@ -50,6 +50,8 @@ public class DraggableView extends RelativeLayout {
     private FragmentManager fragmentManager;
     private ViewDragHelper viewDragHelper;
 
+    private DraggableListener listener;
+
     private int lastActionMotionEvent = -1;
 
     private float scaleFactor = DEFAULT_SCALE_FACTOR;
@@ -273,6 +275,23 @@ public class DraggableView extends RelativeLayout {
         dragView.setLayoutParams(layoutParams);
     }
 
+
+    private void notifyPositionChangedToListener(int left, int top, int dx, int dy) {
+        if (listener != null) {
+            listener.onDraggableViewPositionChanged(left, top, dx, dy);
+        }
+    }
+
+    private void notifyViewReleasedToListener(float xvel, float yvel) {
+        if (listener != null) {
+            listener.onDraggableViewReleased(xvel, yvel);
+        }
+    }
+
+    public void setDraggableListener(DraggableListener listener) {
+        this.listener = listener;
+    }
+
     /*
      * DragPanelCallback
      */
@@ -291,7 +310,9 @@ public class DraggableView extends RelativeLayout {
                 changeBackgroundAlpha();
             }
             invalidate();
+            notifyPositionChangedToListener(left, top, dx, dy);
         }
+
 
         @Override
         public void onViewReleased(View releasedChild, float xvel, float yvel) {
@@ -311,6 +332,7 @@ public class DraggableView extends RelativeLayout {
                     minimize();
                 }
             }
+            notifyViewReleasedToListener(xvel, yvel);
         }
 
         @Override
