@@ -6,7 +6,7 @@
 
     <ImageView
             android:id="@+id/iv_photo"
-            android:layout_height="@dimen/renderer_city_height"
+            android:layout_height="@dimen/place_renderer_height"
             android:layout_width="match_parent"
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"/>

@@ -9,8 +9,8 @@ import butterknife.InjectView;
 import com.github.pedrovgs.DraggablePanel;
 import com.github.pedrovgs.sample.R;
 import com.github.pedrovgs.sample.fragment.BlackFragment;
-import com.github.pedrovgs.sample.fragment.CityFragment;
-import com.github.pedrovgs.sample.viewmodel.CityViewModel;
+import com.github.pedrovgs.sample.fragment.PlaceFragment;
+import com.github.pedrovgs.sample.viewmodel.PlaceViewModel;
 import com.pedrogomez.renderers.RendererAdapter;
 
 import javax.inject.Inject;
@@ -18,22 +18,22 @@ import javax.inject.Inject;
 /**
  * @author Pedro Vicente Gómez Sánchez.
  */
-public class CitiesSampleActivity extends DIFragmentActivity {
+public class PlacesSampleActivity extends DIFragmentActivity {
 
-    @InjectView(R.id.lv_cities)
-    ListView lv_cities;
+    @InjectView(R.id.lv_places)
+    ListView lv_places;
     @InjectView(R.id.draggable_panel)
     DraggablePanel draggablePanel;
 
     @Inject
-    RendererAdapter<CityViewModel> citiesAdapter;
+    RendererAdapter<PlaceViewModel> placesAdapter;
 
-    private CityFragment cityFragment;
+    private PlaceFragment placeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_simple_sample);
+        setContentView(R.layout.activity_place_sample);
         ButterKnife.inject(this);
         initializeFragments();
         initializeListView();
@@ -42,25 +42,25 @@ public class CitiesSampleActivity extends DIFragmentActivity {
 
 
     private void initializeFragments() {
-        cityFragment = new CityFragment();
+        placeFragment = new PlaceFragment();
     }
 
     private void initializeListView() {
-        lv_cities.setAdapter(citiesAdapter);
-        lv_cities.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lv_places.setAdapter(placesAdapter);
+        lv_places.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 draggablePanel.setVisibility(View.VISIBLE);
                 draggablePanel.maximize();
-                CityViewModel cityViewModel = citiesAdapter.getItem(position);
-                cityFragment.showCity(cityViewModel);
+                PlaceViewModel placeViewModel = placesAdapter.getItem(position);
+                placeFragment.showPlace(placeViewModel);
             }
         });
     }
 
     private void initializeDraggablePanel() {
         draggablePanel.setFragmentManager(getSupportFragmentManager());
-        draggablePanel.setTopFragment(cityFragment);
+        draggablePanel.setTopFragment(placeFragment);
         draggablePanel.setBottomFragment(new BlackFragment());
         draggablePanel.setScaleFactor(getResources().getInteger(R.integer.scale_factor));
         draggablePanel.setTopViewHeight(getResources().getDimension(R.dimen.top_fragment_height));

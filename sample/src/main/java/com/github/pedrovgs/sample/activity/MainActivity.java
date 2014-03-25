@@ -22,7 +22,7 @@ public class MainActivity extends Activity {
 
     @OnClick(R.id.bt_simple_sample)
     void openSimpleSampleActivity() {
-        Intent intent = new Intent(this, CitiesSampleActivity.class);
+        Intent intent = new Intent(this, PlacesSampleActivity.class);
         startActivity(intent);
     }
 

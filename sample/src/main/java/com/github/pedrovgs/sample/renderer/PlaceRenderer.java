@@ -9,14 +9,14 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.github.pedrovgs.sample.R;
-import com.github.pedrovgs.sample.viewmodel.CityViewModel;
+import com.github.pedrovgs.sample.viewmodel.PlaceViewModel;
 import com.pedrogomez.renderers.Renderer;
 import com.squareup.picasso.Picasso;
 
 /**
  * @author Pedro Vicente Gómez Sánchez.
  */
-public class CityRenderer extends Renderer<CityViewModel> {
+public class PlaceRenderer extends Renderer<PlaceViewModel> {
 
     private Context context;
 
@@ -25,7 +25,7 @@ public class CityRenderer extends Renderer<CityViewModel> {
     @InjectView(R.id.iv_photo)
     ImageView iv_photo;
 
-    public CityRenderer(Context context) {
+    public PlaceRenderer(Context context) {
         this.context = context;
     }
 
@@ -41,13 +41,13 @@ public class CityRenderer extends Renderer<CityViewModel> {
 
     @Override
     protected View inflate(LayoutInflater layoutInflater, ViewGroup viewGroup) {
-        return layoutInflater.inflate(R.layout.city_row, viewGroup, false);
+        return layoutInflater.inflate(R.layout.place_row, viewGroup, false);
     }
 
     @Override
     protected void render() {
-        CityViewModel city = getContent();
-        tv_name.setText(city.getName());
-        Picasso.with(context).load(city.getPhoto()).placeholder(R.drawable.maps_placeholder).into(iv_photo);
+        PlaceViewModel place = getContent();
+        tv_name.setText(place.getName());
+        Picasso.with(context).load(place.getPhoto()).placeholder(R.drawable.maps_placeholder).into(iv_photo);
     }
 }

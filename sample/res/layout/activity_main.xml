@@ -9,7 +9,7 @@
     <!-- Simple fragment usage sample -->
     <Button
             android:id="@+id/bt_simple_sample"
-            android:text="@string/cities_sample_button"
+            android:text="@string/places_sample_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

@@ -5,9 +5,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <!-- ListView cities -->
+    <!-- ListView places -->
     <ListView
-            android:id="@+id/lv_cities"
+            android:id="@+id/lv_places"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"/>
 

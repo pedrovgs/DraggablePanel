@@ -10,13 +10,13 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.github.pedrovgs.sample.R;
-import com.github.pedrovgs.sample.viewmodel.CityViewModel;
+import com.github.pedrovgs.sample.viewmodel.PlaceViewModel;
 import com.squareup.picasso.Picasso;
 
 /**
  * @author Pedro Vicente Gómez Sánchez.
  */
-public class CityFragment extends Fragment {
+public class PlaceFragment extends Fragment {
 
     @InjectView(R.id.tv_name)
     TextView tv_name;
@@ -25,14 +25,14 @@ public class CityFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.city_row, container, false);
+        View view = inflater.inflate(R.layout.place_row, container, false);
         ButterKnife.inject(this, view);
         return view;
     }
 
-    public void showCity(CityViewModel cityViewModel) {
-        tv_name.setText(cityViewModel.getName());
-        Picasso.with(getActivity()).load(cityViewModel.getPhoto()).placeholder(R.drawable.maps_placeholder).into(iv_photo);
+    public void showPlace(PlaceViewModel placeViewModel) {
+        tv_name.setText(placeViewModel.getName());
+        Picasso.with(getActivity()).load(placeViewModel.getPhoto()).placeholder(R.drawable.maps_placeholder).into(iv_photo);
     }
 
 }

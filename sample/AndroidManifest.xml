@@ -27,11 +27,11 @@
             </intent-filter>
         </activity>
 
-        <!-- Cities sample -->
+        <!-- Places sample -->
 
         <activity
-                android:name=".activity.CitiesSampleActivity"
-                android:label="@string/cities_sample_activity_title">
+                android:name=".activity.PlacesSampleActivity"
+                android:label="@string/places_sample_activity_title">
         </activity>
 
         <!-- Youtube Sample -->

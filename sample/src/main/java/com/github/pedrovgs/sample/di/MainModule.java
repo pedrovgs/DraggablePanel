@@ -4,11 +4,11 @@ import android.app.Application;
 import android.content.Context;
 import android.view.LayoutInflater;
 import com.github.pedrovgs.sample.DraggablePanelApplication;
-import com.github.pedrovgs.sample.activity.CitiesSampleActivity;
-import com.github.pedrovgs.sample.renderer.CityRenderer;
-import com.github.pedrovgs.sample.renderer.rendererbuilder.CityCollectionRendererBuilder;
-import com.github.pedrovgs.sample.viewmodel.CityCollectionViewModel;
-import com.github.pedrovgs.sample.viewmodel.CityViewModel;
+import com.github.pedrovgs.sample.activity.PlacesSampleActivity;
+import com.github.pedrovgs.sample.renderer.PlaceRenderer;
+import com.github.pedrovgs.sample.renderer.rendererbuilder.PlacesCollectionRendererBuilder;
+import com.github.pedrovgs.sample.viewmodel.PlaceCollectionViewModel;
+import com.github.pedrovgs.sample.viewmodel.PlaceViewModel;
 import com.pedrogomez.renderers.Renderer;
 import com.pedrogomez.renderers.RendererAdapter;
 import dagger.Module;
@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * @author Pedro Vicente Gómez Sánchez.
  */
-@Module(injects = {CitiesSampleActivity.class,
+@Module(injects = {PlacesSampleActivity.class,
         DraggablePanelApplication.class})
 public class MainModule {
 
@@ -41,14 +41,14 @@ public class MainModule {
     }
 
     @Provides
-    CityCollectionRendererBuilder provideCityCollectionRendererBuilder(Context context) {
-        List<Renderer<CityViewModel>> prototypes = new LinkedList<Renderer<CityViewModel>>();
-        prototypes.add(new CityRenderer(context));
-        return new CityCollectionRendererBuilder(prototypes);
+    PlacesCollectionRendererBuilder providePlaceCollectionRendererBuilder(Context context) {
+        List<Renderer<PlaceViewModel>> prototypes = new LinkedList<Renderer<PlaceViewModel>>();
+        prototypes.add(new PlaceRenderer(context));
+        return new PlacesCollectionRendererBuilder(prototypes);
     }
 
     @Provides
-    RendererAdapter<CityViewModel> provideCitiesRendererAdapter(LayoutInflater layoutInflater, CityCollectionRendererBuilder cityCollectionRendererBuilder, CityCollectionViewModel cityCollectionViewModel) {
-        return new RendererAdapter<CityViewModel>(layoutInflater, cityCollectionRendererBuilder, cityCollectionViewModel);
+    RendererAdapter<PlaceViewModel> providePlacesRendererAdapter(LayoutInflater layoutInflater, PlacesCollectionRendererBuilder placesCollectionRendererBuilder, PlaceCollectionViewModel placeCollectionViewModel) {
+        return new RendererAdapter<PlaceViewModel>(layoutInflater, placesCollectionRendererBuilder, placeCollectionViewModel);
     }
 }
