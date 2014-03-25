@@ -31,7 +31,7 @@ public class CityCollectionViewModel implements AdapteeCollection<CityViewModel>
         this.add(new CityViewModel("Amazon Rain, Brazil", "http://1.bp.blogspot.com/-zjvjWNPQczI/TfRQTEYMk7I/AAAAAAAAAK8/W9SrwEyYPJw/s1600/rainforest.jpg", "Description"));
         this.add(new CityViewModel("Canals of Venice", "http://www.jds-jgp.net/016_Small_canal_-_Venice.jpg", "Description"));
         this.add(new CityViewModel("Amalfi", "http://img.playasymar.com/wp-content/uploads/2010/12/amalfi.jpg", "Description"));
-        this.add(new CityViewModel("Colosseum of Rome", "http://romanempiretours.com/blog/wp-content/uploads/colosseum-rome-rcol42.jpg", "Description"));
+        this.add(new CityViewModel("Colosseum of Rome", "http://www.fotos-bonitas.com/wp-content/uploads/2013/06/Bing_zh-CN.jpg", "Description"));
         this.add(new CityViewModel("The Blue Grotto", "http://static.environmentalgraffiti.com/sites/default/files/images/800px-BlueGrottoCapriInsidejpg.img_assist_custom-600x450.jpg", "Description"));
         this.add(new CityViewModel("Karnak Temple", "http://www.filmapia.com/sites/default/files/filmapia/pub/place/karnak-temple.jpg", "Description"));
         this.add(new CityViewModel("Nile River", "http://www.holidayplanners.com/nitro/files/nileriver%20egypt.jpg", "Description"));

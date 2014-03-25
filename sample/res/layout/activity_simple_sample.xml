@@ -9,8 +9,7 @@
     <ListView
             android:id="@+id/lv_cities"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:visibility="gone"/>
+            android:layout_height="fill_parent"/>
 
     <!-- DraggablePanel -->
 

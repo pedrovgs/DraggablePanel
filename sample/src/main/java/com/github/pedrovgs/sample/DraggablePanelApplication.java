@@ -14,7 +14,7 @@ public class DraggablePanelApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        MainModule mainModule = new MainModule(getBaseContext());
+        MainModule mainModule = new MainModule(this);
         objectGraph = ObjectGraph.create(mainModule);
         objectGraph.inject(this);
         objectGraph.injectStatics();

@@ -8,7 +8,8 @@ import com.github.pedrovgs.DraggablePanel;
 import com.github.pedrovgs.sample.R;
 import com.github.pedrovgs.sample.fragment.BlackFragment;
 import com.github.pedrovgs.sample.fragment.RedFragment;
-import com.github.pedrovgs.sample.viewmodel.CityCollectionViewModel;
+import com.github.pedrovgs.sample.viewmodel.CityViewModel;
+import com.pedrogomez.renderers.RendererAdapter;
 
 import javax.inject.Inject;
 
@@ -23,15 +24,15 @@ public class CitiesSampleActivity extends DIFragmentActivity {
     DraggablePanel draggablePanel;
 
     @Inject
-    CityCollectionViewModel cities;
+    RendererAdapter<CityViewModel> citiesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simple_sample);
         ButterKnife.inject(this);
-        initializeDraggablePanel();
         initializeListView();
+        initializeDraggablePanel();
     }
 
     private void initializeDraggablePanel() {
@@ -47,7 +48,7 @@ public class CitiesSampleActivity extends DIFragmentActivity {
     }
 
     private void initializeListView() {
-
+        lv_cities.setAdapter(citiesAdapter);
     }
 
 
