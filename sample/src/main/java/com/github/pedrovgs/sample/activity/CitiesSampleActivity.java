@@ -1,23 +1,29 @@
 package com.github.pedrovgs.sample.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.widget.Toast;
+import android.widget.ListView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.OnClick;
 import com.github.pedrovgs.DraggablePanel;
 import com.github.pedrovgs.sample.R;
 import com.github.pedrovgs.sample.fragment.BlackFragment;
 import com.github.pedrovgs.sample.fragment.RedFragment;
+import com.github.pedrovgs.sample.viewmodel.CityCollectionViewModel;
+
+import javax.inject.Inject;
 
 /**
  * @author Pedro Vicente Gómez Sánchez.
  */
-public class SimpleSampleActivity extends FragmentActivity {
+public class CitiesSampleActivity extends DIFragmentActivity {
 
+    @InjectView(R.id.lv_cities)
+    ListView lv_cities;
     @InjectView(R.id.draggable_panel)
     DraggablePanel draggablePanel;
+
+    @Inject
+    CityCollectionViewModel cities;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +31,7 @@ public class SimpleSampleActivity extends FragmentActivity {
         setContentView(R.layout.activity_simple_sample);
         ButterKnife.inject(this);
         initializeDraggablePanel();
+        initializeListView();
     }
 
     private void initializeDraggablePanel() {
@@ -39,9 +46,9 @@ public class SimpleSampleActivity extends FragmentActivity {
         draggablePanel.initializeView();
     }
 
-    @OnClick(R.id.ll_container)
-    void onContentClicked() {
-        Toast.makeText(this, "View container clicked", Toast.LENGTH_SHORT).show();
+    private void initializeListView() {
+
     }
+
 
 }

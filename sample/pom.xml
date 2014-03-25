@@ -51,6 +51,11 @@
             <artifactId>youtube-player-api</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.pedrovgs</groupId>
+            <artifactId>renderers</artifactId>
+        </dependency>
+
     </dependencies>
 
 

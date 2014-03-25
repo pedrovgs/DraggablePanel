@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/ll_container"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/ll_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <!-- ListView cities -->
+    <ListView
+            android:id="@+id/lv_cities"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:visibility="gone"/>
 
     <!-- DraggablePanel -->
 
@@ -14,4 +20,4 @@
             android:layout_height="fill_parent"/>
 
 
-</LinearLayout>
+</RelativeLayout>
