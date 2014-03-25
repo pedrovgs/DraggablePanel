@@ -7,7 +7,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.github.pedrovgs.DraggablePanel;
 import com.github.pedrovgs.sample.R;
-import com.github.pedrovgs.sample.fragment.RedFragment;
+import com.github.pedrovgs.sample.fragment.CityFragment;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
@@ -65,7 +65,7 @@ public class YoutubeSampleActivity extends FragmentActivity {
     private void initializeDraggablePanel() {
         draggablePanel.setFragmentManager(getSupportFragmentManager());
         draggablePanel.setTopFragment(youtubeFragment);
-        draggablePanel.setBottomFragment(new RedFragment());
+        draggablePanel.setBottomFragment(new CityFragment());
         draggablePanel.initializeView();
     }
 }
