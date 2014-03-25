@@ -36,12 +36,26 @@ public class CitiesSampleActivity extends DIFragmentActivity {
         setContentView(R.layout.activity_simple_sample);
         ButterKnife.inject(this);
         initializeFragments();
-        initializeDraggablePanel();
         initializeListView();
+        initializeDraggablePanel();
     }
+
 
     private void initializeFragments() {
         cityFragment = new CityFragment();
+    }
+
+    private void initializeListView() {
+        lv_cities.setAdapter(citiesAdapter);
+        lv_cities.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                draggablePanel.setVisibility(View.VISIBLE);
+                draggablePanel.maximize();
+                CityViewModel cityViewModel = citiesAdapter.getItem(position);
+                cityFragment.showCity(cityViewModel);
+            }
+        });
     }
 
     private void initializeDraggablePanel() {
@@ -54,17 +68,7 @@ public class CitiesSampleActivity extends DIFragmentActivity {
         draggablePanel.setTopFragmentMarginBottom(getResources().getDimension(R.dimen.top_fragment_margin));
         draggablePanel.setBackgroundColor(getResources().getColor(R.color.black));
         draggablePanel.initializeView();
-    }
-
-    private void initializeListView() {
-        lv_cities.setAdapter(citiesAdapter);
-        lv_cities.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                CityViewModel cityViewModel = citiesAdapter.getItem(position);
-                cityFragment.showCity(cityViewModel);
-            }
-        });
+        draggablePanel.setVisibility(View.GONE);
     }
 
 

@@ -185,7 +185,11 @@ public class DraggableView extends RelativeLayout {
     }
 
     private void changeDragViewViewAlpha() {
-        ViewHelper.setAlpha(dragView, 1 - getHorizontalDragOffset());
+        float alpha = 1 - getHorizontalDragOffset();
+        if (alpha == 0) {
+            alpha = 1;
+        }
+        ViewHelper.setAlpha(dragView, alpha);
     }
 
     private float getHorizontalDragOffset() {
@@ -228,13 +232,13 @@ public class DraggableView extends RelativeLayout {
         return false;
     }
 
-    private void closeToRight() {
+    public void closeToRight() {
         if (viewDragHelper.smoothSlideViewTo(dragView, dragView.getWidth(), getHeight() - dragView.getHeight())) {
             ViewCompat.postInvalidateOnAnimation(this);
         }
     }
 
-    private void closeToLeft() {
+    public void closeToLeft() {
         if (viewDragHelper.smoothSlideViewTo(dragView, -dragView.getWidth(), getHeight() - dragView.getHeight())) {
             ViewCompat.postInvalidateOnAnimation(this);
         }
@@ -291,6 +295,7 @@ public class DraggableView extends RelativeLayout {
     public void setDraggableListener(DraggableListener listener) {
         this.listener = listener;
     }
+
 
     /*
      * DragPanelCallback

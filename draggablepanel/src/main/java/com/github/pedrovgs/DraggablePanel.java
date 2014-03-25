@@ -16,6 +16,7 @@ public class DraggablePanel extends FrameLayout {
     private static final float DEFAULT_SCALE_FACTOR = 2;
     private static final float DEFAULT_TOP_FRAGMENT_MARGIN = 0;
 
+    private DraggableView draggableView;
     private Fragment topFragment;
     private Fragment bottomFragment;
     private FragmentManager fragmentManager;
@@ -87,8 +88,24 @@ public class DraggablePanel extends FrameLayout {
         this.topFragmentMarginBottom = topFragmentMarginBottom;
     }
 
-    public void setDraggableListener(DraggableListener draggableListener){
+    public void setDraggableListener(DraggableListener draggableListener) {
         this.draggableListener = draggableListener;
+    }
+
+    public void closeToLeft() {
+        draggableView.closeToLeft();
+    }
+
+    public void closeToRight() {
+        draggableView.closeToRight();
+    }
+
+    public void maximize() {
+        draggableView.maximize();
+    }
+
+    public void minimize() {
+        draggableView.minimize();
     }
 
     /**
@@ -99,7 +116,7 @@ public class DraggablePanel extends FrameLayout {
         checkSupportFragmentmanagerConsistency();
 
         inflate(getContext(), R.layout.draggable_panel, this);
-        DraggableView draggableView = (DraggableView) findViewById(R.id.draggableView);
+        draggableView = (DraggableView) findViewById(R.id.draggableView);
         draggableView.setTopViewHeight(topFragmentHeight);
         draggableView.setFragmentManager(fragmentManager);
         draggableView.attachTopFragment(topFragment);
@@ -126,5 +143,4 @@ public class DraggablePanel extends FrameLayout {
             throw new IllegalStateException("You have to set top and bottom fragment before initialize DraggablePanel");
         }
     }
-
 }
