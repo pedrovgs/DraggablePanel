@@ -18,7 +18,7 @@
             android:id="@+id/draggable_panel"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            draggable_panel:scale_factor="@integer/scale_factor"
+            draggable_panel:scale_factor="@dimen/scale_factor"
             draggable_panel:top_fragment_height="@dimen/top_fragment_height"
             draggable_panel:top_fragment_margin_right="@dimen/top_fragment_margin"
             draggable_panel:top_fragment_margin_bottom="@dimen/top_fragment_margin"

@@ -76,7 +76,7 @@ public class DraggablePanel extends FrameLayout {
         this.fragmentManager = fragmentManager;
     }
 
-    public void setScaleFactor(int scaleFactor) {
+    public void setScaleFactor(float scaleFactor) {
         this.scaleFactor = scaleFactor;
     }
 

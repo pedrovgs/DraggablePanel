@@ -1,6 +1,7 @@
 package com.github.pedrovgs.sample.activity;
 
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -86,7 +87,10 @@ public class PlacesSampleActivity extends DIFragmentActivity {
         draggablePanel.setFragmentManager(getSupportFragmentManager());
         draggablePanel.setTopFragment(placeFragment);
         draggablePanel.setBottomFragment(mapFragment);
-        draggablePanel.setScaleFactor(getResources().getInteger(R.integer.scale_factor));
+        TypedValue typedValue = new TypedValue();
+        getResources().getValue(R.dimen.scale_factor, typedValue, true);
+        float scaleFactor = typedValue.getFloat();
+        draggablePanel.setScaleFactor(scaleFactor);
         draggablePanel.setTopViewHeight(getResources().getDimension(R.dimen.top_fragment_height));
         draggablePanel.setTopFragmentMarginRight(getResources().getDimension(R.dimen.top_fragment_margin));
         draggablePanel.setTopFragmentMarginBottom(getResources().getDimension(R.dimen.top_fragment_margin));

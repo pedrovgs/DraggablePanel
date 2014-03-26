@@ -12,6 +12,6 @@ public class DIFragmentActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((DraggablePanelApplication)getApplication()).inject(this);
+        ((DraggablePanelApplication) getApplication()).inject(this);
     }
 }
