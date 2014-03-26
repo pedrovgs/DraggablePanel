@@ -2,7 +2,8 @@
 <resources>
     <declare-styleable name="draggable_panel">
         <attr name="top_fragment_height" format="dimension"/>
-        <attr name="scale_factor" format="float"/>
+        <attr name="x_scale_factor" format="float"/>
+        <attr name="y_scale_factor" format="float"/>
         <attr name="top_fragment_margin_right" format="dimension"/>
         <attr name="top_fragment_margin_bottom" format="dimension"/>
     </declare-styleable>
@@ -11,7 +12,8 @@
         <attr name="top_view_id" format="reference"/>
         <attr name="bottom_view_id" format="reference"/>
         <attr name="top_view_height" format="dimension"/>
-        <attr name="top_view_scale_factor" format="float"/>
+        <attr name="top_view_x_scale_factor" format="float"/>
+        <attr name="top_view_y_scale_factor" format="float"/>
         <attr name="top_view_margin_right" format="dimension"/>
         <attr name="top_view_margin_bottom" format="dimension"/>
     </declare-styleable>

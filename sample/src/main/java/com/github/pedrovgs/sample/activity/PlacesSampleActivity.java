@@ -88,9 +88,13 @@ public class PlacesSampleActivity extends DIFragmentActivity {
         draggablePanel.setTopFragment(placeFragment);
         draggablePanel.setBottomFragment(mapFragment);
         TypedValue typedValue = new TypedValue();
-        getResources().getValue(R.dimen.scale_factor, typedValue, true);
-        float scaleFactor = typedValue.getFloat();
-        draggablePanel.setScaleFactor(scaleFactor);
+        getResources().getValue(R.dimen.x_scale_factor, typedValue, true);
+        float xScaleFactor = typedValue.getFloat();
+        typedValue = new TypedValue();
+        getResources().getValue(R.dimen.y_scale_factor, typedValue, true);
+        float yScaleFactor = typedValue.getFloat();
+        draggablePanel.setXScaleFactor(xScaleFactor);
+        draggablePanel.setyScaleFactor(yScaleFactor);
         draggablePanel.setTopViewHeight(getResources().getDimension(R.dimen.top_fragment_height));
         draggablePanel.setTopFragmentMarginRight(getResources().getDimension(R.dimen.top_fragment_margin));
         draggablePanel.setTopFragmentMarginBottom(getResources().getDimension(R.dimen.top_fragment_margin));

@@ -54,7 +54,8 @@ public class DraggableView extends RelativeLayout {
 
     private int lastActionMotionEvent = -1;
 
-    private float scaleFactor = DEFAULT_SCALE_FACTOR;
+    private float xScaleFactor = DEFAULT_SCALE_FACTOR;
+    private float yScaleFactor = DEFAULT_SCALE_FACTOR;
     private float topViewHeight;
     private float topFragmentMarginRight = DEFAULT_TOP_FRAGMENT_MARGIN;
     private float topFragmentMarginBottom = DEFAULT_TOP_FRAGMENT_MARGIN;
@@ -98,8 +99,12 @@ public class DraggableView extends RelativeLayout {
         addFragmentToView(R.id.secondView, bottomFragment);
     }
 
-    public void setTopViewScaleFactor(float scaleFactor) {
-        this.scaleFactor = scaleFactor;
+    public void setXTopViewScaleFactor(float xScaleFactor) {
+        this.xScaleFactor = xScaleFactor;
+    }
+
+    public void setYTopViewScaleFactor(float yScaleFactor) {
+        this.yScaleFactor = yScaleFactor;
     }
 
     public void setTopViewMarginRight(float topFragmentMarginRight) {
@@ -123,7 +128,8 @@ public class DraggableView extends RelativeLayout {
         this.dragViewId = attributes.getResourceId(R.styleable.draggable_view_top_view_id, R.id.dragView);
         this.secondViewId = attributes.getResourceId(R.styleable.draggable_view_bottom_view_id, R.id.secondView);
         this.topViewHeight = attributes.getDimension(R.styleable.draggable_view_top_view_height, DEFAULT_TOP_VIEW_HEIGHT);
-        this.scaleFactor = attributes.getFloat(R.styleable.draggable_view_top_view_scale_factor, DEFAULT_SCALE_FACTOR);
+        this.xScaleFactor = attributes.getFloat(R.styleable.draggable_view_top_view_x_scale_factor, DEFAULT_SCALE_FACTOR);
+        this.yScaleFactor = attributes.getFloat(R.styleable.draggable_view_top_view_y_scale_factor, DEFAULT_SCALE_FACTOR);
         this.topFragmentMarginRight = attributes.getDimension(R.styleable.draggable_view_top_view_margin_right, DEFAULT_TOP_FRAGMENT_MARGIN);
         this.topFragmentMarginBottom = attributes.getDimension(R.styleable.draggable_view_top_view_margin_bottom, DEFAULT_TOP_FRAGMENT_MARGIN);
 
@@ -167,8 +173,8 @@ public class DraggableView extends RelativeLayout {
     }
 
     private void changeDragViewScale() {
-        ViewHelper.setScaleX(dragView, 1 - getVerticalDragOffset() / scaleFactor);
-        ViewHelper.setScaleY(dragView, 1 - getVerticalDragOffset() / scaleFactor);
+        ViewHelper.setScaleX(dragView, 1 - getVerticalDragOffset() / xScaleFactor);
+        ViewHelper.setScaleY(dragView, 1 - getVerticalDragOffset() / yScaleFactor);
     }
 
     private void changeBackgroundAlpha() {

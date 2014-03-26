@@ -4,5 +4,6 @@
     <dimen name="place_renderer_height">200dip</dimen>
     <dimen name="tv_name_padding">10dip</dimen>
     <dimen name="tv_name_margin">5dip</dimen>
-    <item name="scale_factor" format="float" type="dimen">2</item>
+    <item name="x_scale_factor" format="float" type="dimen">2</item>
+    <item name="y_scale_factor" format="float" type="dimen">2</item>
 </resources>

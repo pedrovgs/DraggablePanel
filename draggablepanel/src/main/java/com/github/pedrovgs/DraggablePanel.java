@@ -22,7 +22,8 @@ public class DraggablePanel extends FrameLayout {
     private FragmentManager fragmentManager;
     private float topFragmentHeight;
     private float topFragmentMarginRight;
-    private float scaleFactor;
+    private float xScaleFactor;
+    private float yScaleFactor;
     private float topFragmentMarginBottom;
 
     private DraggableListener draggableListener;
@@ -48,7 +49,8 @@ public class DraggablePanel extends FrameLayout {
     private void initializeAttrs(AttributeSet attrs) {
         TypedArray attributes = getContext().obtainStyledAttributes(attrs, R.styleable.draggable_panel);
         this.topFragmentHeight = attributes.getDimension(R.styleable.draggable_panel_top_fragment_height, DEFAULT_TOP_FRAGMENT_HEIGHT);
-        this.scaleFactor = attributes.getFloat(R.styleable.draggable_panel_scale_factor, DEFAULT_SCALE_FACTOR);
+        this.xScaleFactor = attributes.getFloat(R.styleable.draggable_panel_x_scale_factor, DEFAULT_SCALE_FACTOR);
+        this.yScaleFactor = attributes.getFloat(R.styleable.draggable_panel_y_scale_factor, DEFAULT_SCALE_FACTOR);
         this.topFragmentMarginRight = attributes.getDimension(R.styleable.draggable_panel_top_fragment_margin_right, DEFAULT_TOP_FRAGMENT_MARGIN);
         this.topFragmentMarginBottom = attributes.getDimension(R.styleable.draggable_panel_top_fragment_margin_bottom, DEFAULT_TOP_FRAGMENT_MARGIN);
     }
@@ -76,8 +78,12 @@ public class DraggablePanel extends FrameLayout {
         this.fragmentManager = fragmentManager;
     }
 
-    public void setScaleFactor(float scaleFactor) {
-        this.scaleFactor = scaleFactor;
+    public void setXScaleFactor(float xScaleFactor) {
+        this.xScaleFactor = xScaleFactor;
+    }
+
+    public void setyScaleFactor(float yScaleFactor) {
+        this.yScaleFactor = yScaleFactor;
     }
 
     public void setTopFragmentMarginRight(float topFragmentMarginRight) {
@@ -124,7 +130,8 @@ public class DraggablePanel extends FrameLayout {
         draggableView.setBackground(getBackground());
         setBackground(null);
 
-        draggableView.setTopViewScaleFactor(scaleFactor);
+        draggableView.setXTopViewScaleFactor(xScaleFactor);
+        draggableView.setYTopViewScaleFactor(yScaleFactor);
         draggableView.setTopViewMarginRight(topFragmentMarginRight);
         draggableView.setTopViewMarginBottom(topFragmentMarginBottom);
         draggableView.attachBottomFragment(bottomFragment);

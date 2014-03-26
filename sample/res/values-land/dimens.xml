@@ -1,3 +1,3 @@
 <resources>
-    <item name="scale_factor" format="float" type="dimen">1.25</item>
+    <item name="x_scale_factor" format="float" type="dimen">1.5</item>
 </resources>
