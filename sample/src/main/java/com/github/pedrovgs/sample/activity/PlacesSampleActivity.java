@@ -8,9 +8,10 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.github.pedrovgs.DraggablePanel;
 import com.github.pedrovgs.sample.R;
-import com.github.pedrovgs.sample.fragment.BlackFragment;
 import com.github.pedrovgs.sample.fragment.PlaceFragment;
 import com.github.pedrovgs.sample.viewmodel.PlaceViewModel;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.pedrogomez.renderers.RendererAdapter;
 
 import javax.inject.Inject;
@@ -29,6 +30,7 @@ public class PlacesSampleActivity extends DIFragmentActivity {
     RendererAdapter<PlaceViewModel> placesAdapter;
 
     private PlaceFragment placeFragment;
+    private SupportMapFragment mapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,17 @@ public class PlacesSampleActivity extends DIFragmentActivity {
 
     private void initializeFragments() {
         placeFragment = new PlaceFragment();
+
+        mapFragment = new SupportMapFragment() {
+            @Override
+            public void onActivityCreated(Bundle savedInstanceState) {
+                super.onActivityCreated(savedInstanceState);
+                GoogleMap map = mapFragment.getMap();
+                if (map != null) {
+                    //Map configuration.
+                }
+            }
+        };
     }
 
     private void initializeListView() {
@@ -61,7 +74,7 @@ public class PlacesSampleActivity extends DIFragmentActivity {
     private void initializeDraggablePanel() {
         draggablePanel.setFragmentManager(getSupportFragmentManager());
         draggablePanel.setTopFragment(placeFragment);
-        draggablePanel.setBottomFragment(new BlackFragment());
+        draggablePanel.setBottomFragment(mapFragment);
         draggablePanel.setScaleFactor(getResources().getInteger(R.integer.scale_factor));
         draggablePanel.setTopViewHeight(getResources().getDimension(R.dimen.top_fragment_height));
         draggablePanel.setTopFragmentMarginRight(getResources().getDimension(R.dimen.top_fragment_margin));
