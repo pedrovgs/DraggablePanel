@@ -11,7 +11,7 @@ import com.github.pedrovgs.sample.R;
 import com.github.pedrovgs.sample.fragment.PlaceFragment;
 import com.github.pedrovgs.sample.viewmodel.PlaceViewModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMapOptions;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -48,8 +48,17 @@ public class PlacesSampleActivity extends DIFragmentActivity {
 
     private void initializeFragments() {
         placeFragment = new PlaceFragment();
-        GoogleMapOptions options = new GoogleMapOptions();
-        mapFragment = SupportMapFragment.newInstance(options);
+        mapFragment = new SupportMapFragment() {
+            @Override
+            public void onActivityCreated(Bundle savedInstanceState) {
+                super.onActivityCreated(savedInstanceState);
+                GoogleMap map = mapFragment.getMap();
+                if (map != null) {
+                    map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+                }
+            }
+        };
+
     }
 
     private void initializeListView() {
@@ -65,8 +74,7 @@ public class PlacesSampleActivity extends DIFragmentActivity {
                 mapFragment.getMap().clear();
                 LatLng latitudeLongitude = new LatLng(placeViewModel.getLatitude(), placeViewModel.getLongitude());
                 mapFragment.getMap().addMarker(new MarkerOptions().position(latitudeLongitude));
-                mapFragment.getMap().moveCamera(CameraUpdateFactory.newLatLng(latitudeLongitude));
-
+                mapFragment.getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(latitudeLongitude, 10f));
             }
         });
     }
