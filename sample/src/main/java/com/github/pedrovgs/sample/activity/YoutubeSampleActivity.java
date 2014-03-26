@@ -17,7 +17,7 @@ import com.google.android.youtube.player.YouTubePlayerSupportFragment;
  */
 public class YoutubeSampleActivity extends FragmentActivity {
 
-    private static final String YOUTUBE_API_KEY = "AIzaSyD2MyIMbskwhmVSNcZQf9yBWcYo-dWPZOo";
+    private static final String YOUTUBE_API_KEY = "AIzaSyC1rMU-mkhoyTvBIdTnYU0dss0tU9vtK48";
     private static final String VIDEO_KEY = "PpTGsZTMXlY";
 
     @InjectView(R.id.lv_videos)

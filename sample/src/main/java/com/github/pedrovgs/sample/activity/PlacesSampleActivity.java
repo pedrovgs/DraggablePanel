@@ -10,9 +10,11 @@ import com.github.pedrovgs.DraggablePanel;
 import com.github.pedrovgs.sample.R;
 import com.github.pedrovgs.sample.fragment.PlaceFragment;
 import com.github.pedrovgs.sample.viewmodel.PlaceViewModel;
-import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.pedrogomez.renderers.RendererAdapter;
 
 import javax.inject.Inject;
@@ -46,17 +48,8 @@ public class PlacesSampleActivity extends DIFragmentActivity {
 
     private void initializeFragments() {
         placeFragment = new PlaceFragment();
-
-        mapFragment = new SupportMapFragment() {
-            @Override
-            public void onActivityCreated(Bundle savedInstanceState) {
-                super.onActivityCreated(savedInstanceState);
-                GoogleMap map = mapFragment.getMap();
-                if (map != null) {
-                    map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-                }
-            }
-        };
+        GoogleMapOptions options = new GoogleMapOptions();
+        mapFragment = SupportMapFragment.newInstance(options);
     }
 
     private void initializeListView() {
@@ -68,6 +61,12 @@ public class PlacesSampleActivity extends DIFragmentActivity {
                 draggablePanel.maximize();
                 PlaceViewModel placeViewModel = placesAdapter.getItem(position);
                 placeFragment.showPlace(placeViewModel);
+
+                mapFragment.getMap().clear();
+                LatLng latitudeLongitude = new LatLng(placeViewModel.getLatitude(), placeViewModel.getLongitude());
+                mapFragment.getMap().addMarker(new MarkerOptions().position(latitudeLongitude));
+                mapFragment.getMap().moveCamera(CameraUpdateFactory.newLatLng(latitudeLongitude));
+
             }
         });
     }
