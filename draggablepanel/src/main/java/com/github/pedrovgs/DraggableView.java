@@ -265,7 +265,7 @@ public class DraggableView extends RelativeLayout {
     }
 
     private boolean isDragViewAtRight() {
-        return dragView.getRight() >= (getWidth() - MINIMUN_DX_FOR_HORIZONTAL_DRAG);
+        return dragView.getRight() == getWidth();
     }
 
     private boolean isDragViewAtBottom() {
@@ -357,14 +357,12 @@ public class DraggableView extends RelativeLayout {
 
         @Override
         public int clampViewPositionVertical(View child, int top, int dy) {
-            int newTop;
+            int newTop = getHeight() - dragView.getHeight();
             if (isMinimized() && (dy >= MINIMUM_DY_FOR_VERTICAL_DRAG || dy >= -MINIMUM_DY_FOR_VERTICAL_DRAG) || (!isMinimized() && !isDragViewAtBottom())) {
                 final int topBound = getPaddingTop();
                 final int bottomBound = getHeight() - child.getHeight() - child.getPaddingBottom();
 
                 newTop = Math.min(Math.max(top, topBound), bottomBound);
-            } else {
-                newTop = getHeight() - dragView.getHeight();
             }
             return newTop;
         }
