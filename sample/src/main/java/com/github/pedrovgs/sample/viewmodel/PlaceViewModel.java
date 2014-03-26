@@ -7,12 +7,14 @@ public class PlaceViewModel {
 
     private final String name;
     private final String photo;
-    private final String description;
+    private final double latitude;
+    private final double longitude;
 
-    public PlaceViewModel(String name, String photo, String description) {
+    public PlaceViewModel(String name, String photo, double latitude, double longitude) {
         this.name = name;
         this.photo = photo;
-        this.description = description;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public String getName() {
@@ -23,7 +25,11 @@ public class PlaceViewModel {
         return photo;
     }
 
-    public String getDescription() {
-        return description;
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
     }
 }

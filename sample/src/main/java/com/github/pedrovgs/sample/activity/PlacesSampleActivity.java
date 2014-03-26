@@ -12,6 +12,7 @@ import com.github.pedrovgs.sample.fragment.PlaceFragment;
 import com.github.pedrovgs.sample.viewmodel.PlaceViewModel;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
 import com.pedrogomez.renderers.RendererAdapter;
 
 import javax.inject.Inject;
@@ -52,7 +53,7 @@ public class PlacesSampleActivity extends DIFragmentActivity {
                 super.onActivityCreated(savedInstanceState);
                 GoogleMap map = mapFragment.getMap();
                 if (map != null) {
-                    //Map configuration.
+                    map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
                 }
             }
         };
