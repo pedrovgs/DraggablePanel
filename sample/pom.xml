@@ -56,6 +56,12 @@
             <artifactId>renderers</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.google.gms</groupId>
+            <artifactId>google-play-services-jar</artifactId>
+        </dependency>
+
+
     </dependencies>
 
 

@@ -133,6 +133,13 @@
                 <version>1</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.google.gms</groupId>
+                <artifactId>google-play-services-jar</artifactId>
+                <version>7</version>
+            </dependency>
+
+
         </dependencies>
     </dependencyManagement>
 
