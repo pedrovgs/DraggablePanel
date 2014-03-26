@@ -73,7 +73,10 @@ public class PlacesSampleActivity extends DIFragmentActivity {
 
                 mapFragment.getMap().clear();
                 LatLng latitudeLongitude = new LatLng(placeViewModel.getLatitude(), placeViewModel.getLongitude());
-                mapFragment.getMap().addMarker(new MarkerOptions().position(latitudeLongitude));
+                MarkerOptions marker = new MarkerOptions().position(latitudeLongitude);
+                marker.title(placeViewModel.getName());
+                marker.snippet(placeViewModel.getLatitude() + "-" + placeViewModel.getLongitude());
+                mapFragment.getMap().addMarker(marker);
                 mapFragment.getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(latitudeLongitude, 10f));
             }
         });
