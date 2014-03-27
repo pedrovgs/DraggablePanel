@@ -13,6 +13,7 @@ import com.github.pedrovgs.sample.fragment.PlaceFragment;
 import com.github.pedrovgs.sample.viewmodel.PlaceViewModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -49,17 +50,7 @@ public class PlacesSampleActivity extends DIFragmentActivity {
 
     private void initializeFragments() {
         placeFragment = new PlaceFragment();
-        mapFragment = new SupportMapFragment() {
-            @Override
-            public void onActivityCreated(Bundle savedInstanceState) {
-                super.onActivityCreated(savedInstanceState);
-                GoogleMap map = mapFragment.getMap();
-                if (map != null) {
-                    map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-                }
-            }
-        };
-
+        mapFragment = SupportMapFragment.newInstance(new GoogleMapOptions().mapType(GoogleMap.MAP_TYPE_SATELLITE));
     }
 
     private void initializeListView() {
@@ -76,7 +67,7 @@ public class PlacesSampleActivity extends DIFragmentActivity {
                 LatLng latitudeLongitude = new LatLng(placeViewModel.getLatitude(), placeViewModel.getLongitude());
                 MarkerOptions marker = new MarkerOptions().position(latitudeLongitude);
                 marker.title(placeViewModel.getName());
-                marker.snippet(placeViewModel.getLatitude() + "-" + placeViewModel.getLongitude());
+                marker.snippet(placeViewModel.getLatitude() + " , " + placeViewModel.getLongitude());
                 mapFragment.getMap().addMarker(marker);
                 mapFragment.getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(latitudeLongitude, 10f));
             }
