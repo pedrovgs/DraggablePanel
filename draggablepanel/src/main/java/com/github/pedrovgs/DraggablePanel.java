@@ -150,4 +150,21 @@ public class DraggablePanel extends FrameLayout {
             throw new IllegalStateException("You have to set top and bottom fragment before initialize DraggablePanel");
         }
     }
+
+    public boolean isMaximized() {
+        return draggableView.isMaximized();
+    }
+
+    public boolean isMinimized() {
+        return draggableView.isMinimized();
+    }
+
+    public boolean isClosedAtRight() {
+        return draggableView.isClosedAtRight();
+    }
+
+    public boolean isClosedAtLeft() {
+        return draggableView.isClosedAtLeft();
+    }
+
 }

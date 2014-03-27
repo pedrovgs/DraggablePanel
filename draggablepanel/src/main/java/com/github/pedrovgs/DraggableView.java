@@ -250,11 +250,11 @@ public class DraggableView extends RelativeLayout {
         }
     }
 
-    private boolean isMinimized() {
+    public boolean isMinimized() {
         return isDragViewAtBottom() && isDragViewAtRight();
     }
 
-    private boolean isMaximized() {
+    public boolean isMaximized() {
         return isDragViewAtTop();
     }
 
@@ -302,6 +302,13 @@ public class DraggableView extends RelativeLayout {
         this.listener = listener;
     }
 
+    public boolean isClosedAtRight() {
+        return dragView.getLeft() >= getWidth();
+    }
+
+    public boolean isClosedAtLeft() {
+        return dragView.getRight() <= 0;
+    }
 
     /*
      * DragPanelCallback

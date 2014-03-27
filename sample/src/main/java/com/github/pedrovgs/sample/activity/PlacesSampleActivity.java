@@ -1,6 +1,7 @@
 package com.github.pedrovgs.sample.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,6 +27,9 @@ import javax.inject.Inject;
  */
 public class PlacesSampleActivity extends DIFragmentActivity {
 
+    private static final String DRAGGABLE_PANEL_STATE = "draggable_panel_state";
+    private static final String LAST_VIDEO_LOADED_POSITION = "last_video_loaded_position";
+
     @InjectView(R.id.lv_places)
     ListView lv_places;
     @InjectView(R.id.draggable_panel)
@@ -37,6 +41,8 @@ public class PlacesSampleActivity extends DIFragmentActivity {
     private PlaceFragment placeFragment;
     private SupportMapFragment mapFragment;
 
+    private int lastVideoLoadedPosition;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +53,88 @@ public class PlacesSampleActivity extends DIFragmentActivity {
         initializeDraggablePanel();
     }
 
+    private void recoverDraggablePanelState(Bundle savedInstanceState) {
+        if (savedInstanceState.getSerializable(DRAGGABLE_PANEL_STATE) == null) {
+            draggablePanel.setVisibility(View.GONE);
+            return;
+        }
+        Handler handler = new Handler();
+        final DraggablePanelState draggablePanelState = (DraggablePanelState) savedInstanceState.getSerializable(DRAGGABLE_PANEL_STATE);
+        switch (draggablePanelState) {
+            case MAXIMIZED:
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        draggablePanel.maximize();
+                    }
+                }, 100);
+                break;
+            case MINIMIZED:
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        draggablePanel.minimize();
+                    }
+                }, 100);
+                break;
+            case CLOSED_AT_LEFT:
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        draggablePanel.closeToLeft();
+                    }
+                }, 100);
+                break;
+            case CLOSED_AT_RIGHT:
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        draggablePanel.closeToRight();
+                    }
+                }, 100);
+                break;
+            default:
+                draggablePanel.setVisibility(View.GONE);
+                break;
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        saveDraggableState(outState);
+        saveLastVideoLoadedPosition(outState);
+    }
+
+    private void saveLastVideoLoadedPosition(Bundle outState) {
+        outState.putInt(LAST_VIDEO_LOADED_POSITION, lastVideoLoadedPosition);
+    }
+
+    private void saveDraggableState(Bundle outState) {
+        DraggablePanelState draggablePanelState = null;
+        if (draggablePanel.isMaximized()) {
+            draggablePanelState = DraggablePanelState.MAXIMIZED;
+        } else if (draggablePanel.isMinimized()) {
+            draggablePanelState = DraggablePanelState.MINIMIZED;
+        } else if (draggablePanel.isClosedAtLeft()) {
+            draggablePanelState = DraggablePanelState.CLOSED_AT_LEFT;
+        } else if (draggablePanel.isClosedAtRight()) {
+            draggablePanelState = DraggablePanelState.CLOSED_AT_RIGHT;
+        }
+        outState.putSerializable(DRAGGABLE_PANEL_STATE, draggablePanelState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        recoverDraggablePanelState(savedInstanceState);
+        loadLastVideoLoaded(savedInstanceState);
+    }
+
+    private void loadLastVideoLoaded(Bundle savedInstanceState) {
+        lastVideoLoadedPosition = savedInstanceState.getInt(LAST_VIDEO_LOADED_POSITION, 0);
+        showPlace(lastVideoLoadedPosition);
+    }
 
     private void initializeFragments() {
         placeFragment = new PlaceFragment();
@@ -58,20 +146,25 @@ public class PlacesSampleActivity extends DIFragmentActivity {
         lv_places.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                draggablePanel.setVisibility(View.VISIBLE);
-                draggablePanel.maximize();
-                PlaceViewModel placeViewModel = placesAdapter.getItem(position);
-                placeFragment.showPlace(placeViewModel);
-
-                mapFragment.getMap().clear();
-                LatLng latitudeLongitude = new LatLng(placeViewModel.getLatitude(), placeViewModel.getLongitude());
-                MarkerOptions marker = new MarkerOptions().position(latitudeLongitude);
-                marker.title(placeViewModel.getName());
-                marker.snippet(placeViewModel.getLatitude() + " , " + placeViewModel.getLongitude());
-                mapFragment.getMap().addMarker(marker);
-                mapFragment.getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(latitudeLongitude, 10f));
+                lastVideoLoadedPosition = position;
+                showPlace(position);
             }
         });
+    }
+
+    private void showPlace(int position) {
+        draggablePanel.setVisibility(View.VISIBLE);
+        draggablePanel.maximize();
+        PlaceViewModel placeViewModel = placesAdapter.getItem(position);
+        placeFragment.showPlace(placeViewModel);
+
+        mapFragment.getMap().clear();
+        LatLng latitudeLongitude = new LatLng(placeViewModel.getLatitude(), placeViewModel.getLongitude());
+        MarkerOptions marker = new MarkerOptions().position(latitudeLongitude);
+        marker.title(placeViewModel.getName());
+        marker.snippet(placeViewModel.getLatitude() + " , " + placeViewModel.getLongitude());
+        mapFragment.getMap().addMarker(marker);
+        mapFragment.getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(latitudeLongitude, 10f));
     }
 
     private void initializeDraggablePanel() {
