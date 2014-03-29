@@ -117,6 +117,31 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("The Campaign", "1997-03-31"));
         tvShows.add(tvShow);
 
+        tvShow = new TvShowViewModel("How I Met Your Mother", "http://thetvdb.com/banners/_cache/posters/75760-29.jpg", 9);
+        tvShow.addEpisode(new EpisodeViewModel("Pilot", "2005-09-19"));
+        tvShow.addEpisode(new EpisodeViewModel("Purple Giraffe", "2005-09-26"));
+        tvShow.addEpisode(new EpisodeViewModel("Sweet Taste of Liberty", "2005-10-03"));
+        tvShow.addEpisode(new EpisodeViewModel("Return of the Shirt", "2005-10-10"));
+        tvShow.addEpisode(new EpisodeViewModel("Okay Awesome", "2005-10-17"));
+        tvShow.addEpisode(new EpisodeViewModel("Slutty Pumpkin", "2005-10-24"));
+        tvShow.addEpisode(new EpisodeViewModel("Matchmaker", "2005-11-07"));
+        tvShow.addEpisode(new EpisodeViewModel("The Duel", "2005-11-14"));
+        tvShow.addEpisode(new EpisodeViewModel("Belly Full of Turkey", "2005-11-21"));
+        tvShow.addEpisode(new EpisodeViewModel("The Pineapple Incident", "2005-11-28"));
+        tvShow.addEpisode(new EpisodeViewModel("The Limo", "2005-12-19"));
+        tvShow.addEpisode(new EpisodeViewModel("The Wedding", "2006-01-09"));
+        tvShow.addEpisode(new EpisodeViewModel("Drumroll, Please", "2006-01-23"));
+        tvShow.addEpisode(new EpisodeViewModel("Zip, Zip, Zip", "2006-02-27"));
+        tvShow.addEpisode(new EpisodeViewModel("Game Night", "2006-02-06"));
+        tvShow.addEpisode(new EpisodeViewModel("Cupcake", "2006-03-06"));
+        tvShow.addEpisode(new EpisodeViewModel("Life Among the Gorillas", "2006-03-20"));
+        tvShow.addEpisode(new EpisodeViewModel("Nothing Good Happens After 2 A.M.", "2006-04-10"));
+        tvShow.addEpisode(new EpisodeViewModel("Mary the Paralegal", "2006-04-24"));
+        tvShow.addEpisode(new EpisodeViewModel("Best Prom Ever", "2006-05-01"));
+        tvShow.addEpisode(new EpisodeViewModel("Milk", "2006-05-08"));
+        tvShow.addEpisode(new EpisodeViewModel("Come On", "2006-05-15"));
+        tvShows.add(tvShow);
+
     }
 
     @Override
