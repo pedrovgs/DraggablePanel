@@ -303,6 +303,19 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("Some Enchanted Evening", "1990-05-13"));
         tvShows.add(tvShow);
 
+        tvShow = new TvShowViewModel("The Mentalist", "http://thetvdb.com/banners/_cache/posters/82459-6.jpg", 6);
+        tvShow.addEpisode(new EpisodeViewModel("Pilot", "2008-09-23"));
+        tvShow.addEpisode(new EpisodeViewModel("Red Hair and Silver Tape", "2008-09-30"));
+        tvShow.addEpisode(new EpisodeViewModel("Red Tide", "2008-10-14"));
+        tvShow.addEpisode(new EpisodeViewModel("Ladies in Red", "2008-10-21"));
+        tvShow.addEpisode(new EpisodeViewModel("Redwood", "2008-10-28"));
+        tvShow.addEpisode(new EpisodeViewModel("Red Handed", "2008-11-11"));
+        tvShow.addEpisode(new EpisodeViewModel("Seeing Red", "2008-11-18"));
+        tvShow.addEpisode(new EpisodeViewModel("The Thin Red Line", "2008-11-25"));
+        tvShow.addEpisode(new EpisodeViewModel("Flame Red", "2008-12-02"));
+        tvShow.addEpisode(new EpisodeViewModel("Red Brick and Ivy", "2008-12-16"));
+        tvShows.add(tvShow);
+
 
     }
 
