@@ -228,6 +228,20 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("The Turning Point", "2009-11-19"));
         tvShows.add(tvShow);
 
+        tvShow = new TvShowViewModel("Friends", "http://thetvdb.com/banners/_cache/posters/79168-3.jpg", 10);
+        tvShow.addEpisode(new EpisodeViewModel("The One Where Monica Gets A Roommate", "1994-09-22"));
+        tvShow.addEpisode(new EpisodeViewModel("The One With The Sonogram At The End", "1994-09-29"));
+        tvShow.addEpisode(new EpisodeViewModel("The One With The Thumb", "1994-10-06"));
+        tvShow.addEpisode(new EpisodeViewModel("The One With George Stephanopoulos", "1994-10-13"));
+        tvShow.addEpisode(new EpisodeViewModel("The One With The East German Laundry Detergent", "1994-10-20"));
+        tvShow.addEpisode(new EpisodeViewModel("The One With The Butt", "1994-10-27"));
+        tvShow.addEpisode(new EpisodeViewModel("The One With The Blackout", "1994-11-03"));
+        tvShow.addEpisode(new EpisodeViewModel("The One Where Nana Dies Twice", "1994-11-10"));
+        tvShow.addEpisode(new EpisodeViewModel("The One Where Underdog Gets Away", "1994-11-17"));
+        tvShow.addEpisode(new EpisodeViewModel("The One With The Monkey", "1994-12-15"));
+        tvShows.add(tvShow);
+
+
     }
 
     @Override
