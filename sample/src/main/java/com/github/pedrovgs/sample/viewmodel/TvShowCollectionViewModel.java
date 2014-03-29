@@ -264,6 +264,19 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("Brian: Portrait of a Dog", "1999-05-16"));
         tvShows.add(tvShow);
 
+        tvShow = new TvShowViewModel("Gossip Girl", "http://thetvdb.com/banners/_cache/posters/80547-11.jpg", 6);
+        tvShow.addEpisode(new EpisodeViewModel("Pilot", "2007-09-19"));
+        tvShow.addEpisode(new EpisodeViewModel("The Wild Brunch", "2007-09-26"));
+        tvShow.addEpisode(new EpisodeViewModel("Poison Ivy", "2007-10-03"));
+        tvShow.addEpisode(new EpisodeViewModel("Bad News Blair", "2007-10-10"));
+        tvShow.addEpisode(new EpisodeViewModel("Dare Devil", "2007-10-17"));
+        tvShow.addEpisode(new EpisodeViewModel("The Handmaiden's Talea", "2007-10-24"));
+        tvShow.addEpisode(new EpisodeViewModel("Victor (Victrola)", "2007-11-07"));
+        tvShow.addEpisode(new EpisodeViewModel("Seventeen Candles", "2007-11-14"));
+        tvShow.addEpisode(new EpisodeViewModel("Blair Waldorf Must Pie!", "2007-11-28"));
+        tvShow.addEpisode(new EpisodeViewModel("Hi, Society", "2007-12-05"));
+        tvShows.add(tvShow);
+
 
     }
 
