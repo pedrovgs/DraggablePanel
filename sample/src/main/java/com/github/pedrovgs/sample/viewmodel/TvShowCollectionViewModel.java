@@ -277,6 +277,16 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("Hi, Society", "2007-12-05"));
         tvShows.add(tvShow);
 
+        tvShow = new TvShowViewModel("American Dad", "http://thetvdb.com/banners/_cache/posters/73141-1.jpg", 11);
+        tvShow.addEpisode(new EpisodeViewModel("Pilot", "2005-02-06"));
+        tvShow.addEpisode(new EpisodeViewModel("Threat Levels", "2005-05-01"));
+        tvShow.addEpisode(new EpisodeViewModel("Stan Knows Best", "2005-05-08"));
+        tvShow.addEpisode(new EpisodeViewModel("Francine's Flashback", "2005-05-15"));
+        tvShow.addEpisode(new EpisodeViewModel("Roger Codger", "2005-06-05"));
+        tvShow.addEpisode(new EpisodeViewModel("Homeland Insecurity", "2005-06-12"));
+        tvShow.addEpisode(new EpisodeViewModel("Deacon Stan, Jesus Man", "2005-06-19"));
+        tvShows.add(tvShow);
+
 
     }
 
