@@ -316,6 +316,22 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("Red Brick and Ivy", "2008-12-16"));
         tvShows.add(tvShow);
 
+        tvShow = new TvShowViewModel("Sons of Anarchy", "http://thetvdb.com/banners/_cache/posters/82696-1.jpg", 6);
+        tvShow.addEpisode(new EpisodeViewModel("Pilot", "2008-09-03"));
+        tvShow.addEpisode(new EpisodeViewModel("Seeds", "2008-09-10"));
+        tvShow.addEpisode(new EpisodeViewModel("Fun Town", "2008-09-17"));
+        tvShow.addEpisode(new EpisodeViewModel("Patch Over", "2008-09-24"));
+        tvShow.addEpisode(new EpisodeViewModel("Giving Back", "2008-10-01"));
+        tvShow.addEpisode(new EpisodeViewModel("AK 51", "2008-10-08"));
+        tvShow.addEpisode(new EpisodeViewModel("Old Bones", "2008-10-15"));
+        tvShow.addEpisode(new EpisodeViewModel("The Pull", "2008-10-22"));
+        tvShow.addEpisode(new EpisodeViewModel("Hell Followed", "2008-10-29"));
+        tvShow.addEpisode(new EpisodeViewModel("Better Half", "2008-11-05"));
+        tvShow.addEpisode(new EpisodeViewModel("Capybara", "2008-11-12"));
+        tvShow.addEpisode(new EpisodeViewModel("The Sleep of Babies", "2008-11-19"));
+        tvShow.addEpisode(new EpisodeViewModel("The Revelator", "2008-11-26"));
+        tvShows.add(tvShow);
+
 
     }
 
