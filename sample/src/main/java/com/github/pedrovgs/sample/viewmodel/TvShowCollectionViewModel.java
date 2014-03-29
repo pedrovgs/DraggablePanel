@@ -101,6 +101,22 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("Sacrifice", "2013-05-15"));
         tvShows.add(tvShow);
 
+        tvShow = new TvShowViewModel("The Newsroom", "http://thetvdb.com/banners/_cache/posters/76399-1.jpg", 3);
+        tvShow.addEpisode(new EpisodeViewModel("The Walking Shoe Incident", "1996-10-21"));
+        tvShow.addEpisode(new EpisodeViewModel("Dinner at Eight", "1996-10-28"));
+        tvShow.addEpisode(new EpisodeViewModel("Deeper, Deeper", "1996-11-04-11-04"));
+        tvShow.addEpisode(new EpisodeViewModel("The Kevorkian Joke", "1996-11-11"));
+        tvShow.addEpisode(new EpisodeViewModel("A Bad Day", "1996-11-18"));
+        tvShow.addEpisode(new EpisodeViewModel("Petty Tyranny", "1996-11-25"));
+        tvShow.addEpisode(new EpisodeViewModel("Dis and Dat", "1997-02-10"));
+        tvShow.addEpisode(new EpisodeViewModel("Unity", "1997-02-17"));
+        tvShow.addEpisode(new EpisodeViewModel("Parking", "1997-02-24"));
+        tvShow.addEpisode(new EpisodeViewModel("Meltdown (1)", "1997-03-03"));
+        tvShow.addEpisode(new EpisodeViewModel("Meltdown (2)", "1997-03-17"));
+        tvShow.addEpisode(new EpisodeViewModel("Meltdown (3)", "1997-03-24"));
+        tvShow.addEpisode(new EpisodeViewModel("The Campaign", "1997-03-31"));
+        tvShows.add(tvShow);
+
     }
 
     @Override
