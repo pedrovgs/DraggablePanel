@@ -215,6 +215,19 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("Bad Blood", "2014-01-20"));
         tvShows.add(tvShow);
 
+        tvShow = new TvShowViewModel("The Vampire Diaries", "http://thetvdb.com/banners/_cache/posters/95491-28.jpg", 5);
+        tvShow.addEpisode(new EpisodeViewModel("Pilot", "2009-09-10"));
+        tvShow.addEpisode(new EpisodeViewModel("The Night of the Comet", "2009-09-17"));
+        tvShow.addEpisode(new EpisodeViewModel("Friday Night Bites", "2009-09-24"));
+        tvShow.addEpisode(new EpisodeViewModel("Family Ties", "2009-10-01"));
+        tvShow.addEpisode(new EpisodeViewModel("You're Undead to Me", "2009-10-08"));
+        tvShow.addEpisode(new EpisodeViewModel("Lost Girls", "2009-10-15"));
+        tvShow.addEpisode(new EpisodeViewModel("Haunted", "2009-10-29"));
+        tvShow.addEpisode(new EpisodeViewModel("162 Candles", "2009-11-05"));
+        tvShow.addEpisode(new EpisodeViewModel("History Repeating", "2009-11-12"));
+        tvShow.addEpisode(new EpisodeViewModel("The Turning Point", "2009-11-19"));
+        tvShows.add(tvShow);
+
     }
 
     @Override
