@@ -48,6 +48,33 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("Providence", "2014-04-15"));
         tvShows.add(tvShow);
 
+        tvShow = new TvShowViewModel("Lost","http://thetvdb.com/banners/_cache/posters/73739-7.jpg",6);
+        tvShow.addEpisode(new EpisodeViewModel("Pilot (1)","2004-09-22"));
+        tvShow.addEpisode(new EpisodeViewModel("Pilot (2)","2004-09-29"));
+        tvShow.addEpisode(new EpisodeViewModel("Tabula Rasa","2004-10-06"));
+        tvShow.addEpisode(new EpisodeViewModel("Walkabout","2004-10-13"));
+        tvShow.addEpisode(new EpisodeViewModel("White Rabbit","2004-10-20"));
+        tvShow.addEpisode(new EpisodeViewModel("House of the Rising Sun","2004-10-27"));
+        tvShow.addEpisode(new EpisodeViewModel("The Moth","2004-11-03"));
+        tvShow.addEpisode(new EpisodeViewModel("Confidence Man","2004-11-10"));
+        tvShow.addEpisode(new EpisodeViewModel("Solitary","2004-11-17"));
+        tvShow.addEpisode(new EpisodeViewModel("Raised by Another","2004-12-01"));
+        tvShow.addEpisode(new EpisodeViewModel("All the Best Cowboys Have Daddy Issues","2004-12-08"));
+        tvShow.addEpisode(new EpisodeViewModel("Whatever the Case May Be the Case May Be","2005-01-05"));
+        tvShow.addEpisode(new EpisodeViewModel("Hearts and Minds","2005-01-12"));
+        tvShow.addEpisode(new EpisodeViewModel("Special","2005-01-19"));
+        tvShow.addEpisode(new EpisodeViewModel("Homecoming","2005-02-09"));
+        tvShow.addEpisode(new EpisodeViewModel("Outlaws","2005-02-16"));
+        tvShow.addEpisode(new EpisodeViewModel("...In Translation","2005-02-23"));
+        tvShow.addEpisode(new EpisodeViewModel("Numbers","2005-03-02"));
+        tvShow.addEpisode(new EpisodeViewModel("Deus Ex Machina","2005-03-30"));
+        tvShow.addEpisode(new EpisodeViewModel("Do No Harm","2005-04-06"));
+        tvShow.addEpisode(new EpisodeViewModel("The Greater Good (a.k.a. Sides)","2005-05-04"));
+        tvShow.addEpisode(new EpisodeViewModel("Born to Run","2005-05-11"));
+        tvShow.addEpisode(new EpisodeViewModel("Exodus (1)","2005-05-18"));
+        tvShow.addEpisode(new EpisodeViewModel("Exodus (2)","2005-05-25"));
+        tvShows.add(tvShow);
+
     }
 
     @Override
