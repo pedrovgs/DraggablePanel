@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import butterknife.ButterKnife;
+import com.github.pedrovgs.sample.R;
 import com.github.pedrovgs.sample.viewmodel.TvShowViewModel;
 import com.pedrogomez.renderers.Renderer;
 
@@ -12,13 +14,15 @@ import com.pedrogomez.renderers.Renderer;
  */
 public class TvShowRenderer extends Renderer<TvShowViewModel> {
 
-    public TvShowRenderer(Context context) {
+    private final Context context;
 
+    public TvShowRenderer(Context context) {
+        this.context = context;
     }
 
     @Override
     protected void setUpView(View view) {
-
+        ButterKnife.inject(this, view);
     }
 
     @Override
@@ -28,7 +32,7 @@ public class TvShowRenderer extends Renderer<TvShowViewModel> {
 
     @Override
     protected View inflate(LayoutInflater layoutInflater, ViewGroup viewGroup) {
-        return null;
+        return layoutInflater.inflate(R.layout.place_row, viewGroup, false);
     }
 
     @Override

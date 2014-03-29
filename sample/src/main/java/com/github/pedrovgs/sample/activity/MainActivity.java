@@ -3,7 +3,9 @@ package com.github.pedrovgs.sample.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.GridView;
 import butterknife.ButterKnife;
+import butterknife.InjectView;
 import butterknife.OnClick;
 import com.github.pedrovgs.sample.R;
 
@@ -11,7 +13,6 @@ import com.github.pedrovgs.sample.R;
  * @author Pedro Vicente Gómez Sánchez.
  */
 public class MainActivity extends Activity {
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
