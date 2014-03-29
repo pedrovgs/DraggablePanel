@@ -155,6 +155,22 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("Fire and Blood", "2011-06-19"));
         tvShows.add(tvShow);
 
+
+        tvShow = new TvShowViewModel("Dexter", "http://thetvdb.com/banners/_cache/posters/79349-24.jpg", 8);
+        tvShow.addEpisode(new EpisodeViewModel("Dexter", "2006-10-01"));
+        tvShow.addEpisode(new EpisodeViewModel("Crocodile", "2006-10-08"));
+        tvShow.addEpisode(new EpisodeViewModel("Popping Cherry", "2006-10-15"));
+        tvShow.addEpisode(new EpisodeViewModel("Let's Give the Boy a Hand", "2006-10-22"));
+        tvShow.addEpisode(new EpisodeViewModel("Love American Style", "2006-10-29"));
+        tvShow.addEpisode(new EpisodeViewModel("Return to Sender", "2006-11-05"));
+        tvShow.addEpisode(new EpisodeViewModel("Circle of Friends", "2006-11-12"));
+        tvShow.addEpisode(new EpisodeViewModel("Shrink Wrap", "2006-11-19"));
+        tvShow.addEpisode(new EpisodeViewModel("Father Knows Best", "2006-11-26"));
+        tvShow.addEpisode(new EpisodeViewModel("Seeing Red", "2006-12-03"));
+        tvShow.addEpisode(new EpisodeViewModel("Truth Be Told", "2006-12-10"));
+        tvShow.addEpisode(new EpisodeViewModel("Born Free", "2006-12-17"));
+        tvShows.add(tvShow);
+
     }
 
     @Override
