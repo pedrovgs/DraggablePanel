@@ -241,6 +241,19 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("The One With The Monkey", "1994-12-15"));
         tvShows.add(tvShow);
 
+        tvShow = new TvShowViewModel("New Girl", "http://thetvdb.com/banners/_cache/posters/248682-9.jpg", 3);
+        tvShow.addEpisode(new EpisodeViewModel("Pilot", "2011-09-20"));
+        tvShow.addEpisode(new EpisodeViewModel("Kryptonite", "2011-09-27"));
+        tvShow.addEpisode(new EpisodeViewModel("Wedding", "2011-10-04"));
+        tvShow.addEpisode(new EpisodeViewModel("Naked", "2011-11-01"));
+        tvShow.addEpisode(new EpisodeViewModel("Cece Crashes", "2011-11-08"));
+        tvShow.addEpisode(new EpisodeViewModel("Thanksgiving", "2011-11-15"));
+        tvShow.addEpisode(new EpisodeViewModel("Bells", "2011-11-29"));
+        tvShow.addEpisode(new EpisodeViewModel("Bad in Bed", "2011-12-06"));
+        tvShow.addEpisode(new EpisodeViewModel("The 23rd", "2011-12-13"));
+        tvShow.addEpisode(new EpisodeViewModel("The Story of the 50", "2012-01-17"));
+        tvShows.add(tvShow);
+
 
     }
 
