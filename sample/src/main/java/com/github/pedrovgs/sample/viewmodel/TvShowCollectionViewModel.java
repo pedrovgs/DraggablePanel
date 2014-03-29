@@ -331,8 +331,6 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("The Sleep of Babies", "2008-11-19"));
         tvShow.addEpisode(new EpisodeViewModel("The Revelator", "2008-11-26"));
         tvShows.add(tvShow);
-
-
     }
 
     @Override
