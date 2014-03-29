@@ -287,6 +287,22 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("Deacon Stan, Jesus Man", "2005-06-19"));
         tvShows.add(tvShow);
 
+        tvShow = new TvShowViewModel("The Simpsons", "http://thetvdb.com/banners/_cache/posters/71663-20.jpg", 26);
+        tvShow.addEpisode(new EpisodeViewModel("Simpsons Roasting on an Open Fire", "1989-12-17"));
+        tvShow.addEpisode(new EpisodeViewModel("Bart the Genius", "1990-01-14"));
+        tvShow.addEpisode(new EpisodeViewModel("Homer's Odyssey", "1990-01-21"));
+        tvShow.addEpisode(new EpisodeViewModel("There's No Disgrace Like Home", "1990-01-28"));
+        tvShow.addEpisode(new EpisodeViewModel("Bart the General", "1990-02-04"));
+        tvShow.addEpisode(new EpisodeViewModel("Moaning Lisa", "1990-02-11"));
+        tvShow.addEpisode(new EpisodeViewModel("The Call of the Simpsons", "1990-02-18"));
+        tvShow.addEpisode(new EpisodeViewModel("The Telltale Head", "1990-02-25"));
+        tvShow.addEpisode(new EpisodeViewModel("Life on the Fast Lane", "1990-03-18"));
+        tvShow.addEpisode(new EpisodeViewModel("Homer's Night Out", "1990-03-25"));
+        tvShow.addEpisode(new EpisodeViewModel("The Crepes of Wrath", "1990-04-15"));
+        tvShow.addEpisode(new EpisodeViewModel("Krusty Gets Busted", "1990-04-29"));
+        tvShow.addEpisode(new EpisodeViewModel("Some Enchanted Evening", "1990-05-13"));
+        tvShows.add(tvShow);
+
 
     }
 
