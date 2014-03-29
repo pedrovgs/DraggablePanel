@@ -254,6 +254,16 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("The Story of the 50", "2012-01-17"));
         tvShows.add(tvShow);
 
+        tvShow = new TvShowViewModel("Family Guy", "http://thetvdb.com/banners/_cache/posters/75978-13.jpg", 12);
+        tvShow.addEpisode(new EpisodeViewModel("Death has a Shadow", "1999-01-31"));
+        tvShow.addEpisode(new EpisodeViewModel("I Never Met the Dead Man", "1999-04-11"));
+        tvShow.addEpisode(new EpisodeViewModel("Chitty Chitty Death Bang", "1999-04-18"));
+        tvShow.addEpisode(new EpisodeViewModel("Mind Over Murder", "1999-04-25"));
+        tvShow.addEpisode(new EpisodeViewModel("A Hero Sits Next Door", "1999-05-02"));
+        tvShow.addEpisode(new EpisodeViewModel("The Son Also Draws", "1999-05-09"));
+        tvShow.addEpisode(new EpisodeViewModel("Brian: Portrait of a Dog", "1999-05-16"));
+        tvShows.add(tvShow);
+
 
     }
 
