@@ -171,6 +171,33 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("Born Free", "2006-12-17"));
         tvShows.add(tvShow);
 
+        tvShow = new TvShowViewModel("House of Cards", "http://thetvdb.com/banners/_cache/posters/79861-1.jpg", 3);
+        tvShow.addEpisode(new EpisodeViewModel("House of Cards Episode 1", "1990-11-18"));
+        tvShow.addEpisode(new EpisodeViewModel("House of Cards Episode 2", "1990-11-25"));
+        tvShow.addEpisode(new EpisodeViewModel("House of Cards Episode 3", "1990-12-02"));
+        tvShow.addEpisode(new EpisodeViewModel("House of Cards Episode 4", "1990-12-09"));
+        tvShows.add(tvShow);
+
+        tvShow = new TvShowViewModel("The Big Bang Theory", "http://thetvdb.com/banners/_cache/posters/80379-18.jpg", 7);
+        tvShow.addEpisode(new EpisodeViewModel("Pilot", "2007-09-24"));
+        tvShow.addEpisode(new EpisodeViewModel("The Big Bran Hypothesis", "2007-10-01"));
+        tvShow.addEpisode(new EpisodeViewModel("The Fuzzy Boots Corollary", "2007-10-08"));
+        tvShow.addEpisode(new EpisodeViewModel("The Luminous Fish Effect", "2007-10-15"));
+        tvShow.addEpisode(new EpisodeViewModel("The Hamburger Postulate", "2007-10-22"));
+        tvShow.addEpisode(new EpisodeViewModel("The Middle Earth Paradigm", "2007-10-29"));
+        tvShow.addEpisode(new EpisodeViewModel("The Dumpling Paradox", "2007-11-05"));
+        tvShow.addEpisode(new EpisodeViewModel("The Grasshopper Experiment", "2007-11-12"));
+        tvShow.addEpisode(new EpisodeViewModel("The Cooper-Hofstadter Polarization", "2008-03-17"));
+        tvShow.addEpisode(new EpisodeViewModel("The Loobenfeld Decay", "2008-03-24"));
+        tvShow.addEpisode(new EpisodeViewModel("The Pancake Batter Anomaly", "2008-03-31"));
+        tvShow.addEpisode(new EpisodeViewModel("The Jerusalem Duality", "2008-04-14"));
+        tvShow.addEpisode(new EpisodeViewModel("The Bat Jar Conjecture", "2008-04-21"));
+        tvShow.addEpisode(new EpisodeViewModel("The Nerdvana Annihilation", "2008-04-28"));
+        tvShow.addEpisode(new EpisodeViewModel("The Pork Chop Indeterminacy", "2008-05-05"));
+        tvShow.addEpisode(new EpisodeViewModel("The Peanut Reaction", "2008-05-12"));
+        tvShow.addEpisode(new EpisodeViewModel("The Tangerine Factor", "2008-05-19"));
+        tvShows.add(tvShow);
+
     }
 
     @Override
