@@ -198,6 +198,23 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("The Tangerine Factor", "2008-05-19"));
         tvShows.add(tvShow);
 
+
+        tvShow = new TvShowViewModel("Sleepy Hollow", "http://thetvdb.com/banners/_cache/posters/269578-4.jpg", 1);
+        tvShow.addEpisode(new EpisodeViewModel("Pilot", "2013-09-16"));
+        tvShow.addEpisode(new EpisodeViewModel("Blood Moon", "2013-09-23"));
+        tvShow.addEpisode(new EpisodeViewModel("For the Triumph of Evil", "2013-09-30"));
+        tvShow.addEpisode(new EpisodeViewModel("The Lesser Key of Solomon", "2013-10-07"));
+        tvShow.addEpisode(new EpisodeViewModel("John Doe", "2013-10-14"));
+        tvShow.addEpisode(new EpisodeViewModel("The Sin Eater", "2013-11-04"));
+        tvShow.addEpisode(new EpisodeViewModel("The Midnight Ride", "2013-11-11"));
+        tvShow.addEpisode(new EpisodeViewModel("Necromancer", "2013-11-18"));
+        tvShow.addEpisode(new EpisodeViewModel("Sanctuary", "2013-11-25"));
+        tvShow.addEpisode(new EpisodeViewModel("The Golem", "2013-12-09"));
+        tvShow.addEpisode(new EpisodeViewModel("The Vessel", "2014-01-13"));
+        tvShow.addEpisode(new EpisodeViewModel("Indispensable Man", "2014-01-20"));
+        tvShow.addEpisode(new EpisodeViewModel("Bad Blood", "2014-01-20"));
+        tvShows.add(tvShow);
+
     }
 
     @Override
