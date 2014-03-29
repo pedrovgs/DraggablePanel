@@ -6,10 +6,18 @@
 
     <!-- Buttons -->
 
-    <!-- Simple fragment usage sample -->
+    <!-- Places Sample -->
     <Button
-            android:id="@+id/bt_simple_sample"
+            android:id="@+id/bt_places_sample"
             android:text="@string/places_sample_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    <!-- TV Shows Sample -->
+    <Button
+            android:id="@+id/bt_tv_shows_sample"
+            android:text="@string/tv_shows_sample_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

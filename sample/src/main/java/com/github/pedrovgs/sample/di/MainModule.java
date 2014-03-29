@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import com.github.pedrovgs.sample.DraggablePanelApplication;
 import com.github.pedrovgs.sample.activity.PlacesSampleActivity;
+import com.github.pedrovgs.sample.activity.TvShowsActivity;
 import com.github.pedrovgs.sample.renderer.PlaceRenderer;
 import com.github.pedrovgs.sample.renderer.rendererbuilder.PlacesCollectionRendererBuilder;
 import com.github.pedrovgs.sample.viewmodel.PlaceCollectionViewModel;
@@ -20,7 +21,9 @@ import java.util.List;
 /**
  * @author Pedro Vicente Gómez Sánchez.
  */
-@Module(injects = {PlacesSampleActivity.class,
+@Module(injects = {
+        PlacesSampleActivity.class,
+        TvShowsActivity.class,
         DraggablePanelApplication.class})
 public class MainModule {
 

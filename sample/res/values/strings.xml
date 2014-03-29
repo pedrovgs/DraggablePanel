@@ -12,5 +12,7 @@
     <string name="places_sample_button">Places Sample</string>
     <string name="youtube_sample_button">Youtube Sample</string>
     <string name="video_sample_button">Video Sample</string>
+    <string name="tv_shows_sample_activity_title">TV Shows Sample</string>
+    <string name="tv_shows_sample_button">TV Shows Sample</string>
 
 </resources>

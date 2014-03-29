@@ -51,6 +51,13 @@
                 android:label="@string/places_sample_activity_title">
         </activity>
 
+        <!-- TV Shows sample -->
+
+        <activity
+                android:name=".activity.TvShowsActivity"
+                android:label="@string/tv_shows_sample_activity_title"/>
+
+
         <!-- Youtube Sample -->
 
         <activity
