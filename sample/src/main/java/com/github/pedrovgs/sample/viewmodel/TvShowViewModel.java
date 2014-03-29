@@ -23,4 +23,16 @@ public class TvShowViewModel {
     public void addEpisode(EpisodeViewModel episodeViewModel) {
         episodes.add(episodeViewModel);
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public int getNumberOfSeasons() {
+        return numberOfSeasons;
+    }
 }
