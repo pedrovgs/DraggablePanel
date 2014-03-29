@@ -27,6 +27,27 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("A No-Rough-Stuff-Type Deal'", "2008-03-09"));
         tvShows.add(tvShow);
 
+        tvShow = new TvShowViewModel("Marvel's Agents of S.H.I.E.L.D.", "http://thetvdb.com/banners/_cache/posters/263365-3.jpg", 1);
+        tvShow.addEpisode(new EpisodeViewModel("Pilot", "2013-09-24"));
+        tvShow.addEpisode(new EpisodeViewModel("0-8-4", "2013-10-01"));
+        tvShow.addEpisode(new EpisodeViewModel("The Asset", "2013-10-08"));
+        tvShow.addEpisode(new EpisodeViewModel("Eye Spy", "2013-10-15"));
+        tvShow.addEpisode(new EpisodeViewModel("Girl in the Flower Dress", "2013-10-22"));
+        tvShow.addEpisode(new EpisodeViewModel("F.Z.Z.T.", "2013-11-05"));
+        tvShow.addEpisode(new EpisodeViewModel("The Hub", "2013-11-12"));
+        tvShow.addEpisode(new EpisodeViewModel("The Well", "2013-11-19"));
+        tvShow.addEpisode(new EpisodeViewModel("Repairs", "2013-11-26"));
+        tvShow.addEpisode(new EpisodeViewModel("The Bridge", "2013-12-10"));
+        tvShow.addEpisode(new EpisodeViewModel("The Magical Place", "2014-01-07"));
+        tvShow.addEpisode(new EpisodeViewModel("Seeds", "2014-01-14"));
+        tvShow.addEpisode(new EpisodeViewModel("T.R.A.C.K.S.", "2014-02-04"));
+        tvShow.addEpisode(new EpisodeViewModel("T.A.H.I.T.I.", "2014-03-04"));
+        tvShow.addEpisode(new EpisodeViewModel("Yes Men", "2014-03-11"));
+        tvShow.addEpisode(new EpisodeViewModel("End of the Beginning", "2014-04-01"));
+        tvShow.addEpisode(new EpisodeViewModel("Turn, Turn, Turn", "2014-04-08"));
+        tvShow.addEpisode(new EpisodeViewModel("Providence", "2014-04-15"));
+        tvShows.add(tvShow);
+
     }
 
     @Override
