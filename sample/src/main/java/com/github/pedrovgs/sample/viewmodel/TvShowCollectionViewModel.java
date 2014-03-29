@@ -142,6 +142,19 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("Come On", "2006-05-15"));
         tvShows.add(tvShow);
 
+        tvShow = new TvShowViewModel("Game of Thrones", "http://thetvdb.com/banners/_cache/posters/121361-4.jpg", 4);
+        tvShow.addEpisode(new EpisodeViewModel("Winter Is Coming", "2011-04-17"));
+        tvShow.addEpisode(new EpisodeViewModel("The Kingsroad", "2011-04-24"));
+        tvShow.addEpisode(new EpisodeViewModel("Lord Snow", "2011-05-01"));
+        tvShow.addEpisode(new EpisodeViewModel("Cripples, Bastards, and Broken Things", "2011-05-08"));
+        tvShow.addEpisode(new EpisodeViewModel("The Wolf and the Lion", "2011-05-15"));
+        tvShow.addEpisode(new EpisodeViewModel("A Golden Crown", "2011-05-22"));
+        tvShow.addEpisode(new EpisodeViewModel("You Win or You Die", "2011-05-29"));
+        tvShow.addEpisode(new EpisodeViewModel("The Pointy End", "2011-06-05"));
+        tvShow.addEpisode(new EpisodeViewModel("Baelor", "2011-06-12"));
+        tvShow.addEpisode(new EpisodeViewModel("Fire and Blood", "2011-06-19"));
+        tvShows.add(tvShow);
+
     }
 
     @Override
