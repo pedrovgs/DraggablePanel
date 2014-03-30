@@ -24,9 +24,14 @@ public class EpisodeRenderer extends Renderer<EpisodeViewModel> {
     TextView tv_episode_title;
     @InjectView(R.id.tv_episode_publish_date)
     TextView tv_episode_publish_date;
+    private int position;
 
     public EpisodeRenderer(Context context) {
         this.context = context;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     @Override
@@ -47,7 +52,9 @@ public class EpisodeRenderer extends Renderer<EpisodeViewModel> {
     @Override
     protected void render() {
         EpisodeViewModel episode = getContent();
+        tv_episode_number.setText(String.format("%02d", position + 1));
         tv_episode_title.setText(episode.getTitle());
         tv_episode_publish_date.setText(episode.getPublishDate());
     }
+
 }

@@ -12,6 +12,7 @@ import butterknife.InjectView;
 import com.github.pedrovgs.DraggableView;
 import com.github.pedrovgs.sample.R;
 import com.github.pedrovgs.sample.renderer.EpisodeRenderer;
+import com.github.pedrovgs.sample.renderer.EpisodeRendererAdapter;
 import com.github.pedrovgs.sample.renderer.rendererbuilder.EpisodeRendererBuilder;
 import com.github.pedrovgs.sample.viewmodel.EpisodeViewModel;
 import com.github.pedrovgs.sample.viewmodel.TvShowViewModel;
@@ -77,7 +78,7 @@ public class TvShowsActivity extends DIFragmentActivity {
         List<Renderer<EpisodeViewModel>> episodeRenderers = new LinkedList<Renderer<EpisodeViewModel>>();
         episodeRenderers.add(new EpisodeRenderer(this));
         EpisodeRendererBuilder episodeRendererBuilder = new EpisodeRendererBuilder(episodeRenderers);
-        RendererAdapter<EpisodeViewModel> episodesAdapter = new RendererAdapter<EpisodeViewModel>(getLayoutInflater(), episodeRendererBuilder, tvShow.getEpisodes());
+        EpisodeRendererAdapter episodesAdapter = new EpisodeRendererAdapter(getLayoutInflater(), episodeRendererBuilder, tvShow.getEpisodes());
         lv_episodes.setAdapter(episodesAdapter);
     }
 
