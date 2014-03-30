@@ -32,7 +32,7 @@ public class DraggableView extends RelativeLayout {
     private static final String LOGTAG = "DraggableView";
 
     private static final int DEFAULT_SCALE_FACTOR = 2;
-    private static final float DEFAULT_TOP_VIEW_HEIGHT = 200;
+    private static final float DEFAULT_TOP_VIEW_HEIGHT = -1;
     private static final int DEFAULT_TOP_FRAGMENT_MARGIN = 30;
     private static final float SLIDE_TOP = 0f;
     private static final float SLIDE_BOTTOM = 1f;
@@ -307,10 +307,12 @@ public class DraggableView extends RelativeLayout {
     }
 
     public void setTopViewHeight(float topFragmentHeight) {
-        this.topViewHeight = topFragmentHeight;
-        LayoutParams layoutParams = (LayoutParams) dragView.getLayoutParams();
-        layoutParams.height = (int) topFragmentHeight;
-        dragView.setLayoutParams(layoutParams);
+        if (topFragmentHeight > 0) {
+            this.topViewHeight = topFragmentHeight;
+            LayoutParams layoutParams = (LayoutParams) dragView.getLayoutParams();
+            layoutParams.height = (int) topFragmentHeight;
+            dragView.setLayoutParams(layoutParams);
+        }
     }
 
 

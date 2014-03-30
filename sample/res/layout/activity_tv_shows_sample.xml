@@ -30,7 +30,6 @@
             draggable_view:bottom_view_id="@+id/lv_episodes"
             draggable_view:top_view_x_scale_factor="@dimen/x_scale_factor"
             draggable_view:top_view_y_scale_factor="@dimen/y_scale_factor"
-            draggable_view:top_view_height="@dimen/top_fragment_height"
             draggable_view:top_view_margin_right="@dimen/top_fragment_margin"
             draggable_view:top_view_margin_bottom="@dimen/top_fragment_margin"
             android:background="@color/black">
@@ -47,7 +46,7 @@
         <ImageView
                 android:id="@+id/iv_fan_art"
                 android:orientation="vertical"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/tv_show_fan_art_height"
                 android:layout_width="fill_parent"
                 android:scaleType="centerCrop"
                 android:background="@color/white"
