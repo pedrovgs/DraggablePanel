@@ -5,8 +5,12 @@ package com.github.pedrovgs;
  */
 public interface DraggableListener {
 
-    public void onDraggableViewReleased(float xVel, float yVel);
+    public void onMaximized();
 
-    public void onDraggableViewPositionChanged(int left, int top, int dx, int dy);
+    public void onMinimized();
+
+    public void onClosedToLeft();
+
+    public void onClosedToRight();
 
 }

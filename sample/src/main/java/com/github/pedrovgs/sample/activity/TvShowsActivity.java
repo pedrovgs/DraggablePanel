@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.*;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import com.github.pedrovgs.DraggableListener;
 import com.github.pedrovgs.DraggableView;
 import com.github.pedrovgs.sample.R;
 import com.github.pedrovgs.sample.renderer.EpisodeRenderer;
@@ -39,13 +40,17 @@ public class TvShowsActivity extends DIFragmentActivity {
     DraggableView draggableView;
     TextView header;
 
+    private TvShowViewModel tvShowSelected;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tv_shows_sample);
         ButterKnife.inject(this);
         initializeDraggableView();
         initializeGridView();
+        hookListeners();
     }
+
 
     private void initializeDraggableView() {
         Handler handler = new Handler();
@@ -64,11 +69,47 @@ public class TvShowsActivity extends DIFragmentActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 TvShowViewModel tvShow = adapter.getItem(position);
+                tvShowSelected = tvShow;
                 Picasso.with(getBaseContext()).load(tvShow.getFanArt()).placeholder(R.drawable.tv_show_placeholder).into(iv_fan_art);
                 renderEpisodesHeader(tvShow);
                 renderEpisodes(tvShow);
                 draggableView.setVisibility(View.VISIBLE);
                 draggableView.maximize();
+            }
+        });
+    }
+
+
+    private void hookListeners() {
+        /*
+         * This will work in API Level 8 once this sample project uses ActionBarCompat or ActionBarSherlock project.
+         */
+        draggableView.setDraggableListener(new DraggableListener() {
+            @Override
+            public void onMaximized() {
+                if (tvShowSelected != null) {
+                    getActionBar().setTitle(tvShowSelected.getTitle());
+                }
+            }
+
+            @Override
+            public void onMinimized() {
+                if (tvShowSelected != null) {
+                    getActionBar().setTitle(tvShowSelected.getTitle());
+                }
+            }
+
+            @Override
+            public void onClosedToLeft() {
+                tvShowSelected = null;
+                getActionBar().setTitle(getString(R.string.tv_shows_sample_activity_title));
+            }
+
+            @Override
+            public void onClosedToRight() {
+                tvShowSelected = null;
+                getActionBar().setTitle(getString(R.string.tv_shows_sample_activity_title));
+
             }
         });
     }

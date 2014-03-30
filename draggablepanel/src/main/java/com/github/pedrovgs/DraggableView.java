@@ -220,11 +220,25 @@ public class DraggableView extends RelativeLayout {
     public void maximize() {
         Log.d(LOGTAG, "maximize");
         smoothSlideTo(SLIDE_TOP);
+        notifyMaximizeToListener();
+    }
+
+    private void notifyMaximizeToListener() {
+        if (listener != null) {
+            listener.onMaximized();
+        }
     }
 
     public void minimize() {
         Log.d(LOGTAG, "minimize");
         smoothSlideTo(SLIDE_BOTTOM);
+        notifyMinimizeToListener();
+    }
+
+    private void notifyMinimizeToListener() {
+        if (listener != null) {
+            listener.onMinimized();
+        }
     }
 
     private boolean smoothSlideTo(float slideOffset) {
@@ -241,12 +255,26 @@ public class DraggableView extends RelativeLayout {
     public void closeToRight() {
         if (viewDragHelper.smoothSlideViewTo(dragView, dragView.getWidth(), getHeight() - dragView.getHeight())) {
             ViewCompat.postInvalidateOnAnimation(this);
+            notifyCloseToRightListener();
+        }
+    }
+
+    private void notifyCloseToRightListener() {
+        if (listener != null) {
+            listener.onClosedToRight();
         }
     }
 
     public void closeToLeft() {
         if (viewDragHelper.smoothSlideViewTo(dragView, -dragView.getWidth(), getHeight() - dragView.getHeight())) {
             ViewCompat.postInvalidateOnAnimation(this);
+            notifyCloseToLeftListener();
+        }
+    }
+
+    private void notifyCloseToLeftListener() {
+        if (listener != null) {
+            listener.onClosedToLeft();
         }
     }
 
@@ -286,18 +314,6 @@ public class DraggableView extends RelativeLayout {
     }
 
 
-    private void notifyPositionChangedToListener(int left, int top, int dx, int dy) {
-        if (listener != null) {
-            listener.onDraggableViewPositionChanged(left, top, dx, dy);
-        }
-    }
-
-    private void notifyViewReleasedToListener(float xvel, float yvel) {
-        if (listener != null) {
-            listener.onDraggableViewReleased(xvel, yvel);
-        }
-    }
-
     public void setDraggableListener(DraggableListener listener) {
         this.listener = listener;
     }
@@ -328,7 +344,6 @@ public class DraggableView extends RelativeLayout {
                 changeBackgroundAlpha();
             }
             invalidate();
-            notifyPositionChangedToListener(left, top, dx, dy);
         }
 
 
@@ -350,7 +365,6 @@ public class DraggableView extends RelativeLayout {
                     minimize();
                 }
             }
-            notifyViewReleasedToListener(xvel, yvel);
         }
 
         @Override
