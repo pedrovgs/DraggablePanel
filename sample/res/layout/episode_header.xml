@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:text="SEASON 1"
+        android:background="#e4e5e7"
+        android:textColor="#727a7c"
+        android:padding="10dip"
+        android:paddingLeft="6dip"
+        />

@@ -3,10 +3,7 @@ package com.github.pedrovgs.sample.activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.ListView;
+import android.widget.*;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.github.pedrovgs.DraggableView;
@@ -40,6 +37,7 @@ public class TvShowsActivity extends DIFragmentActivity {
     ListView lv_episodes;
     @InjectView(R.id.draggable_view)
     DraggableView draggableView;
+    TextView header;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +53,7 @@ public class TvShowsActivity extends DIFragmentActivity {
             @Override
             public void run() {
                 draggableView.setVisibility(View.GONE);
-                draggableView.minimize();
+                draggableView.closeToRight();
             }
         }, 10);
     }
@@ -67,6 +65,7 @@ public class TvShowsActivity extends DIFragmentActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 TvShowViewModel tvShow = adapter.getItem(position);
                 Picasso.with(getBaseContext()).load(tvShow.getFanArt()).placeholder(R.drawable.tv_show_placeholder).into(iv_fan_art);
+                renderEpisodesHeader(tvShow);
                 renderEpisodes(tvShow);
                 draggableView.setVisibility(View.VISIBLE);
                 draggableView.maximize();
@@ -80,6 +79,14 @@ public class TvShowsActivity extends DIFragmentActivity {
         EpisodeRendererBuilder episodeRendererBuilder = new EpisodeRendererBuilder(episodeRenderers);
         EpisodeRendererAdapter episodesAdapter = new EpisodeRendererAdapter(getLayoutInflater(), episodeRendererBuilder, tvShow.getEpisodes());
         lv_episodes.setAdapter(episodesAdapter);
+    }
+
+    private void renderEpisodesHeader(TvShowViewModel tvShow) {
+        lv_episodes.removeHeaderView(header);
+        header = (TextView) getLayoutInflater().inflate(R.layout.episode_header, null);
+        header.setText(tvShow.getTitle().toUpperCase() + " - SEASON 1");
+        lv_episodes.setAdapter(null);
+        lv_episodes.addHeaderView(header);
     }
 
 }
