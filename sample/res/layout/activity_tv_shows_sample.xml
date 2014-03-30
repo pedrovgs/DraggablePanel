@@ -43,7 +43,7 @@
                 android:background="@color/white"/>
 
         <ImageView
-                android:id="@+id/iv_poster"
+                android:id="@+id/iv_fan_art"
                 android:orientation="vertical"
                 android:layout_height="wrap_content"
                 android:layout_width="fill_parent"

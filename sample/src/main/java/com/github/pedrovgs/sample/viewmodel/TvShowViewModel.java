@@ -1,8 +1,5 @@
 package com.github.pedrovgs.sample.viewmodel;
 
-import java.util.LinkedList;
-import java.util.List;
-
 /**
  * @author Pedro Vicente Gómez Sánchez.
  */
@@ -12,14 +9,14 @@ public class TvShowViewModel {
     private final String poster;
     private final String fanArt;
     private final int numberOfSeasons;
-    private final List<EpisodeViewModel> episodes;
+    private final EpisodeCollection episodes;
 
     public TvShowViewModel(String title, String poster, String fanArt, int numberOfSeasons) {
         this.title = title;
         this.poster = poster;
         this.fanArt = fanArt;
         this.numberOfSeasons = numberOfSeasons;
-        this.episodes = new LinkedList<EpisodeViewModel>();
+        this.episodes = new EpisodeCollection();
     }
 
     public void addEpisode(EpisodeViewModel episodeViewModel) {
@@ -40,5 +37,9 @@ public class TvShowViewModel {
 
     public int getNumberOfSeasons() {
         return numberOfSeasons;
+    }
+
+    public EpisodeCollection getEpisodes() {
+        return episodes;
     }
 }
