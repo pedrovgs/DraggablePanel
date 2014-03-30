@@ -56,7 +56,7 @@ public class TvShowsActivity extends DIFragmentActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 TvShowViewModel tvShow = adapter.getItem(position);
-                Picasso.with(getBaseContext()).load(tvShow.getThumbnail()).placeholder(R.drawable.tv_show_placeholder).into(iv_poster);
+                Picasso.with(getBaseContext()).load(tvShow.getFanArt()).placeholder(R.drawable.tv_show_placeholder).into(iv_poster);
                 draggableView.setVisibility(View.VISIBLE);
                 draggableView.maximize();
             }

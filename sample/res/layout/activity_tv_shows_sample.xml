@@ -47,6 +47,8 @@
                 android:orientation="vertical"
                 android:layout_height="wrap_content"
                 android:layout_width="fill_parent"
+                android:scaleType="centerCrop"
+                android:background="@color/white"
                 android:layout_alignParentTop="true"/>
 
     </com.github.pedrovgs.DraggableView>

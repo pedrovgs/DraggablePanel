@@ -10,6 +10,7 @@
             android:layout_width="match_parent"
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"
+            android:background="@color/white"
             android:layout_alignParentTop="true"/>
 
     <TextView

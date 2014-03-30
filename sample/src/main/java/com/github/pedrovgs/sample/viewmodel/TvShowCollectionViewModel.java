@@ -17,7 +17,7 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
     @Inject
     public TvShowCollectionViewModel() {
         this.tvShows = new LinkedList<TvShowViewModel>();
-        TvShowViewModel tvShow = new TvShowViewModel("Breaking Bad", "http://thetvdb.com/banners/_cache/posters/81189-22.jpg", 5);
+        TvShowViewModel tvShow = new TvShowViewModel("Breaking Bad", "http://thetvdb.com/banners/_cache/posters/81189-22.jpg", "http://thetvdb.com/banners/_cache/fanart/original/81189-21.jpg", 5);
         tvShow.addEpisode(new EpisodeViewModel("Pilot", "2008-01-20"));
         tvShow.addEpisode(new EpisodeViewModel("Cat's in the Bag...", "2008-01-27"));
         tvShow.addEpisode(new EpisodeViewModel("...And the Bag's in the River", "2008-02-10"));
@@ -27,7 +27,7 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("A No-Rough-Stuff-Type Deal'", "2008-03-09"));
         tvShows.add(tvShow);
 
-        tvShow = new TvShowViewModel("Marvel's Agents of S.H.I.E.L.D.", "http://thetvdb.com/banners/_cache/posters/263365-3.jpg", 1);
+        tvShow = new TvShowViewModel("Marvel's Agents of S.H.I.E.L.D.", "http://thetvdb.com/banners/_cache/posters/263365-3.jpg", "http://thetvdb.com/banners/_cache/fanart/original/263365-4.jpg", 1);
         tvShow.addEpisode(new EpisodeViewModel("Pilot", "2013-09-24"));
         tvShow.addEpisode(new EpisodeViewModel("0-8-4", "2013-10-01"));
         tvShow.addEpisode(new EpisodeViewModel("The Asset", "2013-10-08"));
@@ -48,7 +48,7 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("Providence", "2014-04-15"));
         tvShows.add(tvShow);
 
-        tvShow = new TvShowViewModel("Lost", "http://thetvdb.com/banners/_cache/posters/73739-7.jpg", 6);
+        tvShow = new TvShowViewModel("Lost", "http://thetvdb.com/banners/_cache/posters/73739-7.jpg", "http://thetvdb.com/banners/_cache/fanart/original/73739-20.jpg", 6);
         tvShow.addEpisode(new EpisodeViewModel("Pilot (1)", "2004-09-22"));
         tvShow.addEpisode(new EpisodeViewModel("Pilot (2)", "2004-09-29"));
         tvShow.addEpisode(new EpisodeViewModel("Tabula Rasa", "2004-10-06"));
@@ -75,7 +75,7 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("Exodus (2)", "2005-05-25"));
         tvShows.add(tvShow);
 
-        tvShow = new TvShowViewModel("Arrow", "http://thetvdb.com/banners/_cache/posters/257655-5.jpg", 2);
+        tvShow = new TvShowViewModel("Arrow", "http://thetvdb.com/banners/_cache/posters/257655-5.jpg", "http://thetvdb.com/banners/_cache/fanart/original/257655-16.jpg", 2);
         tvShow.addEpisode(new EpisodeViewModel("Pilot", "2012-10-10"));
         tvShow.addEpisode(new EpisodeViewModel("Honor Thy Father", "2012-10-17"));
         tvShow.addEpisode(new EpisodeViewModel("Lone Gunmen", "2012-10-24"));
@@ -101,7 +101,7 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("Sacrifice", "2013-05-15"));
         tvShows.add(tvShow);
 
-        tvShow = new TvShowViewModel("The Newsroom", "http://thetvdb.com/banners/_cache/posters/76399-1.jpg", 3);
+        tvShow = new TvShowViewModel("The Newsroom", "http://thetvdb.com/banners/_cache/posters/76399-1.jpg", "http://thetvdb.com/banners/_cache/fanart/original/76399-1.jpg", 3);
         tvShow.addEpisode(new EpisodeViewModel("The Walking Shoe Incident", "1996-10-21"));
         tvShow.addEpisode(new EpisodeViewModel("Dinner at Eight", "1996-10-28"));
         tvShow.addEpisode(new EpisodeViewModel("Deeper, Deeper", "1996-11-04-11-04"));
@@ -117,7 +117,7 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("The Campaign", "1997-03-31"));
         tvShows.add(tvShow);
 
-        tvShow = new TvShowViewModel("How I Met Your Mother", "http://thetvdb.com/banners/_cache/posters/75760-29.jpg", 9);
+        tvShow = new TvShowViewModel("How I Met Your Mother", "http://thetvdb.com/banners/_cache/posters/75760-29.jpg", "http://thetvdb.com/banners/_cache/fanart/original/75760-51.jpg", 9);
         tvShow.addEpisode(new EpisodeViewModel("Pilot", "2005-09-19"));
         tvShow.addEpisode(new EpisodeViewModel("Purple Giraffe", "2005-09-26"));
         tvShow.addEpisode(new EpisodeViewModel("Sweet Taste of Liberty", "2005-10-03"));
@@ -142,7 +142,7 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("Come On", "2006-05-15"));
         tvShows.add(tvShow);
 
-        tvShow = new TvShowViewModel("Game of Thrones", "http://thetvdb.com/banners/_cache/posters/121361-4.jpg", 4);
+        tvShow = new TvShowViewModel("Game of Thrones", "http://thetvdb.com/banners/_cache/posters/121361-4.jpg", "http://thetvdb.com/banners/_cache/fanart/original/121361-15.jpg", 4);
         tvShow.addEpisode(new EpisodeViewModel("Winter Is Coming", "2011-04-17"));
         tvShow.addEpisode(new EpisodeViewModel("The Kingsroad", "2011-04-24"));
         tvShow.addEpisode(new EpisodeViewModel("Lord Snow", "2011-05-01"));
@@ -156,7 +156,7 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShows.add(tvShow);
 
 
-        tvShow = new TvShowViewModel("Dexter", "http://thetvdb.com/banners/_cache/posters/79349-24.jpg", 8);
+        tvShow = new TvShowViewModel("Dexter", "http://thetvdb.com/banners/_cache/posters/79349-24.jpg", "http://thetvdb.com/banners/_cache/fanart/original/79349-42.jpg", 8);
         tvShow.addEpisode(new EpisodeViewModel("Dexter", "2006-10-01"));
         tvShow.addEpisode(new EpisodeViewModel("Crocodile", "2006-10-08"));
         tvShow.addEpisode(new EpisodeViewModel("Popping Cherry", "2006-10-15"));
@@ -171,14 +171,14 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("Born Free", "2006-12-17"));
         tvShows.add(tvShow);
 
-        tvShow = new TvShowViewModel("House of Cards", "http://thetvdb.com/banners/_cache/posters/79861-1.jpg", 3);
+        tvShow = new TvShowViewModel("House of Cards", "http://thetvdb.com/banners/_cache/posters/79861-1.jpg", "http://thetvdb.com/banners/_cache/fanart/original/79861-3.jpg", 3);
         tvShow.addEpisode(new EpisodeViewModel("House of Cards Episode 1", "1990-11-18"));
         tvShow.addEpisode(new EpisodeViewModel("House of Cards Episode 2", "1990-11-25"));
         tvShow.addEpisode(new EpisodeViewModel("House of Cards Episode 3", "1990-12-02"));
         tvShow.addEpisode(new EpisodeViewModel("House of Cards Episode 4", "1990-12-09"));
         tvShows.add(tvShow);
 
-        tvShow = new TvShowViewModel("The Big Bang Theory", "http://thetvdb.com/banners/_cache/posters/80379-18.jpg", 7);
+        tvShow = new TvShowViewModel("The Big Bang Theory", "http://thetvdb.com/banners/_cache/posters/80379-18.jpg", "http://thetvdb.com/banners/_cache/fanart/original/80379-38.jpg", 7);
         tvShow.addEpisode(new EpisodeViewModel("Pilot", "2007-09-24"));
         tvShow.addEpisode(new EpisodeViewModel("The Big Bran Hypothesis", "2007-10-01"));
         tvShow.addEpisode(new EpisodeViewModel("The Fuzzy Boots Corollary", "2007-10-08"));
@@ -199,7 +199,7 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShows.add(tvShow);
 
 
-        tvShow = new TvShowViewModel("Sleepy Hollow", "http://thetvdb.com/banners/_cache/posters/269578-4.jpg", 1);
+        tvShow = new TvShowViewModel("Sleepy Hollow", "http://thetvdb.com/banners/_cache/posters/269578-4.jpg", "http://thetvdb.com/banners/_cache/fanart/original/269578-4.jpg", 1);
         tvShow.addEpisode(new EpisodeViewModel("Pilot", "2013-09-16"));
         tvShow.addEpisode(new EpisodeViewModel("Blood Moon", "2013-09-23"));
         tvShow.addEpisode(new EpisodeViewModel("For the Triumph of Evil", "2013-09-30"));
@@ -215,7 +215,7 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("Bad Blood", "2014-01-20"));
         tvShows.add(tvShow);
 
-        tvShow = new TvShowViewModel("The Vampire Diaries", "http://thetvdb.com/banners/_cache/posters/95491-28.jpg", 5);
+        tvShow = new TvShowViewModel("The Vampire Diaries", "http://thetvdb.com/banners/_cache/posters/95491-28.jpg", "http://thetvdb.com/banners/_cache/fanart/original/95491-68.jpg", 5);
         tvShow.addEpisode(new EpisodeViewModel("Pilot", "2009-09-10"));
         tvShow.addEpisode(new EpisodeViewModel("The Night of the Comet", "2009-09-17"));
         tvShow.addEpisode(new EpisodeViewModel("Friday Night Bites", "2009-09-24"));
@@ -228,7 +228,7 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("The Turning Point", "2009-11-19"));
         tvShows.add(tvShow);
 
-        tvShow = new TvShowViewModel("Friends", "http://thetvdb.com/banners/_cache/posters/79168-3.jpg", 10);
+        tvShow = new TvShowViewModel("Friends", "http://thetvdb.com/banners/_cache/posters/79168-3.jpg", "http://thetvdb.com/banners/_cache/fanart/original/79168-6.jpg", 10);
         tvShow.addEpisode(new EpisodeViewModel("The One Where Monica Gets A Roommate", "1994-09-22"));
         tvShow.addEpisode(new EpisodeViewModel("The One With The Sonogram At The End", "1994-09-29"));
         tvShow.addEpisode(new EpisodeViewModel("The One With The Thumb", "1994-10-06"));
@@ -241,7 +241,7 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("The One With The Monkey", "1994-12-15"));
         tvShows.add(tvShow);
 
-        tvShow = new TvShowViewModel("New Girl", "http://thetvdb.com/banners/_cache/posters/248682-9.jpg", 3);
+        tvShow = new TvShowViewModel("New Girl", "http://thetvdb.com/banners/_cache/posters/248682-9.jpg", "http://thetvdb.com/banners/_cache/fanart/original/248682-20.jpg", 3);
         tvShow.addEpisode(new EpisodeViewModel("Pilot", "2011-09-20"));
         tvShow.addEpisode(new EpisodeViewModel("Kryptonite", "2011-09-27"));
         tvShow.addEpisode(new EpisodeViewModel("Wedding", "2011-10-04"));
@@ -254,7 +254,7 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("The Story of the 50", "2012-01-17"));
         tvShows.add(tvShow);
 
-        tvShow = new TvShowViewModel("Family Guy", "http://thetvdb.com/banners/_cache/posters/75978-13.jpg", 12);
+        tvShow = new TvShowViewModel("Family Guy", "http://thetvdb.com/banners/_cache/posters/75978-13.jpg", "http://thetvdb.com/banners/_cache/fanart/original/75978-27.jpg", 12);
         tvShow.addEpisode(new EpisodeViewModel("Death has a Shadow", "1999-01-31"));
         tvShow.addEpisode(new EpisodeViewModel("I Never Met the Dead Man", "1999-04-11"));
         tvShow.addEpisode(new EpisodeViewModel("Chitty Chitty Death Bang", "1999-04-18"));
@@ -264,7 +264,7 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("Brian: Portrait of a Dog", "1999-05-16"));
         tvShows.add(tvShow);
 
-        tvShow = new TvShowViewModel("Gossip Girl", "http://thetvdb.com/banners/_cache/posters/80547-11.jpg", 6);
+        tvShow = new TvShowViewModel("Gossip Girl", "http://thetvdb.com/banners/_cache/posters/80547-11.jpg", "http://thetvdb.com/banners/_cache/fanart/original/80547-24.jpg", 6);
         tvShow.addEpisode(new EpisodeViewModel("Pilot", "2007-09-19"));
         tvShow.addEpisode(new EpisodeViewModel("The Wild Brunch", "2007-09-26"));
         tvShow.addEpisode(new EpisodeViewModel("Poison Ivy", "2007-10-03"));
@@ -277,7 +277,7 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("Hi, Society", "2007-12-05"));
         tvShows.add(tvShow);
 
-        tvShow = new TvShowViewModel("American Dad", "http://thetvdb.com/banners/_cache/posters/73141-1.jpg", 11);
+        tvShow = new TvShowViewModel("American Dad", "http://thetvdb.com/banners/_cache/posters/73141-1.jpg", "http://thetvdb.com/banners/_cache/fanart/original/73141-12.jpg", 11);
         tvShow.addEpisode(new EpisodeViewModel("Pilot", "2005-02-06"));
         tvShow.addEpisode(new EpisodeViewModel("Threat Levels", "2005-05-01"));
         tvShow.addEpisode(new EpisodeViewModel("Stan Knows Best", "2005-05-08"));
@@ -287,7 +287,7 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("Deacon Stan, Jesus Man", "2005-06-19"));
         tvShows.add(tvShow);
 
-        tvShow = new TvShowViewModel("The Simpsons", "http://thetvdb.com/banners/_cache/posters/71663-20.jpg", 26);
+        tvShow = new TvShowViewModel("The Simpsons", "http://thetvdb.com/banners/_cache/posters/71663-20.jpg", "http://thetvdb.com/banners/_cache/fanart/original/71663-30.jpg", 26);
         tvShow.addEpisode(new EpisodeViewModel("Simpsons Roasting on an Open Fire", "1989-12-17"));
         tvShow.addEpisode(new EpisodeViewModel("Bart the Genius", "1990-01-14"));
         tvShow.addEpisode(new EpisodeViewModel("Homer's Odyssey", "1990-01-21"));
@@ -303,7 +303,7 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("Some Enchanted Evening", "1990-05-13"));
         tvShows.add(tvShow);
 
-        tvShow = new TvShowViewModel("The Mentalist", "http://thetvdb.com/banners/_cache/posters/82459-6.jpg", 6);
+        tvShow = new TvShowViewModel("The Mentalist", "http://thetvdb.com/banners/_cache/posters/82459-6.jpg", "http://thetvdb.com/banners/_cache/fanart/original/82459-4.jpg", 6);
         tvShow.addEpisode(new EpisodeViewModel("Pilot", "2008-09-23"));
         tvShow.addEpisode(new EpisodeViewModel("Red Hair and Silver Tape", "2008-09-30"));
         tvShow.addEpisode(new EpisodeViewModel("Red Tide", "2008-10-14"));
@@ -316,7 +316,7 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShow.addEpisode(new EpisodeViewModel("Red Brick and Ivy", "2008-12-16"));
         tvShows.add(tvShow);
 
-        tvShow = new TvShowViewModel("Sons of Anarchy", "http://thetvdb.com/banners/_cache/posters/82696-1.jpg", 6);
+        tvShow = new TvShowViewModel("Sons of Anarchy", "http://thetvdb.com/banners/_cache/posters/82696-1.jpg", "http://thetvdb.com/banners/_cache/fanart/original/82696-18.jpg", 6);
         tvShow.addEpisode(new EpisodeViewModel("Pilot", "2008-09-03"));
         tvShow.addEpisode(new EpisodeViewModel("Seeds", "2008-09-10"));
         tvShow.addEpisode(new EpisodeViewModel("Fun Town", "2008-09-17"));

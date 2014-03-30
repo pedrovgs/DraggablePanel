@@ -49,7 +49,7 @@ public class TvShowRenderer extends Renderer<TvShowViewModel> {
     @Override
     protected void render() {
         TvShowViewModel tvShow = getContent();
-        Picasso.with(context).load(tvShow.getThumbnail()).placeholder(R.drawable.tv_show_placeholder).into(iv_thumbnail);
+        Picasso.with(context).load(tvShow.getPoster()).placeholder(R.drawable.tv_show_placeholder).into(iv_thumbnail);
 
         tv_title.setText(tvShow.getTitle().toUpperCase());
 
