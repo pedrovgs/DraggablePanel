@@ -7,6 +7,7 @@
                 android:background="#f1f1f1">
 
     <!-- Grid View -->
+
     <GridView
             android:id="@+id/gv_tv_shows"
             android:layout_width="fill_parent"
@@ -15,5 +16,39 @@
             android:verticalSpacing="10dip"
             android:horizontalSpacing="10dip"
             android:layout_margin="10dip"/>
+
+    <!-- Draggable View -->
+    <!-- DraggableView -->
+
+    <com.github.pedrovgs.DraggableView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:draggable_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/draggable_view"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            draggable_view:top_view_id="@+id/iv_poster"
+            draggable_view:bottom_view_id="@+id/lv_episodes"
+            draggable_view:top_view_x_scale_factor="@dimen/x_scale_factor"
+            draggable_view:top_view_y_scale_factor="@dimen/y_scale_factor"
+            draggable_view:top_view_height="@dimen/top_fragment_height"
+            draggable_view:top_view_margin_right="@dimen/top_fragment_margin"
+            draggable_view:top_view_margin_bottom="@dimen/top_fragment_margin"
+            android:background="@color/black">
+
+        <ListView
+                android:id="@+id/lv_episodes"
+                android:layout_below="@+id/dragView"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@color/white"/>
+
+        <ImageView
+                android:id="@+id/iv_poster"
+                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_alignParentTop="true"/>
+
+    </com.github.pedrovgs.DraggableView>
 
 </RelativeLayout>
