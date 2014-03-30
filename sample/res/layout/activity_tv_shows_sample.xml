@@ -26,7 +26,7 @@
             android:id="@+id/draggable_view"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            draggable_view:top_view_id="@+id/iv_poster"
+            draggable_view:top_view_id="@+id/iv_fan_art"
             draggable_view:bottom_view_id="@+id/lv_episodes"
             draggable_view:top_view_x_scale_factor="@dimen/x_scale_factor"
             draggable_view:top_view_y_scale_factor="@dimen/y_scale_factor"
@@ -37,8 +37,10 @@
 
         <ListView
                 android:id="@+id/lv_episodes"
-                android:layout_below="@+id/dragView"
+                android:layout_below="@+id/iv_fan_art"
                 android:layout_width="fill_parent"
+                android:divider="#508b999b"
+                android:dividerHeight="1dp"
                 android:layout_height="fill_parent"
                 android:background="@color/white"/>
 

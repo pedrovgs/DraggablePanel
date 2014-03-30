@@ -1,5 +1,6 @@
 package com.github.pedrovgs.sample.renderer.rendererbuilder;
 
+import com.github.pedrovgs.sample.renderer.EpisodeRenderer;
 import com.github.pedrovgs.sample.viewmodel.EpisodeViewModel;
 import com.pedrogomez.renderers.Renderer;
 import com.pedrogomez.renderers.RendererBuilder;
@@ -17,6 +18,6 @@ public class EpisodeRendererBuilder extends RendererBuilder<EpisodeViewModel> {
 
     @Override
     protected Class getPrototypeClass(EpisodeViewModel episodeViewModel) {
-        return null;
+        return EpisodeRenderer.class;
     }
 }

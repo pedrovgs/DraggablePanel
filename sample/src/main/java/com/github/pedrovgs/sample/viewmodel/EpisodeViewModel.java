@@ -12,4 +12,12 @@ public class EpisodeViewModel {
         this.title = title;
         this.publishDate = publishDate;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getPublishDate() {
+        return publishDate;
+    }
 }
