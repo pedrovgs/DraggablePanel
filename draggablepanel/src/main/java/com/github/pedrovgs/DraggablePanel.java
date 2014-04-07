@@ -46,22 +46,6 @@ public class DraggablePanel extends FrameLayout {
         initializeEditMode();
     }
 
-    private void initializeAttrs(AttributeSet attrs) {
-        TypedArray attributes = getContext().obtainStyledAttributes(attrs, R.styleable.draggable_panel);
-        this.topFragmentHeight = attributes.getDimension(R.styleable.draggable_panel_top_fragment_height, DEFAULT_TOP_FRAGMENT_HEIGHT);
-        this.xScaleFactor = attributes.getFloat(R.styleable.draggable_panel_x_scale_factor, DEFAULT_SCALE_FACTOR);
-        this.yScaleFactor = attributes.getFloat(R.styleable.draggable_panel_y_scale_factor, DEFAULT_SCALE_FACTOR);
-        this.topFragmentMarginRight = attributes.getDimension(R.styleable.draggable_panel_top_fragment_margin_right, DEFAULT_TOP_FRAGMENT_MARGIN);
-        this.topFragmentMarginBottom = attributes.getDimension(R.styleable.draggable_panel_top_fragment_margin_bottom, DEFAULT_TOP_FRAGMENT_MARGIN);
-    }
-
-    private void initializeEditMode() {
-        if (isInEditMode()) {
-            inflate(getContext(), R.layout.draggable_panel, this);
-        }
-    }
-
-
     public void setTopViewHeight(float topFragmentHeight) {
         this.topFragmentHeight = topFragmentHeight;
     }
@@ -114,9 +98,6 @@ public class DraggablePanel extends FrameLayout {
         draggableView.minimize();
     }
 
-    /**
-     * TODO we have to remove this mehtod and use initializeView as part of creation flow.
-     */
     public void initializeView() {
         checkFragmentConsistency();
         checkSupportFragmentmanagerConsistency();
@@ -139,18 +120,6 @@ public class DraggablePanel extends FrameLayout {
         draggableView.setDraggableListener(draggableListener);
     }
 
-    private void checkSupportFragmentmanagerConsistency() {
-        if (fragmentManager == null) {
-            throw new IllegalStateException("You have to set the support FragmentManager before initialize DraggablePanel");
-        }
-    }
-
-    private void checkFragmentConsistency() {
-        if (topFragment == null || bottomFragment == null) {
-            throw new IllegalStateException("You have to set top and bottom fragment before initialize DraggablePanel");
-        }
-    }
-
     public boolean isMaximized() {
         return draggableView.isMaximized();
     }
@@ -165,6 +134,33 @@ public class DraggablePanel extends FrameLayout {
 
     public boolean isClosedAtLeft() {
         return draggableView.isClosedAtLeft();
+    }
+
+    private void initializeAttrs(AttributeSet attrs) {
+        TypedArray attributes = getContext().obtainStyledAttributes(attrs, R.styleable.draggable_panel);
+        this.topFragmentHeight = attributes.getDimension(R.styleable.draggable_panel_top_fragment_height, DEFAULT_TOP_FRAGMENT_HEIGHT);
+        this.xScaleFactor = attributes.getFloat(R.styleable.draggable_panel_x_scale_factor, DEFAULT_SCALE_FACTOR);
+        this.yScaleFactor = attributes.getFloat(R.styleable.draggable_panel_y_scale_factor, DEFAULT_SCALE_FACTOR);
+        this.topFragmentMarginRight = attributes.getDimension(R.styleable.draggable_panel_top_fragment_margin_right, DEFAULT_TOP_FRAGMENT_MARGIN);
+        this.topFragmentMarginBottom = attributes.getDimension(R.styleable.draggable_panel_top_fragment_margin_bottom, DEFAULT_TOP_FRAGMENT_MARGIN);
+    }
+
+    private void initializeEditMode() {
+        if (isInEditMode()) {
+            inflate(getContext(), R.layout.draggable_panel, this);
+        }
+    }
+
+    private void checkSupportFragmentmanagerConsistency() {
+        if (fragmentManager == null) {
+            throw new IllegalStateException("You have to set the support FragmentManager before initialize DraggablePanel");
+        }
+    }
+
+    private void checkFragmentConsistency() {
+        if (topFragment == null || bottomFragment == null) {
+            throw new IllegalStateException("You have to set top and bottom fragment before initialize DraggablePanel");
+        }
     }
 
 }
