@@ -1,6 +1,7 @@
 package com.github.pedrovgs;
 
 import android.support.v4.widget.ViewDragHelper;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -8,8 +9,10 @@ import android.view.View;
  */
 public class DraggableViewCallback extends ViewDragHelper.Callback {
 
-    private static final int MINIMUM_DY_FOR_VERTICAL_DRAG = 10;
-    private static final int MINIMUN_DX_FOR_HORIZONTAL_DRAG = 20;
+    private static final int MINIMUN_DX_FOR_HORIZONTAL_DRAG = 25;
+    private static final int MINIMUM_DY_FOR_VERTICAL_DRAG = 15;
+    private static final float X_MIN_VELOCITY = 1300;
+    private static final float Y_MIN_VELOCITY = 1300;
 
 
     private DraggableView draggableView;
@@ -36,21 +39,36 @@ public class DraggableViewCallback extends ViewDragHelper.Callback {
 
 
     @Override
-    public void onViewReleased(View releasedChild, float xvel, float yvel) {
-        super.onViewReleased(releasedChild, xvel, yvel);
-        if (!draggableView.isDragViewAtBottom()) {
-            if (draggableView.isHeaderAboveTheMiddle()) {
-                draggableView.maximize();
-            } else {
-                draggableView.minimize();
-            }
-        } else {
-            if (draggableView.isNextToLeftBound()) {
+    public void onViewReleased(View releasedChild, float xVel, float yVel) {
+        super.onViewReleased(releasedChild, xVel, yVel);
+        Log.e("DEPURAR", "X-->" + xVel);
+        Log.e("DEPURAR", "Y-->" + yVel);
+
+        if (draggableView.isDragViewAtBottom() && !draggableView.isDragViewAtRight()) {
+            if (xVel < 0 && xVel <= X_MIN_VELOCITY) {
                 draggableView.closeToLeft();
-            } else if (draggableView.isNextToRightBound()) {
+            } else if (xVel > 0 && xVel >= X_MIN_VELOCITY) {
                 draggableView.closeToRight();
             } else {
+                if (draggableView.isNextToLeftBound()) {
+                    draggableView.closeToLeft();
+                } else if (draggableView.isNextToRightBound()) {
+                    draggableView.closeToRight();
+                } else {
+                    draggableView.minimize();
+                }
+            }
+        } else {
+            if (yVel < 0 && yVel <= -Y_MIN_VELOCITY) {
+                draggableView.maximize();
+            } else if (yVel > 0 && yVel >= Y_MIN_VELOCITY) {
                 draggableView.minimize();
+            } else {
+                if (draggableView.isHeaderAboveTheMiddle()) {
+                    draggableView.maximize();
+                } else {
+                    draggableView.minimize();
+                }
             }
         }
     }
@@ -63,7 +81,7 @@ public class DraggableViewCallback extends ViewDragHelper.Callback {
     @Override
     public int clampViewPositionHorizontal(View child, int left, int dx) {
         int newLeft = 0;
-        if (((draggableView.isMinimized() && (dx > MINIMUN_DX_FOR_HORIZONTAL_DRAG || dx < -MINIMUN_DX_FOR_HORIZONTAL_DRAG))) || (draggableView.isDragViewAtBottom() && !draggableView.isDragViewAtRight())) {
+        if ((draggableView.isMinimized() && Math.abs(dx) > MINIMUN_DX_FOR_HORIZONTAL_DRAG) || (draggableView.isDragViewAtBottom() && !draggableView.isDragViewAtRight())) {
             newLeft = left;
         }
         return newLeft;
