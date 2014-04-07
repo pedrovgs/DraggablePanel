@@ -30,20 +30,17 @@ public class DraggablePanel extends FrameLayout {
 
     public DraggablePanel(Context context) {
         super(context);
-        initializeEditMode();
     }
 
     public DraggablePanel(Context context, AttributeSet attrs) {
         super(context, attrs);
         initializeAttrs(attrs);
-        initializeEditMode();
     }
 
 
     public DraggablePanel(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initializeAttrs(attrs);
-        initializeEditMode();
     }
 
     public void setTopViewHeight(float topFragmentHeight) {
@@ -143,12 +140,6 @@ public class DraggablePanel extends FrameLayout {
         this.yScaleFactor = attributes.getFloat(R.styleable.draggable_panel_y_scale_factor, DEFAULT_SCALE_FACTOR);
         this.topFragmentMarginRight = attributes.getDimension(R.styleable.draggable_panel_top_fragment_margin_right, DEFAULT_TOP_FRAGMENT_MARGIN);
         this.topFragmentMarginBottom = attributes.getDimension(R.styleable.draggable_panel_top_fragment_margin_bottom, DEFAULT_TOP_FRAGMENT_MARGIN);
-    }
-
-    private void initializeEditMode() {
-        if (isInEditMode()) {
-            inflate(getContext(), R.layout.draggable_panel, this);
-        }
     }
 
     private void checkSupportFragmentmanagerConsistency() {
