@@ -1,7 +1,6 @@
 package com.github.pedrovgs;
 
 import android.support.v4.widget.ViewDragHelper;
-import android.util.Log;
 import android.view.View;
 
 /**
@@ -41,9 +40,7 @@ public class DraggableViewCallback extends ViewDragHelper.Callback {
     @Override
     public void onViewReleased(View releasedChild, float xVel, float yVel) {
         super.onViewReleased(releasedChild, xVel, yVel);
-        Log.e("DEPURAR", "X-->" + xVel);
-        Log.e("DEPURAR", "Y-->" + yVel);
-
+        
         if (draggableView.isDragViewAtBottom() && !draggableView.isDragViewAtRight()) {
             if (xVel < 0 && xVel <= X_MIN_VELOCITY) {
                 draggableView.closeToLeft();

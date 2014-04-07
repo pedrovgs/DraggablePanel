@@ -11,7 +11,6 @@ import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,22 +24,11 @@ import com.nineoldandroids.view.ViewHelper;
  */
 public class DraggableView extends RelativeLayout {
 
-    /*
-     * Constants
-     */
-
-    private static final String LOGTAG = "DraggableView";
-
     private static final int DEFAULT_SCALE_FACTOR = 2;
     private static final float DEFAULT_TOP_VIEW_HEIGHT = -1;
     private static final int DEFAULT_TOP_FRAGMENT_MARGIN = 30;
     private static final float SLIDE_TOP = 0f;
     private static final float SLIDE_BOTTOM = 1f;
-
-
-    /*
-     * Attributes
-     */
 
     private View dragView;
     private View secondView;
@@ -48,24 +36,19 @@ public class DraggableView extends RelativeLayout {
     private FragmentManager fragmentManager;
     private ViewDragHelper viewDragHelper;
 
-    private DraggableListener listener;
-
-    private int lastActionMotionEvent = -1;
-
     private float xScaleFactor = DEFAULT_SCALE_FACTOR;
     private float yScaleFactor = DEFAULT_SCALE_FACTOR;
-    private float topViewHeight;
     private float topFragmentMarginRight = DEFAULT_TOP_FRAGMENT_MARGIN;
     private float topFragmentMarginBottom = DEFAULT_TOP_FRAGMENT_MARGIN;
-    private float initialMotionX;
-    private float initialMotionY;
+    private float topViewHeight;
     private int dragViewId;
     private int secondViewId;
+    private DraggableListener listener;
 
+    private float initialMotionX;
+    private float initialMotionY;
+    private int lastActionMotionEvent = -1;
 
-    /*
-     * Constructors
-     */
 
     public DraggableView(Context context) {
         super(context);
@@ -131,7 +114,6 @@ public class DraggableView extends RelativeLayout {
 
     }
 
-
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
@@ -143,7 +125,6 @@ public class DraggableView extends RelativeLayout {
         }
 
     }
-
 
     @Override
     public void computeScroll() {
@@ -209,14 +190,12 @@ public class DraggableView extends RelativeLayout {
     }
 
     boolean isHeaderAboveTheMiddle() {
-        Log.d(LOGTAG, "isHeaderAboveTheMiddle");
         int viewHeight = getHeight();
         float viewHeaderY = ViewHelper.getY(dragView) + (dragView.getHeight() / 2);
         return viewHeaderY < (viewHeight * 0.5f);
     }
 
     public void maximize() {
-        Log.d(LOGTAG, "maximize");
         smoothSlideTo(SLIDE_TOP);
         notifyMaximizeToListener();
     }
@@ -228,7 +207,6 @@ public class DraggableView extends RelativeLayout {
     }
 
     public void minimize() {
-        Log.d(LOGTAG, "minimize");
         smoothSlideTo(SLIDE_BOTTOM);
         notifyMinimizeToListener();
     }
@@ -393,7 +371,6 @@ public class DraggableView extends RelativeLayout {
 
 
     private boolean isViewHit(View view, int x, int y) {
-        Log.d(LOGTAG, "isViewHit");
         int[] viewLocation = new int[2];
         view.getLocationOnScreen(viewLocation);
         int[] parentLocation = new int[2];
