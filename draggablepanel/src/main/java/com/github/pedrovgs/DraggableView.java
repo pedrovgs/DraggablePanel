@@ -94,38 +94,6 @@ public class DraggableView extends RelativeLayout {
         this.topFragmentMarginBottom = topFragmentMarginBottom;
     }
 
-    private void addFragmentToView(final int viewId, final Fragment fragment) {
-        fragmentManager.beginTransaction().replace(viewId, fragment).commit();
-    }
-
-    private void initializeView() {
-        viewDragHelper = ViewDragHelper.create(this, 1f, new DraggableViewCallback(this, dragView));
-    }
-
-    private void initializeAttributes(AttributeSet attrs) {
-        TypedArray attributes = getContext().obtainStyledAttributes(attrs, R.styleable.draggable_view);
-        this.dragViewId = attributes.getResourceId(R.styleable.draggable_view_top_view_id, R.id.dragView);
-        this.secondViewId = attributes.getResourceId(R.styleable.draggable_view_bottom_view_id, R.id.secondView);
-        this.topViewHeight = attributes.getDimension(R.styleable.draggable_view_top_view_height, DEFAULT_TOP_VIEW_HEIGHT);
-        this.xScaleFactor = attributes.getFloat(R.styleable.draggable_view_top_view_x_scale_factor, DEFAULT_SCALE_FACTOR);
-        this.yScaleFactor = attributes.getFloat(R.styleable.draggable_view_top_view_y_scale_factor, DEFAULT_SCALE_FACTOR);
-        this.topFragmentMarginRight = attributes.getDimension(R.styleable.draggable_view_top_view_margin_right, DEFAULT_TOP_FRAGMENT_MARGIN);
-        this.topFragmentMarginBottom = attributes.getDimension(R.styleable.draggable_view_top_view_margin_bottom, DEFAULT_TOP_FRAGMENT_MARGIN);
-
-    }
-
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
-        if (!isInEditMode()) {
-            dragView = findViewById(dragViewId);
-            secondView = findViewById(secondViewId);
-            setTopViewHeight(topViewHeight);
-            initializeView();
-        }
-
-    }
-
     @Override
     public void computeScroll() {
         if (!isInEditMode() && viewDragHelper.continueSettling(true)) {
@@ -133,99 +101,14 @@ public class DraggableView extends RelativeLayout {
         }
     }
 
-
-    void changeDragViewPosition() {
-        ViewHelper.setPivotX(dragView, dragView.getWidth() - getDragViewMarginRight());
-        ViewHelper.setPivotY(dragView, dragView.getHeight() - getDragViewMarginBottom());
-    }
-
-    void changeSeondViewPosition() {
-        ViewHelper.setY(secondView, dragView.getTop() + dragView.getHeight());
-    }
-
-    private float getDragViewMarginRight() {
-        return topFragmentMarginRight;
-    }
-
-    private float getDragViewMarginBottom() {
-        return topFragmentMarginBottom;
-    }
-
-    void changeDragViewScale() {
-        ViewHelper.setScaleX(dragView, 1 - getVerticalDragOffset() / xScaleFactor);
-        ViewHelper.setScaleY(dragView, 1 - getVerticalDragOffset() / yScaleFactor);
-    }
-
-    void changeBackgroundAlpha() {
-        Drawable background = getBackground();
-        if (background != null) {
-            int newAlpha = (int) (100 * (1 - getVerticalDragOffset()));
-            background.setAlpha(newAlpha);
-        }
-    }
-
-
-    void changeSecondViewAlpha() {
-        ViewHelper.setAlpha(secondView, 1 - getVerticalDragOffset());
-    }
-
-    void changeDragViewViewAlpha() {
-        float alpha = 1 - getHorizontalDragOffset();
-        if (alpha == 0) {
-            alpha = 1;
-        }
-        ViewHelper.setAlpha(dragView, alpha);
-    }
-
-    private float getHorizontalDragOffset() {
-        return (float) Math.abs(dragView.getLeft()) / (float) getWidth();
-    }
-
-    private float getVerticalDragOffset() {
-        return dragView.getTop() / getVierticalDragRange();
-    }
-
-    private float getVierticalDragRange() {
-        return getHeight() - dragView.getHeight();
-    }
-
-    boolean isHeaderAboveTheMiddle() {
-        int viewHeight = getHeight();
-        float viewHeaderY = ViewHelper.getY(dragView) + (dragView.getHeight() / 2);
-        return viewHeaderY < (viewHeight * 0.5f);
-    }
-
     public void maximize() {
         smoothSlideTo(SLIDE_TOP);
         notifyMaximizeToListener();
     }
 
-    private void notifyMaximizeToListener() {
-        if (listener != null) {
-            listener.onMaximized();
-        }
-    }
-
     public void minimize() {
         smoothSlideTo(SLIDE_BOTTOM);
         notifyMinimizeToListener();
-    }
-
-    private void notifyMinimizeToListener() {
-        if (listener != null) {
-            listener.onMinimized();
-        }
-    }
-
-    private boolean smoothSlideTo(float slideOffset) {
-        final int topBound = getPaddingTop();
-        int y = (int) (topBound + slideOffset * getVierticalDragRange());
-
-        if (viewDragHelper.smoothSlideViewTo(dragView, 0, y)) {
-            ViewCompat.postInvalidateOnAnimation(this);
-            return true;
-        }
-        return false;
     }
 
     public void closeToRight() {
@@ -235,22 +118,10 @@ public class DraggableView extends RelativeLayout {
         }
     }
 
-    private void notifyCloseToRightListener() {
-        if (listener != null) {
-            listener.onClosedToRight();
-        }
-    }
-
     public void closeToLeft() {
         if (viewDragHelper.smoothSlideViewTo(dragView, -dragView.getWidth(), getHeight() - dragView.getHeight())) {
             ViewCompat.postInvalidateOnAnimation(this);
             notifyCloseToLeftListener();
-        }
-    }
-
-    private void notifyCloseToLeftListener() {
-        if (listener != null) {
-            listener.onClosedToLeft();
         }
     }
 
@@ -262,25 +133,6 @@ public class DraggableView extends RelativeLayout {
         return isDragViewAtTop();
     }
 
-    boolean isNextToLeftBound() {
-        return (dragView.getRight() - getDragViewMarginRight()) < getWidth() / 2;
-    }
-
-    boolean isNextToRightBound() {
-        return (dragView.getLeft() - getDragViewMarginRight()) > getWidth() * 0.25;
-    }
-
-    private boolean isDragViewAtTop() {
-        return dragView.getTop() == 0;
-    }
-
-    boolean isDragViewAtRight() {
-        return dragView.getRight() == getWidth();
-    }
-
-    boolean isDragViewAtBottom() {
-        return dragView.getTop() == (getHeight() - dragView.getHeight());
-    }
 
     public void setTopViewHeight(float topFragmentHeight) {
         if (topFragmentHeight > 0) {
@@ -369,6 +221,80 @@ public class DraggableView extends RelativeLayout {
         return isHeaderViewUnder && isHeaderViewHit || isDescViewHit;
     }
 
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+        if (!isInEditMode()) {
+            dragView = findViewById(dragViewId);
+            secondView = findViewById(secondViewId);
+            setTopViewHeight(topViewHeight);
+            initializeView();
+        }
+
+    }
+
+
+    void changeDragViewPosition() {
+        ViewHelper.setPivotX(dragView, dragView.getWidth() - getDragViewMarginRight());
+        ViewHelper.setPivotY(dragView, dragView.getHeight() - getDragViewMarginBottom());
+    }
+
+    void changeSeondViewPosition() {
+        ViewHelper.setY(secondView, dragView.getTop() + dragView.getHeight());
+    }
+
+
+    void changeDragViewScale() {
+        ViewHelper.setScaleX(dragView, 1 - getVerticalDragOffset() / xScaleFactor);
+        ViewHelper.setScaleY(dragView, 1 - getVerticalDragOffset() / yScaleFactor);
+    }
+
+    void changeBackgroundAlpha() {
+        Drawable background = getBackground();
+        if (background != null) {
+            int newAlpha = (int) (100 * (1 - getVerticalDragOffset()));
+            background.setAlpha(newAlpha);
+        }
+    }
+
+
+    void changeSecondViewAlpha() {
+        ViewHelper.setAlpha(secondView, 1 - getVerticalDragOffset());
+    }
+
+    void changeDragViewViewAlpha() {
+        float alpha = 1 - getHorizontalDragOffset();
+        if (alpha == 0) {
+            alpha = 1;
+        }
+        ViewHelper.setAlpha(dragView, alpha);
+    }
+
+    boolean isHeaderAboveTheMiddle() {
+        int viewHeight = getHeight();
+        float viewHeaderY = ViewHelper.getY(dragView) + (dragView.getHeight() / 2);
+        return viewHeaderY < (viewHeight * 0.5f);
+    }
+
+    boolean isNextToLeftBound() {
+        return (dragView.getRight() - getDragViewMarginRight()) < getWidth() / 2;
+    }
+
+    boolean isNextToRightBound() {
+        return (dragView.getLeft() - getDragViewMarginRight()) > getWidth() * 0.25;
+    }
+
+    boolean isDragViewAtTop() {
+        return dragView.getTop() == 0;
+    }
+
+    boolean isDragViewAtRight() {
+        return dragView.getRight() == getWidth();
+    }
+
+    boolean isDragViewAtBottom() {
+        return dragView.getTop() == (getHeight() - dragView.getHeight());
+    }
 
     private boolean isViewHit(View view, int x, int y) {
         int[] viewLocation = new int[2];
@@ -381,5 +307,78 @@ public class DraggableView extends RelativeLayout {
                 screenY >= viewLocation[1] && screenY < viewLocation[1] + view.getHeight();
     }
 
+    private void addFragmentToView(final int viewId, final Fragment fragment) {
+        fragmentManager.beginTransaction().replace(viewId, fragment).commit();
+    }
 
+    private void initializeView() {
+        viewDragHelper = ViewDragHelper.create(this, 1f, new DraggableViewCallback(this, dragView));
+    }
+
+    private void initializeAttributes(AttributeSet attrs) {
+        TypedArray attributes = getContext().obtainStyledAttributes(attrs, R.styleable.draggable_view);
+        this.dragViewId = attributes.getResourceId(R.styleable.draggable_view_top_view_id, R.id.dragView);
+        this.secondViewId = attributes.getResourceId(R.styleable.draggable_view_bottom_view_id, R.id.secondView);
+        this.topViewHeight = attributes.getDimension(R.styleable.draggable_view_top_view_height, DEFAULT_TOP_VIEW_HEIGHT);
+        this.xScaleFactor = attributes.getFloat(R.styleable.draggable_view_top_view_x_scale_factor, DEFAULT_SCALE_FACTOR);
+        this.yScaleFactor = attributes.getFloat(R.styleable.draggable_view_top_view_y_scale_factor, DEFAULT_SCALE_FACTOR);
+        this.topFragmentMarginRight = attributes.getDimension(R.styleable.draggable_view_top_view_margin_right, DEFAULT_TOP_FRAGMENT_MARGIN);
+        this.topFragmentMarginBottom = attributes.getDimension(R.styleable.draggable_view_top_view_margin_bottom, DEFAULT_TOP_FRAGMENT_MARGIN);
+
+    }
+
+    private float getDragViewMarginRight() {
+        return topFragmentMarginRight;
+    }
+
+    private float getDragViewMarginBottom() {
+        return topFragmentMarginBottom;
+    }
+
+    private float getHorizontalDragOffset() {
+        return (float) Math.abs(dragView.getLeft()) / (float) getWidth();
+    }
+
+    private float getVerticalDragOffset() {
+        return dragView.getTop() / getVierticalDragRange();
+    }
+
+    private float getVierticalDragRange() {
+        return getHeight() - dragView.getHeight();
+    }
+
+    private void notifyMaximizeToListener() {
+        if (listener != null) {
+            listener.onMaximized();
+        }
+    }
+
+    private void notifyMinimizeToListener() {
+        if (listener != null) {
+            listener.onMinimized();
+        }
+    }
+
+    private void notifyCloseToRightListener() {
+        if (listener != null) {
+            listener.onClosedToRight();
+        }
+    }
+
+    private void notifyCloseToLeftListener() {
+        if (listener != null) {
+            listener.onClosedToLeft();
+        }
+    }
+
+    private boolean smoothSlideTo(float slideOffset) {
+        final int topBound = getPaddingTop();
+        int y = (int) (topBound + slideOffset * getVierticalDragRange());
+
+        if (viewDragHelper.smoothSlideViewTo(dragView, 0, y)) {
+            ViewCompat.postInvalidateOnAnimation(this);
+            return true;
+        }
+        return false;
+    }
 }
