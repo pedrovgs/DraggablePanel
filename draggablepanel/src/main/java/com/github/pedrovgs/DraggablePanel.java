@@ -104,16 +104,13 @@ public class DraggablePanel extends FrameLayout {
         draggableView.setTopViewHeight(topFragmentHeight);
         draggableView.setFragmentManager(fragmentManager);
         draggableView.attachTopFragment(topFragment);
-
         draggableView.setBackground(getBackground());
         setBackground(null);
-
         draggableView.setXTopViewScaleFactor(xScaleFactor);
         draggableView.setYTopViewScaleFactor(yScaleFactor);
         draggableView.setTopViewMarginRight(topFragmentMarginRight);
         draggableView.setTopViewMarginBottom(topFragmentMarginBottom);
         draggableView.attachBottomFragment(bottomFragment);
-
         draggableView.setDraggableListener(draggableListener);
     }
 
@@ -135,6 +132,7 @@ public class DraggablePanel extends FrameLayout {
 
     private void initializeAttrs(AttributeSet attrs) {
         TypedArray attributes = getContext().obtainStyledAttributes(attrs, R.styleable.draggable_panel);
+        attributes.recycle();
         this.topFragmentHeight = attributes.getDimension(R.styleable.draggable_panel_top_fragment_height, DEFAULT_TOP_FRAGMENT_HEIGHT);
         this.xScaleFactor = attributes.getFloat(R.styleable.draggable_panel_x_scale_factor, DEFAULT_SCALE_FACTOR);
         this.yScaleFactor = attributes.getFloat(R.styleable.draggable_panel_y_scale_factor, DEFAULT_SCALE_FACTOR);
