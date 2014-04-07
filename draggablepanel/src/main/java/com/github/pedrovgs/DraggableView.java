@@ -377,7 +377,7 @@ public class DraggableView extends RelativeLayout {
         @Override
         public int clampViewPositionHorizontal(View child, int left, int dx) {
             int newLeft = 0;
-            if (((isMinimized() && (dx > MINIMUN_DX_FOR_HORIZONTAL_DRAG || dx < -MINIMUN_DX_FOR_HORIZONTAL_DRAG))) || (isDragViewAtBottom())) {
+            if (((isMinimized() && (dx > MINIMUN_DX_FOR_HORIZONTAL_DRAG || dx < -MINIMUN_DX_FOR_HORIZONTAL_DRAG))) || (isDragViewAtBottom() && !isDragViewAtRight())) {
                 newLeft = left;
             }
             return newLeft;
