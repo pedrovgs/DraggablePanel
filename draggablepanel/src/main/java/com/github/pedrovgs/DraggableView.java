@@ -56,7 +56,7 @@ public class DraggableView extends RelativeLayout {
     private float yScaleFactor = DEFAULT_SCALE_FACTOR;
     private float topFragmentMarginRight = DEFAULT_TOP_FRAGMENT_MARGIN;
     private float topFragmentMarginBottom = DEFAULT_TOP_FRAGMENT_MARGIN;
-    private float topViewHeight;
+    private float topViewHeight = DEFAULT_TOP_VIEW_HEIGHT;
     private int dragViewId;
     private int secondViewId;
     private boolean enableHorizontalAlphaEffect;
@@ -246,8 +246,9 @@ public class DraggableView extends RelativeLayout {
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        dragView.layout(lastLeftPosition, lastTopPosition, lastLeftPosition + dragView.getMeasuredWidth(), (int) (lastTopPosition + topViewHeight));
-        secondView.layout(0, (int) (lastTopPosition + topViewHeight), right, lastTopPosition + bottom);
+        int topViewHeight = this.topViewHeight == DEFAULT_TOP_VIEW_HEIGHT ? dragView.getMeasuredHeight() : (int) this.topViewHeight;
+        dragView.layout(lastLeftPosition, lastTopPosition, lastLeftPosition + dragView.getMeasuredWidth(), lastTopPosition + topViewHeight);
+        secondView.layout(0, lastTopPosition + topViewHeight, right, lastTopPosition + bottom);
     }
 
 
