@@ -151,7 +151,7 @@ public class TvShowsActivity extends DIFragmentActivity {
         lv_episodes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                EpisodeViewModel episodeViewModel = tvShowSelected.getEpisodes().get(position);
+                EpisodeViewModel episodeViewModel = tvShowSelected.getEpisodes().get(position - 1);
                 Toast.makeText(getBaseContext(), tvShowSelected.getTitle() + " - " + episodeViewModel.getTitle(), Toast.LENGTH_LONG).show();
             }
         });

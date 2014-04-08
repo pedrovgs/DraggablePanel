@@ -37,6 +37,7 @@ public class MoviePosterFragment extends Fragment {
     ImageView iv_thumbnail;
 
     private String videoPosterThumbnail;
+    private String posterTitle;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,8 +51,12 @@ public class MoviePosterFragment extends Fragment {
         this.videoPosterThumbnail = videoPosterThumbnail;
     }
 
+    public void setPosterTitle(String posterTitle) {
+        this.posterTitle = posterTitle;
+    }
+
     @OnClick(R.id.iv_thumbnail)
     void onThubmnailClicked() {
-        Toast.makeText(getActivity(), "Thumbnail view clicked", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), posterTitle, Toast.LENGTH_SHORT).show();
     }
 }

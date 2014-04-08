@@ -38,6 +38,7 @@ public class VideoSampleActivity extends FragmentActivity {
     private static final String APPLICATION_RAW_PATH = "android.resource://com.github.pedrovgs.sample/";
     private static final String VIDEO_POSTER = "http://wac.450f.edgecastcdn.net/80450F/screencrush.com/files/2013/11/the-amazing-spider-man-2-poster-rhino.jpg";
     private static final String VIDEO_THUMBNAIL = "http://wac.450f.edgecastcdn.net/80450F/screencrush.com/files/2013/11/the-amazing-spider-man-2-poster-green-goblin.jpg";
+    private static final String VIDEO_TITLE = "The Amazing Spider-Man 2: Rise of Electro";
 
     @InjectView(R.id.draggable_view)
     DraggableView draggableView;
@@ -103,7 +104,7 @@ public class VideoSampleActivity extends FragmentActivity {
 
     @OnClick(R.id.iv_thumbnail)
     void onThubmnailClicked() {
-        Toast.makeText(this, "Thumbnail view clicked", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, VIDEO_TITLE, Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.iv_poster)
