@@ -43,6 +43,7 @@ public class DraggableView extends RelativeLayout {
     private float topViewHeight;
     private int dragViewId;
     private int secondViewId;
+    private boolean enableHorizontalAlphaEffect;
     private DraggableListener listener;
 
     private float initialMotionX;
@@ -143,6 +144,9 @@ public class DraggableView extends RelativeLayout {
         }
     }
 
+    public void setHorizontalAlphaEffectEnabled(boolean enableHorizontalAlphaEffect) {
+        this.enableHorizontalAlphaEffect = enableHorizontalAlphaEffect;
+    }
 
     public void setDraggableListener(DraggableListener listener) {
         this.listener = listener;
@@ -263,11 +267,13 @@ public class DraggableView extends RelativeLayout {
     }
 
     void changeDragViewViewAlpha() {
-        float alpha = 1 - getHorizontalDragOffset();
-        if (alpha == 0) {
-            alpha = 1;
+        if (enableHorizontalAlphaEffect) {
+            float alpha = 1 - getHorizontalDragOffset();
+            if (alpha == 0) {
+                alpha = 1;
+            }
+            ViewHelper.setAlpha(dragView, alpha);
         }
-        ViewHelper.setAlpha(dragView, alpha);
     }
 
     boolean isHeaderAboveTheMiddle() {
@@ -381,4 +387,5 @@ public class DraggableView extends RelativeLayout {
         }
         return false;
     }
+
 }

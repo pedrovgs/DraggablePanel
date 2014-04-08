@@ -2,16 +2,17 @@ package com.github.pedrovgs.sample.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.widget.ListView;
+import android.widget.ImageView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import com.github.pedrovgs.DraggablePanel;
 import com.github.pedrovgs.sample.R;
 import com.github.pedrovgs.sample.fragment.MoviePosterFragment;
-import com.github.pedrovgs.sample.fragment.PlaceFragment;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
+import com.squareup.picasso.Picasso;
 
 /**
  * @author Pedro Vicente Gómez Sánchez.
@@ -21,9 +22,10 @@ public class YoutubeSampleActivity extends FragmentActivity {
     private static final String YOUTUBE_API_KEY = "AIzaSyC1rMU-mkhoyTvBIdTnYU0dss0tU9vtK48";
     private static final String VIDEO_KEY = "pK2zYHWDZKo";
     private static final String VIDEO_POSTER_THUMBNAIL = "http://4.bp.blogspot.com/-BT6IshdVsoA/UjfnTo_TkBI/AAAAAAAAMWk/JvDCYCoFRlQ/s1600/xmenDOFP.wobbly.1.jpg";
+    private static final String SECOND_VIDEO_POSTER_THUMBNAIL = "http://media.comicbook.com/wp-content/uploads/2013/07/x-men-days-of-future-past-wolverine-poster.jpg";
 
-    @InjectView(R.id.lv_videos)
-    ListView lv_videos;
+    @InjectView(R.id.iv_thumbnail)
+    ImageView iv_thumbnail;
     @InjectView(R.id.draggable_panel)
     DraggablePanel draggablePanel;
 
@@ -69,5 +71,11 @@ public class YoutubeSampleActivity extends FragmentActivity {
         draggablePanel.setTopFragment(youtubeFragment);
         draggablePanel.setBottomFragment(new MoviePosterFragment(VIDEO_POSTER_THUMBNAIL));
         draggablePanel.initializeView();
+        Picasso.with(this).load(SECOND_VIDEO_POSTER_THUMBNAIL).into(iv_thumbnail);
+    }
+
+    @OnClick(R.id.fl_container)
+    void onContainerClicked() {
+        draggablePanel.maximize();
     }
 }
