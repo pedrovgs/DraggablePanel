@@ -7,6 +7,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.github.pedrovgs.DraggablePanel;
 import com.github.pedrovgs.sample.R;
+import com.github.pedrovgs.sample.fragment.MoviePosterFragment;
 import com.github.pedrovgs.sample.fragment.PlaceFragment;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
@@ -18,7 +19,8 @@ import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 public class YoutubeSampleActivity extends FragmentActivity {
 
     private static final String YOUTUBE_API_KEY = "AIzaSyC1rMU-mkhoyTvBIdTnYU0dss0tU9vtK48";
-    private static final String VIDEO_KEY = "PpTGsZTMXlY";
+    private static final String VIDEO_KEY = "pK2zYHWDZKo";
+    private static final String VIDEO_POSTER_THUMBNAIL = "http://4.bp.blogspot.com/-BT6IshdVsoA/UjfnTo_TkBI/AAAAAAAAMWk/JvDCYCoFRlQ/s1600/xmenDOFP.wobbly.1.jpg";
 
     @InjectView(R.id.lv_videos)
     ListView lv_videos;
@@ -65,7 +67,7 @@ public class YoutubeSampleActivity extends FragmentActivity {
     private void initializeDraggablePanel() {
         draggablePanel.setFragmentManager(getSupportFragmentManager());
         draggablePanel.setTopFragment(youtubeFragment);
-        draggablePanel.setBottomFragment(new PlaceFragment());
+        draggablePanel.setBottomFragment(new MoviePosterFragment(VIDEO_POSTER_THUMBNAIL));
         draggablePanel.initializeView();
     }
 }
