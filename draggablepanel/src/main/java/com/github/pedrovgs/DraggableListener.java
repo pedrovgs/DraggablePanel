@@ -20,12 +20,12 @@ package com.github.pedrovgs;
  */
 public interface DraggableListener {
 
-    public void onMaximized();
+    void onMaximized();
 
-    public void onMinimized();
+    void onMinimized();
 
-    public void onClosedToLeft();
+    void onClosedToLeft();
 
-    public void onClosedToRight();
+    void onClosedToRight();
 
 }
