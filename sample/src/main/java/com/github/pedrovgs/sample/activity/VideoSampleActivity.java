@@ -101,11 +101,6 @@ public class VideoSampleActivity extends FragmentActivity {
         Picasso.with(this).load(VIDEO_THUMBNAIL).placeholder(R.drawable.spiderman_placeholder).into(iv_thumbnail);
     }
 
-    @OnClick(R.id.video_view)
-    void onVideoViewClicked() {
-        Toast.makeText(this, "Video view clicked", Toast.LENGTH_SHORT).show();
-    }
-
     @OnClick(R.id.iv_thumbnail)
     void onThubmnailClicked() {
         Toast.makeText(this, "Thumbnail view clicked", Toast.LENGTH_SHORT).show();
