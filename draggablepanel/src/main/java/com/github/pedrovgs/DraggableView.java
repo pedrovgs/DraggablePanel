@@ -231,27 +231,10 @@ public class DraggableView extends RelativeLayout {
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        dragView.layout(lastLeftPosition, lastTopPosition, lastLeftPosition + dragView.getMeasuredWidth(), lastTopPosition + dragView.getMeasuredHeight());
-        secondView.layout(0, lastTopPosition + dragView.getMeasuredHeight(), right, lastTopPosition + bottom);
+        dragView.layout(lastLeftPosition, lastTopPosition, lastLeftPosition + dragView.getMeasuredWidth(), (int) (lastTopPosition + topViewHeight));
+        secondView.layout(0, (int) (lastTopPosition + topViewHeight), right, lastTopPosition + bottom);
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        measureChildren(widthMeasureSpec, heightMeasureSpec);
-
-        int maxWidth = MeasureSpec.getSize(widthMeasureSpec);
-        int maxHeight = MeasureSpec.getSize(heightMeasureSpec);
-
-        setMeasuredDimension(resolveSize(maxWidth, widthMeasureSpec),
-                this.resolveSize(maxHeight, heightMeasureSpec));
-    }
-
-    public static int resolveSize(int size, int measureSpec) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-            return View.resolveSize(size, measureSpec);
-        }
-        return resolveSizeAndState(size, measureSpec, 0);
-    }
 
     @Override
     protected void onFinishInflate() {
