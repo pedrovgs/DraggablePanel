@@ -17,10 +17,12 @@ package com.github.pedrovgs.sample.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.*;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import com.github.pedrovgs.DraggableListener;
 import com.github.pedrovgs.DraggableView;
 import com.github.pedrovgs.sample.R;
@@ -66,6 +68,10 @@ public class TvShowsActivity extends DIFragmentActivity {
         hookListeners();
     }
 
+    @OnClick(R.id.iv_fan_art)
+    void onFanArtClicked() {
+        Toast.makeText(this, tvShowSelected.getTitle(), Toast.LENGTH_LONG).show();
+    }
 
     private void initializeDraggableView() {
         Handler handler = new Handler();
@@ -96,6 +102,13 @@ public class TvShowsActivity extends DIFragmentActivity {
 
 
     private void hookListeners() {
+        iv_fan_art.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                Toast.makeText(getBaseContext(), "culo", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
         /*
          * This will work in API Level 8 once this sample project uses ActionBarCompat or ActionBarSherlock project.
          */
@@ -143,6 +156,13 @@ public class TvShowsActivity extends DIFragmentActivity {
         header.setText(tvShow.getTitle().toUpperCase() + " - SEASON 1");
         lv_episodes.setAdapter(null);
         lv_episodes.addHeaderView(header);
+        lv_episodes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                EpisodeViewModel episodeViewModel = tvShowSelected.getEpisodes().get(position);
+                Toast.makeText(getBaseContext(), tvShowSelected.getTitle() + " - " + episodeViewModel.getTitle(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 }

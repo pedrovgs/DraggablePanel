@@ -228,9 +228,9 @@ public class DraggableView extends RelativeLayout {
         final float x = ev.getX();
         final float y = ev.getY();
 
-        boolean isHeaderViewUnder = viewDragHelper.isViewUnder(dragView, (int) x, (int) y);
-        boolean isHeaderViewHit = isViewHit(dragView, (int) x, (int) y);
-        boolean isDescViewHit = isViewHit(secondView, (int) x, (int) y);
+        boolean isDragViewUnder = viewDragHelper.isViewUnder(dragView, (int) x, (int) y);
+        boolean isDragViewHit = isViewHit(dragView, (int) x, (int) y);
+        boolean isSecondViewHit = isViewHit(secondView, (int) x, (int) y);
 
         if (dragView instanceof ViewGroup) {
             ViewGroup viewGroup = (ViewGroup) dragView;
@@ -241,7 +241,7 @@ public class DraggableView extends RelativeLayout {
             dragView.performClick();
         }
         lastActionMotionEvent = action;
-        return isHeaderViewUnder && isHeaderViewHit || isDescViewHit;
+        return isDragViewUnder && isDragViewHit || isSecondViewHit;
     }
 
     @Override
