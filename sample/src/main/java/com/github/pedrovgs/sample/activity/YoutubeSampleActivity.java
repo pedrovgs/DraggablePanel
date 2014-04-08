@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import com.github.pedrovgs.DraggableListener;
 import com.github.pedrovgs.DraggablePanel;
 import com.github.pedrovgs.sample.R;
 import com.github.pedrovgs.sample.fragment.MoviePosterFragment;
@@ -40,6 +41,7 @@ public class YoutubeSampleActivity extends FragmentActivity {
         ButterKnife.inject(this);
         initializeYoutubeFragment();
         initializeDraggablePanel();
+        hookDraggablePanelListeners();
     }
 
     private void initializeYoutubeFragment() {
@@ -72,6 +74,36 @@ public class YoutubeSampleActivity extends FragmentActivity {
         draggablePanel.setBottomFragment(new MoviePosterFragment(VIDEO_POSTER_THUMBNAIL));
         draggablePanel.initializeView();
         Picasso.with(this).load(SECOND_VIDEO_POSTER_THUMBNAIL).into(iv_thumbnail);
+    }
+
+    private void hookDraggablePanelListeners() {
+        draggablePanel.setDraggableListener(new DraggableListener() {
+            @Override
+            public void onMaximized() {
+                if (!youtubePlayer.isPlaying()) {
+                    youtubePlayer.play();
+                }
+            }
+
+            @Override
+            public void onMinimized() {
+
+            }
+
+            @Override
+            public void onClosedToLeft() {
+                if (youtubePlayer.isPlaying()) {
+                    youtubePlayer.pause();
+                }
+            }
+
+            @Override
+            public void onClosedToRight() {
+                if (youtubePlayer.isPlaying()) {
+                    youtubePlayer.pause();
+                }
+            }
+        });
     }
 
     @OnClick(R.id.fl_container)
