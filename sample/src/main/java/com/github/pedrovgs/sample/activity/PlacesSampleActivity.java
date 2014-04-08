@@ -54,12 +54,12 @@ public class PlacesSampleActivity extends DIFragmentActivity {
     }
 
     private void recoverDraggablePanelState(Bundle savedInstanceState) {
-        if (savedInstanceState.getSerializable(DRAGGABLE_PANEL_STATE) == null) {
+        final DraggablePanelState draggablePanelState = (DraggablePanelState) savedInstanceState.getSerializable(DRAGGABLE_PANEL_STATE);
+        if (draggablePanelState == null) {
             draggablePanel.setVisibility(View.GONE);
             return;
         }
         Handler handler = new Handler();
-        final DraggablePanelState draggablePanelState = (DraggablePanelState) savedInstanceState.getSerializable(DRAGGABLE_PANEL_STATE);
         switch (draggablePanelState) {
             case MAXIMIZED:
                 handler.postDelayed(new Runnable() {
@@ -67,7 +67,7 @@ public class PlacesSampleActivity extends DIFragmentActivity {
                     public void run() {
                         draggablePanel.maximize();
                     }
-                }, 100);
+                }, 50);
                 break;
             case MINIMIZED:
                 handler.postDelayed(new Runnable() {
@@ -75,23 +75,25 @@ public class PlacesSampleActivity extends DIFragmentActivity {
                     public void run() {
                         draggablePanel.minimize();
                     }
-                }, 100);
+                }, 50);
                 break;
             case CLOSED_AT_LEFT:
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        draggablePanel.setVisibility(View.GONE);
                         draggablePanel.closeToLeft();
                     }
-                }, 100);
+                }, 50);
                 break;
             case CLOSED_AT_RIGHT:
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        draggablePanel.setVisibility(View.GONE);
                         draggablePanel.closeToRight();
                     }
-                }, 100);
+                }, 50);
                 break;
             default:
                 draggablePanel.setVisibility(View.GONE);
