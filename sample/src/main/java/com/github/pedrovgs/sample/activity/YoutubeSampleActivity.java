@@ -71,7 +71,9 @@ public class YoutubeSampleActivity extends FragmentActivity {
     private void initializeDraggablePanel() {
         draggablePanel.setFragmentManager(getSupportFragmentManager());
         draggablePanel.setTopFragment(youtubeFragment);
-        draggablePanel.setBottomFragment(new MoviePosterFragment(VIDEO_POSTER_THUMBNAIL));
+        MoviePosterFragment moviePosterFragment = new MoviePosterFragment();
+        moviePosterFragment.setPoster(VIDEO_POSTER_THUMBNAIL);
+        draggablePanel.setBottomFragment(moviePosterFragment);
         draggablePanel.initializeView();
         Picasso.with(this).load(SECOND_VIDEO_POSTER_THUMBNAIL).into(iv_thumbnail);
     }

@@ -19,11 +19,7 @@ public class MoviePosterFragment extends Fragment {
     @InjectView(R.id.iv_thumbnail)
     ImageView iv_thumbnail;
 
-    private final String videoPosterThumbnail;
-
-    public MoviePosterFragment(String videoPosterThumbnail) {
-        this.videoPosterThumbnail = videoPosterThumbnail;
-    }
+    private String videoPosterThumbnail;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,4 +30,7 @@ public class MoviePosterFragment extends Fragment {
     }
 
 
+    public void setPoster(String videoPosterThumbnail) {
+        this.videoPosterThumbnail = videoPosterThumbnail;
+    }
 }
