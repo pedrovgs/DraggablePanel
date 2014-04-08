@@ -28,7 +28,6 @@ import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import com.nineoldandroids.view.ViewHelper;
 
@@ -64,7 +63,6 @@ public class DraggableView extends RelativeLayout {
 
     private float initialMotionX;
     private float initialMotionY;
-    private int lastActionMotionEvent = -1;
 
     private int lastTopPosition;
     private int lastLeftPosition;
@@ -223,25 +221,15 @@ public class DraggableView extends RelativeLayout {
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         viewDragHelper.processTouchEvent(ev);
-        int action = ev.getAction();
 
-        final float x = ev.getX();
-        final float y = ev.getY();
+        final int x = (int) ev.getX();
+        final int y = (int) ev.getY();
 
-        boolean isDragViewUnder = viewDragHelper.isViewUnder(dragView, (int) x, (int) y);
-        boolean isDragViewHit = isViewHit(dragView, (int) x, (int) y);
-        boolean isSecondViewHit = isViewHit(secondView, (int) x, (int) y);
+        boolean isDragViewHit = isViewHit(dragView, x, y);
+        boolean isSecondViewHit = isViewHit(secondView, x, y);
 
-        if (dragView instanceof ViewGroup) {
-            ViewGroup viewGroup = (ViewGroup) dragView;
-            for (int i = 0; i < viewGroup.getChildCount(); i++) {
-                viewGroup.getChildAt(i).dispatchTouchEvent(ev);
-            }
-        } else if (action == MotionEvent.ACTION_UP && lastActionMotionEvent != MotionEvent.ACTION_MOVE) {
-            dragView.performClick();
-        }
-        lastActionMotionEvent = action;
-        return isDragViewUnder && isDragViewHit || isSecondViewHit;
+        dragView.dispatchTouchEvent(ev);
+        return isDragViewHit || isSecondViewHit;
     }
 
     @Override

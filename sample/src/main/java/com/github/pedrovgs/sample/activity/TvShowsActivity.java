@@ -17,7 +17,6 @@ package com.github.pedrovgs.sample.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.*;
 import butterknife.ButterKnife;
@@ -102,13 +101,6 @@ public class TvShowsActivity extends DIFragmentActivity {
 
 
     private void hookListeners() {
-        iv_fan_art.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                Toast.makeText(getBaseContext(), "culo", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
         /*
          * This will work in API Level 8 once this sample project uses ActionBarCompat or ActionBarSherlock project.
          */
