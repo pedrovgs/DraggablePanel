@@ -82,8 +82,8 @@ public class VideoSampleActivity extends FragmentActivity {
     }
 
     private void initializePoster() {
-        Picasso.with(this).load(VIDEO_POSTER).into(iv_poster);
-        Picasso.with(this).load(VIDEO_THUMBNAIL).into(iv_thumbnail);
+        Picasso.with(this).load(VIDEO_POSTER).placeholder(R.drawable.spiderman_placeholder).into(iv_poster);
+        Picasso.with(this).load(VIDEO_THUMBNAIL).placeholder(R.drawable.spiderman_placeholder).into(iv_thumbnail);
     }
 
     @OnClick(R.id.video_view)
