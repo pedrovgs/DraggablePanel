@@ -21,8 +21,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import com.github.pedrovgs.sample.R;
 import com.squareup.picasso.Picasso;
 
@@ -40,12 +42,16 @@ public class MoviePosterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_movie_poster, container, false);
         ButterKnife.inject(this, view);
-        Picasso.with(getActivity()).load(videoPosterThumbnail).placeholder(R.drawable.tv_show_placeholder).into(iv_thumbnail);
+        Picasso.with(getActivity()).load(videoPosterThumbnail).placeholder(R.drawable.xmen_placeholder).into(iv_thumbnail);
         return view;
     }
 
-
     public void setPoster(String videoPosterThumbnail) {
         this.videoPosterThumbnail = videoPosterThumbnail;
+    }
+
+    @OnClick(R.id.iv_thumbnail)
+    void onThubmnailClicked() {
+        Toast.makeText(getActivity(), "Thumbnail view clicked", Toast.LENGTH_SHORT).show();
     }
 }

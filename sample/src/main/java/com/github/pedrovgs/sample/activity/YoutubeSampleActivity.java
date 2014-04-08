@@ -123,8 +123,9 @@ public class YoutubeSampleActivity extends FragmentActivity {
         });
     }
 
-    @OnClick(R.id.fl_container)
+    @OnClick(R.id.iv_thumbnail)
     void onContainerClicked() {
         draggablePanel.maximize();
     }
+
 }
