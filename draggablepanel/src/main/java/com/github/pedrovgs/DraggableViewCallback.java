@@ -24,6 +24,7 @@ public class DraggableViewCallback extends ViewDragHelper.Callback {
 
     @Override
     public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
+        draggableView.updateLastDragViewPosition(top, left);
         if (draggableView.isDragViewAtBottom()) {
             draggableView.changeDragViewViewAlpha();
         } else {
@@ -40,7 +41,7 @@ public class DraggableViewCallback extends ViewDragHelper.Callback {
     @Override
     public void onViewReleased(View releasedChild, float xVel, float yVel) {
         super.onViewReleased(releasedChild, xVel, yVel);
-        
+
         if (draggableView.isDragViewAtBottom() && !draggableView.isDragViewAtRight()) {
             if (xVel < 0 && xVel <= X_MIN_VELOCITY) {
                 draggableView.closeToLeft();
