@@ -12,23 +12,63 @@
 
         <!-- Places sample -->
 
-        <ImageView
-                android:id="@+id/iv_places"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:src="@drawable/places_button_image"
-                android:scaleType="centerCrop"
-                android:layout_weight="1"/>
+        <FrameLayout
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_weight="1">
+
+            <ImageView
+                    android:id="@+id/iv_places"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:src="@drawable/places_button_image"
+                    android:scaleType="centerCrop"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Places"
+                    android:textSize="18sp"
+                    android:layout_marginTop="10dip"
+                    android:layout_gravity="center_horizontal"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:background="#7f000000"
+                    android:paddingLeft="@dimen/tv_name_padding"
+                    android:paddingRight="@dimen/tv_name_padding"/>
+
+        </FrameLayout>
 
         <!-- Tv Shows Sample -->
 
-        <ImageView
-                android:id="@+id/iv_tv_shows"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:src="@drawable/tv_show_button_image"
-                android:scaleType="centerCrop"
-                android:layout_weight="1"/>
+        <FrameLayout
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_weight="1">
+
+            <ImageView
+                    android:id="@+id/iv_tv_shows"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:src="@drawable/tv_show_button_image"
+                    android:scaleType="centerCrop"/>
+
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tv Shows"
+                    android:textSize="18sp"
+                    android:layout_marginTop="10dip"
+                    android:layout_gravity="center_horizontal"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:background="#7f000000"
+                    android:paddingLeft="@dimen/tv_name_padding"
+                    android:paddingRight="@dimen/tv_name_padding"/>
+
+        </FrameLayout>
+
     </TableRow>
 
     <!-- Second row -->
@@ -40,23 +80,63 @@
 
         <!-- Youtube Sample -->
 
-        <ImageView
-                android:id="@+id/iv_youtube"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:src="@drawable/youtube_button_image"
-                android:scaleType="centerCrop"
-                android:layout_weight="1"/>
+        <FrameLayout
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_weight="1">
+
+            <ImageView
+                    android:id="@+id/iv_youtube"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:src="@drawable/youtube_button_image"
+                    android:scaleType="centerCrop"/>
+
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Youtube"
+                    android:textSize="18sp"
+                    android:layout_marginTop="10dip"
+                    android:layout_gravity="center_horizontal"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:background="#7f000000"
+                    android:paddingLeft="@dimen/tv_name_padding"
+                    android:paddingRight="@dimen/tv_name_padding"/>
+
+        </FrameLayout>
 
         <!-- Video Sample -->
 
-        <ImageView
-                android:id="@+id/iv_video"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:src="@drawable/video_button_image"
-                android:scaleType="centerCrop"
-                android:layout_weight="1"/>
+        <FrameLayout
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_weight="1">
+
+            <ImageView
+                    android:id="@+id/iv_video"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:src="@drawable/video_button_image"
+                    android:scaleType="centerCrop"/>
+
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="VideoView"
+                    android:textSize="18sp"
+                    android:layout_marginTop="10dip"
+                    android:layout_gravity="center_horizontal"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:background="#7f000000"
+                    android:paddingLeft="@dimen/tv_name_padding"
+                    android:paddingRight="@dimen/tv_name_padding"/>
+
+        </FrameLayout>
 
     </TableRow>
 </TableLayout>
