@@ -22,8 +22,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import com.github.pedrovgs.sample.R;
 import com.github.pedrovgs.sample.viewmodel.PlaceViewModel;
 import com.squareup.picasso.Picasso;
@@ -38,6 +40,8 @@ public class PlaceFragment extends Fragment {
     @InjectView(R.id.iv_photo)
     ImageView iv_photo;
 
+    private PlaceViewModel placeViewModel;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.place_row, container, false);
@@ -46,8 +50,14 @@ public class PlaceFragment extends Fragment {
     }
 
     public void showPlace(PlaceViewModel placeViewModel) {
+        this.placeViewModel = placeViewModel;
         tv_name.setText(placeViewModel.getName());
         Picasso.with(getActivity()).load(placeViewModel.getPhoto()).placeholder(R.drawable.maps_placeholder).into(iv_photo);
+    }
+
+    @OnClick(R.id.iv_photo)
+    void onPhotoClicked() {
+        Toast.makeText(getActivity(), placeViewModel.getName(), Toast.LENGTH_LONG).show();
     }
 
 }
