@@ -1,40 +1,62 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              android:gravity="center">
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:id="@+id/tableLayout1"
+             android:layout_width="fill_parent"
+             android:layout_height="fill_parent">
 
-    <!-- Buttons -->
+    <!-- First row-->
 
-    <!-- Places Sample -->
-    <Button
-            android:id="@+id/bt_places_sample"
-            android:text="@string/places_sample_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
 
+        <!-- Places sample -->
 
-    <!-- TV Shows Sample -->
-    <Button
-            android:id="@+id/bt_tv_shows_sample"
-            android:text="@string/tv_shows_sample_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        <ImageView
+                android:id="@+id/iv_places"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/places_button_image"
+                android:scaleType="centerCrop"
+                android:layout_weight="1"/>
 
-    <!-- Youtube sample -->
+        <!-- Tv Shows Sample -->
 
-    <Button
-            android:id="@+id/bt_youtube_sample"
-            android:text="@string/youtube_sample_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        <ImageView
+                android:id="@+id/iv_tv_shows"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/tv_show_button_image"
+                android:scaleType="centerCrop"
+                android:layout_weight="1"/>
+    </TableRow>
 
-    <!-- Video sample -->
+    <!-- Second row -->
 
-    <Button
-            android:id="@+id/bt_video_sample"
-            android:text="@string/video_sample_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
 
-</LinearLayout>
+        <!-- Youtube Sample -->
+
+        <ImageView
+                android:id="@+id/iv_youtube"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/youtube_button_image"
+                android:scaleType="centerCrop"
+                android:layout_weight="1"/>
+
+        <!-- Video Sample -->
+
+        <ImageView
+                android:id="@+id/iv_video"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/video_button_image"
+                android:scaleType="centerCrop"
+                android:layout_weight="1"/>
+
+    </TableRow>
+</TableLayout>

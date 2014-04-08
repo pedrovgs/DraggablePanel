@@ -34,25 +34,25 @@ public class MainActivity extends Activity {
         ButterKnife.inject(this);
     }
 
-    @OnClick(R.id.bt_places_sample)
+    @OnClick(R.id.iv_places)
     void openSimpleSampleActivity() {
         Intent intent = new Intent(this, PlacesSampleActivity.class);
         startActivity(intent);
     }
 
-    @OnClick(R.id.bt_tv_shows_sample)
+    @OnClick(R.id.iv_tv_shows)
     void openTvShowsSampleActivity() {
         Intent intent = new Intent(this, TvShowsActivity.class);
         startActivity(intent);
     }
 
-    @OnClick(R.id.bt_youtube_sample)
+    @OnClick(R.id.iv_youtube)
     void openYoutubeSampleActivity() {
         Intent intent = new Intent(this, YoutubeSampleActivity.class);
         startActivity(intent);
     }
 
-    @OnClick(R.id.bt_video_sample)
+    @OnClick(R.id.iv_video)
     void openVideoSampleActivity() {
         Intent intent = new Intent(this, VideoSampleActivity.class);
         startActivity(intent);
