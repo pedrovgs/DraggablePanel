@@ -36,9 +36,9 @@ public class PlaceRenderer extends Renderer<PlaceViewModel> {
     private Context context;
 
     @InjectView(R.id.tv_name)
-    TextView tv_name;
+    TextView nameTextView;
     @InjectView(R.id.iv_photo)
-    ImageView iv_photo;
+    ImageView photoImageView;
 
     public PlaceRenderer(Context context) {
         this.context = context;
@@ -62,7 +62,7 @@ public class PlaceRenderer extends Renderer<PlaceViewModel> {
     @Override
     protected void render() {
         PlaceViewModel place = getContent();
-        tv_name.setText(place.getName());
-        Picasso.with(context).load(place.getPhoto()).placeholder(R.drawable.maps_placeholder).into(iv_photo);
+        nameTextView.setText(place.getName());
+        Picasso.with(context).load(place.getPhoto()).placeholder(R.drawable.maps_placeholder).into(photoImageView);
     }
 }
