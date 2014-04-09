@@ -199,7 +199,6 @@ public class PlacesSampleActivity extends DIFragmentActivity {
         draggablePanel.setTopViewHeight(getResources().getDimension(R.dimen.top_fragment_height));
         draggablePanel.setTopFragmentMarginRight(getResources().getDimension(R.dimen.top_fragment_margin));
         draggablePanel.setTopFragmentMarginBottom(getResources().getDimension(R.dimen.top_fragment_margin));
-        draggablePanel.setBackgroundColor(getResources().getColor(R.color.black));
         draggablePanel.initializeView();
         draggablePanel.setVisibility(View.GONE);
     }
