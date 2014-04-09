@@ -36,11 +36,11 @@ public class TvShowRenderer extends Renderer<TvShowViewModel> {
     private final Context context;
 
     @InjectView(R.id.iv_thumbnail)
-    ImageView iv_thumbnail;
+    ImageView thumbnailImageView;
     @InjectView(R.id.tv_title)
-    TextView tv_title;
+    TextView titleTextView;
     @InjectView(R.id.tv_seasons_counter)
-    TextView tv_seasons_counter;
+    TextView seasonsCounterTextView;
 
     public TvShowRenderer(Context context) {
         this.context = context;
@@ -64,10 +64,10 @@ public class TvShowRenderer extends Renderer<TvShowViewModel> {
     @Override
     protected void render() {
         TvShowViewModel tvShow = getContent();
-        Picasso.with(context).load(tvShow.getPoster()).placeholder(R.drawable.tv_show_placeholder).into(iv_thumbnail);
+        Picasso.with(context).load(tvShow.getPoster()).placeholder(R.drawable.tv_show_placeholder).into(thumbnailImageView);
 
-        tv_title.setText(tvShow.getTitle().toUpperCase());
+        titleTextView.setText(tvShow.getTitle().toUpperCase());
 
-        tv_seasons_counter.setText(tvShow.getNumberOfSeasons() + " seasons");
+        seasonsCounterTextView.setText(tvShow.getNumberOfSeasons() + " seasons");
     }
 }

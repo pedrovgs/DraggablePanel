@@ -31,11 +31,12 @@ import com.pedrogomez.renderers.Renderer;
 public class EpisodeRenderer extends Renderer<EpisodeViewModel> {
 
     @InjectView(R.id.tv_episode_number)
-    TextView tv_episode_number;
+    TextView episodeNumberTextView;
     @InjectView(R.id.tv_episode_title)
-    TextView tv_episode_title;
+    TextView episodeTitleTextView;
     @InjectView(R.id.tv_episode_publish_date)
-    TextView tv_episode_publish_date;
+    TextView episodeDateTextView;
+
     private int position;
 
     public void setPosition(int position) {
@@ -60,9 +61,9 @@ public class EpisodeRenderer extends Renderer<EpisodeViewModel> {
     @Override
     protected void render() {
         EpisodeViewModel episode = getContent();
-        tv_episode_number.setText(String.format("%02d", position + 1));
-        tv_episode_title.setText(episode.getTitle());
-        tv_episode_publish_date.setText(episode.getPublishDate());
+        episodeNumberTextView.setText(String.format("%02d", position + 1));
+        episodeTitleTextView.setText(episode.getTitle());
+        episodeDateTextView.setText(episode.getPublishDate());
     }
 
 }
