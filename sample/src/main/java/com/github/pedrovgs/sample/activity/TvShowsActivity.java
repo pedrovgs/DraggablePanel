@@ -43,6 +43,7 @@ import java.util.List;
  */
 public class TvShowsActivity extends DIFragmentActivity {
 
+    public static final int DELAY_MILLIS = 10;
     @Inject
     RendererAdapter<TvShowViewModel> adapter;
 
@@ -80,7 +81,7 @@ public class TvShowsActivity extends DIFragmentActivity {
                 draggableView.setVisibility(View.GONE);
                 draggableView.closeToRight();
             }
-        }, 10);
+        }, DELAY_MILLIS);
     }
 
     private void initializeGridView() {
@@ -136,7 +137,7 @@ public class TvShowsActivity extends DIFragmentActivity {
 
     private void renderEpisodes(final TvShowViewModel tvShow) {
         List<Renderer<EpisodeViewModel>> episodeRenderers = new LinkedList<Renderer<EpisodeViewModel>>();
-        episodeRenderers.add(new EpisodeRenderer(this));
+        episodeRenderers.add(new EpisodeRenderer());
         EpisodeRendererBuilder episodeRendererBuilder = new EpisodeRendererBuilder(episodeRenderers);
         EpisodeRendererAdapter episodesAdapter = new EpisodeRendererAdapter(getLayoutInflater(), episodeRendererBuilder, tvShow.getEpisodes());
         lv_episodes.setAdapter(episodesAdapter);

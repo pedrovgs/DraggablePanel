@@ -15,7 +15,6 @@
  */
 package com.github.pedrovgs.sample.renderer;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,8 +30,6 @@ import com.pedrogomez.renderers.Renderer;
  */
 public class EpisodeRenderer extends Renderer<EpisodeViewModel> {
 
-    private final Context context;
-
     @InjectView(R.id.tv_episode_number)
     TextView tv_episode_number;
     @InjectView(R.id.tv_episode_title)
@@ -40,10 +37,6 @@ public class EpisodeRenderer extends Renderer<EpisodeViewModel> {
     @InjectView(R.id.tv_episode_publish_date)
     TextView tv_episode_publish_date;
     private int position;
-
-    public EpisodeRenderer(Context context) {
-        this.context = context;
-    }
 
     public void setPosition(int position) {
         this.position = position;
