@@ -45,9 +45,9 @@ public class VideoSampleActivity extends FragmentActivity {
     @InjectView(R.id.video_view)
     VideoView videoView;
     @InjectView(R.id.iv_thumbnail)
-    ImageView iv_thumbnail;
+    ImageView thumbnailImageView;
     @InjectView(R.id.iv_poster)
-    ImageView iv_poster;
+    ImageView posterImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +63,7 @@ public class VideoSampleActivity extends FragmentActivity {
         draggableView.setDraggableListener(new DraggableListener() {
             @Override
             public void onMaximized() {
-                if (!videoView.isPlaying()) {
-                    videoView.start();
-                }
+                startVideo();
             }
 
             @Override
@@ -75,18 +73,26 @@ public class VideoSampleActivity extends FragmentActivity {
 
             @Override
             public void onClosedToLeft() {
-                if (videoView.isPlaying()) {
-                    videoView.pause();
-                }
+                pauseVideo();
             }
 
             @Override
             public void onClosedToRight() {
-                if (videoView.isPlaying()) {
-                    videoView.pause();
-                }
+                pauseVideo();
             }
         });
+    }
+
+    private void pauseVideo() {
+        if (videoView.isPlaying()) {
+            videoView.pause();
+        }
+    }
+
+    private void startVideo() {
+        if (!videoView.isPlaying()) {
+            videoView.start();
+        }
     }
 
     private void initializeVideoView() {
@@ -98,8 +104,8 @@ public class VideoSampleActivity extends FragmentActivity {
     }
 
     private void initializePoster() {
-        Picasso.with(this).load(VIDEO_POSTER).placeholder(R.drawable.spiderman_placeholder).into(iv_poster);
-        Picasso.with(this).load(VIDEO_THUMBNAIL).placeholder(R.drawable.spiderman_placeholder).into(iv_thumbnail);
+        Picasso.with(this).load(VIDEO_POSTER).placeholder(R.drawable.spiderman_placeholder).into(posterImageView);
+        Picasso.with(this).load(VIDEO_THUMBNAIL).placeholder(R.drawable.spiderman_placeholder).into(thumbnailImageView);
     }
 
     @OnClick(R.id.iv_thumbnail)

@@ -49,12 +49,12 @@ public class PlacesSampleActivity extends DIFragmentActivity {
     private static final float ZOOM = 10f;
 
     @InjectView(R.id.lv_places)
-    protected ListView placesListView;
+    ListView placesListView;
     @InjectView(R.id.draggable_panel)
-    protected DraggablePanel draggablePanel;
+    DraggablePanel draggablePanel;
 
     @Inject
-    protected RendererAdapter<PlaceViewModel> placesAdapter;
+    RendererAdapter<PlaceViewModel> placesAdapter;
 
     private PlaceFragment placeFragment;
     private SupportMapFragment mapFragment;
@@ -77,6 +77,10 @@ public class PlacesSampleActivity extends DIFragmentActivity {
             draggablePanel.setVisibility(View.GONE);
             return;
         }
+        updateDraggablePanelStateDelayed(draggablePanelState);
+    }
+
+    private void updateDraggablePanelStateDelayed(DraggablePanelState draggablePanelState) {
         Handler handler = new Handler();
         switch (draggablePanelState) {
             case MAXIMIZED:

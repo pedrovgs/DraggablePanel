@@ -43,18 +43,20 @@ import java.util.List;
  */
 public class TvShowsActivity extends DIFragmentActivity {
 
-    public static final int DELAY_MILLIS = 10;
+    private static final int DELAY_MILLIS = 10;
+
     @Inject
     RendererAdapter<TvShowViewModel> adapter;
 
     @InjectView(R.id.gv_tv_shows)
-    GridView gv_tv_shows;
+    GridView tvShowsGridView;
     @InjectView(R.id.iv_fan_art)
-    ImageView iv_fan_art;
+    ImageView fanArtImageView;
     @InjectView(R.id.lv_episodes)
-    ListView lv_episodes;
+    ListView episodesListView;
     @InjectView(R.id.draggable_view)
     DraggableView draggableView;
+
     TextView header;
 
     private TvShowViewModel tvShowSelected;
@@ -85,13 +87,13 @@ public class TvShowsActivity extends DIFragmentActivity {
     }
 
     private void initializeGridView() {
-        gv_tv_shows.setAdapter(adapter);
-        gv_tv_shows.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        tvShowsGridView.setAdapter(adapter);
+        tvShowsGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 TvShowViewModel tvShow = adapter.getItem(position);
                 tvShowSelected = tvShow;
-                Picasso.with(getBaseContext()).load(tvShow.getFanArt()).placeholder(R.drawable.tv_show_placeholder).into(iv_fan_art);
+                Picasso.with(getBaseContext()).load(tvShow.getFanArt()).placeholder(R.drawable.tv_show_placeholder).into(fanArtImageView);
                 renderEpisodesHeader(tvShow);
                 renderEpisodes(tvShow);
                 draggableView.setVisibility(View.VISIBLE);
@@ -108,31 +110,35 @@ public class TvShowsActivity extends DIFragmentActivity {
         draggableView.setDraggableListener(new DraggableListener() {
             @Override
             public void onMaximized() {
-                if (tvShowSelected != null) {
-                    getSupportActionBar().setTitle(tvShowSelected.getTitle());
-                }
+                updateActionBarTitle();
             }
 
             @Override
             public void onMinimized() {
-                if (tvShowSelected != null) {
-                    getSupportActionBar().setTitle(tvShowSelected.getTitle());
-                }
+                updateActionBarTitle();
             }
 
             @Override
             public void onClosedToLeft() {
-                tvShowSelected = null;
-                getSupportActionBar().setTitle(R.string.tv_shows_sample_activity_title);
+                resetActionBarTitle();
             }
 
             @Override
             public void onClosedToRight() {
-                tvShowSelected = null;
-                getSupportActionBar().setTitle(R.string.tv_shows_sample_activity_title);
-
+                resetActionBarTitle();
             }
         });
+    }
+
+    private void resetActionBarTitle() {
+        tvShowSelected = null;
+        getSupportActionBar().setTitle(R.string.tv_shows_sample_activity_title);
+    }
+
+    private void updateActionBarTitle() {
+        if (tvShowSelected != null) {
+            getSupportActionBar().setTitle(tvShowSelected.getTitle());
+        }
     }
 
     private void renderEpisodes(final TvShowViewModel tvShow) {
@@ -140,16 +146,16 @@ public class TvShowsActivity extends DIFragmentActivity {
         episodeRenderers.add(new EpisodeRenderer());
         EpisodeRendererBuilder episodeRendererBuilder = new EpisodeRendererBuilder(episodeRenderers);
         EpisodeRendererAdapter episodesAdapter = new EpisodeRendererAdapter(getLayoutInflater(), episodeRendererBuilder, tvShow.getEpisodes());
-        lv_episodes.setAdapter(episodesAdapter);
+        episodesListView.setAdapter(episodesAdapter);
     }
 
     private void renderEpisodesHeader(TvShowViewModel tvShow) {
-        lv_episodes.removeHeaderView(header);
+        episodesListView.removeHeaderView(header);
         header = (TextView) getLayoutInflater().inflate(R.layout.episode_header, null);
         header.setText(tvShow.getTitle().toUpperCase() + " - SEASON 1");
-        lv_episodes.setAdapter(null);
-        lv_episodes.addHeaderView(header);
-        lv_episodes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        episodesListView.setAdapter(null);
+        episodesListView.addHeaderView(header);
+        episodesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 if (tvShowSelected != null) {

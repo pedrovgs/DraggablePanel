@@ -42,7 +42,7 @@ public class YoutubeSampleActivity extends FragmentActivity {
     private static final String VIDEO_POSTER_TITLE = "X-Men: Days of Future Past";
 
     @InjectView(R.id.iv_thumbnail)
-    ImageView iv_thumbnail;
+    ImageView thumbnailImageView;
     @InjectView(R.id.draggable_panel)
     DraggablePanel draggablePanel;
 
@@ -66,8 +66,7 @@ public class YoutubeSampleActivity extends FragmentActivity {
                 new YouTubePlayer.OnInitializedListener() {
 
                     @Override
-                    public void onInitializationSuccess(YouTubePlayer.Provider provider,
-                                                        YouTubePlayer player, boolean wasRestored) {
+                    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player, boolean wasRestored) {
                         if (!wasRestored) {
                             youtubePlayer = player;
                             youtubePlayer.loadVideo(VIDEO_KEY);
@@ -76,8 +75,7 @@ public class YoutubeSampleActivity extends FragmentActivity {
                     }
 
                     @Override
-                    public void onInitializationFailure(YouTubePlayer.Provider provider,
-                                                        YouTubeInitializationResult error) {
+                    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult error) {
                     }
 
                 }
@@ -92,16 +90,14 @@ public class YoutubeSampleActivity extends FragmentActivity {
         moviePosterFragment.setPosterTitle(VIDEO_POSTER_TITLE);
         draggablePanel.setBottomFragment(moviePosterFragment);
         draggablePanel.initializeView();
-        Picasso.with(this).load(SECOND_VIDEO_POSTER_THUMBNAIL).placeholder(R.drawable.xmen_placeholder).into(iv_thumbnail);
+        Picasso.with(this).load(SECOND_VIDEO_POSTER_THUMBNAIL).placeholder(R.drawable.xmen_placeholder).into(thumbnailImageView);
     }
 
     private void hookDraggablePanelListeners() {
         draggablePanel.setDraggableListener(new DraggableListener() {
             @Override
             public void onMaximized() {
-                if (!youtubePlayer.isPlaying()) {
-                    youtubePlayer.play();
-                }
+                playVideo();
             }
 
             @Override
@@ -111,18 +107,26 @@ public class YoutubeSampleActivity extends FragmentActivity {
 
             @Override
             public void onClosedToLeft() {
-                if (youtubePlayer.isPlaying()) {
-                    youtubePlayer.pause();
-                }
+                pauseVideo();
             }
 
             @Override
             public void onClosedToRight() {
-                if (youtubePlayer.isPlaying()) {
-                    youtubePlayer.pause();
-                }
+                pauseVideo();
             }
         });
+    }
+
+    private void pauseVideo() {
+        if (youtubePlayer.isPlaying()) {
+            youtubePlayer.pause();
+        }
+    }
+
+    private void playVideo() {
+        if (!youtubePlayer.isPlaying()) {
+            youtubePlayer.play();
+        }
     }
 
     @OnClick(R.id.iv_thumbnail)
