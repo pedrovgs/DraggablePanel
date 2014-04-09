@@ -61,9 +61,6 @@ public class DraggableView extends RelativeLayout {
     private boolean enableHorizontalAlphaEffect;
     private DraggableListener listener;
 
-    private float initialMotionX;
-    private float initialMotionY;
-
     private int lastTopPosition;
     private int lastLeftPosition;
 
@@ -182,39 +179,11 @@ public class DraggableView extends RelativeLayout {
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         final int action = MotionEventCompat.getActionMasked(ev);
 
-        if ((action != MotionEvent.ACTION_DOWN)) {
-            viewDragHelper.cancel();
-            return super.onInterceptTouchEvent(ev);
-        }
-
         if (action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_UP) {
             viewDragHelper.cancel();
             return false;
         }
-
-        final float x = ev.getX();
-        final float y = ev.getY();
-        boolean interceptTap = false;
-
-        switch (action) {
-            case MotionEvent.ACTION_DOWN: {
-                initialMotionX = x;
-                initialMotionY = y;
-                interceptTap = viewDragHelper.isViewUnder(dragView, (int) x, (int) y);
-                break;
-            }
-
-            case MotionEvent.ACTION_MOVE: {
-                final float adx = Math.abs(x - initialMotionX);
-                final float ady = Math.abs(y - initialMotionY);
-                final int slop = viewDragHelper.getTouchSlop();
-                if (ady > slop && adx > ady) {
-                    viewDragHelper.cancel();
-                    return false;
-                }
-            }
-        }
-
+        boolean interceptTap = viewDragHelper.isViewUnder(dragView, (int) ev.getX(), (int) ev.getY());
         return viewDragHelper.shouldInterceptTouchEvent(ev) || interceptTap;
     }
 
