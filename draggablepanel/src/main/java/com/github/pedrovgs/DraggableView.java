@@ -38,12 +38,16 @@ import com.nineoldandroids.view.ViewHelper;
  */
 public class DraggableView extends RelativeLayout {
 
+    public static final float HALF = 0.5f;
+    public static final double QUARTER = 0.25;
+    public static final int ZERO = 0;
     private static final int DEFAULT_SCALE_FACTOR = 2;
     private static final float DEFAULT_TOP_VIEW_HEIGHT = -1;
     private static final int DEFAULT_TOP_FRAGMENT_MARGIN = 30;
     private static final float SLIDE_TOP = 0f;
     private static final float SLIDE_BOTTOM = 1f;
     private static final boolean DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFECT = true;
+    public static final int ONE_HUNDRED = 100;
 
     private View dragView;
     private View secondView;
@@ -245,7 +249,7 @@ public class DraggableView extends RelativeLayout {
     void changeBackgroundAlpha() {
         Drawable background = getBackground();
         if (background != null) {
-            int newAlpha = (int) (100 * (1 - getVerticalDragOffset()));
+            int newAlpha = (int) (ONE_HUNDRED * (1 - getVerticalDragOffset()));
             background.setAlpha(newAlpha);
         }
     }
@@ -267,20 +271,20 @@ public class DraggableView extends RelativeLayout {
 
     boolean isHeaderAboveTheMiddle() {
         int viewHeight = getHeight();
-        float viewHeaderY = ViewHelper.getY(dragView) + (dragView.getHeight() / 2);
-        return viewHeaderY < (viewHeight * 0.5f);
+        float viewHeaderY = ViewHelper.getY(dragView) + (dragView.getHeight() * HALF);
+        return viewHeaderY < (viewHeight * HALF);
     }
 
     boolean isNextToLeftBound() {
-        return (dragView.getRight() - getDragViewMarginRight()) < getWidth() / 2;
+        return (dragView.getRight() - getDragViewMarginRight()) < getWidth() * HALF;
     }
 
     boolean isNextToRightBound() {
-        return (dragView.getLeft() - getDragViewMarginRight()) > getWidth() * 0.25;
+        return (dragView.getLeft() - getDragViewMarginRight()) > getWidth() * QUARTER;
     }
 
     boolean isDragViewAtTop() {
-        return dragView.getTop() == 0;
+        return dragView.getTop() == ZERO;
     }
 
     boolean isDragViewAtRight() {
