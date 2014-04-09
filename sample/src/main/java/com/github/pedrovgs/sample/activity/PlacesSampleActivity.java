@@ -15,6 +15,7 @@
  */
 package com.github.pedrovgs.sample.activity;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.TypedValue;
@@ -44,14 +45,16 @@ public class PlacesSampleActivity extends DIFragmentActivity {
 
     private static final String DRAGGABLE_PANEL_STATE = "draggable_panel_state";
     private static final String LAST_VIDEO_LOADED_POSITION = "last_video_loaded_position";
+    private static final int DELAY_MILLIS = 50;
+    private static final float ZOOM = 10f;
 
     @InjectView(R.id.lv_places)
-    ListView lv_places;
+    protected ListView placesListView;
     @InjectView(R.id.draggable_panel)
-    DraggablePanel draggablePanel;
+    protected DraggablePanel draggablePanel;
 
     @Inject
-    RendererAdapter<PlaceViewModel> placesAdapter;
+    protected RendererAdapter<PlaceViewModel> placesAdapter;
 
     private PlaceFragment placeFragment;
     private SupportMapFragment mapFragment;
@@ -82,7 +85,7 @@ public class PlacesSampleActivity extends DIFragmentActivity {
                     public void run() {
                         draggablePanel.maximize();
                     }
-                }, 50);
+                }, DELAY_MILLIS);
                 break;
             case MINIMIZED:
                 handler.postDelayed(new Runnable() {
@@ -90,7 +93,7 @@ public class PlacesSampleActivity extends DIFragmentActivity {
                     public void run() {
                         draggablePanel.minimize();
                     }
-                }, 50);
+                }, DELAY_MILLIS);
                 break;
             case CLOSED_AT_LEFT:
                 handler.postDelayed(new Runnable() {
@@ -99,7 +102,7 @@ public class PlacesSampleActivity extends DIFragmentActivity {
                         draggablePanel.setVisibility(View.GONE);
                         draggablePanel.closeToLeft();
                     }
-                }, 50);
+                }, DELAY_MILLIS);
                 break;
             case CLOSED_AT_RIGHT:
                 handler.postDelayed(new Runnable() {
@@ -108,7 +111,7 @@ public class PlacesSampleActivity extends DIFragmentActivity {
                         draggablePanel.setVisibility(View.GONE);
                         draggablePanel.closeToRight();
                     }
-                }, 50);
+                }, DELAY_MILLIS);
                 break;
             default:
                 draggablePanel.setVisibility(View.GONE);
@@ -159,8 +162,8 @@ public class PlacesSampleActivity extends DIFragmentActivity {
     }
 
     private void initializeListView() {
-        lv_places.setAdapter(placesAdapter);
-        lv_places.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        placesListView.setAdapter(placesAdapter);
+        placesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 lastVideoLoadedPosition = position;
@@ -181,10 +184,10 @@ public class PlacesSampleActivity extends DIFragmentActivity {
         marker.title(placeViewModel.getName());
         marker.snippet(placeViewModel.getLatitude() + " , " + placeViewModel.getLongitude());
         mapFragment.getMap().addMarker(marker);
-        mapFragment.getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(latitudeLongitude, 10f));
+        mapFragment.getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(latitudeLongitude, ZOOM));
     }
 
-    private void initializeDraggablePanel() {
+    private void initializeDraggablePanel() throws Resources.NotFoundException {
         draggablePanel.setFragmentManager(getSupportFragmentManager());
         draggablePanel.setTopFragment(placeFragment);
         draggablePanel.setBottomFragment(mapFragment);
