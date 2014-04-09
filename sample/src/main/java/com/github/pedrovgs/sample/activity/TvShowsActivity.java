@@ -108,27 +108,27 @@ public class TvShowsActivity extends DIFragmentActivity {
             @Override
             public void onMaximized() {
                 if (tvShowSelected != null) {
-                    //getActionBar().setTitle(tvShowSelected.getTitle());
+                    getSupportActionBar().setTitle(tvShowSelected.getTitle());
                 }
             }
 
             @Override
             public void onMinimized() {
                 if (tvShowSelected != null) {
-                    //getActionBar().setTitle(tvShowSelected.getTitle());
+                    getSupportActionBar().setTitle(tvShowSelected.getTitle());
                 }
             }
 
             @Override
             public void onClosedToLeft() {
                 tvShowSelected = null;
-                //getActionBar().setTitle(getString(R.string.tv_shows_sample_activity_title));
+                getSupportActionBar().setTitle(R.string.tv_shows_sample_activity_title);
             }
 
             @Override
             public void onClosedToRight() {
                 tvShowSelected = null;
-                //getActionBar().setTitle(getString(R.string.tv_shows_sample_activity_title));
+                getSupportActionBar().setTitle(R.string.tv_shows_sample_activity_title);
 
             }
         });
