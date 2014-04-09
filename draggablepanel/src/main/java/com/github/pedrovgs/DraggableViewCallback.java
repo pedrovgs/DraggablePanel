@@ -58,37 +58,15 @@ public class DraggableViewCallback extends ViewDragHelper.Callback {
         super.onViewReleased(releasedChild, xVel, yVel);
 
         if (draggableView.isDragViewAtBottom() && !draggableView.isDragViewAtRight()) {
-            if (xVel < 0 && xVel <= X_MIN_VELOCITY) {
-                draggableView.closeToLeft();
-            } else if (xVel > 0 && xVel >= X_MIN_VELOCITY) {
-                draggableView.closeToRight();
-            } else {
-                if (draggableView.isNextToLeftBound()) {
-                    draggableView.closeToLeft();
-                } else if (draggableView.isNextToRightBound()) {
-                    draggableView.closeToRight();
-                } else {
-                    draggableView.minimize();
-                }
-            }
+            triggerOnReleaseActionsWhileHorizontalDrag(xVel);
         } else {
-            if (yVel < 0 && yVel <= -Y_MIN_VELOCITY) {
-                draggableView.maximize();
-            } else if (yVel > 0 && yVel >= Y_MIN_VELOCITY) {
-                draggableView.minimize();
-            } else {
-                if (draggableView.isHeaderAboveTheMiddle()) {
-                    draggableView.maximize();
-                } else {
-                    draggableView.minimize();
-                }
-            }
+            triggerOnReleaseActionsWhileVerticalDrag(yVel);
         }
     }
 
     @Override
     public boolean tryCaptureView(View view, int pointerId) {
-        return view == capturedView;
+        return view.equals(capturedView);
     }
 
     @Override
@@ -104,13 +82,43 @@ public class DraggableViewCallback extends ViewDragHelper.Callback {
     @Override
     public int clampViewPositionVertical(View child, int top, int dy) {
         int newTop = draggableView.getHeight() - capturedView.getHeight();
-        if (draggableView.isMinimized() && (dy >= MINIMUM_DY_FOR_VERTICAL_DRAG || dy >= -MINIMUM_DY_FOR_VERTICAL_DRAG) || (!draggableView.isMinimized() && !draggableView.isDragViewAtBottom())) {
+        if (draggableView.isMinimized() && Math.abs(dy) >= MINIMUM_DY_FOR_VERTICAL_DRAG || (!draggableView.isMinimized() && !draggableView.isDragViewAtBottom())) {
             final int topBound = draggableView.getPaddingTop();
             final int bottomBound = draggableView.getHeight() - child.getHeight() - child.getPaddingBottom();
 
             newTop = Math.min(Math.max(top, topBound), bottomBound);
         }
         return newTop;
+    }
+
+    private void triggerOnReleaseActionsWhileVerticalDrag(float yVel) {
+        if (yVel < 0 && yVel <= -Y_MIN_VELOCITY) {
+            draggableView.maximize();
+        } else if (yVel > 0 && yVel >= Y_MIN_VELOCITY) {
+            draggableView.minimize();
+        } else {
+            if (draggableView.isHeaderAboveTheMiddle()) {
+                draggableView.maximize();
+            } else {
+                draggableView.minimize();
+            }
+        }
+    }
+
+    private void triggerOnReleaseActionsWhileHorizontalDrag(float xVel) {
+        if (xVel < 0 && xVel <= X_MIN_VELOCITY) {
+            draggableView.closeToLeft();
+        } else if (xVel > 0 && xVel >= X_MIN_VELOCITY) {
+            draggableView.closeToRight();
+        } else {
+            if (draggableView.isNextToLeftBound()) {
+                draggableView.closeToLeft();
+            } else if (draggableView.isNextToRightBound()) {
+                draggableView.closeToRight();
+            } else {
+                draggableView.minimize();
+            }
+        }
     }
 
 }

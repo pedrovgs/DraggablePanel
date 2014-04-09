@@ -207,9 +207,9 @@ public class DraggableView extends RelativeLayout {
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        int topViewHeight = this.topViewHeight == DEFAULT_TOP_VIEW_HEIGHT ? dragView.getMeasuredHeight() : (int) this.topViewHeight;
-        dragView.layout(lastLeftPosition, lastTopPosition, lastLeftPosition + dragView.getMeasuredWidth(), lastTopPosition + topViewHeight);
-        secondView.layout(0, lastTopPosition + topViewHeight, right, lastTopPosition + bottom);
+        int newTop = this.topViewHeight == DEFAULT_TOP_VIEW_HEIGHT ? dragView.getMeasuredHeight() : (int) this.topViewHeight;
+        dragView.layout(lastLeftPosition, lastTopPosition, lastLeftPosition + dragView.getMeasuredWidth(), lastTopPosition + newTop);
+        secondView.layout(0, lastTopPosition + newTop, right, lastTopPosition + bottom);
     }
 
 
