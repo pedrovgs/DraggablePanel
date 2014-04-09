@@ -36,9 +36,9 @@ import com.squareup.picasso.Picasso;
 public class PlaceFragment extends Fragment {
 
     @InjectView(R.id.tv_name)
-    TextView tv_name;
+    TextView nameTextView;
     @InjectView(R.id.iv_photo)
-    ImageView iv_photo;
+    ImageView photoImageView;
 
     private PlaceViewModel placeViewModel;
 
@@ -51,8 +51,8 @@ public class PlaceFragment extends Fragment {
 
     public void showPlace(PlaceViewModel placeViewModel) {
         this.placeViewModel = placeViewModel;
-        tv_name.setText(placeViewModel.getName());
-        Picasso.with(getActivity()).load(placeViewModel.getPhoto()).placeholder(R.drawable.maps_placeholder).into(iv_photo);
+        nameTextView.setText(placeViewModel.getName());
+        Picasso.with(getActivity()).load(placeViewModel.getPhoto()).placeholder(R.drawable.maps_placeholder).into(photoImageView);
     }
 
     @OnClick(R.id.iv_photo)

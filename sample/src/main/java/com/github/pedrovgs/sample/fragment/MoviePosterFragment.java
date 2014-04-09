@@ -34,7 +34,7 @@ import com.squareup.picasso.Picasso;
 public class MoviePosterFragment extends Fragment {
 
     @InjectView(R.id.iv_thumbnail)
-    ImageView iv_thumbnail;
+    ImageView thumbnailImageView;
 
     private String videoPosterThumbnail;
     private String posterTitle;
@@ -43,7 +43,7 @@ public class MoviePosterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_movie_poster, container, false);
         ButterKnife.inject(this, view);
-        Picasso.with(getActivity()).load(videoPosterThumbnail).placeholder(R.drawable.xmen_placeholder).into(iv_thumbnail);
+        Picasso.with(getActivity()).load(videoPosterThumbnail).placeholder(R.drawable.xmen_placeholder).into(thumbnailImageView);
         return view;
     }
 
