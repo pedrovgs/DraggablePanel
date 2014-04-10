@@ -195,13 +195,11 @@ public class DraggableView extends RelativeLayout {
     public boolean onTouchEvent(MotionEvent ev) {
         viewDragHelper.processTouchEvent(ev);
 
-        final int x = (int) ev.getX();
-        final int y = (int) ev.getY();
-
-        boolean isDragViewHit = isViewHit(dragView, x, y);
-        boolean isSecondViewHit = isViewHit(secondView, x, y);
-
-        dragView.dispatchTouchEvent(ev);
+        boolean isDragViewHit = isViewHit(dragView, (int) ev.getX(), (int) ev.getY());
+        boolean isSecondViewHit = isViewHit(secondView, (int) ev.getX(), (int) ev.getY());
+        if (isMaximized()) {
+            dragView.dispatchTouchEvent(ev);
+        }
         return isDragViewHit || isSecondViewHit;
     }
 
