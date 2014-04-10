@@ -7,5 +7,4 @@
         android:background="#e4e5e7"
         android:textColor="#727a7c"
         android:padding="10dip"
-        android:paddingLeft="6dip"
-        />
+        android:paddingLeft="6dip"/>
