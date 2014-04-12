@@ -3,8 +3,10 @@
     <dimen name="top_fragment_margin">10dip</dimen>
     <dimen name="place_renderer_height">200dip</dimen>
     <dimen name="tv_show_fan_art_height">150dip</dimen>
-    <dimen name="tv_name_padding">10dip</dimen>
+    <dimen name="button_title_padding_left_right">10dip</dimen>
     <dimen name="tv_name_margin">5dip</dimen>
+    <dimen name="button_title_text_size">18sp</dimen>
+    <dimen name="button_title_margin_top">10dip</dimen>
     <item name="x_scale_factor" format="float" type="dimen">2</item>
     <item name="y_scale_factor" format="float" type="dimen">2</item>
 </resources>

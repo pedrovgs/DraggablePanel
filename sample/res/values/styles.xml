@@ -1,7 +1,24 @@
 <resources>
 
-    <style name="AppTheme" parent="@style/Theme.Sherlock.Light">
+    <!-- Application -->
+
+    <style name="AppTheme" parent="@style/Theme.Sherlock.Light"/>
+
+    <style name="image_view">
+        <item name="android:scaleType">centerCrop</item>
     </style>
 
+    <!-- Main Activity -->
+
+    <style name="main_activity_button_title">
+        <item name="android:textSize">@dimen/button_title_text_size</item>
+        <item name="android:layout_marginTop">@dimen/button_title_margin_top</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@color/button_title_background</item>
+        <item name="android:paddingLeft">@dimen/button_title_padding_left_right</item>
+        <item name="android:paddingRight">@dimen/button_title_padding_left_right</item>
+    </style>
 
 </resources>
