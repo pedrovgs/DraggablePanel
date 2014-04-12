@@ -29,6 +29,9 @@ import com.pedrogomez.renderers.Renderer;
 import com.squareup.picasso.Picasso;
 
 /**
+ * Renderer implementation used to render tv shows inside ListView or GridViews. More info in
+ * this link: {@link https://github.com/pedrovgs/Renderers}
+ *
  * @author Pedro Vicente Gómez Sánchez.
  */
 public class TvShowRenderer extends Renderer<TvShowViewModel> {
@@ -46,6 +49,11 @@ public class TvShowRenderer extends Renderer<TvShowViewModel> {
         this.context = context;
     }
 
+    /**
+     * Apply ButterKnife inject method to support view injections.
+     *
+     * @param view
+     */
     @Override
     protected void setUpView(View view) {
         ButterKnife.inject(this, view);
@@ -56,11 +64,21 @@ public class TvShowRenderer extends Renderer<TvShowViewModel> {
         //Empty
     }
 
+    /**
+     * Inflate the layout associated to this renderer
+     *
+     * @param layoutInflater
+     * @param viewGroup
+     * @return
+     */
     @Override
     protected View inflate(LayoutInflater layoutInflater, ViewGroup viewGroup) {
         return layoutInflater.inflate(R.layout.tv_show_row, viewGroup, false);
     }
 
+    /**
+     * Render the TvShowViewModel information.
+     */
     @Override
     protected void render() {
         TvShowViewModel tvShow = getContent();
