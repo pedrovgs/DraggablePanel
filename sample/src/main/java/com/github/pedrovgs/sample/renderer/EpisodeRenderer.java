@@ -26,6 +26,9 @@ import com.github.pedrovgs.sample.viewmodel.EpisodeViewModel;
 import com.pedrogomez.renderers.Renderer;
 
 /**
+ * Renderer implementation used to render episodes inside ListView or GridViews. More info in
+ * this link: {@link https://github.com/pedrovgs/Renderers}
+ *
  * @author Pedro Vicente Gómez Sánchez.
  */
 public class EpisodeRenderer extends Renderer<EpisodeViewModel> {
@@ -39,10 +42,20 @@ public class EpisodeRenderer extends Renderer<EpisodeViewModel> {
 
     private int position;
 
+    /**
+     * Configure the position associated to this renderer.
+     *
+     * @param position
+     */
     public void setPosition(int position) {
         this.position = position;
     }
 
+    /**
+     * Apply ButterKnife inject method to support view injections.
+     *
+     * @param view
+     */
     @Override
     protected void setUpView(View view) {
         ButterKnife.inject(this, view);
@@ -53,11 +66,21 @@ public class EpisodeRenderer extends Renderer<EpisodeViewModel> {
         //Empty
     }
 
+    /**
+     * Inflate the layout associated to this renderer
+     *
+     * @param layoutInflater
+     * @param viewGroup
+     * @return
+     */
     @Override
     protected View inflate(LayoutInflater layoutInflater, ViewGroup viewGroup) {
         return layoutInflater.inflate(R.layout.episode_row, viewGroup, false);
     }
 
+    /**
+     * Render the EpisodeViewModel information.
+     */
     @Override
     protected void render() {
         EpisodeViewModel episode = getContent();
