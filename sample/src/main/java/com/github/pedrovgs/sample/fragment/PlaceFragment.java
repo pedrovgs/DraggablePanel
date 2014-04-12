@@ -31,6 +31,8 @@ import com.github.pedrovgs.sample.viewmodel.PlaceViewModel;
 import com.squareup.picasso.Picasso;
 
 /**
+ * Fragment implementation created to show a place inside an ImageView widget.
+ *
  * @author Pedro Vicente Gómez Sánchez.
  */
 public class PlaceFragment extends Fragment {
@@ -42,6 +44,14 @@ public class PlaceFragment extends Fragment {
 
     private PlaceViewModel placeViewModel;
 
+    /**
+     * Override method used to initialize the fragment.
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.place_row, container, false);
@@ -49,12 +59,21 @@ public class PlaceFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Use the PlaceViewModel information to render the place name and the place image inside the fragment
+     *
+     * @param placeViewModel
+     */
     public void showPlace(PlaceViewModel placeViewModel) {
         this.placeViewModel = placeViewModel;
         nameTextView.setText(placeViewModel.getName());
         Picasso.with(getActivity()).load(placeViewModel.getPhoto()).placeholder(R.drawable.maps_placeholder).into(photoImageView);
     }
 
+
+    /**
+     * Method triggered when the iv_photo widget is clicked. This method shows a toast with the place information.
+     */
     @OnClick(R.id.iv_photo)
     void onPhotoClicked() {
         Toast.makeText(getActivity(), placeViewModel.getName(), Toast.LENGTH_LONG).show();
