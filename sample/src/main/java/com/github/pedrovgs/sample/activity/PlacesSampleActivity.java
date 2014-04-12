@@ -39,12 +39,15 @@ import com.pedrogomez.renderers.RendererAdapter;
 import javax.inject.Inject;
 
 /**
+ * Sample activity created to show a list of famous places. If the user clicks on any list element this sample shows
+ * a detailed draggable view with a picture and a map with the location.
+ *
  * @author Pedro Vicente Gómez Sánchez.
  */
 public class PlacesSampleActivity extends DIFragmentActivity {
 
     private static final String DRAGGABLE_PANEL_STATE = "draggable_panel_state";
-    private static final String LAST_VIDEO_LOADED_POSITION = "last_video_loaded_position";
+    private static final String LAST_LOADED_PLACE_POSITION = "last_video_loaded_position";
     private static final int DELAY_MILLIS = 50;
     private static final float ZOOM = 10f;
 
@@ -59,8 +62,13 @@ public class PlacesSampleActivity extends DIFragmentActivity {
     private PlaceFragment placeFragment;
     private SupportMapFragment mapFragment;
 
-    private int lastVideoLoadedPosition;
+    private int lastLoadedPlacePosition;
 
+    /**
+     * Initialize the Activity with some injected data.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +79,36 @@ public class PlacesSampleActivity extends DIFragmentActivity {
         initializeDraggablePanel();
     }
 
+    /**
+     * Save the DraggablePanel state to restore it once the activity lifecycle be rebooted.
+     *
+     * @param outState bundle to put the DraggableState information.
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        saveDraggableState(outState);
+        saveLastPlaceLoadedPosition(outState);
+    }
+
+    /**
+     * Restore the DraggablePanel state.
+     *
+     * @param savedInstanceState bundle to get the Draggable state.
+     */
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        recoverDraggablePanelState(savedInstanceState);
+        loadLastPlaceClicked(savedInstanceState);
+    }
+
+    /**
+     * Get the DraggablePanelState from the saved bundle, modify the DraggablePanel visibility to GONE and apply the
+     * DraggablePanelState to recover the last graphic state.
+     *
+     * @param savedInstanceState
+     */
     private void recoverDraggablePanelState(Bundle savedInstanceState) {
         final DraggableState draggableState = (DraggableState) savedInstanceState.getSerializable(DRAGGABLE_PANEL_STATE);
         if (draggableState == null) {
@@ -80,6 +118,11 @@ public class PlacesSampleActivity extends DIFragmentActivity {
         updateDraggablePanelStateDelayed(draggableState);
     }
 
+    /**
+     * Return the view to the DraggablePanelState: minimized, maximized, closed to the right or closed to the left.
+     *
+     * @param draggableState to apply.
+     */
     private void updateDraggablePanelStateDelayed(DraggableState draggableState) {
         Handler handler = new Handler();
         switch (draggableState) {
@@ -123,17 +166,20 @@ public class PlacesSampleActivity extends DIFragmentActivity {
         }
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        saveDraggableState(outState);
-        saveLastVideoLoadedPosition(outState);
+    /**
+     * Keep a reference of the last place loaded.
+     *
+     * @param outState Bundle used to store the position.
+     */
+    private void saveLastPlaceLoadedPosition(Bundle outState) {
+        outState.putInt(LAST_LOADED_PLACE_POSITION, lastLoadedPlacePosition);
     }
 
-    private void saveLastVideoLoadedPosition(Bundle outState) {
-        outState.putInt(LAST_VIDEO_LOADED_POSITION, lastVideoLoadedPosition);
-    }
-
+    /**
+     * Keep a reference of the last DraggablePanelState.
+     *
+     * @param outState Bundle used to store the DraggablePanelState.
+     */
     private void saveDraggableState(Bundle outState) {
         DraggableState draggableState = null;
         if (draggablePanel.isMaximized()) {
@@ -148,34 +194,43 @@ public class PlacesSampleActivity extends DIFragmentActivity {
         outState.putSerializable(DRAGGABLE_PANEL_STATE, draggableState);
     }
 
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        recoverDraggablePanelState(savedInstanceState);
-        loadLastVideoLoaded(savedInstanceState);
+    /**
+     * Apply the last place loaded to the different fragments showed inside the DraggablePanel..
+     *
+     * @param savedInstanceState
+     */
+    private void loadLastPlaceClicked(Bundle savedInstanceState) {
+        lastLoadedPlacePosition = savedInstanceState.getInt(LAST_LOADED_PLACE_POSITION, 0);
+        showPlace(lastLoadedPlacePosition);
     }
 
-    private void loadLastVideoLoaded(Bundle savedInstanceState) {
-        lastVideoLoadedPosition = savedInstanceState.getInt(LAST_VIDEO_LOADED_POSITION, 0);
-        showPlace(lastVideoLoadedPosition);
-    }
-
+    /**
+     * Initialize PlaceFragment and SupportMapFragment.
+     */
     private void initializeFragments() {
         placeFragment = new PlaceFragment();
         mapFragment = SupportMapFragment.newInstance(new GoogleMapOptions().mapType(GoogleMap.MAP_TYPE_SATELLITE));
     }
 
+    /**
+     * Initialize places ListView using placesAdapter and configure OnItemClickListener.
+     */
     private void initializeListView() {
         placesListView.setAdapter(placesAdapter);
         placesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                lastVideoLoadedPosition = position;
+                lastLoadedPlacePosition = position;
                 showPlace(position);
             }
         });
     }
 
+    /**
+     * Show a place in PlaceFragment and SupportMapFragment and apply the maximize effect over the DraggablePanel.
+     *
+     * @param position
+     */
     private void showPlace(int position) {
         draggablePanel.setVisibility(View.VISIBLE);
         draggablePanel.maximize();
@@ -191,6 +246,11 @@ public class PlacesSampleActivity extends DIFragmentActivity {
         mapFragment.getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(latitudeLongitude, ZOOM));
     }
 
+    /**
+     * Initialize the DraggablePanel with top and bottom Fragments and apply all the configuration.
+     *
+     * @throws Resources.NotFoundException
+     */
     private void initializeDraggablePanel() throws Resources.NotFoundException {
         draggablePanel.setFragmentManager(getSupportFragmentManager());
         draggablePanel.setTopFragment(placeFragment);
@@ -209,6 +269,5 @@ public class PlacesSampleActivity extends DIFragmentActivity {
         draggablePanel.initializeView();
         draggablePanel.setVisibility(View.GONE);
     }
-
 
 }
