@@ -12,13 +12,9 @@
             android:id="@+id/gv_tv_shows"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:numColumns="2"
-            android:verticalSpacing="10dip"
-            android:horizontalSpacing="10dip"
-            android:layout_margin="10dip"/>
+            style="@style/tv_show_grid_view"/>
 
     <!-- Draggable View -->
-    <!-- DraggableView -->
 
     <com.github.pedrovgs.DraggableView
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -34,23 +30,23 @@
             draggable_view:top_view_margin_bottom="@dimen/top_fragment_margin"
             android:background="@color/black">
 
+        <!-- ListView Episodes -->
+
         <ListView
                 android:id="@+id/lv_episodes"
-                android:layout_below="@+id/iv_fan_art"
                 android:layout_width="fill_parent"
-                android:divider="#508b999b"
-                android:dividerHeight="1dp"
                 android:layout_height="fill_parent"
-                android:background="@color/white"/>
+                android:layout_below="@+id/iv_fan_art"
+                style="@style/episodes_list_view"/>
+
+        <!-- TvShow Fan Art -->
 
         <ImageView
                 android:id="@+id/iv_fan_art"
-                android:orientation="vertical"
-                android:layout_height="@dimen/tv_show_fan_art_height"
                 android:layout_width="fill_parent"
-                android:scaleType="centerCrop"
-                android:background="@color/white"
-                android:layout_alignParentTop="true"/>
+                android:layout_height="@dimen/tv_show_fan_art_height"
+                android:layout_alignParentTop="true"
+                style="@style/image_view"/>
 
     </com.github.pedrovgs.DraggableView>
 

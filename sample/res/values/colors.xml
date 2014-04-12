@@ -3,4 +3,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFF</color>
     <color name="button_title_background">#7f000000</color>
+    <color name="list_view_divider">#508b999b</color>
 </resources>

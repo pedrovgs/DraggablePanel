@@ -21,4 +21,19 @@
         <item name="android:paddingRight">@dimen/button_title_padding_left_right</item>
     </style>
 
+    <!-- Tv Shows Sample -->
+
+    <style name="tv_show_grid_view">
+        <item name="android:numColumns">@integer/grid_view_num_columns</item>
+        <item name="android:verticalSpacing">@dimen/grid_view_vertical_spacing</item>
+        <item name="android:horizontalSpacing">@dimen/grid_view_horizontal_spacing</item>
+        <item name="android:layout_margin">@dimen/grid_view_margin</item>
+    </style>
+
+    <style name="episodes_list_view">
+        <item name="android:dividerHeight">@dimen/divider_height</item>
+        <item name="android:divider">@color/list_view_divider</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
 </resources>

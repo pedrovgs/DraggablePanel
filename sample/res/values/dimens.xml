@@ -9,4 +9,8 @@
     <dimen name="button_title_margin_top">10dip</dimen>
     <item name="x_scale_factor" format="float" type="dimen">2</item>
     <item name="y_scale_factor" format="float" type="dimen">2</item>
+    <dimen name="grid_view_vertical_spacing">10dip</dimen>
+    <dimen name="grid_view_horizontal_spacing">10dip</dimen>
+    <dimen name="grid_view_margin">10dip</dimen>
+    <dimen name="divider_height">1dip</dimen>
 </resources>
