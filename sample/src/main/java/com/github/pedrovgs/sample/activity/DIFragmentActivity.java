@@ -20,6 +20,10 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.github.pedrovgs.sample.DraggablePanelApplication;
 
 /**
+ * Base FragmentActivity created to support dependency injection in activities extending this Activity. This Activity
+ * extends from SherlockFragmentActivity to use the support Action Bar. The implementation uses the application class
+ * to inject dependencies.
+ *
  * @author Pedro Vicente Gómez Sánchez.
  */
 public class DIFragmentActivity extends SherlockFragmentActivity {
