@@ -23,6 +23,10 @@ import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
 /**
+ * Custom view created to handle DraggableView using fragments. With this custom view the client code can configure the
+ * top and bottom fragment and other elements like: top fragment height, top fragment margin right, top fragment x
+ * scale factor, top fragment y scale factor, top fragment margin bottom and enable or disable horizontal alpha effect.
+ *
  * @author Pedro Vicente Gómez Sánchez.
  */
 public class DraggablePanel extends FrameLayout {
@@ -33,17 +37,18 @@ public class DraggablePanel extends FrameLayout {
     private static final boolean DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT = true;
 
     private DraggableView draggableView;
+    private DraggableListener draggableListener;
+
+    private FragmentManager fragmentManager;
     private Fragment topFragment;
     private Fragment bottomFragment;
-    private FragmentManager fragmentManager;
     private float topFragmentHeight;
     private float topFragmentMarginRight;
+    private float topFragmentMarginBottom;
     private float xScaleFactor;
     private float yScaleFactor;
-    private float topFragmentMarginBottom;
     private boolean enableHorizontalAlphaEffect;
 
-    private DraggableListener draggableListener;
 
     public DraggablePanel(Context context) {
         super(context);
@@ -60,65 +65,137 @@ public class DraggablePanel extends FrameLayout {
         initializeAttrs(attrs);
     }
 
-    public void setTopViewHeight(float topFragmentHeight) {
-        this.topFragmentHeight = topFragmentHeight;
-    }
-
-    public void setTopFragment(Fragment topFragment) {
-        this.topFragment = topFragment;
-    }
-
-    public void setBottomFragment(Fragment bottomFragment) {
-        this.bottomFragment = bottomFragment;
-    }
-
+    /**
+     * Configure the FragmentManager used to attach top and bottom fragment inside the view.
+     *
+     * @param fragmentManager
+     */
     public void setFragmentManager(FragmentManager fragmentManager) {
         this.fragmentManager = fragmentManager;
     }
 
+    /**
+     * Configure the Fragment that will work as draggable element inside this custom view. This Fragment has to be
+     * configured before initialize the view.
+     *
+     * @param topFragment used as draggable element.
+     */
+    public void setTopFragment(Fragment topFragment) {
+        this.topFragment = topFragment;
+    }
+
+    /**
+     * Configure the Fragment that will work as secondary element inside this custom view. This Fragment has to be
+     * configured before initialize the view.
+     *
+     * @param bottomFragment used as secondary element.
+     */
+    public void setBottomFragment(Fragment bottomFragment) {
+        this.bottomFragment = bottomFragment;
+    }
+
+    /**
+     * Configure the height associated to the top Fragment used inside the view as draggable element.
+     *
+     * @param topFragmentHeight in pixels.
+     */
+    public void setTopViewHeight(float topFragmentHeight) {
+        this.topFragmentHeight = topFragmentHeight;
+    }
+
+    /**
+     * Configure the horizontal scale factor applied when the top fragment is dragged to the bottom of the custom view.
+     *
+     * @param xScaleFactor
+     */
     public void setXScaleFactor(float xScaleFactor) {
         this.xScaleFactor = xScaleFactor;
     }
 
-    public void setyScaleFactor(float yScaleFactor) {
+    /**
+     * Configure the vertical scale factor applied when the top fragment is dragged to the bottom of the custom view.
+     *
+     * @param yScaleFactor
+     */
+    public void setYScaleFactor(float yScaleFactor) {
         this.yScaleFactor = yScaleFactor;
     }
 
+    /**
+     * Configure the top Fragment margin right applied when the view has been minimized.
+     *
+     * @param topFragmentMarginRight in pixels.
+     */
     public void setTopFragmentMarginRight(float topFragmentMarginRight) {
         this.topFragmentMarginRight = topFragmentMarginRight;
     }
 
+    /**
+     * Configure the top Fragment margin bottom applied when the view has been minimized.
+     *
+     * @param topFragmentMarginBottom in pixels.
+     */
     public void setTopFragmentMarginBottom(float topFragmentMarginBottom) {
         this.topFragmentMarginBottom = topFragmentMarginBottom;
     }
 
+    /**
+     * Configure the DraggableListener that is going to be invoked when the view be minimized, maximized, closed to the
+     * left or right.
+     *
+     * @param draggableListener
+     */
     public void setDraggableListener(DraggableListener draggableListener) {
         this.draggableListener = draggableListener;
     }
 
+    /**
+     * Configure the disabling of the alpha effect applied when the view is being dragged horizontally.
+     *
+     * @param enableHorizontalAlphaEffect to enable or disable the effect.
+     */
     public void setEnableHorizontalAlphaEffect(boolean enableHorizontalAlphaEffect) {
         this.enableHorizontalAlphaEffect = enableHorizontalAlphaEffect;
     }
 
+    /**
+     * Close the custom view applying an animation to close the view to the left side of the screen.
+     */
     public void closeToLeft() {
         draggableView.closeToLeft();
     }
 
+    /**
+     * Close the custom view applying an animation to close the view to the right side of the screen.
+     */
     public void closeToRight() {
         draggableView.closeToRight();
     }
 
+    /**
+     * Maximize the custom view applying an animation to return the view to the initial position.
+     */
     public void maximize() {
         draggableView.maximize();
     }
 
+    /**
+     * Minimize the custom view applying an animation to put the top fragment on the bottom right corner of the screen.
+     */
     public void minimize() {
         draggableView.minimize();
     }
 
+    /**
+     * Apply all the custom view configuration and inflate the main widgets. The view won't be visible if this method
+     * is not called.
+     * <p/>
+     * FragmentManager, top Fragment and bottom Fragment have to be configured before initialize this view. If not,
+     * this method will throw and IllegalStateException.
+     */
     public void initializeView() {
         checkFragmentConsistency();
-        checkSupportFragmentmanagerConsistency();
+        checkSupportFragmentManagerConsistency();
 
         inflate(getContext(), R.layout.draggable_panel, this);
         draggableView = (DraggableView) findViewById(R.id.draggableView);
@@ -134,23 +211,48 @@ public class DraggablePanel extends FrameLayout {
         draggableView.setHorizontalAlphaEffectEnabled(enableHorizontalAlphaEffect);
     }
 
+    /**
+     * Checks if the top Fragment is maximized.
+     *
+     * @return true if the view is maximized.
+     */
     public boolean isMaximized() {
         return draggableView.isMaximized();
     }
 
+    /**
+     * Checks if the top Fragment is minimized.
+     *
+     * @return true if the view is minimized.
+     */
     public boolean isMinimized() {
         return draggableView.isMinimized();
     }
 
+    /**
+     * Checks if the top Fragment closed at the right place.
+     *
+     * @return true if the view is closed at right.
+     */
     public boolean isClosedAtRight() {
         return draggableView.isClosedAtRight();
     }
 
+    /**
+     * Checks if the top Fragment is closed at the left place.
+     *
+     * @return true if the view is closed at left.
+     */
     public boolean isClosedAtLeft() {
         return draggableView.isClosedAtLeft();
     }
 
-    private void initializeAttrs(AttributeSet attrs) {
+    /**
+     * Initialize the xml configuration based on styleable attributes
+     *
+     * @param attrs to analyze.
+     */
+    private final void initializeAttrs(AttributeSet attrs) {
         TypedArray attributes = getContext().obtainStyledAttributes(attrs, R.styleable.draggable_panel);
         this.topFragmentHeight = attributes.getDimension(R.styleable.draggable_panel_top_fragment_height, DEFAULT_TOP_FRAGMENT_HEIGHT);
         this.xScaleFactor = attributes.getFloat(R.styleable.draggable_panel_x_scale_factor, DEFAULT_SCALE_FACTOR);
@@ -161,12 +263,20 @@ public class DraggablePanel extends FrameLayout {
         attributes.recycle();
     }
 
-    private void checkSupportFragmentmanagerConsistency() {
+    /**
+     * Validate FragmentManager configuration. If is not initialized, this method will throw an
+     * IllegalStateException.
+     */
+    private void checkSupportFragmentManagerConsistency() {
         if (fragmentManager == null) {
             throw new IllegalStateException("You have to set the support FragmentManager before initialize DraggablePanel");
         }
     }
 
+    /**
+     * Validate top and bottom Fragment configuration. If are not initialized, this method will throw an
+     * IllegalStateException.
+     */
     private void checkFragmentConsistency() {
         if (topFragment == null || bottomFragment == null) {
             throw new IllegalStateException("You have to set top and bottom fragment before initialize DraggablePanel");
