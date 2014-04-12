@@ -38,6 +38,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * MainModule created to provide the most important dependencies for this sample project
+ *
  * @author Pedro Vicente Gómez Sánchez.
  */
 @Module(injects = {
@@ -52,37 +54,79 @@ public class MainModule {
         this.application = application;
     }
 
+    /**
+     * Provisioning of a LayoutInflater instance obtained from the application context.
+     *
+     * @return
+     */
     @Provides
-    LayoutInflater provideLayoutInflater() {
+    protected LayoutInflater provideLayoutInflater() {
         return LayoutInflater.from(application.getBaseContext());
     }
 
+    /**
+     * Provisioning of the base context obtained from the application.
+     *
+     * @return
+     */
     @Provides
-    Context provideContext() {
+    protected Context provideContext() {
         return this.application.getBaseContext();
     }
 
+    /**
+     * Provisioning of a RendererBuilder implementation to work with places ListView. More information in this library:
+     * {@link https://github.com/pedrovgs/Renderers}
+     *
+     * @param context
+     * @return
+     */
     @Provides
-    PlacesCollectionRendererBuilder providePlaceCollectionRendererBuilder(Context context) {
+    protected PlacesCollectionRendererBuilder providePlaceCollectionRendererBuilder(Context context) {
         List<Renderer<PlaceViewModel>> prototypes = new LinkedList<Renderer<PlaceViewModel>>();
         prototypes.add(new PlaceRenderer(context));
         return new PlacesCollectionRendererBuilder(prototypes);
     }
 
+    /**
+     * Provisioning of a RendererAdapter implementation to work with places ListView. More information in this library:
+     * {@link https://github.com/pedrovgs/Renderers}
+     *
+     * @param layoutInflater
+     * @param placesCollectionRendererBuilder
+     * @param placeCollectionViewModel
+     * @return
+     */
     @Provides
-    RendererAdapter<PlaceViewModel> providePlacesRendererAdapter(LayoutInflater layoutInflater, PlacesCollectionRendererBuilder placesCollectionRendererBuilder, PlaceCollectionViewModel placeCollectionViewModel) {
+    protected RendererAdapter<PlaceViewModel> providePlacesRendererAdapter(LayoutInflater layoutInflater, PlacesCollectionRendererBuilder placesCollectionRendererBuilder, PlaceCollectionViewModel placeCollectionViewModel) {
         return new RendererAdapter<PlaceViewModel>(layoutInflater, placesCollectionRendererBuilder, placeCollectionViewModel);
     }
 
+    /**
+     * Provisioning of a RendererBuilder implementation to work with tv shows ListView. More information in this library:
+     * {@link https://github.com/pedrovgs/Renderers}
+     *
+     * @param context
+     * @return
+     */
     @Provides
-    TvShowCollectionRendererBuilder provideTvShowCollectionRendererBuilder(Context context) {
+    protected TvShowCollectionRendererBuilder provideTvShowCollectionRendererBuilder(Context context) {
         List<Renderer<TvShowViewModel>> prototypes = new LinkedList<Renderer<TvShowViewModel>>();
         prototypes.add(new TvShowRenderer(context));
         return new TvShowCollectionRendererBuilder(prototypes);
     }
 
+    /**
+     * Provisioning of a RendererAdapter implementation to work with tv shows ListView. More information in this library:
+     * {@link https://github.com/pedrovgs/Renderers}
+     *
+     * @param layoutInflater
+     * @param tvShowCollectionRendererBuilder
+     * @param tvShowCollectionViewModel
+     * @return
+     */
     @Provides
-    RendererAdapter<TvShowViewModel> provideTvShowRendererAdapter(LayoutInflater layoutInflater, TvShowCollectionRendererBuilder tvShowCollectionRendererBuilder, TvShowCollectionViewModel tvShowCollectionViewModel) {
+    protected RendererAdapter<TvShowViewModel> provideTvShowRendererAdapter(LayoutInflater layoutInflater, TvShowCollectionRendererBuilder tvShowCollectionRendererBuilder, TvShowCollectionViewModel tvShowCollectionViewModel) {
         return new RendererAdapter<TvShowViewModel>(layoutInflater, tvShowCollectionRendererBuilder, tvShowCollectionViewModel);
     }
 }
