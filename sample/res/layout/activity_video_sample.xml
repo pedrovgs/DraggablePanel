@@ -10,8 +10,7 @@
             android:id="@+id/iv_poster"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:scaleType="centerCrop"
-            android:background="@color/black"/>
+            style="@style/image_view"/>
 
     <!-- DraggableView -->
 
@@ -31,17 +30,19 @@
             draggable_view:enable_minimized_horizontal_alpha_effect="false"
             android:background="@color/black">
 
+        <!-- Video Thumbnail -->
+
         <ImageView
                 android:id="@+id/iv_thumbnail"
                 android:layout_below="@+id/dragView"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:scaleType="centerCrop"
-                android:background="@color/white"/>
+                style="@style/image_view"/>
+
+        <!-- VideoView -->
 
         <VideoView
                 android:id="@+id/video_view"
-                android:orientation="vertical"
                 android:layout_height="wrap_content"
                 android:layout_width="fill_parent"
                 android:layout_alignParentTop="true"/>
