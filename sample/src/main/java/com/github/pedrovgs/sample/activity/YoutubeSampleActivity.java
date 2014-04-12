@@ -30,7 +30,10 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.squareup.picasso.Picasso;
 
+
 /**
+ * Sample activity created to show a video from YouTube using a YouTubePlayer.
+ *
  * @author Pedro Vicente Gómez Sánchez.
  */
 public class YoutubeSampleActivity extends FragmentActivity {
@@ -47,9 +50,13 @@ public class YoutubeSampleActivity extends FragmentActivity {
     DraggablePanel draggablePanel;
 
     private YouTubePlayer youtubePlayer;
-
     private YouTubePlayerSupportFragment youtubeFragment;
 
+    /**
+     * Initialize the Activity with some injected data.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +67,18 @@ public class YoutubeSampleActivity extends FragmentActivity {
         hookDraggablePanelListeners();
     }
 
+    /**
+     * Method triggered when the iv_thumbnail widget is clicked. This method maximize the DraggablePanel.
+     */
+    @OnClick(R.id.iv_thumbnail)
+    void onContainerClicked() {
+        draggablePanel.maximize();
+    }
+
+    /**
+     * Initialize the YouTubeSupportFrament attached as top fragment to the DraggablePanel widget and reproduce the
+     * YouTube video represented with a YouTube url.
+     */
     private void initializeYoutubeFragment() {
         youtubeFragment = new YouTubePlayerSupportFragment();
         youtubeFragment.initialize(YOUTUBE_API_KEY,
@@ -82,6 +101,9 @@ public class YoutubeSampleActivity extends FragmentActivity {
         );
     }
 
+    /**
+     * Initialize and configure the DraggablePanel widget with two fragments and some attributes.
+     */
     private void initializeDraggablePanel() {
         draggablePanel.setFragmentManager(getSupportFragmentManager());
         draggablePanel.setTopFragment(youtubeFragment);
@@ -93,6 +115,10 @@ public class YoutubeSampleActivity extends FragmentActivity {
         Picasso.with(this).load(SECOND_VIDEO_POSTER_THUMBNAIL).placeholder(R.drawable.xmen_placeholder).into(thumbnailImageView);
     }
 
+    /**
+     * Hook the DraggableListener to DraggablePanel to pause or resume the video when the DragglabePanel is maximized
+     * or closed.
+     */
     private void hookDraggablePanelListeners() {
         draggablePanel.setDraggableListener(new DraggableListener() {
             @Override
@@ -102,7 +128,7 @@ public class YoutubeSampleActivity extends FragmentActivity {
 
             @Override
             public void onMinimized() {
-
+                //Empty
             }
 
             @Override
@@ -117,21 +143,22 @@ public class YoutubeSampleActivity extends FragmentActivity {
         });
     }
 
+    /**
+     * Pause the video reproduced in the YouTubePlayer.
+     */
     private void pauseVideo() {
         if (youtubePlayer.isPlaying()) {
             youtubePlayer.pause();
         }
     }
 
+    /**
+     * Resume the video reproduced in the YouTubePlayer.
+     */
     private void playVideo() {
         if (!youtubePlayer.isPlaying()) {
             youtubePlayer.play();
         }
-    }
-
-    @OnClick(R.id.iv_thumbnail)
-    void onContainerClicked() {
-        draggablePanel.maximize();
     }
 
 }
