@@ -72,17 +72,17 @@ public class PlacesSampleActivity extends DIFragmentActivity {
     }
 
     private void recoverDraggablePanelState(Bundle savedInstanceState) {
-        final DraggablePanelState draggablePanelState = (DraggablePanelState) savedInstanceState.getSerializable(DRAGGABLE_PANEL_STATE);
-        if (draggablePanelState == null) {
+        final DraggableState draggableState = (DraggableState) savedInstanceState.getSerializable(DRAGGABLE_PANEL_STATE);
+        if (draggableState == null) {
             draggablePanel.setVisibility(View.GONE);
             return;
         }
-        updateDraggablePanelStateDelayed(draggablePanelState);
+        updateDraggablePanelStateDelayed(draggableState);
     }
 
-    private void updateDraggablePanelStateDelayed(DraggablePanelState draggablePanelState) {
+    private void updateDraggablePanelStateDelayed(DraggableState draggableState) {
         Handler handler = new Handler();
-        switch (draggablePanelState) {
+        switch (draggableState) {
             case MAXIMIZED:
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -135,17 +135,17 @@ public class PlacesSampleActivity extends DIFragmentActivity {
     }
 
     private void saveDraggableState(Bundle outState) {
-        DraggablePanelState draggablePanelState = null;
+        DraggableState draggableState = null;
         if (draggablePanel.isMaximized()) {
-            draggablePanelState = DraggablePanelState.MAXIMIZED;
+            draggableState = DraggableState.MAXIMIZED;
         } else if (draggablePanel.isMinimized()) {
-            draggablePanelState = DraggablePanelState.MINIMIZED;
+            draggableState = DraggableState.MINIMIZED;
         } else if (draggablePanel.isClosedAtLeft()) {
-            draggablePanelState = DraggablePanelState.CLOSED_AT_LEFT;
+            draggableState = DraggableState.CLOSED_AT_LEFT;
         } else if (draggablePanel.isClosedAtRight()) {
-            draggablePanelState = DraggablePanelState.CLOSED_AT_RIGHT;
+            draggableState = DraggableState.CLOSED_AT_RIGHT;
         }
-        outState.putSerializable(DRAGGABLE_PANEL_STATE, draggablePanelState);
+        outState.putSerializable(DRAGGABLE_PANEL_STATE, draggableState);
     }
 
     @Override

@@ -18,9 +18,11 @@ package com.github.pedrovgs.sample.activity;
 import java.io.Serializable;
 
 /**
+ * Enum created to represent the DraggablePanel and DraggableView different states.
+ *
  * @author Pedro Vicente Gómez Sánchez.
  */
-public enum DraggablePanelState implements Serializable {
+public enum DraggableState implements Serializable {
 
     MINIMIZED, MAXIMIZED, CLOSED_AT_LEFT, CLOSED_AT_RIGHT;
 
