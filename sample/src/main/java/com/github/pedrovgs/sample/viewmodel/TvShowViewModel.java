@@ -16,6 +16,9 @@
 package com.github.pedrovgs.sample.viewmodel;
 
 /**
+ * TvShowViewModel implementation created to contain all the tv show information and to keep all the representation
+ * state of a tv show.
+ *
  * @author Pedro Vicente Gómez Sánchez.
  */
 public class TvShowViewModel {
@@ -34,26 +37,46 @@ public class TvShowViewModel {
         this.episodes = new EpisodeCollection();
     }
 
+    /**
+     * Add an episode to the tvShowViewModel.
+     *
+     * @param episodeViewModel
+     */
     public void addEpisode(EpisodeViewModel episodeViewModel) {
         episodes.add(episodeViewModel);
     }
 
+    /**
+     * @return the tv show title.
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * @return the tv show poster.
+     */
     public String getPoster() {
         return poster;
     }
 
+    /**
+     * @return the tv show fan art.
+     */
     public String getFanArt() {
         return fanArt;
     }
 
+    /**
+     * @return the tv show number of seasons.
+     */
     public int getNumberOfSeasons() {
         return numberOfSeasons;
     }
 
+    /**
+     * @return the tv show EpisodeCollection.
+     */
     public EpisodeCollection getEpisodes() {
         return episodes;
     }
