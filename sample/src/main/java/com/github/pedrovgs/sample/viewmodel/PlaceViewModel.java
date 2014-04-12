@@ -16,6 +16,9 @@
 package com.github.pedrovgs.sample.viewmodel;
 
 /**
+ * PlaceViewModel implementation created to contain all the place information and to keep all the representation
+ * state of a place.
+ *
  * @author Pedro Vicente Gómez Sánchez.
  */
 public class PlaceViewModel {
@@ -32,18 +35,30 @@ public class PlaceViewModel {
         this.longitude = longitude;
     }
 
+    /**
+     * @return the place name.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @return the place photo.
+     */
     public String getPhoto() {
         return photo;
     }
 
+    /**
+     * @return the place latitude.
+     */
     public double getLatitude() {
         return latitude;
     }
 
+    /**
+     * @return the place longitude.
+     */
     public double getLongitude() {
         return longitude;
     }
