@@ -22,7 +22,11 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+
 /**
+ * PlaceCollectionViewModel implementation used to contains all the places information. This implementation
+ * is based on a LinkedList with hardcoded data.
+ *
  * @author Pedro Vicente Gómez Sánchez.
  */
 public class PlaceCollectionViewModel implements AdapteeCollection<PlaceViewModel> {
@@ -55,32 +59,62 @@ public class PlaceCollectionViewModel implements AdapteeCollection<PlaceViewMode
 
     }
 
+    /**
+     * Return the number of places inside the collection.
+     *
+     * @return
+     */
     @Override
     public int size() {
         return places.size();
     }
 
+    /**
+     * Return a PlaceViewModel obtained by position.
+     *
+     * @param i
+     * @return
+     */
     @Override
     public PlaceViewModel get(int i) {
         return places.get(i);
     }
 
+    /**
+     * Add a PlaceViewModel to the collection.
+     *
+     * @param placeViewModel
+     */
     @Override
     public void add(PlaceViewModel placeViewModel) {
         places.add(placeViewModel);
     }
 
+    /**
+     * Remove a PlaceViewModel from the collection.
+     *
+     * @param placeViewModel
+     */
     @Override
     public void remove(PlaceViewModel placeViewModel) {
         places.remove(placeViewModel);
     }
 
-
+    /**
+     * Add a collection of PlaceViewModel to the collection.
+     *
+     * @param collection
+     */
     @Override
     public void addAll(Collection collection) {
         places.addAll(collection);
     }
 
+    /**
+     * Remove a collection of PlaceViewModel to the collection.
+     *
+     * @param collection
+     */
     @Override
     public void removeAll(Collection collection) {
         places.addAll(collection);
