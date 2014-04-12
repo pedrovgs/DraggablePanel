@@ -8,20 +8,12 @@
             android:id="@+id/iv_photo"
             android:layout_height="@dimen/place_renderer_height"
             android:layout_width="match_parent"
-            android:scaleType="centerCrop"
-            android:adjustViewBounds="true"/>
+            style="@style/image_view"/>
 
     <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#7f000000"
-            android:paddingLeft="@dimen/button_title_padding_left_right"
-            android:paddingRight="@dimen/button_title_padding_left_right"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="@dimen/tv_name_margin"
-            android:layout_marginLeft="@dimen/tv_name_margin"
-            android:textStyle="bold"
-            android:textColor="@color/white"/>
+            style="@style/place_title"/>
 
 </FrameLayout>

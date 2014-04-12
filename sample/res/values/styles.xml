@@ -67,4 +67,17 @@
         <item name="android:textColor">@color/text_soft_grey</item>
         <item name="android:fontFamily">sans-serif-light</item>
     </style>
+
+    <!-- Places Sample -->
+
+    <style name="place_title">
+        <item name="android:background">@color/semi_transparent_black</item>
+        <item name="android:paddingLeft">@dimen/button_title_padding_left_right</item>
+        <item name="android:paddingRight">@dimen/button_title_padding_left_right</item>
+        <item name="android:layout_marginBottom">@dimen/place_title_margin</item>
+        <item name="android:layout_marginLeft">@dimen/place_title_margin</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 </resources>
