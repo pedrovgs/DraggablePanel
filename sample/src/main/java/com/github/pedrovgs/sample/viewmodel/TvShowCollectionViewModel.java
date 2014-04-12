@@ -22,7 +22,11 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+
 /**
+ * TvShowCollectionViewModel implementation used to contains all the tv shows information. This implementation
+ * is based on a LinkedList with hardcoded data.
+ *
  * @author Pedro Vicente Gómez Sánchez.
  */
 public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewModel> {
@@ -348,31 +352,62 @@ public class TvShowCollectionViewModel implements AdapteeCollection<TvShowViewMo
         tvShows.add(tvShow);
     }
 
+    /**
+     * Return the number of tv shows inside the collection.
+     *
+     * @return
+     */
     @Override
     public int size() {
         return tvShows.size();
     }
 
+    /**
+     * Return a TvShowViewModel obtained by position.
+     *
+     * @param i
+     * @return
+     */
     @Override
     public TvShowViewModel get(int i) {
         return tvShows.get(i);
     }
 
+    /**
+     * Add a TvShowViewModel to the collection.
+     *
+     * @param tvShowViewModel
+     */
     @Override
     public void add(TvShowViewModel tvShowViewModel) {
         tvShows.add(tvShowViewModel);
     }
 
+    /**
+     * Remove a TvShowViewModel from the collection.
+     *
+     * @param tvShowViewModel
+     */
     @Override
     public void remove(TvShowViewModel tvShowViewModel) {
         tvShows.remove(tvShowViewModel);
     }
 
+    /**
+     * Add a collection of TvShowViewModel to the collection.
+     *
+     * @param tvShowViewModels
+     */
     @Override
     public void addAll(Collection<TvShowViewModel> tvShowViewModels) {
         tvShows.addAll(tvShowViewModels);
     }
 
+    /**
+     * Remove a collection of TvShowViewModel to the collection.
+     *
+     * @param tvShowViewModels
+     */
     @Override
     public void removeAll(Collection<TvShowViewModel> tvShowViewModels) {
         tvShowViewModels.removeAll(tvShowViewModels);
