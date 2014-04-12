@@ -47,7 +47,7 @@ import javax.inject.Inject;
 public class PlacesSampleActivity extends DIFragmentActivity {
 
     private static final String DRAGGABLE_PANEL_STATE = "draggable_panel_state";
-    private static final String LAST_LOADED_PLACE_POSITION = "last_video_loaded_position";
+    private static final String LAST_LOADED_PLACE_POSITION = "last_place_loaded_position";
     private static final int DELAY_MILLIS = 50;
     private static final float ZOOM = 10f;
 
