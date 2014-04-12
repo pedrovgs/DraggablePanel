@@ -30,7 +30,10 @@ import com.github.pedrovgs.DraggableView;
 import com.github.pedrovgs.sample.R;
 import com.squareup.picasso.Picasso;
 
+
 /**
+ * Sample activity created to show a video using a VideoView.
+ *
  * @author Pedro Vicente Gómez Sánchez.
  */
 public class VideoSampleActivity extends FragmentActivity {
@@ -49,6 +52,11 @@ public class VideoSampleActivity extends FragmentActivity {
     @InjectView(R.id.iv_poster)
     ImageView posterImageView;
 
+    /**
+     * Initialize the Activity with some injected data.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +67,26 @@ public class VideoSampleActivity extends FragmentActivity {
         hookDraggableViewListener();
     }
 
+    /**
+     * Method triggered when the iv_thumbnail widget is clicked. This method shows a toast with the video title.
+     */
+    @OnClick(R.id.iv_thumbnail)
+    void onThubmnailClicked() {
+        Toast.makeText(this, VIDEO_TITLE, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Method triggered when the iv_poster widget is clicked. This method maximized the draggableView widget.
+     */
+    @OnClick(R.id.iv_poster)
+    void onPosterClicked() {
+        draggableView.maximize();
+    }
+
+
+    /**
+     * Hook DraggableListener to draggableView to pause or resume VideoView.
+     */
     private void hookDraggableViewListener() {
         draggableView.setDraggableListener(new DraggableListener() {
             @Override
@@ -66,9 +94,10 @@ public class VideoSampleActivity extends FragmentActivity {
                 startVideo();
             }
 
+            //Empty
             @Override
             public void onMinimized() {
-
+                //Empty
             }
 
             @Override
@@ -83,18 +112,27 @@ public class VideoSampleActivity extends FragmentActivity {
         });
     }
 
+    /**
+     * Pause the VideoView content.
+     */
     private void pauseVideo() {
         if (videoView.isPlaying()) {
             videoView.pause();
         }
     }
 
+    /**
+     * Resume the VideoView content.
+     */
     private void startVideo() {
         if (!videoView.isPlaying()) {
             videoView.start();
         }
     }
 
+    /**
+     * Initialize ViedeoView with a video by default.
+     */
     private void initializeVideoView() {
         Uri path = Uri.parse(APPLICATION_RAW_PATH + R.raw.video);
         MediaController mediaController = new MediaController(this);
@@ -103,18 +141,12 @@ public class VideoSampleActivity extends FragmentActivity {
         videoView.start();
     }
 
+    /**
+     * Initialize some ImageViews with a video poster and a video thumbnail.
+     */
     private void initializePoster() {
         Picasso.with(this).load(VIDEO_POSTER).placeholder(R.drawable.spiderman_placeholder).into(posterImageView);
         Picasso.with(this).load(VIDEO_THUMBNAIL).placeholder(R.drawable.spiderman_placeholder).into(thumbnailImageView);
     }
-
-    @OnClick(R.id.iv_thumbnail)
-    void onThubmnailClicked() {
-        Toast.makeText(this, VIDEO_TITLE, Toast.LENGTH_SHORT).show();
-    }
-
-    @OnClick(R.id.iv_poster)
-    void onPosterClicked() {
-        draggableView.maximize();
-    }
+    
 }
