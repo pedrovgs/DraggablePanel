@@ -39,6 +39,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * Sample activity created to show a list of famous tv shows. If the user clicks on any list element this sample shows
+ * a detailed draggable view with a picture and a list of episodes.
+ *
  * @author Pedro Vicente Gómez Sánchez.
  */
 public class TvShowsActivity extends DIFragmentActivity {
@@ -61,6 +64,12 @@ public class TvShowsActivity extends DIFragmentActivity {
 
     private TvShowViewModel tvShowSelected;
 
+    /**
+     * Initialize the Activity with some injected data.
+     *
+     * @param savedInstanceState
+     */
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tv_shows_sample);
@@ -70,11 +79,17 @@ public class TvShowsActivity extends DIFragmentActivity {
         hookListeners();
     }
 
+    /**
+     * Method triggered when the iv_fan_art widget is clicked. This method shows a toast with the tv show selected.
+     */
     @OnClick(R.id.iv_fan_art)
     void onFanArtClicked() {
         Toast.makeText(this, tvShowSelected.getTitle(), Toast.LENGTH_LONG).show();
     }
 
+    /**
+     * Initialize DraggableView.
+     */
     private void initializeDraggableView() {
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -86,6 +101,9 @@ public class TvShowsActivity extends DIFragmentActivity {
         }, DELAY_MILLIS);
     }
 
+    /**
+     * Initialize GridView with some injected data and configure OnItemClickListener.
+     */
     private void initializeGridView() {
         tvShowsGridView.setAdapter(adapter);
         tvShowsGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -102,11 +120,10 @@ public class TvShowsActivity extends DIFragmentActivity {
         });
     }
 
-
+    /**
+     * Hook DraggableListener to draggableView to modify action bar title with the tv show information.
+     */
     private void hookListeners() {
-        /*
-         * This will work in API Level 8 once this sample project uses ActionBarCompat or ActionBarSherlock project.
-         */
         draggableView.setDraggableListener(new DraggableListener() {
             @Override
             public void onMaximized() {
@@ -130,17 +147,29 @@ public class TvShowsActivity extends DIFragmentActivity {
         });
     }
 
+    /**
+     * Update action bar title with the default title value.
+     */
     private void resetActionBarTitle() {
         tvShowSelected = null;
         getSupportActionBar().setTitle(R.string.tv_shows_sample_activity_title);
     }
 
+    /**
+     * Update action bar title with the tv show selected title.
+     */
     private void updateActionBarTitle() {
         if (tvShowSelected != null) {
             getSupportActionBar().setTitle(tvShowSelected.getTitle());
         }
     }
 
+    /**
+     * Render a list of episodes using a tv show view model with the information. This method create an adapter with
+     * the episodes information to be inserted in the ListView.
+     *
+     * @param tvShow to render
+     */
     private void renderEpisodes(final TvShowViewModel tvShow) {
         List<Renderer<EpisodeViewModel>> episodeRenderers = new LinkedList<Renderer<EpisodeViewModel>>();
         episodeRenderers.add(new EpisodeRenderer());
@@ -149,6 +178,11 @@ public class TvShowsActivity extends DIFragmentActivity {
         episodesListView.setAdapter(episodesAdapter);
     }
 
+    /**
+     * Configure a view as episodes ListView header with the name of the tv show and the season.
+     *
+     * @param tvShow
+     */
     private void renderEpisodesHeader(TvShowViewModel tvShow) {
         episodesListView.removeHeaderView(header);
         header = (TextView) getLayoutInflater().inflate(R.layout.episode_header, null);
