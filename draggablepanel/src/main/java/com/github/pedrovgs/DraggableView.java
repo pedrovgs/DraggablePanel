@@ -321,7 +321,7 @@ public class DraggableView extends RelativeLayout {
      * @param topFragment to be attached.
      */
     void attachTopFragment(Fragment topFragment) {
-        addFragmentToView(R.id.dragView, topFragment);
+        addFragmentToView(R.id.drag_view, topFragment);
     }
 
     /**
@@ -330,7 +330,7 @@ public class DraggableView extends RelativeLayout {
      * @param bottomFragment to be attached.
      */
     void attachBottomFragment(Fragment bottomFragment) {
-        addFragmentToView(R.id.secondView, bottomFragment);
+        addFragmentToView(R.id.second_view, bottomFragment);
     }
 
     /**
@@ -500,8 +500,8 @@ public class DraggableView extends RelativeLayout {
      */
     private void initializeAttributes(AttributeSet attrs) {
         TypedArray attributes = getContext().obtainStyledAttributes(attrs, R.styleable.draggable_view);
-        this.dragViewId = attributes.getResourceId(R.styleable.draggable_view_top_view_id, R.id.dragView);
-        this.secondViewId = attributes.getResourceId(R.styleable.draggable_view_bottom_view_id, R.id.secondView);
+        this.dragViewId = attributes.getResourceId(R.styleable.draggable_view_top_view_id, R.id.drag_view);
+        this.secondViewId = attributes.getResourceId(R.styleable.draggable_view_bottom_view_id, R.id.second_view);
         this.topViewHeight = attributes.getDimension(R.styleable.draggable_view_top_view_height, DEFAULT_TOP_VIEW_HEIGHT);
         this.xScaleFactor = attributes.getFloat(R.styleable.draggable_view_top_view_x_scale_factor, DEFAULT_SCALE_FACTOR);
         this.yScaleFactor = attributes.getFloat(R.styleable.draggable_view_top_view_y_scale_factor, DEFAULT_SCALE_FACTOR);

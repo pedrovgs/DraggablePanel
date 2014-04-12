@@ -198,7 +198,7 @@ public class DraggablePanel extends FrameLayout {
         checkSupportFragmentManagerConsistency();
 
         inflate(getContext(), R.layout.draggable_panel, this);
-        draggableView = (DraggableView) findViewById(R.id.draggableView);
+        draggableView = (DraggableView) findViewById(R.id.draggable_view);
         draggableView.setTopViewHeight(topFragmentHeight);
         draggableView.setFragmentManager(fragmentManager);
         draggableView.attachTopFragment(topFragment);
