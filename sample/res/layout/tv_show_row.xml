@@ -8,29 +8,21 @@
             android:id="@+id/iv_thumbnail"
             android:layout_height="@dimen/place_renderer_height"
             android:layout_width="match_parent"
-            android:scaleType="centerCrop"
-            android:adjustViewBounds="true"
-            android:background="@color/white"
-            android:layout_alignParentTop="true"/>
+            android:layout_alignParentTop="true"
+            style="@style/image_view"/>
 
     <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#57585a"
-            android:textStyle="bold"
-            android:maxLines="1"
-            android:ellipsize="end"
             android:layout_below="@+id/iv_thumbnail"
-            android:layout_marginLeft="5dip"
-            android:layout_marginTop="5dip"/>
+            style="@style/tv_show_title"/>
 
     <TextView
             android:id="@+id/tv_seasons_counter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_title"
-            android:layout_marginLeft="5dip"
-            android:layout_marginBottom="10dip"/>
+            style="@style/tv_show_seasons_counter"/>
 
 </RelativeLayout>

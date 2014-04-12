@@ -68,6 +68,19 @@
         <item name="android:fontFamily">sans-serif-light</item>
     </style>
 
+    <style name="tv_show_title">
+        <item name="android:textColor">@color/text_hard_grey</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:layout_marginLeft">@dimen/tv_show_title_margin_left_top</item>
+    </style>
+
+    <style name="tv_show_seasons_counter">
+        <item name="android:layout_marginLeft">@dimen/tv_show_margin_left</item>
+        <item name="android:layout_marginBottom">@dimen/tv_show_margin_bottom</item>
+    </style>
+
     <!-- Places Sample -->
 
     <style name="place_title">

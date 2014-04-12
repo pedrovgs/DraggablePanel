@@ -22,4 +22,7 @@
     <dimen name="episode_publish_date_margin_left">8dip</dimen>
     <dimen name="episode_publish_date_margin_bottom">2dip</dimen>
     <dimen name="place_title_margin">5dip</dimen>
+    <dimen name="tv_show_title_margin_left_top">5dip</dimen>
+    <dimen name="tv_show_margin_left">5dip</dimen>
+    <dimen name="tv_show_margin_bottom">10dip</dimen>
 </resources>

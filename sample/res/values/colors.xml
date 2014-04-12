@@ -9,4 +9,5 @@
     <color name="soft_grey">#508b999b</color>
     <color name="text_grey">#727a7c</color>
     <color name="text_soft_grey">#aab0b0</color>
+    <color name="text_hard_grey">#57585a</color>
 </resources>
