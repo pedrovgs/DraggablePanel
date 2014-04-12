@@ -43,4 +43,28 @@
         <item name="android:paddingLeft">@dimen/episodes_header_padding_left</item>
     </style>
 
+    <style name="episode_row">
+        <item name="android:background">@color/soft_white</item>
+        <item name="android:paddingLeft">@dimen/episode_padding_left_right</item>
+        <item name="android:paddingRight">@dimen/episode_padding_left_right</item>
+    </style>
+
+    <style name="episode_number">
+        <item name="android:textSize">@dimen/episode_number</item>
+        <item name="android:textColor">@color/grey</item>
+    </style>
+
+    <style name="episode_title">
+        <item name="android:layout_marginTop">@dimen/episode_title_margin_top</item>
+        <item name="android:layout_marginLeft">@dimen/episode_title_margin_left</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/episode_title</item>
+    </style>
+
+    <style name="episode_publish_date">
+        <item name="android:layout_marginLeft">@dimen/episode_publish_date_margin_left</item>
+        <item name="android:layout_marginBottom">@dimen/episode_publish_date_margin_bottom</item>
+        <item name="android:textColor">@color/text_soft_grey</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
 </resources>

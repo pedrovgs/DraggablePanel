@@ -15,4 +15,11 @@
     <dimen name="divider_height">1dip</dimen>
     <dimen name="episodes_header_padding">10dip</dimen>
     <dimen name="episodes_header_padding_left">16dip</dimen>
+    <dimen name="episode_padding_left_right">6dip</dimen>
+    <dimen name="episode_number">38sp</dimen>
+    <dimen name="episode_title">20sp</dimen>
+    <dimen name="episode_title_margin_top">6dip</dimen>
+    <dimen name="episode_title_margin_left">8dip</dimen>
+    <dimen name="episode_publish_date_margin_left">8dip</dimen>
+    <dimen name="episode_publish_date_margin_bottom">2dip</dimen>
 </resources>

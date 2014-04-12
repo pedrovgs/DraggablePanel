@@ -3,40 +3,31 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="#f0f0f0"
-                android:paddingLeft="6dip"
-                android:paddingRight="6dip">
+                style="@style/episode_row">
 
     <!-- Episode number -->
+    
     <TextView android:id="@+id/tv_episode_number"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_alignParentLeft="true"
               android:layout_centerVertical="true"
-              android:textSize="38sp"
-              android:textColor="#8b999b"
-              android:text="01"/>
+              style="@style/episode_number"/>
 
     <!-- Episode title -->
+
     <TextView android:id="@+id/tv_episode_title"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_toRightOf="@id/tv_episode_number"
-              android:text="Episode 1"
-              android:layout_marginTop="6dip"
-              android:layout_marginLeft="8dip"
-              android:textColor="@color/black"
-              android:textSize="20sp"/>
+              style="@style/episode_title"/>
 
     <!-- Episode publish date -->
+
     <TextView android:id="@+id/tv_episode_publish_date"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_toRightOf="@id/tv_episode_number"
               android:layout_below="@id/tv_episode_title"
-              android:layout_marginLeft="8dip"
-              android:layout_marginBottom="2dip"
-              android:textColor="#aab0b0"
-              android:fontFamily="sans-serif-light"
-              android:text="20 - 11 - 1990"/>
+              style="@style/episode_publish_date"/>
 </RelativeLayout>
