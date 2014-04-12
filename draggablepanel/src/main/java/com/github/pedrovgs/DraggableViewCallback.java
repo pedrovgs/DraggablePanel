@@ -46,7 +46,7 @@ public class DraggableViewCallback extends ViewDragHelper.Callback {
             draggableView.changeDragViewScale();
             draggableView.changeDragViewPosition();
             draggableView.changeSecondViewAlpha();
-            draggableView.changeSeondViewPosition();
+            draggableView.changeSecondViewPosition();
             draggableView.changeBackgroundAlpha();
         }
         draggableView.invalidate();
@@ -97,7 +97,7 @@ public class DraggableViewCallback extends ViewDragHelper.Callback {
         } else if (yVel > 0 && yVel >= Y_MIN_VELOCITY) {
             draggableView.minimize();
         } else {
-            if (draggableView.isHeaderAboveTheMiddle()) {
+            if (draggableView.isDragViewAboveTheMiddle()) {
                 draggableView.maximize();
             } else {
                 draggableView.minimize();
