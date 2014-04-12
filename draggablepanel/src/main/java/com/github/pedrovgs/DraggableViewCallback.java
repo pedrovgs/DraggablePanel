@@ -19,24 +19,41 @@ import android.support.v4.widget.ViewDragHelper;
 import android.view.View;
 
 /**
+ * ViewDragHelper.Callback implementation used to work with DraggableView to perform the scale effect and other
+ * animation when the view is released.
+ *
  * @author Pedro Vicente Gómez Sánchez.
  */
-public class DraggableViewCallback extends ViewDragHelper.Callback {
+class DraggableViewCallback extends ViewDragHelper.Callback {
 
     private static final int MINIMUN_DX_FOR_HORIZONTAL_DRAG = 25;
     private static final int MINIMUM_DY_FOR_VERTICAL_DRAG = 15;
     private static final float X_MIN_VELOCITY = 1300;
     private static final float Y_MIN_VELOCITY = 1300;
 
-
     private DraggableView draggableView;
-    private View capturedView;
+    private View draggedView;
 
-    public DraggableViewCallback(DraggableView draggableView, View capturedView) {
+    /**
+     * Main constructor.
+     *
+     * @param draggableView instance used to apply some animations or visual effects.
+     * @param draggedView
+     */
+    public DraggableViewCallback(DraggableView draggableView, View draggedView) {
         this.draggableView = draggableView;
-        this.capturedView = capturedView;
+        this.draggedView = draggedView;
     }
 
+    /**
+     * Override method used to apply different scale and alpha effects while the view is being dragged.
+     *
+     * @param changedView
+     * @param left        position.
+     * @param top         position.
+     * @param dx          change in X position from the last call.
+     * @param dy          change in Y position from the last call.
+     */
     @Override
     public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
         draggableView.updateLastDragViewPosition(top, left);
@@ -52,7 +69,15 @@ public class DraggableViewCallback extends ViewDragHelper.Callback {
         draggableView.invalidate();
     }
 
-
+    /**
+     * Override method used to apply different animations when the dragged view is released. The dragged view is going
+     * to be maximized or minimized if the view is above the middle of the custom view and the velocity is greater than
+     * a constant value.
+     *
+     * @param releasedChild the captured child view now being released.
+     * @param xVel          X velocity of the pointer as it left the screen in pixels per second.
+     * @param yVel          Y velocity of the pointer as it left the screen in pixels per second.
+     */
     @Override
     public void onViewReleased(View releasedChild, float xVel, float yVel) {
         super.onViewReleased(releasedChild, xVel, yVel);
@@ -64,11 +89,27 @@ public class DraggableViewCallback extends ViewDragHelper.Callback {
         }
     }
 
+    /**
+     * Override method used to configure which is going to be the dragged view.
+     *
+     * @param view      child the user is attempting to capture.
+     * @param pointerId ID of the pointer attempting the capture,
+     * @return true if capture should be allowed, false otherwise.
+     */
     @Override
     public boolean tryCaptureView(View view, int pointerId) {
-        return view.equals(capturedView);
+        return view.equals(draggedView);
     }
 
+    /**
+     * Override method used to configure the horizontal drag. Restrict the motion of the dragged child view along the
+     * horizontal axis.
+     *
+     * @param child child view being dragged.
+     * @param left  attempted motion along the X axis.
+     * @param dx    proposed change in position for left.
+     * @return the new clamped position for left.
+     */
     @Override
     public int clampViewPositionHorizontal(View child, int left, int dx) {
         int newLeft = 0;
@@ -78,10 +119,18 @@ public class DraggableViewCallback extends ViewDragHelper.Callback {
         return newLeft;
     }
 
-
+    /**
+     * Override method used to configure the vertical drag. Restrict the motion of the dragged child view along the
+     * vertical axis.
+     *
+     * @param child child view being dragged.
+     * @param top   attempted motion along the Y axis.
+     * @param dy    proposed change in position for top.
+     * @return the new clamped position for top.
+     */
     @Override
     public int clampViewPositionVertical(View child, int top, int dy) {
-        int newTop = draggableView.getHeight() - capturedView.getHeight();
+        int newTop = draggableView.getHeight() - draggedView.getHeight();
         if (draggableView.isMinimized() && Math.abs(dy) >= MINIMUM_DY_FOR_VERTICAL_DRAG || (!draggableView.isMinimized() && !draggableView.isDragViewAtBottom())) {
             final int topBound = draggableView.getPaddingTop();
             final int bottomBound = draggableView.getHeight() - child.getHeight() - child.getPaddingBottom();
@@ -91,6 +140,11 @@ public class DraggableViewCallback extends ViewDragHelper.Callback {
         return newTop;
     }
 
+    /**
+     * Maximize or minimize the DraggableView using the draggableView position and the y axis velocity.
+     *
+     * @param yVel
+     */
     private void triggerOnReleaseActionsWhileVerticalDrag(float yVel) {
         if (yVel < 0 && yVel <= -Y_MIN_VELOCITY) {
             draggableView.maximize();
@@ -105,6 +159,11 @@ public class DraggableViewCallback extends ViewDragHelper.Callback {
         }
     }
 
+    /**
+     * Close the view to the right, to the left or minimize it using the draggableView position and the x axis velocity.
+     *
+     * @param xVel
+     */
     private void triggerOnReleaseActionsWhileHorizontalDrag(float xVel) {
         if (xVel < 0 && xVel <= X_MIN_VELOCITY) {
             draggableView.closeToLeft();
