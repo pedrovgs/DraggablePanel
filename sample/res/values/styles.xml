@@ -16,7 +16,7 @@
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:background">@color/button_title_background</item>
+        <item name="android:background">@color/semi_transparent_black</item>
         <item name="android:paddingLeft">@dimen/button_title_padding_left_right</item>
         <item name="android:paddingRight">@dimen/button_title_padding_left_right</item>
     </style>
@@ -32,8 +32,15 @@
 
     <style name="episodes_list_view">
         <item name="android:dividerHeight">@dimen/divider_height</item>
-        <item name="android:divider">@color/list_view_divider</item>
+        <item name="android:divider">@color/soft_grey</item>
         <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="episodes_list_view_header">
+        <item name="android:background">@color/hard_grey</item>
+        <item name="android:textColor">@color/text_grey</item>
+        <item name="android:padding">@dimen/episodes_header_padding</item>
+        <item name="android:paddingLeft">@dimen/episodes_header_padding_left</item>
     </style>
 
 </resources>

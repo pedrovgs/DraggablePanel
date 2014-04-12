@@ -13,4 +13,6 @@
     <dimen name="grid_view_horizontal_spacing">10dip</dimen>
     <dimen name="grid_view_margin">10dip</dimen>
     <dimen name="divider_height">1dip</dimen>
+    <dimen name="episodes_header_padding">10dip</dimen>
+    <dimen name="episodes_header_padding_left">16dip</dimen>
 </resources>
