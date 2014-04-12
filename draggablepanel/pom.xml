@@ -51,7 +51,6 @@
     </dependencies>
 
     <build>
-        <testSourceDirectory>${project.basedir}/src/main/test</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>com.jayway.maven.plugins.android.generation2</groupId>
