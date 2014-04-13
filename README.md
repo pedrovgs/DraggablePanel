@@ -204,10 +204,10 @@ License
 [2]: http://blog.denevell.org/android-viewdraghelper-example-tutorial.html
 [3]: http://developer.android.com/reference/android/support/v4/widget/ViewDragHelper.html
 [4]: http://developer.android.com/reference/android/support/v4/widget/ViewDragHelper.Callback.html
-[5]: http://raw.github.com/pedrovgs/Renderers/master/art/Screenshot_demo_1.png
-[6]: http://raw.github.com/pedrovgs/Renderers/master/art/Screenshot_demo_1.png
-[7]: http://raw.github.com/pedrovgs/Renderers/master/art/Screenshot_demo_1.png
-[8]: http://raw.github.com/pedrovgs/Renderers/master/art/Screenshot_demo_1.png
+[5]: ./art/screenshot1.gif
+[6]: ./art/screenshot2.gif
+[7]: ./art/screenshot3.gif
+[8]: ./art/screenshot4.gif
 [9]: https://play.google.com/store/apps/details?id=com.nero.elrubiusomg
 [10]: https://twitter.com/pedro_g_s
 [11]: https://github.com/pedrovgs/Renderers
