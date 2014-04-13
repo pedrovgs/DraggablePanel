@@ -91,7 +91,25 @@ To use Draggable Panel library and get your new awesome UI working you can use t
 Usage
 -----
 
-This project will be available on Maven Central Repository asap.
+Download the project, compile it using ```mvn clean install``` import ``draggablepanel-1.0.0.apklib`` into your project.
+
+Or declare it into your pom.xml
+
+        <dependency>
+          <groupId>com.github.pedrovgs</groupId>
+          <artifactId>draggablepanel</artifactId>
+          <version>1.0.0</version>
+          <type>apklib</type>
+        </dependency>
+
+
+Or into your build.gradle
+
+        dependencies{
+            compile 'com.github.pedrovgs:draggablepanel:1.0.0'
+        }
+
+
 
 Customization
 -------------
