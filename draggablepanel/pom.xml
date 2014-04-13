@@ -5,11 +5,11 @@
     <parent>
         <groupId>com.github.pedrovgs</groupId>
         <artifactId>draggablepanel-parent</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>draggablepanel</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>apklib</packaging>
 
     <name>DRAGGABLE PANEL - LIBRARY</name>
