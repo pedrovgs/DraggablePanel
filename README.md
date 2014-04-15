@@ -15,6 +15,8 @@ This library works on Android 4.X because the scale effect is not going to work 
 Screenshots
 -----------
 
+[Download demo application from Google Play Store][18]
+
 ![Demo Screenshot 1][5]
 ![Demo Screenshot 2][6]
 ![Demo Screenshot 4][7]
@@ -235,3 +237,4 @@ License
 [15]: https://github.com/square/picasso
 [16]: http://actionbarsherlock.com/
 [17]: https://developers.google.com/youtube/android/player/
+[18]: https://play.google.com/store/apps/details?id=com.github.pedrovgs.sample
