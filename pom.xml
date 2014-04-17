@@ -4,7 +4,7 @@
 
     <groupId>com.github.pedrovgs</groupId>
     <artifactId>draggablepanel-parent</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <parent>
@@ -98,7 +98,7 @@
             <dependency>
                 <groupId>com.github.pedrovgs</groupId>
                 <artifactId>draggablepanel</artifactId>
-                <version>1.0.1</version>
+                <version>1.0.2-SNAPSHOT</version>
                 <type>apklib</type>
             </dependency>
 
