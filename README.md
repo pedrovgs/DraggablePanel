@@ -95,7 +95,7 @@ To use Draggable Panel library and get your new awesome UI working you can use t
 Import DraggablePanel dependency
 --------------------------------
 
-Download the project, compile it using ```mvn clean install``` import ``draggablepanel-1.0.2.aar`` into your project.
+Download the project, compile it using maven or gradle and import ``draggablepanel-1.0.2.aar`` into your project.
 
 Or declare it into your pom.xml. This library uses NineOldAndroid library and Android support library v4 version 19.1.0, you have to provide this dependencies from your local artifact repository or from maven central repository.
 
