@@ -172,6 +172,7 @@ TODO
 
 I don't have too much time to work on this library and I'm going to put in this section some things to do in the future:
 
+* Support Android Studio / IntelliJ layout preview mode.
 * Create other draggable component to resize elements instead of scale the view. This new component is needed to drag and resize videos.
 
 
