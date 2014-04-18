@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>draggablepanel</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.3-SNAPSHOT</version>
     <packaging>apklib</packaging>
 
     <name>DRAGGABLE PANEL - LIBRARY</name>
