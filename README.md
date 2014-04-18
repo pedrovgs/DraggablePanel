@@ -111,9 +111,9 @@ Or into your build.gradle
 
         dependencies{
             compile 'com.github.pedrovgs:draggablepanel:1.0.2'
-    compile 'com.github.pedrovgs:draggablepanel:1.0.2@aar'
-    compile 'com.android.support:support-v4:19.1.+'
-    compile 'com.nineoldandroids:library:2.4.+'
+            compile 'com.github.pedrovgs:draggablepanel:1.0.2@aar'
+            compile 'com.android.support:support-v4:19.1.+'
+            compile 'com.nineoldandroids:library:2.4.+'
         }
 
 
