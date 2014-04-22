@@ -33,63 +33,57 @@ To use Draggable Panel library and get your new awesome UI working you can use t
 * 1. Add ``DraggablePanel`` widget to your layout. Configure the view customization elements using styleable attributes or programatically and configure your fragments to work as top or bottom fragment inside the ``DraggablePanel`` widget.
 
 ```xml
-
-    <com.github.pedrovgs.DraggablePanel
-            android:id="@+id/draggable_panel"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"/>
-
+<com.github.pedrovgs.DraggablePanel
+        android:id="@+id/draggable_panel"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
 ```
 
 ```java
-
- private void initializeDraggablePanel() throws Resources.NotFoundException {
-        draggablePanel.setFragmentManager(getSupportFragmentManager());
-        draggablePanel.setTopFragment(placeFragment);
-        draggablePanel.setBottomFragment(mapFragment);
-        draggablePanel.initializeView();
-    }
-
+private void initializeDraggablePanel() throws Resources.NotFoundException {
+      draggablePanel.setFragmentManager(getSupportFragmentManager());
+      draggablePanel.setTopFragment(placeFragment);
+      draggablePanel.setBottomFragment(mapFragment);
+      draggablePanel.initializeView();
+}
 ```
 
 * 2. Add ``DraggableView`` widget to your layout. Configure the view to use two children views as the draggable view and the second view. Configure the customization elements using styleable attributes or programatically.
 
 ```xml
+<com.github.pedrovgs.DraggableView
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:draggable_view="http://schemas.android.com/apk/res-auto"
+          android:id="@+id/draggable_view"
+          android:layout_width="fill_parent"
+          android:layout_height="fill_parent"
+          draggable_view:top_view_id="@+id/iv_fan_art"
+          draggable_view:bottom_view_id="@+id/lv_episodes"
+          draggable_view:top_view_x_scale_factor="@dimen/x_scale_factor"
+          draggable_view:top_view_y_scale_factor="@dimen/y_scale_factor"
+          draggable_view:top_view_margin_right="@dimen/top_fragment_margin"
+          draggable_view:top_view_margin_bottom="@dimen/top_fragment_margin"
+          android:background="@color/black">
 
-     <com.github.pedrovgs.DraggableView
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:draggable_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/draggable_view"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                draggable_view:top_view_id="@+id/iv_fan_art"
-                draggable_view:bottom_view_id="@+id/lv_episodes"
-                draggable_view:top_view_x_scale_factor="@dimen/x_scale_factor"
-                draggable_view:top_view_y_scale_factor="@dimen/y_scale_factor"
-                draggable_view:top_view_margin_right="@dimen/top_fragment_margin"
-                draggable_view:top_view_margin_bottom="@dimen/top_fragment_margin"
-                android:background="@color/black">
+      <!-- ListView Episodes -->
 
-            <!-- ListView Episodes -->
+      <ListView
+              android:id="@+id/lv_episodes"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:layout_below="@+id/iv_fan_art"
+              style="@style/episodes_list_view"/>
 
-            <ListView
-                    android:id="@+id/lv_episodes"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_below="@+id/iv_fan_art"
-                    style="@style/episodes_list_view"/>
+      <!-- TvShow Fan Art -->
 
-            <!-- TvShow Fan Art -->
+      <ImageView
+              android:id="@+id/iv_fan_art"
+              android:layout_width="fill_parent"
+              android:layout_height="@dimen/tv_show_fan_art_height"
+              android:layout_alignParentTop="true"
+              style="@style/image_view"/>
 
-            <ImageView
-                    android:id="@+id/iv_fan_art"
-                    android:layout_width="fill_parent"
-                    android:layout_height="@dimen/tv_show_fan_art_height"
-                    android:layout_alignParentTop="true"
-                    style="@style/image_view"/>
-
-        </com.github.pedrovgs.DraggableView>
-
+</com.github.pedrovgs.DraggableView>
 ```
 
 Import DraggablePanel dependency
@@ -99,22 +93,25 @@ Download the project, compile it using maven or gradle and import ``draggablepan
 
 Or declare it into your pom.xml. This library uses NineOldAndroid library and Android support library v4 version 19.1.0, you have to provide this dependencies from your local artifact repository or from maven central repository.
 
-        <dependency>
-          <groupId>com.github.pedrovgs</groupId>
-          <artifactId>draggablepanel</artifactId>
-          <version>1.0.2</version>
-          <type>aar</type>
-        </dependency>
+```xml
+<dependency>
+  <groupId>com.github.pedrovgs</groupId>
+  <artifactId>draggablepanel</artifactId>
+  <version>1.0.2</version>
+  <type>aar</type>
+</dependency>
+```
 
 
 Or into your build.gradle
 
-        dependencies{
-            compile 'com.github.pedrovgs:draggablepanel:1.0.2@aar'
-            compile 'com.android.support:support-v4:19.1.+'
-            compile 'com.nineoldandroids:library:2.4.+'
-        }
-
+```groovy
+dependencies {
+    compile 'com.github.pedrovgs:draggablepanel:1.0.2@aar'
+    compile 'com.android.support:support-v4:19.1.+'
+    compile 'com.nineoldandroids:library:2.4.+'
+}
+```
 
 
 Customization
@@ -130,38 +127,33 @@ You can customize some of the view effects programatically or using xml styleabl
 * Enable or disable the horizontal alpha effect applied while the view is being horizontally dragged.
 
 ```xml
+<com.github.pedrovgs.DraggableView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:draggable_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/draggable_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        draggable_view:top_view_id="@+id/iv_fan_art"
+        draggable_view:bottom_view_id="@+id/lv_episodes"
+        draggable_view:top_view_x_scale_factor="@dimen/x_scale_factor"
+        draggable_view:top_view_y_scale_factor="@dimen/y_scale_factor"
+        draggable_view:top_view_margin_right="@dimen/top_fragment_margin"
+        draggable_view:top_view_margin_bottom="@dimen/top_fragment_margin"
+        android:background="@color/black">
 
-    <com.github.pedrovgs.DraggableView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:draggable_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/draggable_view"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            draggable_view:top_view_id="@+id/iv_fan_art"
-            draggable_view:bottom_view_id="@+id/lv_episodes"
-            draggable_view:top_view_x_scale_factor="@dimen/x_scale_factor"
-            draggable_view:top_view_y_scale_factor="@dimen/y_scale_factor"
-            draggable_view:top_view_margin_right="@dimen/top_fragment_margin"
-            draggable_view:top_view_margin_bottom="@dimen/top_fragment_margin"
-            android:background="@color/black">
+        <!-- ....... -->
 
-            .......
-
-
-    </com.github.pedrovgs.DraggableView>
-
+</com.github.pedrovgs.DraggableView>
 ```
 
 ```java
-
-        draggablePanel.setTopFragment(placeFragment);
-        draggablePanel.setBottomFragment(mapFragment);
-        draggablePanel.setXScaleFactor(xScaleFactor);
-        draggablePanel.setYScaleFactor(yScaleFactor);
-        draggablePanel.setTopViewHeight(topViewHeight);
-        draggablePanel.setTopFragmentMarginRight(topViewMarginRight);
-        draggablePanel.setTopFragmentMarginBottom(topViewMargnBottom);
-
+draggablePanel.setTopFragment(placeFragment);
+draggablePanel.setBottomFragment(mapFragment);
+draggablePanel.setXScaleFactor(xScaleFactor);
+draggablePanel.setYScaleFactor(yScaleFactor);
+draggablePanel.setTopViewHeight(topViewHeight);
+draggablePanel.setTopFragmentMarginRight(topViewMarginRight);
+draggablePanel.setTopFragmentMarginBottom(topViewMargnBottom);
 ```
 
 Similar customizable attributes are available programatically or using styleable attributes in ``DraggableView``.
