@@ -41,10 +41,10 @@ public class DraggableView extends RelativeLayout {
     private static final int ZERO = 0;
     private static final int DEFAULT_SCALE_FACTOR = 2;
     private static final float DEFAULT_TOP_VIEW_HEIGHT = -1;
-    private static final int DEFAULT_TOP_FRAGMENT_MARGIN = 30;
+    private static final int DEFAULT_TOP_VIEW_MARGIN = 30;
     private static final float SLIDE_TOP = 0f;
     private static final float SLIDE_BOTTOM = 1f;
-    private static final boolean DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFECT = true;
+    private static final boolean DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT = true;
     private static final int ONE_HUNDRED = 100;
     private static final float SENSITIVITY = 1f;
 
@@ -56,8 +56,8 @@ public class DraggableView extends RelativeLayout {
 
     private float xScaleFactor = DEFAULT_SCALE_FACTOR;
     private float yScaleFactor = DEFAULT_SCALE_FACTOR;
-    private float topFragmentMarginRight = DEFAULT_TOP_FRAGMENT_MARGIN;
-    private float topFragmentMarginBottom = DEFAULT_TOP_FRAGMENT_MARGIN;
+    private float topViewMarginRight = DEFAULT_TOP_VIEW_MARGIN;
+    private float topViewMarginBottom = DEFAULT_TOP_VIEW_MARGIN;
     private float topViewHeight = DEFAULT_TOP_VIEW_HEIGHT;
     private boolean enableHorizontalAlphaEffect;
     private int dragViewId;
@@ -108,7 +108,7 @@ public class DraggableView extends RelativeLayout {
      * @param topFragmentMarginRight in pixels.
      */
     public void setTopViewMarginRight(float topFragmentMarginRight) {
-        this.topFragmentMarginRight = topFragmentMarginRight;
+        this.topViewMarginRight = topFragmentMarginRight;
     }
 
     /**
@@ -117,7 +117,7 @@ public class DraggableView extends RelativeLayout {
      * @param topFragmentMarginBottom
      */
     public void setTopViewMarginBottom(float topFragmentMarginBottom) {
-        this.topFragmentMarginBottom = topFragmentMarginBottom;
+        this.topViewMarginBottom = topFragmentMarginBottom;
     }
 
     /**
@@ -201,7 +201,7 @@ public class DraggableView extends RelativeLayout {
     }
 
     /**
-     * Checks if the top Fragment is minimized.
+     * Checks if the top view is minimized.
      *
      * @return true if the view is minimized.
      */
@@ -210,7 +210,7 @@ public class DraggableView extends RelativeLayout {
     }
 
     /**
-     * Checks if the top Fragment is maximized.
+     * Checks if the top view is maximized.
      *
      * @return true if the view is maximized.
      */
@@ -219,7 +219,7 @@ public class DraggableView extends RelativeLayout {
     }
 
     /**
-     * Checks if the top Fragment closed at the right place.
+     * Checks if the top view closed at the right place.
      *
      * @return true if the view is closed at right.
      */
@@ -228,12 +228,21 @@ public class DraggableView extends RelativeLayout {
     }
 
     /**
-     * Checks if the top Fragment is closed at the left place.
+     * Checks if the top view is closed at the left place.
      *
      * @return true if the view is closed at left.
      */
     public boolean isClosedAtLeft() {
         return dragView.getRight() <= 0;
+    }
+
+    /**
+     * Checks if the top view is closed at the right or left place.
+     *
+     * @return true if the view is closed.
+     */
+    public boolean isClosed() {
+        return isClosedAtLeft() || isClosedAtRight();
     }
 
     /**
@@ -264,7 +273,9 @@ public class DraggableView extends RelativeLayout {
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         viewDragHelper.processTouchEvent(ev);
-
+        if (isClosed()) {
+            return false;
+        }
         boolean isDragViewHit = isViewHit(dragView, (int) ev.getX(), (int) ev.getY());
         boolean isSecondViewHit = isViewHit(secondView, (int) ev.getX(), (int) ev.getY());
         if (isMaximized()) {
@@ -505,9 +516,9 @@ public class DraggableView extends RelativeLayout {
         this.topViewHeight = attributes.getDimension(R.styleable.draggable_view_top_view_height, DEFAULT_TOP_VIEW_HEIGHT);
         this.xScaleFactor = attributes.getFloat(R.styleable.draggable_view_top_view_x_scale_factor, DEFAULT_SCALE_FACTOR);
         this.yScaleFactor = attributes.getFloat(R.styleable.draggable_view_top_view_y_scale_factor, DEFAULT_SCALE_FACTOR);
-        this.topFragmentMarginRight = attributes.getDimension(R.styleable.draggable_view_top_view_margin_right, DEFAULT_TOP_FRAGMENT_MARGIN);
-        this.topFragmentMarginBottom = attributes.getDimension(R.styleable.draggable_view_top_view_margin_bottom, DEFAULT_TOP_FRAGMENT_MARGIN);
-        this.enableHorizontalAlphaEffect = attributes.getBoolean(R.styleable.draggable_view_enable_minimized_horizontal_alpha_effect, DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFECT);
+        this.topViewMarginRight = attributes.getDimension(R.styleable.draggable_view_top_view_margin_right, DEFAULT_TOP_VIEW_MARGIN);
+        this.topViewMarginBottom = attributes.getDimension(R.styleable.draggable_view_top_view_margin_bottom, DEFAULT_TOP_VIEW_MARGIN);
+        this.enableHorizontalAlphaEffect = attributes.getBoolean(R.styleable.draggable_view_enable_minimized_horizontal_alpha_effect, DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT);
         attributes.recycle();
 
     }
@@ -534,14 +545,14 @@ public class DraggableView extends RelativeLayout {
      * @return configured dragged view margin right configured.
      */
     private float getDragViewMarginRight() {
-        return topFragmentMarginRight;
+        return topViewMarginRight;
     }
 
     /**
      * @return configured dragged view margin bottom.
      */
     private float getDragViewMarginBottom() {
-        return topFragmentMarginBottom;
+        return topViewMarginBottom;
     }
 
     /**
