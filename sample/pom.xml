@@ -6,11 +6,11 @@
     <parent>
         <groupId>com.github.pedrovgs</groupId>
         <artifactId>draggablepanel-parent</artifactId>
-        <version>1.0.3</version>
+        <version>1.0.4-SNAPSHOT</version>
     </parent>
 
     <artifactId>sample</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4-SNAPSHOT</version>
     <packaging>apk</packaging>
 
     <name>DRAGGABLE PANEL - SAMPLE</name>
