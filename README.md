@@ -97,7 +97,7 @@ Or declare it into your pom.xml. This library uses NineOldAndroid library and An
 <dependency>
   <groupId>com.github.pedrovgs</groupId>
   <artifactId>draggablepanel</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
   <type>aar</type>
 </dependency>
 ```
@@ -107,7 +107,7 @@ Or into your build.gradle
 
 ```groovy
 dependencies {
-    compile 'com.github.pedrovgs:draggablepanel:1.0.2@aar'
+    compile 'com.github.pedrovgs:draggablepanel:1.0.3@aar'
     compile 'com.android.support:support-v4:19.1.+'
     compile 'com.nineoldandroids:library:2.4.+'
 }
