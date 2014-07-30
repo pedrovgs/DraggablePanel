@@ -32,7 +32,7 @@ android {
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
-            java.srcDirs = ['src']
+            java.srcDirs = ['src/main/java']
             res.srcDirs = ['res']
         }
     }
