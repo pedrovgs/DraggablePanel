@@ -29,7 +29,7 @@ import com.nineoldandroids.view.ViewHelper;
  *
  * @author Pedro Vicente Gómez Sánchez
  */
-public class Resizer {
+public class Transformer {
 
     private final View scaledView;
     private float viewHeight;
@@ -40,7 +40,7 @@ public class Resizer {
     private int lastTopPosition;
     private int lastLeftPosition;
 
-    public Resizer(View scaledView) {
+    public Transformer(View scaledView) {
         this.scaledView = scaledView;
     }
 
