@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.pedrovgs.resizer;
+package com.github.pedrovgs.transformer;
 
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -31,7 +31,7 @@ import com.nineoldandroids.view.ViewHelper;
  */
 public class Transformer {
 
-    private final View scaledView;
+    private final View view;
     private float viewHeight;
     private float xScaleFactor;
     private float yScaleFactor;
@@ -39,9 +39,11 @@ public class Transformer {
     private float marginBottom;
     private int lastTopPosition;
     private int lastLeftPosition;
+    private float originalHeight;
+    private float originalWidth;
 
-    public Transformer(View scaledView) {
-        this.scaledView = scaledView;
+    public Transformer(View view) {
+        this.view = view;
     }
 
     public void setXScaleFactor(float xScaleFactor) {
@@ -52,8 +54,8 @@ public class Transformer {
         this.yScaleFactor = yScaleFactor;
     }
 
-    protected View getScaledView() {
-        return scaledView;
+    protected View getView() {
+        return view;
     }
 
     protected float getxScaleFactor() {
@@ -82,15 +84,16 @@ public class Transformer {
 
     public void setViewHeight(float viewHeight) {
         this.viewHeight = viewHeight;
-        if(viewHeight>0f) {
-            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) scaledView.getLayoutParams();
+        if (viewHeight > 0f) {
+            originalHeight = viewHeight;
+            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
             layoutParams.height = (int) viewHeight;
-            scaledView.setLayoutParams(layoutParams);
+            view.setLayoutParams(layoutParams);
         }
     }
 
     public float getViewHeight() {
-        return viewHeight<0f ? scaledView.getMeasuredHeight() : viewHeight;
+        return viewHeight < 0f ? view.getMeasuredHeight() : viewHeight;
     }
 
     public void setLastTopPosition(int lastTopPosition) {
@@ -110,18 +113,33 @@ public class Transformer {
     }
 
     public void updateXPosition() {
-        ViewHelper.setPivotX(scaledView, scaledView.getWidth() - getMarginRight());
+        ViewHelper.setPivotX(view, view.getWidth() - getMarginRight());
     }
 
     public void updateYPosition() {
-        ViewHelper.setPivotY(scaledView, scaledView.getHeight() - getMarginBottom());
+        ViewHelper.setPivotY(view, view.getHeight() - getMarginBottom());
     }
 
     public void updateWidth(float verticalDragOffset) {
-        ViewHelper.setScaleX(scaledView, 1 - verticalDragOffset / xScaleFactor);
+        ViewHelper.setScaleX(view, 1 - verticalDragOffset / getxScaleFactor());
     }
 
     public void updateHeight(float verticalDragOffset) {
-        ViewHelper.setScaleY(scaledView, 1 - verticalDragOffset / yScaleFactor);
+        ViewHelper.setScaleY(view, 1 - verticalDragOffset / getyScaleFactor());
     }
+
+    public float getOriginalHeight() {
+        if (originalHeight == 0) {
+            originalHeight = viewHeight < 0 ? view.getMeasuredHeight() : viewHeight;
+        }
+        return originalHeight;
+    }
+
+    public float getOriginalWidth() {
+        if (originalWidth == 0) {
+            originalWidth = view.getMeasuredWidth();
+        }
+        return originalWidth;
+    }
+
 }
