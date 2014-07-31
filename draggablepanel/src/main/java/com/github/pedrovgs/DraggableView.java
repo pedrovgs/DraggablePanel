@@ -510,9 +510,9 @@ public class DraggableView extends RelativeLayout {
      */
     private void initializeResizer(TypedArray attributes) {
         if(shouldScaleView()){
-            transformer = new ResizeTransformer(dragView);
-        }else{
             transformer = new Transformer(dragView);
+        }else{
+            transformer = new ResizeTransformer(dragView);
         }
         transformer.setViewHeight(attributes.getDimension(R.styleable.draggable_view_top_view_height,DEFAULT_TOP_VIEW_HEIGHT));
         transformer.setXScaleFactor(attributes.getFloat(R.styleable.draggable_view_top_view_x_scale_factor, DEFAULT_SCALE_FACTOR));
@@ -523,7 +523,7 @@ public class DraggableView extends RelativeLayout {
 
     private boolean shouldScaleView() {
         //TODO change this with an implementation based on styleable attributes.
-        return true;
+        return false;
     }
 
     /**
