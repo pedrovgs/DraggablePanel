@@ -44,9 +44,6 @@ public class DraggableView extends RelativeLayout {
     private static final int DEFAULT_SCALE_FACTOR = 2;
     private static final int DEFAULT_TOP_VIEW_MARGIN = 30;
     private static final float DEFAULT_TOP_VIEW_HEIGHT = -1;
-    private static final float HALF = 0.5f;
-    private static final double QUARTER = 0.25;
-    private static final int ZERO = 0;
     private static final float SLIDE_TOP = 0f;
     private static final float SLIDE_BOTTOM = 1f;
     private static final boolean DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT = true;
@@ -174,7 +171,7 @@ public class DraggableView extends RelativeLayout {
      * Close the custom view applying an animation to close the view to the right side of the screen.
      */
     public void closeToRight() {
-        if (viewDragHelper.smoothSlideViewTo(dragView, dragView.getWidth(), getHeight() - dragView.getHeight())) {
+        if (viewDragHelper.smoothSlideViewTo(dragView, (int)transformer.getOriginalWidth(), getHeight() - transformer.getHeightPlusMarginTop())) {
             ViewCompat.postInvalidateOnAnimation(this);
             notifyCloseToRightListener();
         }
@@ -184,7 +181,7 @@ public class DraggableView extends RelativeLayout {
      * Close the custom view applying an animation to close the view to the left side of the screen.
      */
     public void closeToLeft() {
-        if (viewDragHelper.smoothSlideViewTo(dragView, -dragView.getWidth(), getHeight() - dragView.getHeight())) {
+        if (viewDragHelper.smoothSlideViewTo(dragView, (int) -transformer.getOriginalWidth(), getHeight() - transformer.getHeightPlusMarginTop())) {
             ViewCompat.postInvalidateOnAnimation(this);
             notifyCloseToLeftListener();
         }
@@ -303,7 +300,7 @@ public class DraggableView extends RelativeLayout {
         super.onFinishInflate();
         if (!isInEditMode()) {
             mapGUI(attributes);
-            initializeResizer(attributes);
+            initializeTransformer(attributes);
             attributes.recycle();
             initializeViewDragHelper();
         }
@@ -412,17 +409,13 @@ public class DraggableView extends RelativeLayout {
         }
     }
 
-    //TODO This methods should be implemented by the transformer :S
-
     /**
      * Check if dragged view is above the middle of the custom view.
      *
      * @return true if dragged view is above the middle of the custom view or false if is below.
      */
     boolean isDragViewAboveTheMiddle() {
-        int viewHeight = getHeight();
-        float viewHeaderY = ViewHelper.getY(dragView) + (dragView.getHeight() * HALF);
-        return viewHeaderY < (viewHeight * HALF);
+        return transformer.isAboveTheMiddle();
     }
 
     /**
@@ -431,7 +424,7 @@ public class DraggableView extends RelativeLayout {
      * @return true if dragged view right position is behind the right half of the custom view.
      */
     boolean isNextToLeftBound() {
-        return (dragView.getRight() - getDragViewMarginRight()) < getWidth() * HALF;
+        return transformer.isNextToLeftBound();
     }
 
     /**
@@ -440,7 +433,7 @@ public class DraggableView extends RelativeLayout {
      * @return true if dragged view left position is behind the left quarter of the custom view.
      */
     boolean isNextToRightBound() {
-        return (dragView.getLeft() - getDragViewMarginRight()) > getWidth() * QUARTER;
+        return transformer.isNextToRightBound();
     }
 
     /**
@@ -449,7 +442,7 @@ public class DraggableView extends RelativeLayout {
      * @return true if dragged view top position is equals to zero.
      */
     boolean isDragViewAtTop() {
-        return dragView.getTop() == ZERO;
+        return transformer.isViewAtTop();
     }
 
     /**
@@ -458,7 +451,7 @@ public class DraggableView extends RelativeLayout {
      * @return true if dragged view right position is equals to custom view width.
      */
     boolean isDragViewAtRight() {
-        return dragView.getRight() == getWidth();
+        return transformer.isViewAtRight();
     }
 
     /**
@@ -467,7 +460,7 @@ public class DraggableView extends RelativeLayout {
      * @return true if dragged view bottom position is equals to custom view height.
      */
     boolean isDragViewAtBottom() {
-        return dragView.getBottom() == getHeight();
+        return transformer.isViewAtBottom();
     }
 
     /**
@@ -510,11 +503,11 @@ public class DraggableView extends RelativeLayout {
      * Initialize Transformer with a scalable or change width/height implementation.
      * @param attributes
      */
-    private void initializeResizer(TypedArray attributes) {
+    private void initializeTransformer(TypedArray attributes) {
         if(shouldScaleView()){
-            transformer = new Transformer(dragView);
+            transformer = new Transformer(dragView,this);
         }else{
-            transformer = new ResizeTransformer(dragView);
+            transformer = new ResizeTransformer(dragView,this);
         }
         transformer.setViewHeight(attributes.getDimension(R.styleable.draggable_view_top_view_height,DEFAULT_TOP_VIEW_HEIGHT));
         transformer.setXScaleFactor(attributes.getFloat(R.styleable.draggable_view_top_view_x_scale_factor, DEFAULT_SCALE_FACTOR));
@@ -537,7 +530,6 @@ public class DraggableView extends RelativeLayout {
         TypedArray attributes = getContext().obtainStyledAttributes(attrs, R.styleable.draggable_view);
         this.enableHorizontalAlphaEffect = attributes.getBoolean(R.styleable.draggable_view_enable_minimized_horizontal_alpha_effect, DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT);
         this.attributes = attributes;
-
     }
 
     /**
@@ -550,8 +542,9 @@ public class DraggableView extends RelativeLayout {
     private boolean smoothSlideTo(float slideOffset) {
         final int topBound = getPaddingTop();
         int y = (int) (topBound + slideOffset * getVerticalDragRange());
+        int x = (int) slideOffset*(getWidth()-transformer.getWidthPlusMarginRight());
 
-        if (viewDragHelper.smoothSlideViewTo(dragView, 0, y)) {
+        if (viewDragHelper.smoothSlideViewTo(dragView, x, y)) {
             ViewCompat.postInvalidateOnAnimation(this);
             return true;
         }
@@ -596,7 +589,7 @@ public class DraggableView extends RelativeLayout {
      * @return the difference between the custom view height and the dragged view height.
      */
     private float getVerticalDragRange() {
-        return getHeight() - dragView.getHeight();
+        return getHeight() - transformer.getHeightPlusMarginTop();
     }
 
     /**
@@ -635,4 +628,7 @@ public class DraggableView extends RelativeLayout {
         }
     }
 
+    public int getDraggedViewHeightPlusMarginTop() {
+        return transformer.getHeightPlusMarginTop();
+    }
 }

@@ -32,6 +32,7 @@ import com.nineoldandroids.view.ViewHelper;
 public class Transformer {
 
     private final View view;
+    private final View parent;
     private float viewHeight;
     private float xScaleFactor;
     private float yScaleFactor;
@@ -43,8 +44,9 @@ public class Transformer {
     private float originalHeight;
     private float originalWidth;
 
-    public Transformer(View view) {
+    public Transformer(View view,View parent) {
         this.view = view;
+        this.parent = parent;
     }
 
     public void setXScaleFactor(float xScaleFactor) {
@@ -57,6 +59,10 @@ public class Transformer {
 
     protected View getView() {
         return view;
+    }
+
+    protected View getParentView(){
+        return parent;
     }
 
     protected float getxScaleFactor() {
@@ -160,5 +166,39 @@ public class Transformer {
 
     public int getViewRightPosition(float verticalDragOffset) {
         return (int) (getOriginalWidth()-(marginRight*verticalDragOffset));
+    }
+
+    public boolean isViewAtRight() {
+        return view.getRight() == parent.getWidth();
+    }
+
+    public boolean isViewAtTop() {
+        return view.getTop() == 0;
+    }
+
+    public boolean isViewAtBottom() {
+        return view.getBottom()== parent.getHeight();
+    }
+
+    public boolean isNextToRightBound() {
+        return (view.getLeft() - getMarginRight()) > parent.getWidth() * 0.25;
+    }
+
+    public boolean isNextToLeftBound() {
+        return (view.getRight() - getMarginRight()) < parent.getWidth() * 0.25;
+    }
+
+    public boolean isAboveTheMiddle() {
+        int parentHeight = parent.getHeight();
+        float viewYPosition = ViewHelper.getY(view) + (view.getHeight() * 0.5f);
+        return viewYPosition < (parentHeight * 0.5);
+    }
+
+    public int getHeightPlusMarginTop() {
+        return view.getHeight();
+    }
+
+    public int getWidthPlusMarginRight() {
+        return 0;
     }
 }

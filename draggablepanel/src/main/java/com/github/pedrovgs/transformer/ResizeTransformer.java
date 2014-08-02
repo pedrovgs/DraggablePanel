@@ -14,8 +14,8 @@ public class ResizeTransformer extends Transformer{
 
     private float lastHeight;
 
-    public ResizeTransformer(View view) {
-        super(view);
+    public ResizeTransformer(View view,View parent) {
+        super(view, parent);
     }
 
     @Override
@@ -58,4 +58,33 @@ public class ResizeTransformer extends Transformer{
         // ViewDragHelper already changes the Y position.
     }
 
+    @Override
+    public boolean isViewAtRight() {
+        return getView().getRight()+getMarginRight() == getParentView().getWidth();
+    }
+
+    @Override
+    public boolean isViewAtBottom(){
+        return getView().getBottom()+getMarginBottom() >= getParentView().getHeight();
+    }
+
+    @Override
+    public boolean isNextToRightBound() {
+        return (getView().getLeft() - getMarginRight()) > getParentView().getWidth() * 0.75;
+    }
+
+    @Override
+    public boolean isNextToLeftBound() {
+        return (getView().getLeft() - getMarginRight()) < getParentView().getWidth() * 0.25;
+    }
+
+    @Override
+    public int getHeightPlusMarginTop() {
+        return (int) (getView().getHeight()+getMarginBottom());
+    }
+
+    @Override
+    public int getWidthPlusMarginRight() {
+        return (int) ((getOriginalWidth()+getMarginRight())/getxScaleFactor());
+    }
 }
