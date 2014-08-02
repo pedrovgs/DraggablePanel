@@ -39,6 +39,7 @@ public class Transformer {
     private float marginBottom;
     private int lastTopPosition;
     private int lastLeftPosition;
+    private int lastRightPosition;
     private float originalHeight;
     private float originalWidth;
 
@@ -104,6 +105,17 @@ public class Transformer {
         this.lastLeftPosition = lastLeftPosition;
     }
 
+    public void setLastRightPosition(int lastRightPosition) {
+        this.lastRightPosition = lastRightPosition;
+    }
+
+    public int getLastRightPosition(){
+        if(lastRightPosition<=0){
+            lastRightPosition = view.getMeasuredWidth();
+        }
+        return lastRightPosition;
+    }
+
     public int getLastTopPosition() {
         return lastTopPosition;
     }
@@ -112,7 +124,7 @@ public class Transformer {
         return lastLeftPosition;
     }
 
-    public void updateXPosition() {
+    public void updateXPosition(float verticalDragOffset) {
         ViewHelper.setPivotX(view, view.getWidth() - getMarginRight());
     }
 
@@ -142,4 +154,11 @@ public class Transformer {
         return originalWidth;
     }
 
+    public int getViewWidth() {
+        return getView().getMeasuredWidth();
+    }
+
+    public int getViewRightPosition(float verticalDragOffset) {
+        return (int) (getOriginalWidth()-(marginRight*verticalDragOffset));
+    }
 }

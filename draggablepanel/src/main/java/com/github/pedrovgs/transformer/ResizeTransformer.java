@@ -41,10 +41,11 @@ public class ResizeTransformer extends Transformer{
     }
 
     @Override
-    public void updateXPosition() {
+    public void updateXPosition(float verticalDragOffset) {
         int left,top,right,bottom;
-        left = (int) (getOriginalWidth()-getView().getWidth());
-        right = left + getView().getWidth();
+        left = (int) (getOriginalWidth()-getViewWidth());
+        right = getViewRightPosition(verticalDragOffset);
+        setLastRightPosition(right);
         top = getView().getTop();
         bottom = getView().getBottom();
         getView().layout(left,top,right,bottom);

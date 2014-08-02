@@ -24,6 +24,7 @@ import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -287,7 +288,9 @@ public class DraggableView extends RelativeLayout {
         int newTop = (int) transformer.getViewHeight();
         int lastTopPosition = transformer.getLastTopPosition();
         int lastLeftPosition = transformer.getLastLeftPosition();
-        dragView.layout(lastLeftPosition, lastTopPosition, lastLeftPosition + dragView.getMeasuredWidth(), lastTopPosition + newTop);
+        int newRight = transformer.getLastRightPosition();
+        Log.d("DEPURAR", "NEW RIGHT " + newRight);
+        dragView.layout(lastLeftPosition, lastTopPosition, newRight, lastTopPosition + newTop);
         secondView.layout(0, lastTopPosition + newTop, right, lastTopPosition + bottom);
     }
 
@@ -359,7 +362,7 @@ public class DraggableView extends RelativeLayout {
      * the view is dragged.
      */
     void changeDragViewPosition() {
-        transformer.updateXPosition();
+        transformer.updateXPosition(getVerticalDragOffset());
         transformer.updateYPosition();
     }
 
