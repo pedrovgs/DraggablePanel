@@ -23,6 +23,7 @@ public class ResizeTransformer extends Transformer{
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) getView().getLayoutParams();
         int newWidth = (int) (getOriginalWidth() * (1 - verticalDragOffset / getxScaleFactor()));
         params.width = newWidth;
+        setLastLeftPosition((int) (getOriginalWidth()-newWidth));
         getView().setLayoutParams(params);
     }
 
@@ -57,8 +58,4 @@ public class ResizeTransformer extends Transformer{
         // ViewDragHelper already changes the Y position.
     }
 
-    @Override
-    public int getLastLeftPosition() {
-        return (int) (getOriginalWidth()-getView().getWidth());
-    }
 }
