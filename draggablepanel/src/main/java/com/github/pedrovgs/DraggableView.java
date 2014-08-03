@@ -29,8 +29,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.github.pedrovgs.transformer.ResizeTransformer;
 import com.github.pedrovgs.transformer.Transformer;
+import com.github.pedrovgs.transformer.TransformerFactory;
 import com.nineoldandroids.view.ViewHelper;
 
 /**
@@ -516,11 +516,8 @@ public class DraggableView extends RelativeLayout {
      */
     private void initializeTransformer(TypedArray attributes) {
         topViewResize = attributes.getBoolean(R.styleable.draggable_view_top_view_resize,DEFAULT_TOP_VIEW_RESIZE);
-        if(shouldScaleView()){
-            transformer = new Transformer(dragView,this);
-        }else{
-            transformer = new ResizeTransformer(dragView,this);
-        }
+        TransformerFactory transformerFactory = new TransformerFactory();
+        transformer = transformerFactory.getTransformer(topViewResize,dragView,this);
         transformer.setViewHeight(attributes.getDimension(R.styleable.draggable_view_top_view_height,DEFAULT_TOP_VIEW_HEIGHT));
         transformer.setXScaleFactor(attributes.getFloat(R.styleable.draggable_view_top_view_x_scale_factor, DEFAULT_SCALE_FACTOR));
         transformer.setyScaleFactor(attributes.getFloat(R.styleable.draggable_view_top_view_y_scale_factor, DEFAULT_SCALE_FACTOR));
