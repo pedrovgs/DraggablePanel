@@ -35,6 +35,7 @@ public class DraggablePanel extends FrameLayout {
     private static final float DEFAULT_SCALE_FACTOR = 2;
     private static final float DEFAULT_TOP_FRAGMENT_MARGIN = 0;
     private static final boolean DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT = true;
+    private static final boolean DEFAULT_TOP_FRAGMENT_RESIZE = false;
 
     private DraggableView draggableView;
     private DraggableListener draggableListener;
@@ -48,6 +49,7 @@ public class DraggablePanel extends FrameLayout {
     private float xScaleFactor;
     private float yScaleFactor;
     private boolean enableHorizontalAlphaEffect;
+    private boolean topFragmentResize;
 
 
     public DraggablePanel(Context context) {
@@ -159,6 +161,15 @@ public class DraggablePanel extends FrameLayout {
     }
 
     /**
+     * Configure top fragment to be resized instead of scaled when the view is dragged vertically.
+     *
+     * @param topFragmentResize to enable or disable the resize effect.
+     */
+    public void setTopFragmentResize(boolean topFragmentResize) {
+        this.topFragmentResize = topFragmentResize;
+    }
+
+    /**
      * Close the custom view applying an animation to close the view to the left side of the screen.
      */
     public void closeToLeft() {
@@ -209,6 +220,7 @@ public class DraggablePanel extends FrameLayout {
         draggableView.attachBottomFragment(bottomFragment);
         draggableView.setDraggableListener(draggableListener);
         draggableView.setHorizontalAlphaEffectEnabled(enableHorizontalAlphaEffect);
+        draggableView.setTopViewResize(topFragmentResize);
     }
 
     /**
@@ -260,6 +272,7 @@ public class DraggablePanel extends FrameLayout {
         this.topFragmentMarginRight = attributes.getDimension(R.styleable.draggable_panel_top_fragment_margin_right, DEFAULT_TOP_FRAGMENT_MARGIN);
         this.topFragmentMarginBottom = attributes.getDimension(R.styleable.draggable_panel_top_fragment_margin_bottom, DEFAULT_TOP_FRAGMENT_MARGIN);
         this.enableHorizontalAlphaEffect = attributes.getBoolean(R.styleable.draggable_panel_enable_horizontal_alpha_effect, DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT);
+        this.topFragmentResize = attributes.getBoolean(R.styleable.draggable_panel_top_fragment_resize,DEFAULT_TOP_FRAGMENT_RESIZE);
         attributes.recycle();
     }
 

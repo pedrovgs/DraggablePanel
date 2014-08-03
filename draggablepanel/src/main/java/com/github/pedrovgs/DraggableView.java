@@ -141,6 +141,15 @@ public class DraggableView extends RelativeLayout {
     }
 
     /**
+     * Configure DraggableView to resize top view instead of scale it.
+     *
+     * @param topFragmentResize
+     */
+    public void setTopViewResize(boolean topFragmentResize) {
+
+    }
+
+    /**
      * To ensure the animation is going to work this method has been override to call postInvalidateOnAnimation if the
      * view is not settled yet.
      */
@@ -631,4 +640,5 @@ public class DraggableView extends RelativeLayout {
     public int getDraggedViewHeightPlusMarginTop() {
         return transformer.getHeightPlusMarginTop();
     }
+
 }
