@@ -29,7 +29,7 @@ import com.nineoldandroids.view.ViewHelper;
  *
  * @author Pedro Vicente Gómez Sánchez
  */
-public class Transformer {
+public abstract class Transformer {
 
     private final View view;
     private final View parent;
@@ -130,21 +130,13 @@ public class Transformer {
         return lastLeftPosition;
     }
 
-    public void updateXPosition(float verticalDragOffset) {
-        ViewHelper.setPivotX(view, view.getWidth() - getMarginRight());
-    }
+    public abstract void updateXPosition(float verticalDragOffset);
 
-    public void updateYPosition() {
-        ViewHelper.setPivotY(view, view.getHeight() - getMarginBottom());
-    }
+    public abstract void updateYPosition();
 
-    public void updateWidth(float verticalDragOffset) {
-        ViewHelper.setScaleX(view, 1 - verticalDragOffset / getxScaleFactor());
-    }
+    public abstract void updateWidth(float verticalDragOffset);
 
-    public void updateHeight(float verticalDragOffset) {
-        ViewHelper.setScaleY(view, 1 - verticalDragOffset / getyScaleFactor());
-    }
+    public abstract void updateHeight(float verticalDragOffset);
 
     public float getOriginalHeight() {
         if (originalHeight == 0) {
@@ -168,25 +160,17 @@ public class Transformer {
         return (int) (getOriginalWidth()-(marginRight*verticalDragOffset));
     }
 
-    public boolean isViewAtRight() {
-        return view.getRight() == parent.getWidth();
-    }
+    public abstract boolean isViewAtRight();
 
     public boolean isViewAtTop() {
         return view.getTop() == 0;
     }
 
-    public boolean isViewAtBottom() {
-        return view.getBottom()== parent.getHeight();
-    }
+    public abstract boolean isViewAtBottom();
 
-    public boolean isNextToRightBound() {
-        return (view.getLeft() - getMarginRight()) > parent.getWidth() * 0.25;
-    }
+    public abstract boolean isNextToRightBound();
 
-    public boolean isNextToLeftBound() {
-        return (view.getRight() - getMarginRight()) < parent.getWidth() * 0.25;
-    }
+    public abstract boolean isNextToLeftBound();
 
     public boolean isAboveTheMiddle() {
         int parentHeight = parent.getHeight();
@@ -194,11 +178,7 @@ public class Transformer {
         return viewYPosition < (parentHeight * 0.5);
     }
 
-    public int getHeightPlusMarginTop() {
-        return view.getHeight();
-    }
+    public abstract int getHeightPlusMarginTop();
 
-    public int getWidthPlusMarginRight() {
-        return 0;
-    }
+    public abstract int getWidthPlusMarginRight();
 }

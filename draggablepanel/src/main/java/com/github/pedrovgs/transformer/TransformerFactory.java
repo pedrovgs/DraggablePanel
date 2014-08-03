@@ -29,7 +29,7 @@ public class TransformerFactory {
         if(resize){
             transformer = new ResizeTransformer(view,parent);
         }else{
-            transformer = new Transformer(view,parent);
+            transformer = new ScaleTransformer(view,parent);
         }
         return transformer;
     }
