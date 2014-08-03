@@ -57,19 +57,19 @@ public abstract class Transformer {
         this.yScaleFactor = yScaleFactor;
     }
 
-    protected View getView() {
+    public View getView() {
         return view;
     }
 
-    protected View getParentView(){
+    public View getParentView(){
         return parent;
     }
 
-    protected float getxScaleFactor() {
+    public float getxScaleFactor() {
         return xScaleFactor;
     }
 
-    protected float getyScaleFactor() {
+    public float getyScaleFactor() {
         return yScaleFactor;
     }
 
@@ -156,9 +156,7 @@ public abstract class Transformer {
         return getView().getMeasuredWidth();
     }
 
-    public int getViewRightPosition(float verticalDragOffset) {
-        return (int) (getOriginalWidth()-(marginRight*verticalDragOffset));
-    }
+    public abstract int getViewRightPosition(float verticalDragOffset);
 
     public abstract boolean isViewAtRight();
 
@@ -181,4 +179,6 @@ public abstract class Transformer {
     public abstract int getHeightPlusMarginTop();
 
     public abstract int getWidthPlusMarginRight();
+
+    public abstract int getMinWidth();
 }

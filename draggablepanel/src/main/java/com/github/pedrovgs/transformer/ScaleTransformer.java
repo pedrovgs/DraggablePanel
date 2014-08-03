@@ -45,6 +45,11 @@ class ScaleTransformer extends Transformer {
     }
 
     @Override
+    public int getViewRightPosition(float verticalDragOffset) {
+        return getParentView().getWidth();
+    }
+
+    @Override
     public void updateXPosition(float verticalDragOffset) {
         ViewHelper.setPivotX(getView(), getView().getWidth() - getMarginRight());
     }
@@ -82,5 +87,10 @@ class ScaleTransformer extends Transformer {
     @Override
     public int getWidthPlusMarginRight() {
         return 0;
+    }
+
+    @Override
+    public int getMinWidth() {
+        return (int) getOriginalWidth();
     }
 }

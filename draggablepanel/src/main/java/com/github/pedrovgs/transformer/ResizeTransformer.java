@@ -45,10 +45,15 @@ class ResizeTransformer extends Transformer{
     @Override
     public void updateHeight(float verticalDragOffset) {
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) getView().getLayoutParams();
-        int newHeight = (int) (getOriginalHeight() * (1 - verticalDragOffset / getxScaleFactor()));
+        int newHeight = (int) (getOriginalHeight() * (1 - verticalDragOffset / getyScaleFactor()));
         params.height = newHeight;
         lastHeight = newHeight;
         getView().setLayoutParams(params);
+    }
+
+    @Override
+    public int getViewRightPosition(float verticalDragOffset) {
+        return (int) ((getOriginalWidth())-getMarginRight()*verticalDragOffset);
     }
 
     @Override
@@ -58,6 +63,7 @@ class ResizeTransformer extends Transformer{
 
     @Override
     public void updateXPosition(float verticalDragOffset) {
+        Log.i("DEPURAR","OFFSET "+verticalDragOffset);
         int left,top,right,bottom;
         left = (int) (getOriginalWidth()-getViewWidth());
         right = getViewRightPosition(verticalDragOffset);
@@ -65,7 +71,7 @@ class ResizeTransformer extends Transformer{
         top = getView().getTop();
         bottom = getView().getBottom();
         getView().layout(left,top,right,bottom);
-        Log.e("DEPURAR","LEFT "+ left+ " - RIGHT "+right);
+        Log.e("DEPURAR", "LEFT " + left + " - RIGHT " + right);
     }
 
     @Override
@@ -100,6 +106,12 @@ class ResizeTransformer extends Transformer{
 
     @Override
     public int getWidthPlusMarginRight() {
-        return (int) ((getOriginalWidth()+getMarginRight())/getxScaleFactor());
+        return (int) ((getOriginalWidth()/getxScaleFactor())+getMarginRight());
     }
+
+    @Override
+    public int getMinWidth() {
+        return (int) (getOriginalWidth()/getxScaleFactor());
+    }
+
 }

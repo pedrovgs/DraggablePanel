@@ -297,6 +297,7 @@ public class DraggableView extends RelativeLayout {
         int lastTopPosition = transformer.getLastTopPosition();
         int lastLeftPosition = transformer.getLastLeftPosition();
         int newRight = transformer.getLastRightPosition();
+        Log.d("DEPURAR","NEW LEFT "+ lastLeftPosition+"NEW RIGHT "+newRight);
         dragView.layout(lastLeftPosition, lastTopPosition, newRight, lastTopPosition + newTop);
         secondView.layout(0, lastTopPosition + newTop, right, lastTopPosition + bottom);
     }
@@ -549,8 +550,7 @@ public class DraggableView extends RelativeLayout {
     private boolean smoothSlideTo(float slideOffset) {
         final int topBound = getPaddingTop();
         int y = (int) (topBound + slideOffset * getVerticalDragRange());
-        int x = (int) slideOffset*(getWidth()-transformer.getWidthPlusMarginRight());
-
+        int x = (int) (slideOffset*(getWidth()-transformer.getMinWidth()));
         if (viewDragHelper.smoothSlideViewTo(dragView, x, y)) {
             ViewCompat.postInvalidateOnAnimation(this);
             return true;
