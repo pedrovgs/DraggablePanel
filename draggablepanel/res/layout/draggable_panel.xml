@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.github.pedrovgs.DraggableView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:draggable_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/draggable_view"
+<com.github.pedrovgs.DraggableView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:draggable_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/draggable_view"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    draggable_view:bottom_view_id="@+id/second_view"
+    draggable_view:top_view_id="@+id/drag_view">
+
+    <FrameLayout
+        android:id="@+id/second_view"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        draggable_view:top_view_id="@+id/drag_view"
-        draggable_view:bottom_view_id="@+id/second_view">
+        android:layout_below="@+id/drag_view" />
 
     <FrameLayout
-            android:id="@+id/second_view"
-            android:layout_below="@+id/drag_view"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"/>
-
-    <FrameLayout
-            android:id="@+id/drag_view"
-            android:orientation="vertical"
-            android:layout_height="wrap_content"
-            android:layout_width="fill_parent"
-            android:layout_alignParentTop="true"/>
+        android:id="@+id/drag_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical" />
 
 </com.github.pedrovgs.DraggableView>

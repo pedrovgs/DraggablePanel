@@ -15,7 +15,6 @@
  */
 package com.github.pedrovgs.transformer;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -25,11 +24,11 @@ import android.widget.RelativeLayout;
  *
  * @author Pedro Vicente Gómez Sánchez
  */
-class ResizeTransformer extends Transformer{
+class ResizeTransformer extends Transformer {
 
     private float lastHeight;
 
-    ResizeTransformer(View view,View parent) {
+    ResizeTransformer(View view, View parent) {
         super(view, parent);
     }
 
@@ -38,7 +37,7 @@ class ResizeTransformer extends Transformer{
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) getView().getLayoutParams();
         int newWidth = (int) (getOriginalWidth() * (1 - verticalDragOffset / getxScaleFactor()));
         params.width = newWidth;
-        setLastLeftPosition((int) (getOriginalWidth()-newWidth));
+        setLastLeftPosition((int) (getOriginalWidth() - newWidth));
         getView().setLayoutParams(params);
     }
 
@@ -53,25 +52,23 @@ class ResizeTransformer extends Transformer{
 
     @Override
     public int getViewRightPosition(float verticalDragOffset) {
-        return (int) ((getOriginalWidth())-getMarginRight()*verticalDragOffset);
+        return (int) ((getOriginalWidth()) - getMarginRight() * verticalDragOffset);
     }
 
     @Override
     public float getViewHeight() {
-        return lastHeight==0 ? super.getViewHeight() : lastHeight;
+        return lastHeight == 0 ? super.getViewHeight() : lastHeight;
     }
 
     @Override
     public void updateXPosition(float verticalDragOffset) {
-        Log.i("DEPURAR","OFFSET "+verticalDragOffset);
-        int left,top,right,bottom;
-        left = (int) (getOriginalWidth()-getViewWidth());
+        int left, top, right, bottom;
+        left = (int) (getOriginalWidth() - getViewWidth());
         right = getViewRightPosition(verticalDragOffset);
         setLastRightPosition(right);
         top = getView().getTop();
         bottom = getView().getBottom();
-        getView().layout(left,top,right,bottom);
-        Log.e("DEPURAR", "LEFT " + left + " - RIGHT " + right);
+        getView().layout(left, top, right, bottom);
     }
 
     @Override
@@ -81,12 +78,12 @@ class ResizeTransformer extends Transformer{
 
     @Override
     public boolean isViewAtRight() {
-        return getView().getRight()+getMarginRight() == getParentView().getWidth();
+        return getView().getRight() + getMarginRight() == getParentView().getWidth();
     }
 
     @Override
-    public boolean isViewAtBottom(){
-        return getView().getBottom()+getMarginBottom() >= getParentView().getHeight();
+    public boolean isViewAtBottom() {
+        return getView().getBottom() + getMarginBottom() >= getParentView().getHeight();
     }
 
     @Override
@@ -101,17 +98,17 @@ class ResizeTransformer extends Transformer{
 
     @Override
     public int getHeightPlusMarginTop() {
-        return (int) ((getOriginalHeight()/getyScaleFactor())+getMarginBottom());
+        return (int) ((getOriginalHeight() / getyScaleFactor()) + getMarginBottom());
     }
 
     @Override
     public int getWidthPlusMarginRight() {
-        return (int) ((getOriginalWidth()/getxScaleFactor())+getMarginRight());
+        return (int) ((getOriginalWidth() / getxScaleFactor()) + getMarginRight());
     }
 
     @Override
     public int getMinWidth() {
-        return (int) (getOriginalWidth()/getxScaleFactor());
+        return (int) (getOriginalWidth() / getxScaleFactor());
     }
 
 }

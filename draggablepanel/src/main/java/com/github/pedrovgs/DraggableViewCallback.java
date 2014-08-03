@@ -16,7 +16,6 @@
 package com.github.pedrovgs;
 
 import android.support.v4.widget.ViewDragHelper;
-import android.util.Log;
 import android.view.View;
 
 /**
@@ -135,7 +134,7 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
         if (draggableView.isMinimized() && Math.abs(dy) >= MINIMUM_DY_FOR_VERTICAL_DRAG || (!draggableView.isMinimized() && !draggableView.isDragViewAtBottom())) {
 
             final int topBound = draggableView.getPaddingTop();
-            final int bottomBound = draggableView.getHeight() - draggableView.getDraggedViewHeightPlusMarginTop()  - draggedView.getPaddingBottom();
+            final int bottomBound = draggableView.getHeight() - draggableView.getDraggedViewHeightPlusMarginTop() - draggedView.getPaddingBottom();
 
             newTop = Math.min(Math.max(top, topBound), bottomBound);
         }

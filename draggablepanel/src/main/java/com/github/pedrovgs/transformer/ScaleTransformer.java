@@ -15,9 +15,7 @@
  */
 package com.github.pedrovgs.transformer;
 
-import android.util.Log;
 import android.view.View;
-import android.widget.RelativeLayout;
 
 import com.nineoldandroids.view.ViewHelper;
 
@@ -29,7 +27,7 @@ import com.nineoldandroids.view.ViewHelper;
  */
 class ScaleTransformer extends Transformer {
 
-    public ScaleTransformer(View view, View parent) {
+    ScaleTransformer(View view, View parent) {
         super(view, parent);
     }
 
@@ -65,8 +63,8 @@ class ScaleTransformer extends Transformer {
     }
 
     @Override
-    public boolean isViewAtBottom(){
-        return getView().getBottom()== getParentView().getHeight();
+    public boolean isViewAtBottom() {
+        return getView().getBottom() == getParentView().getHeight();
     }
 
     @Override

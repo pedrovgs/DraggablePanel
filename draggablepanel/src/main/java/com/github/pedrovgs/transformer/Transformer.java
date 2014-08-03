@@ -44,7 +44,7 @@ public abstract class Transformer {
     private float originalHeight;
     private float originalWidth;
 
-    public Transformer(View view,View parent) {
+    public Transformer(View view, View parent) {
         this.view = view;
         this.parent = parent;
     }
@@ -53,15 +53,11 @@ public abstract class Transformer {
         this.xScaleFactor = xScaleFactor;
     }
 
-    public void setyScaleFactor(float yScaleFactor) {
-        this.yScaleFactor = yScaleFactor;
-    }
-
     public View getView() {
         return view;
     }
 
-    public View getParentView(){
+    public View getParentView() {
         return parent;
     }
 
@@ -73,20 +69,28 @@ public abstract class Transformer {
         return yScaleFactor;
     }
 
-    public void setMarginRight(float marginRight) {
-        this.marginRight = marginRight;
-    }
-
-    public void setMarginBottom(float marginBottom) {
-        this.marginBottom = marginBottom;
+    public void setyScaleFactor(float yScaleFactor) {
+        this.yScaleFactor = yScaleFactor;
     }
 
     public float getMarginRight() {
         return marginRight;
     }
 
+    public void setMarginRight(float marginRight) {
+        this.marginRight = marginRight;
+    }
+
     public float getMarginBottom() {
         return marginBottom;
+    }
+
+    public void setMarginBottom(float marginBottom) {
+        this.marginBottom = marginBottom;
+    }
+
+    public float getViewHeight() {
+        return viewHeight < 0f ? view.getMeasuredHeight() : viewHeight;
     }
 
     public void setViewHeight(float viewHeight) {
@@ -99,35 +103,31 @@ public abstract class Transformer {
         }
     }
 
-    public float getViewHeight() {
-        return viewHeight < 0f ? view.getMeasuredHeight() : viewHeight;
-    }
-
-    public void setLastTopPosition(int lastTopPosition) {
-        this.lastTopPosition = lastTopPosition;
-    }
-
-    public void setLastLeftPosition(int lastLeftPosition) {
-        this.lastLeftPosition = lastLeftPosition;
+    public int getLastRightPosition() {
+        if (lastRightPosition <= 0) {
+            lastRightPosition = view.getMeasuredWidth();
+        }
+        return lastRightPosition;
     }
 
     public void setLastRightPosition(int lastRightPosition) {
         this.lastRightPosition = lastRightPosition;
     }
 
-    public int getLastRightPosition(){
-        if(lastRightPosition<=0){
-            lastRightPosition = view.getMeasuredWidth();
-        }
-        return lastRightPosition;
-    }
-
     public int getLastTopPosition() {
         return lastTopPosition;
     }
 
+    public void setLastTopPosition(int lastTopPosition) {
+        this.lastTopPosition = lastTopPosition;
+    }
+
     public int getLastLeftPosition() {
         return lastLeftPosition;
+    }
+
+    public void setLastLeftPosition(int lastLeftPosition) {
+        this.lastLeftPosition = lastLeftPosition;
     }
 
     public abstract void updateXPosition(float verticalDragOffset);
