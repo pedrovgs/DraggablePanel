@@ -80,7 +80,7 @@ public class ResizeTransformer extends Transformer{
 
     @Override
     public int getHeightPlusMarginTop() {
-        return (int) (getView().getHeight()+getMarginBottom());
+        return (int) ((getOriginalHeight()/getyScaleFactor())+getMarginBottom());
     }
 
     @Override
