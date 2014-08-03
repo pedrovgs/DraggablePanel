@@ -181,4 +181,5 @@ public abstract class Transformer {
     public abstract int getWidthPlusMarginRight();
 
     public abstract int getMinWidth();
+
 }
