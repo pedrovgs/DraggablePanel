@@ -49,6 +49,7 @@ public class DraggableView extends RelativeLayout {
     private static final boolean DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT = true;
     private static final int ONE_HUNDRED = 100;
     private static final float SENSITIVITY = 1f;
+    private static final boolean DEFAULT_TOP_VIEW_RESIZE = false;
 
     private View dragView;
     private View secondView;
@@ -59,6 +60,7 @@ public class DraggableView extends RelativeLayout {
     private Transformer transformer;
 
     private boolean enableHorizontalAlphaEffect;
+    private boolean topViewResize;
 
     private DraggableListener listener;
 
@@ -143,10 +145,10 @@ public class DraggableView extends RelativeLayout {
     /**
      * Configure DraggableView to resize top view instead of scale it.
      *
-     * @param topFragmentResize
+     * @param topViewResize
      */
-    public void setTopViewResize(boolean topFragmentResize) {
-
+    public void setTopViewResize(boolean topViewResize) {
+        this.topViewResize = topViewResize;
     }
 
     /**
@@ -513,6 +515,7 @@ public class DraggableView extends RelativeLayout {
      * @param attributes
      */
     private void initializeTransformer(TypedArray attributes) {
+        topViewResize = attributes.getBoolean(R.styleable.draggable_view_top_view_resize,DEFAULT_TOP_VIEW_RESIZE);
         if(shouldScaleView()){
             transformer = new Transformer(dragView,this);
         }else{
@@ -526,8 +529,7 @@ public class DraggableView extends RelativeLayout {
     }
 
     private boolean shouldScaleView() {
-        //TODO change this with an implementation based on styleable attributes.
-        return false;
+        return !topViewResize;
     }
 
     /**
