@@ -21,7 +21,8 @@ import com.nineoldandroids.view.ViewHelper;
 
 /**
  * Transformer extension created to scale the view instead of resize it as the other
- * implementation does.
+ * implementation does. This implementation is based on Nineoldanroids library to scale
+ * the view.
  *
  * @author Pedro Vicente Gómez Sánchez
  */
@@ -31,62 +32,91 @@ class ScaleTransformer extends Transformer {
         super(view, parent);
     }
 
-
+    /**
+     * Uses Nineoldandroids to change the scale in the X axis.
+     *
+     * @param verticalDragOffset used to calculate the new scale.
+     */
     @Override
     public void updateWidth(float verticalDragOffset) {
-        ViewHelper.setScaleX(getView(), 1 - verticalDragOffset / getxScaleFactor());
+        ViewHelper.setScaleX(getView(), 1 - verticalDragOffset / getXScaleFactor());
     }
 
+    /**
+     * Uses Nineoldandroids to change the scale in the Y axis.
+     *
+     * @param verticalDragOffset used to calculate the new scale.
+     */
     @Override
     public void updateHeight(float verticalDragOffset) {
-        ViewHelper.setScaleY(getView(), 1 - verticalDragOffset / getyScaleFactor());
+        ViewHelper.setScaleY(getView(), 1 - verticalDragOffset / getYScaleFactor());
     }
 
-    @Override
-    public int getViewRightPosition(float verticalDragOffset) {
-        return getParentView().getWidth();
-    }
-
+    /**
+     * Uses Nineoldandroids to change the X position of the view.
+     *
+     * @param verticalDragOffset used to calculate the new X position.
+     */
     @Override
     public void updateXPosition(float verticalDragOffset) {
         ViewHelper.setPivotX(getView(), getView().getWidth() - getMarginRight());
     }
 
+    /**
+     * Uses Nineoldandroids to change the Y position of the view.
+     *
+     * @param verticalDragOffset used to calculate the new Y position.
+     */
     @Override
-    public void updateYPosition() {
+    public void updateYPosition(float verticalDragOffset) {
         ViewHelper.setPivotY(getView(), getView().getHeight() - getMarginBottom());
     }
 
+    /**
+     * @return true if the right corner of the view matches with the parent view width.
+     */
     @Override
     public boolean isViewAtRight() {
         return getView().getRight() == getParentView().getWidth();
     }
 
+    /**
+     * @return true if the bottom corner of the view matches with the parent view height.
+     */
     @Override
     public boolean isViewAtBottom() {
         return getView().getBottom() == getParentView().getHeight();
     }
 
+    /**
+     * @return true if the left position of the view is to the right of the twenty five percent of
+     * the parent width.
+     */
     @Override
     public boolean isNextToRightBound() {
         return (getView().getLeft() - getMarginRight()) > getParentView().getWidth() * 0.25;
     }
 
+    /**
+     * @return true if the left position of the view is to the left of the twenty five percent of
+     * the parent width.
+     */
     @Override
     public boolean isNextToLeftBound() {
-        return (getView().getRight() - getMarginRight()) < getParentView().getWidth() * 0.25;
+        return (getView().getLeft() - getMarginRight()) < getParentView().getWidth() * 0.25;
     }
 
+    /**
+     * @return min view height taking into account the configured margin.
+     */
     @Override
-    public int getHeightPlusMarginTop() {
+    public int getMinHeightPlusMargin() {
         return getView().getHeight();
     }
 
-    @Override
-    public int getWidthPlusMarginRight() {
-        return 0;
-    }
-
+    /**
+     * @return min view width.
+     */
     @Override
     public int getMinWidth() {
         return (int) getOriginalWidth();

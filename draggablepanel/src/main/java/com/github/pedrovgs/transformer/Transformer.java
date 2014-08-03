@@ -22,10 +22,14 @@ import com.nineoldandroids.view.ViewHelper;
 
 /**
  * Abstract class created to be implemented by different classes are going to change the size of a
- * view. The most basic one is going to scale the view and the most complex used with VideoView or
- * the YouTubePlayer is going to change the size of the view.
+ * view. The most basic one is going to scale the view and the most complex used with VideoView
+ * is going to change the size of the view.
  * <p/>
  * The view used in this class has to be contained by a RelativeLayout.
+ * <p/>
+ * This class also provide information about the size of the view and the position because different
+ * Transformer implementations could change the size of the view but not the position, like
+ * ScaleTransformer does.
  *
  * @author Pedro Vicente Gómez Sánchez
  */
@@ -33,6 +37,7 @@ public abstract class Transformer {
 
     private final View view;
     private final View parent;
+
     private float viewHeight;
     private float xScaleFactor;
     private float yScaleFactor;
@@ -53,23 +58,15 @@ public abstract class Transformer {
         this.xScaleFactor = xScaleFactor;
     }
 
-    public View getView() {
-        return view;
-    }
-
-    public View getParentView() {
-        return parent;
-    }
-
-    public float getxScaleFactor() {
+    public float getXScaleFactor() {
         return xScaleFactor;
     }
 
-    public float getyScaleFactor() {
+    public float getYScaleFactor() {
         return yScaleFactor;
     }
 
-    public void setyScaleFactor(float yScaleFactor) {
+    public void setYScaleFactor(float yScaleFactor) {
         this.yScaleFactor = yScaleFactor;
     }
 
@@ -93,6 +90,11 @@ public abstract class Transformer {
         return viewHeight < 0f ? view.getMeasuredHeight() : viewHeight;
     }
 
+    /**
+     * Change view height using the LayoutParams of the view.
+     *
+     * @param viewHeight to change..
+     */
     public void setViewHeight(float viewHeight) {
         this.viewHeight = viewHeight;
         if (viewHeight > 0f) {
@@ -130,14 +132,25 @@ public abstract class Transformer {
         this.lastLeftPosition = lastLeftPosition;
     }
 
+    protected View getView() {
+        return view;
+    }
+
+    protected View getParentView() {
+        return parent;
+    }
+
     public abstract void updateXPosition(float verticalDragOffset);
 
-    public abstract void updateYPosition();
+    public abstract void updateYPosition(float verticalDragOffset);
 
     public abstract void updateWidth(float verticalDragOffset);
 
     public abstract void updateHeight(float verticalDragOffset);
 
+    /**
+     * @return height of the view before it has change the size.
+     */
     public float getOriginalHeight() {
         if (originalHeight == 0) {
             originalHeight = viewHeight < 0 ? view.getMeasuredHeight() : viewHeight;
@@ -145,6 +158,9 @@ public abstract class Transformer {
         return originalHeight;
     }
 
+    /**
+     * @return width of the view before it has change the size.
+     */
     public float getOriginalWidth() {
         if (originalWidth == 0) {
             originalWidth = view.getMeasuredWidth();
@@ -152,23 +168,16 @@ public abstract class Transformer {
         return originalWidth;
     }
 
+    /**
+     * @return current width of the view.
+     */
     public int getViewWidth() {
         return getView().getMeasuredWidth();
     }
 
-    public abstract int getViewRightPosition(float verticalDragOffset);
-
-    public abstract boolean isViewAtRight();
-
     public boolean isViewAtTop() {
         return view.getTop() == 0;
     }
-
-    public abstract boolean isViewAtBottom();
-
-    public abstract boolean isNextToRightBound();
-
-    public abstract boolean isNextToLeftBound();
 
     public boolean isAboveTheMiddle() {
         int parentHeight = parent.getHeight();
@@ -176,10 +185,23 @@ public abstract class Transformer {
         return viewYPosition < (parentHeight * 0.5);
     }
 
-    public abstract int getHeightPlusMarginTop();
+    public abstract boolean isViewAtRight();
 
-    public abstract int getWidthPlusMarginRight();
+    public abstract boolean isViewAtBottom();
 
+    public abstract boolean isNextToRightBound();
+
+    public abstract boolean isNextToLeftBound();
+
+    /**
+     * @return min possible height, after apply the transformation, plus the margin right.
+     */
+    public abstract int getMinHeightPlusMargin();
+
+
+    /**
+     * @return min possible width, after apply the transformation.
+     */
     public abstract int getMinWidth();
 
 }

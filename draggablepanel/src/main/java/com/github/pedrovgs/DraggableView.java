@@ -92,7 +92,7 @@ public class DraggableView extends RelativeLayout {
      * @param yScaleFactor
      */
     public void setYTopViewScaleFactor(float yScaleFactor) {
-        transformer.setyScaleFactor(yScaleFactor);
+        transformer.setYScaleFactor(yScaleFactor);
     }
 
     /**
@@ -181,7 +181,7 @@ public class DraggableView extends RelativeLayout {
      * Close the custom view applying an animation to close the view to the right side of the screen.
      */
     public void closeToRight() {
-        if (viewDragHelper.smoothSlideViewTo(dragView, (int) transformer.getOriginalWidth(), getHeight() - transformer.getHeightPlusMarginTop())) {
+        if (viewDragHelper.smoothSlideViewTo(dragView, (int) transformer.getOriginalWidth(), getHeight() - transformer.getMinHeightPlusMargin())) {
             ViewCompat.postInvalidateOnAnimation(this);
             notifyCloseToRightListener();
         }
@@ -191,7 +191,7 @@ public class DraggableView extends RelativeLayout {
      * Close the custom view applying an animation to close the view to the left side of the screen.
      */
     public void closeToLeft() {
-        if (viewDragHelper.smoothSlideViewTo(dragView, (int) -transformer.getOriginalWidth(), getHeight() - transformer.getHeightPlusMarginTop())) {
+        if (viewDragHelper.smoothSlideViewTo(dragView, (int) -transformer.getOriginalWidth(), getHeight() - transformer.getMinHeightPlusMargin())) {
             ViewCompat.postInvalidateOnAnimation(this);
             notifyCloseToLeftListener();
         }
@@ -369,7 +369,7 @@ public class DraggableView extends RelativeLayout {
      */
     void changeDragViewPosition() {
         transformer.updateXPosition(getVerticalDragOffset());
-        transformer.updateYPosition();
+        transformer.updateYPosition(getVerticalDragOffset());
     }
 
     /**
@@ -519,7 +519,7 @@ public class DraggableView extends RelativeLayout {
         transformer = transformerFactory.getTransformer(topViewResize, dragView, this);
         transformer.setViewHeight(attributes.getDimension(R.styleable.draggable_view_top_view_height, DEFAULT_TOP_VIEW_HEIGHT));
         transformer.setXScaleFactor(attributes.getFloat(R.styleable.draggable_view_top_view_x_scale_factor, DEFAULT_SCALE_FACTOR));
-        transformer.setyScaleFactor(attributes.getFloat(R.styleable.draggable_view_top_view_y_scale_factor, DEFAULT_SCALE_FACTOR));
+        transformer.setYScaleFactor(attributes.getFloat(R.styleable.draggable_view_top_view_y_scale_factor, DEFAULT_SCALE_FACTOR));
         transformer.setMarginRight(attributes.getDimension(R.styleable.draggable_view_top_view_margin_right, DEFAULT_TOP_VIEW_MARGIN));
         transformer.setMarginBottom(attributes.getDimension(R.styleable.draggable_view_top_view_margin_bottom, DEFAULT_TOP_VIEW_MARGIN));
     }
@@ -595,7 +595,7 @@ public class DraggableView extends RelativeLayout {
      * @return the difference between the custom view height and the dragged view height.
      */
     private float getVerticalDragRange() {
-        return getHeight() - transformer.getHeightPlusMarginTop();
+        return getHeight() - transformer.getMinHeightPlusMargin();
     }
 
     /**
@@ -635,7 +635,7 @@ public class DraggableView extends RelativeLayout {
     }
 
     public int getDraggedViewHeightPlusMarginTop() {
-        return transformer.getHeightPlusMarginTop();
+        return transformer.getMinHeightPlusMargin();
     }
 
 }
