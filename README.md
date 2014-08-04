@@ -158,14 +158,22 @@ draggablePanel.setTopFragmentMarginBottom(topViewMargnBottom);
 
 Similar customizable attributes are available programatically or using styleable attributes in ``DraggableView``.
 
+Do you want to resize the top view instead of scale it? Add ``dragable_view:top_view_resize`` attribute to your DraggableView:
 
-TODO
-----
+```xml
+<com.github.pedrovgs.DraggableView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:draggable_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/draggable_view"
+            draggable_view:top_view_resize="true">
+```
 
-I don't have too much time to work on this library and I'm going to put in this section some things to do in the future:
+
+Do you want to contribute? TODO
+-------------------------------
 
 * Support Android Studio / IntelliJ layout preview mode.
-* Create other draggable component to resize elements instead of scale the view. This new component is needed to drag and resize videos.
+* Add Travis CI support wity .travis.yml file.
 
 
 Developed By
@@ -184,6 +192,7 @@ Who's using it
 --------------
 
 * [El Rubius Vídeos][9] using the first beta release.
+* [DudePerfect Vídeos] [18] using the first beta release.
 
 *Does your app use DraggablePanel? If you want to be featured on this list tell me on [Twitter][10]
 
@@ -234,3 +243,4 @@ License
 [15]: https://github.com/square/picasso
 [16]: http://actionbarsherlock.com/
 [17]: https://developers.google.com/youtube/android/player/
+[18]: https://play.google.com/store/apps/details?id=com.nero.dudeperfect

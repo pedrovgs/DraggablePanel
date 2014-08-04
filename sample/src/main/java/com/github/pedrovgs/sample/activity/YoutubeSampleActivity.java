@@ -39,7 +39,7 @@ import com.squareup.picasso.Picasso;
 public class YoutubeSampleActivity extends FragmentActivity {
 
     private static final String YOUTUBE_API_KEY = "AIzaSyC1rMU-mkhoyTvBIdTnYU0dss0tU9vtK48";
-    private static final String VIDEO_KEY = "pK2zYHWDZKo";
+    private static final String VIDEO_KEY = "gsjtg7m1MMM";
     private static final String VIDEO_POSTER_THUMBNAIL = "http://4.bp.blogspot.com/-BT6IshdVsoA/UjfnTo_TkBI/AAAAAAAAMWk/JvDCYCoFRlQ/s1600/xmenDOFP.wobbly.1.jpg";
     private static final String SECOND_VIDEO_POSTER_THUMBNAIL = "http://media.comicbook.com/wp-content/uploads/2013/07/x-men-days-of-future-past-wolverine-poster.jpg";
     private static final String VIDEO_POSTER_TITLE = "X-Men: Days of Future Past";

@@ -35,6 +35,7 @@ public class DraggablePanel extends FrameLayout {
     private static final float DEFAULT_SCALE_FACTOR = 2;
     private static final float DEFAULT_TOP_FRAGMENT_MARGIN = 0;
     private static final boolean DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT = true;
+    private static final boolean DEFAULT_TOP_FRAGMENT_RESIZE = false;
 
     private DraggableView draggableView;
     private DraggableListener draggableListener;
