@@ -60,13 +60,13 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
         if (draggableView.isDragViewAtBottom()) {
             draggableView.changeDragViewViewAlpha();
         } else {
+            draggableView.restoreAlpha();
             draggableView.changeDragViewScale();
             draggableView.changeDragViewPosition();
             draggableView.changeSecondViewAlpha();
             draggableView.changeSecondViewPosition();
             draggableView.changeBackgroundAlpha();
         }
-        draggableView.invalidate();
     }
 
     /**

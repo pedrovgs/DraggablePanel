@@ -296,8 +296,9 @@ public class DraggableView extends RelativeLayout {
         int lastTopPosition = transformer.getLastTopPosition();
         int lastLeftPosition = transformer.getLastLeftPosition();
         int newRight = transformer.getLastRightPosition();
-        dragView.layout(lastLeftPosition, lastTopPosition, newRight, lastTopPosition + newTop);
-        secondView.layout(0, lastTopPosition + newTop, right, lastTopPosition + bottom);
+        int newBottom = lastTopPosition + newTop;
+        dragView.layout(lastLeftPosition, lastTopPosition, newRight, newBottom);
+        secondView.layout(0, newBottom, right, lastTopPosition + bottom);
     }
 
     /**
@@ -415,6 +416,15 @@ public class DraggableView extends RelativeLayout {
                 alpha = 1;
             }
             ViewHelper.setAlpha(dragView, alpha);
+        }
+    }
+
+    /**
+     * Restore view alpha to 1
+     */
+    void restoreAlpha() {
+        if (enableHorizontalAlphaEffect && ViewHelper.getAlpha(dragView) < 1) {
+            ViewHelper.setAlpha(dragView, 1);
         }
     }
 

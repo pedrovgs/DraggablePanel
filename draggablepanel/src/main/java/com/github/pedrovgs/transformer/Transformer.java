@@ -54,12 +54,12 @@ public abstract class Transformer {
         this.parent = parent;
     }
 
-    public void setXScaleFactor(float xScaleFactor) {
-        this.xScaleFactor = xScaleFactor;
-    }
-
     public float getXScaleFactor() {
         return xScaleFactor;
+    }
+
+    public void setXScaleFactor(float xScaleFactor) {
+        this.xScaleFactor = xScaleFactor;
     }
 
     public float getYScaleFactor() {
