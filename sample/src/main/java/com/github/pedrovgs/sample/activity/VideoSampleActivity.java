@@ -135,8 +135,6 @@ public class VideoSampleActivity extends FragmentActivity {
      */
     private void initializeVideoView() {
         Uri path = Uri.parse(APPLICATION_RAW_PATH + R.raw.video);
-        MediaController mediaController = new MediaController(this);
-        videoView.setMediaController(mediaController);
         videoView.setVideoURI(path);
         videoView.start();
     }

@@ -60,13 +60,13 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
         if (draggableView.isDragViewAtBottom()) {
             draggableView.changeDragViewViewAlpha();
         } else {
+            draggableView.restoreAlpha();
             draggableView.changeDragViewScale();
             draggableView.changeDragViewPosition();
             draggableView.changeSecondViewAlpha();
             draggableView.changeSecondViewPosition();
             draggableView.changeBackgroundAlpha();
         }
-        draggableView.invalidate();
     }
 
     /**
@@ -112,7 +112,7 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
      */
     @Override
     public int clampViewPositionHorizontal(View child, int left, int dx) {
-        int newLeft = 0;
+        int newLeft = draggedView.getLeft();
         if ((draggableView.isMinimized() && Math.abs(dx) > MINIMUN_DX_FOR_HORIZONTAL_DRAG) || (draggableView.isDragViewAtBottom() && !draggableView.isDragViewAtRight())) {
             newLeft = left;
         }
@@ -130,10 +130,11 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
      */
     @Override
     public int clampViewPositionVertical(View child, int top, int dy) {
-        int newTop = draggableView.getHeight() - draggedView.getHeight();
+        int newTop = draggableView.getHeight() - draggableView.getDraggedViewHeightPlusMarginTop();
         if (draggableView.isMinimized() && Math.abs(dy) >= MINIMUM_DY_FOR_VERTICAL_DRAG || (!draggableView.isMinimized() && !draggableView.isDragViewAtBottom())) {
+
             final int topBound = draggableView.getPaddingTop();
-            final int bottomBound = draggableView.getHeight() - child.getHeight() - child.getPaddingBottom();
+            final int bottomBound = draggableView.getHeight() - draggableView.getDraggedViewHeightPlusMarginTop() - draggedView.getPaddingBottom();
 
             newTop = Math.min(Math.max(top, topBound), bottomBound);
         }
