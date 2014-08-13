@@ -277,8 +277,22 @@ public class DraggableView extends RelativeLayout {
         boolean isSecondViewHit = isViewHit(secondView, (int) ev.getX(), (int) ev.getY());
         if (isMaximized()) {
             dragView.dispatchTouchEvent(ev);
+        } else {
+            dragView.dispatchTouchEvent(cloneMotionEventWithAction(ev, MotionEvent.ACTION_CANCEL));
         }
         return isDragViewHit || isSecondViewHit;
+    }
+
+    /**
+     * Clone given motion event and set specified action. This method is useful, when we want to
+     * cancel event propagation in child views by sending event with {@link MotionEvent#ACTION_CANCEL} action.
+     * @param event event to clone
+     * @param action new action
+     * @return cloned motion event
+     */
+    private MotionEvent cloneMotionEventWithAction(MotionEvent event, int action) {
+        return MotionEvent.obtain(event.getDownTime(), event.getEventTime(), action,
+                event.getX(), event.getY(), event.getMetaState());
     }
 
     /**
