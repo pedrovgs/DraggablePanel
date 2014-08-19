@@ -1,6 +1,7 @@
 Draggable Panel
 ===============
 
+[![Build Status](https://travis-ci.org/pedrovgs/DraggablePanel.svg?branch=develop)](https://travis-ci.org/pedrovgs/DraggablePanel)
 
 Draggable Panel is an Android library created to build a draggable user interface similar to the new YouTube draggable video component based on Fragments or Views.
 
@@ -184,7 +185,6 @@ Do you want to contribute? TODO
 -------------------------------
 
 * Support Android Studio / IntelliJ layout preview mode.
-* Add Travis CI support with .travis.yml file.
 
 
 Developed By
