@@ -312,7 +312,8 @@ public class DraggableView extends RelativeLayout {
         int newRight = transformer.getLastRightPosition();
         int newBottom = lastTopPosition + newTop;
         dragView.layout(lastLeftPosition, lastTopPosition, newRight, newBottom);
-        secondView.layout(0, newBottom, right, lastTopPosition + bottom);
+        secondView.layout(0, (int) transformer.getOriginalHeight(), right, getHeight());
+
     }
 
     /**
