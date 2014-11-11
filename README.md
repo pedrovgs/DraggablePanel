@@ -89,7 +89,7 @@ private void initializeDraggablePanel() throws Resources.NotFoundException {
 Import DraggablePanel dependency
 --------------------------------
 
-Download the project, compile it using maven or gradle and import ``draggablepanel-1.2.aar`` into your project.
+Download the project, compile it using maven or gradle and import ``draggablepanel-1.3.aar`` into your project.
 
 Or declare it into your pom.xml. This library uses NineOldAndroid library and Android support library v4 version 19.1.0, you have to provide this dependencies from your local artifact repository or from maven central repository.
 
@@ -97,7 +97,7 @@ Or declare it into your pom.xml. This library uses NineOldAndroid library and An
 <dependency>
   <groupId>com.github.pedrovgs</groupId>
   <artifactId>draggablepanel</artifactId>
-  <version>1.2</version>
+  <version>1.3</version>
   <type>aar</type>
 </dependency>
 ```
@@ -107,7 +107,7 @@ Or into your build.gradle
 
 ```groovy
 dependencies {
-    compile 'com.github.pedrovgs:draggablepanel:1.2@aar'
+    compile 'com.github.pedrovgs:draggablepanel:1.3@aar'
     compile 'com.android.support:support-v4:19.1.+'
     compile 'com.nineoldandroids:library:2.4.+'
 }
