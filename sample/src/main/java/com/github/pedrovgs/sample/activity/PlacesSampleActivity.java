@@ -15,7 +15,6 @@
  */
 package com.github.pedrovgs.sample.activity;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.TypedValue;
@@ -237,10 +236,8 @@ public class PlacesSampleActivity extends DIFragmentActivity {
 
   /**
    * Initialize the DraggablePanel with top and bottom Fragments and apply all the configuration.
-   *
-   * @throws Resources.NotFoundException
    */
-  private void initializeDraggablePanel() throws Resources.NotFoundException {
+  private void initializeDraggablePanel() {
     draggablePanel.setFragmentManager(getSupportFragmentManager());
     draggablePanel.setTopFragment(placeFragment);
     draggablePanel.setBottomFragment(mapFragment);

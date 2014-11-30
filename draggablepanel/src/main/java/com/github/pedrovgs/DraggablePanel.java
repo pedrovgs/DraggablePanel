@@ -250,7 +250,7 @@ public class DraggablePanel extends FrameLayout {
    *
    * @param attrs to analyze.
    */
-  private final void initializeAttrs(AttributeSet attrs) {
+  private void initializeAttrs(AttributeSet attrs) {
     TypedArray attributes = getContext().obtainStyledAttributes(attrs, R.styleable.draggable_panel);
     this.topFragmentHeight =
         attributes.getDimension(R.styleable.draggable_panel_top_fragment_height,

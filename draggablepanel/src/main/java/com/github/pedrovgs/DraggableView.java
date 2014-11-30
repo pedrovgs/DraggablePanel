@@ -492,8 +492,10 @@ public class DraggableView extends RelativeLayout {
     this.getLocationOnScreen(parentLocation);
     int screenX = parentLocation[0] + x;
     int screenY = parentLocation[1] + y;
-    return screenX >= viewLocation[0] && screenX < viewLocation[0] + view.getWidth() &&
-        screenY >= viewLocation[1] && screenY < viewLocation[1] + view.getHeight();
+    return screenX >= viewLocation[0]
+        && screenX < viewLocation[0] + view.getWidth()
+        && screenY >= viewLocation[1]
+        && screenY < viewLocation[1] + view.getHeight();
   }
 
   /**
