@@ -36,56 +36,46 @@ import com.squareup.picasso.Picasso;
  */
 public class TvShowRenderer extends Renderer<TvShowViewModel> {
 
-    private final Context context;
+  private final Context context;
 
-    @InjectView(R.id.iv_thumbnail)
-    ImageView thumbnailImageView;
-    @InjectView(R.id.tv_title)
-    TextView titleTextView;
-    @InjectView(R.id.tv_seasons_counter)
-    TextView seasonsCounterTextView;
+  @InjectView(R.id.iv_thumbnail) ImageView thumbnailImageView;
+  @InjectView(R.id.tv_title) TextView titleTextView;
+  @InjectView(R.id.tv_seasons_counter) TextView seasonsCounterTextView;
 
-    public TvShowRenderer(Context context) {
-        this.context = context;
-    }
+  public TvShowRenderer(Context context) {
+    this.context = context;
+  }
 
-    /**
-     * Apply ButterKnife inject method to support view injections.
-     *
-     * @param view
-     */
-    @Override
-    protected void setUpView(View view) {
-        ButterKnife.inject(this, view);
-    }
+  /**
+   * Apply ButterKnife inject method to support view injections.
+   */
+  @Override protected void setUpView(View view) {
+    ButterKnife.inject(this, view);
+  }
 
-    @Override
-    protected void hookListeners(View view) {
-        //Empty
-    }
+  @Override protected void hookListeners(View view) {
+    //Empty
+  }
 
-    /**
-     * Inflate the layout associated to this renderer
-     *
-     * @param layoutInflater
-     * @param viewGroup
-     * @return
-     */
-    @Override
-    protected View inflate(LayoutInflater layoutInflater, ViewGroup viewGroup) {
-        return layoutInflater.inflate(R.layout.tv_show_row, viewGroup, false);
-    }
+  /**
+   * Inflate the layout associated to this renderer
+   */
+  @Override protected View inflate(LayoutInflater layoutInflater, ViewGroup viewGroup) {
+    return layoutInflater.inflate(R.layout.tv_show_row, viewGroup, false);
+  }
 
-    /**
-     * Render the TvShowViewModel information.
-     */
-    @Override
-    protected void render() {
-        TvShowViewModel tvShow = getContent();
-        Picasso.with(context).load(tvShow.getPoster()).placeholder(R.drawable.tv_show_placeholder).into(thumbnailImageView);
+  /**
+   * Render the TvShowViewModel information.
+   */
+  @Override protected void render() {
+    TvShowViewModel tvShow = getContent();
+    Picasso.with(context)
+        .load(tvShow.getPoster())
+        .placeholder(R.drawable.tv_show_placeholder)
+        .into(thumbnailImageView);
 
-        titleTextView.setText(tvShow.getTitle().toUpperCase());
+    titleTextView.setText(tvShow.getTitle().toUpperCase());
 
-        seasonsCounterTextView.setText(tvShow.getNumberOfSeasons() + " seasons");
-    }
+    seasonsCounterTextView.setText(tvShow.getNumberOfSeasons() + " seasons");
+  }
 }

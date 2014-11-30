@@ -16,33 +16,32 @@
 package com.github.pedrovgs.sample.viewmodel;
 
 /**
- * EpisodeViewModel implementation created to contain all the episode information and to keep all the representation
- * state of an episode.
+ * EpisodeViewModel implementation created to contain all the episode information and to keep all
+ * the representation state of an episode.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
 public class EpisodeViewModel {
 
-    private final String title;
-    private final String publishDate;
+  private final String title;
+  private final String publishDate;
 
-    public EpisodeViewModel(String title, String publishDate) {
-        this.title = title;
-        this.publishDate = publishDate;
-    }
+  public EpisodeViewModel(String title, String publishDate) {
+    this.title = title;
+    this.publishDate = publishDate;
+  }
 
-    /**
-     * @return title associated to the EpisodeViewModel.
-     */
-    public String getTitle() {
-        return title;
-    }
+  /**
+   * @return title associated to the EpisodeViewModel.
+   */
+  public String getTitle() {
+    return title;
+  }
 
-    /**
-     *
-     * @return publish date associated to the EpisodeViewModel
-     */
-    public String getPublishDate() {
-        return publishDate;
-    }
+  /**
+   * @return publish date associated to the EpisodeViewModel
+   */
+  public String getPublishDate() {
+    return publishDate;
+  }
 }

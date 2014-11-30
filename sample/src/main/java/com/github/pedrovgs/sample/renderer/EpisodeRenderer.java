@@ -33,60 +33,44 @@ import com.pedrogomez.renderers.Renderer;
  */
 public class EpisodeRenderer extends Renderer<EpisodeViewModel> {
 
-    @InjectView(R.id.tv_episode_number)
-    TextView episodeNumberTextView;
-    @InjectView(R.id.tv_episode_title)
-    TextView episodeTitleTextView;
-    @InjectView(R.id.tv_episode_publish_date)
-    TextView episodeDateTextView;
+  @InjectView(R.id.tv_episode_number) TextView episodeNumberTextView;
+  @InjectView(R.id.tv_episode_title) TextView episodeTitleTextView;
+  @InjectView(R.id.tv_episode_publish_date) TextView episodeDateTextView;
 
-    private int position;
+  private int position;
 
-    /**
-     * Configure the position associated to this renderer.
-     *
-     * @param position
-     */
-    public void setPosition(int position) {
-        this.position = position;
-    }
+  /**
+   * Configure the position associated to this renderer.
+   */
+  public void setPosition(int position) {
+    this.position = position;
+  }
 
-    /**
-     * Apply ButterKnife inject method to support view injections.
-     *
-     * @param view
-     */
-    @Override
-    protected void setUpView(View view) {
-        ButterKnife.inject(this, view);
-    }
+  /**
+   * Apply ButterKnife inject method to support view injections.
+   */
+  @Override protected void setUpView(View view) {
+    ButterKnife.inject(this, view);
+  }
 
-    @Override
-    protected void hookListeners(View view) {
-        //Empty
-    }
+  @Override protected void hookListeners(View view) {
+    //Empty
+  }
 
-    /**
-     * Inflate the layout associated to this renderer
-     *
-     * @param layoutInflater
-     * @param viewGroup
-     * @return
-     */
-    @Override
-    protected View inflate(LayoutInflater layoutInflater, ViewGroup viewGroup) {
-        return layoutInflater.inflate(R.layout.episode_row, viewGroup, false);
-    }
+  /**
+   * Inflate the layout associated to this renderer
+   */
+  @Override protected View inflate(LayoutInflater layoutInflater, ViewGroup viewGroup) {
+    return layoutInflater.inflate(R.layout.episode_row, viewGroup, false);
+  }
 
-    /**
-     * Render the EpisodeViewModel information.
-     */
-    @Override
-    protected void render() {
-        EpisodeViewModel episode = getContent();
-        episodeNumberTextView.setText(String.format("%02d", position + 1));
-        episodeTitleTextView.setText(episode.getTitle());
-        episodeDateTextView.setText(episode.getPublishDate());
-    }
-
+  /**
+   * Render the EpisodeViewModel information.
+   */
+  @Override protected void render() {
+    EpisodeViewModel episode = getContent();
+    episodeNumberTextView.setText(String.format("%02d", position + 1));
+    episodeTitleTextView.setText(episode.getTitle());
+    episodeDateTextView.setText(episode.getPublishDate());
+  }
 }

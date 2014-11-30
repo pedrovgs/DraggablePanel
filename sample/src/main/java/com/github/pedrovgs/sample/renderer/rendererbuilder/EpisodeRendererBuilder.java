@@ -19,23 +19,21 @@ import com.github.pedrovgs.sample.renderer.EpisodeRenderer;
 import com.github.pedrovgs.sample.viewmodel.EpisodeViewModel;
 import com.pedrogomez.renderers.Renderer;
 import com.pedrogomez.renderers.RendererBuilder;
-
 import java.util.Collection;
 
 /**
- * RendererBuilder implementation created to map EpisodeViewModel with EpisodeRenderer implementations. More info in
- * this link: {@link https://github.com/pedrovgs/Renderers}
+ * RendererBuilder implementation created to map EpisodeViewModel with EpisodeRenderer
+ * implementations. More info in this link: {@link https://github.com/pedrovgs/Renderers}
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
 public class EpisodeRendererBuilder extends RendererBuilder<EpisodeViewModel> {
 
-    public EpisodeRendererBuilder(Collection<Renderer<EpisodeViewModel>> prototypes) {
-        super(prototypes);
-    }
+  public EpisodeRendererBuilder(Collection<Renderer<EpisodeViewModel>> prototypes) {
+    super(prototypes);
+  }
 
-    @Override
-    protected Class getPrototypeClass(EpisodeViewModel episodeViewModel) {
-        return EpisodeRenderer.class;
-    }
+  @Override protected Class getPrototypeClass(EpisodeViewModel episodeViewModel) {
+    return EpisodeRenderer.class;
+  }
 }
