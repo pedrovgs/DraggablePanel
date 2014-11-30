@@ -27,7 +27,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
-
 import com.github.pedrovgs.transformer.Transformer;
 import com.github.pedrovgs.transformer.TransformerFactory;
 import com.nineoldandroids.view.ViewHelper;
@@ -42,7 +41,7 @@ public class DraggableView extends RelativeLayout {
 
     private static final int DEFAULT_SCALE_FACTOR = 2;
     private static final int DEFAULT_TOP_VIEW_MARGIN = 30;
-    private static final float DEFAULT_TOP_VIEW_HEIGHT = -1;
+    private static final int DEFAULT_TOP_VIEW_HEIGHT = -1;
     private static final float SLIDE_TOP = 0f;
     private static final float SLIDE_BOTTOM = 1f;
     private static final boolean DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT = true;
