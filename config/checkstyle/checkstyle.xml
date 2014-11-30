@@ -3,6 +3,9 @@
     "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
     "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
 
+<!-- THIS CHECKSYTLE CONFIGURATION IS SIMILAR TO THE ONE USED BY SQUARE INC. IF YOU WANT TO
+     CONFIGURE YOUR IDE TO USE THIS CHECKSTYLE TAKE A LOOK AT https://github.com/square/java-code-styles-->
+    
 <module name="Checker">
   <!--module name="NewlineAtEndOfFile"/-->
   <module name="FileLength"/>

@@ -13,4 +13,5 @@ before_script:
   - ./mvn-install-youtubeplayerapi.sh
 
 script:
+  ./gradlew checkstyle
   ./gradlew build
