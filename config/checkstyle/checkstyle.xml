@@ -5,7 +5,7 @@
 
 <!-- THIS CHECKSYTLE CONFIGURATION IS SIMILAR TO THE ONE USED BY SQUARE INC. IF YOU WANT TO
      CONFIGURE YOUR IDE TO USE THIS CHECKSTYLE TAKE A LOOK AT https://github.com/square/java-code-styles-->
-    
+
 <module name="Checker">
   <!--module name="NewlineAtEndOfFile"/-->
   <module name="FileLength"/>
@@ -64,7 +64,7 @@
     <!-- Checks for Size Violations.                    -->
     <!-- See http://checkstyle.sf.net/config_sizes.html -->
     <module name="LineLength">
-      <property name="max" value="100"/>
+      <property name="max" value="120"/>
     </module>
 
     <!--module name="ParameterNumber"/-->
