@@ -113,21 +113,21 @@ class ResizeTransformer extends Transformer {
     }
 
     /**
-     * @return true if the left position of the view is to the right of the seventy five percent of the
-     * parent view width.
-     */
-    @Override
-    public boolean isNextToRightBound() {
-        return (getView().getLeft() - getMarginRight()) > getParentView().getWidth() * 0.75;
-    }
-
-    /**
      * @return true if the left position of the view is to the left of the twenty five percent of
      * the parent width.
      */
     @Override
     public boolean isNextToLeftBound() {
         return (getView().getLeft() - getMarginRight()) < getParentView().getWidth() * 0.25;
+    }
+
+    /**
+     * @return true if the left position of the view is to the right of the seventy five percent of the
+     * parent view width.
+     */
+    @Override
+    public boolean isNextToRightBound() {
+        return (getView().getLeft() - getMarginRight()) > getParentView().getWidth() * 0.75;
     }
 
     /**
