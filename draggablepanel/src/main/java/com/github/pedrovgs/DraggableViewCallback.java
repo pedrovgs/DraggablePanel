@@ -165,7 +165,7 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
      * @param xVel
      */
     private void triggerOnReleaseActionsWhileHorizontalDrag(float xVel) {
-        if (xVel < 0 && xVel <= X_MIN_VELOCITY) {
+        if (xVel < 0 && xVel <= -X_MIN_VELOCITY) {
             draggableView.closeToLeft();
         } else if (xVel > 0 && xVel >= X_MIN_VELOCITY) {
             draggableView.closeToRight();
