@@ -36,51 +36,42 @@ import com.squareup.picasso.Picasso;
  */
 public class PlaceRenderer extends Renderer<PlaceViewModel> {
 
-    private Context context;
+  private Context context;
 
-    @InjectView(R.id.tv_name)
-    TextView nameTextView;
-    @InjectView(R.id.iv_photo)
-    ImageView photoImageView;
+  @InjectView(R.id.tv_name) TextView nameTextView;
+  @InjectView(R.id.iv_photo) ImageView photoImageView;
 
-    public PlaceRenderer(Context context) {
-        this.context = context;
-    }
+  public PlaceRenderer(Context context) {
+    this.context = context;
+  }
 
-    /**
-     * Apply ButterKnife inject method to support view injections.
-     *
-     * @param view
-     */
-    @Override
-    protected void setUpView(View view) {
-        ButterKnife.inject(this, view);
-    }
+  /**
+   * Apply ButterKnife inject method to support view injections.
+   */
+  @Override protected void setUpView(View view) {
+    ButterKnife.inject(this, view);
+  }
 
-    @Override
-    protected void hookListeners(View view) {
-        //Empty
-    }
+  @Override protected void hookListeners(View view) {
+    //Empty
+  }
 
-    /**
-     * Inflate the layout associated to this renderer
-     *
-     * @param layoutInflater
-     * @param viewGroup
-     * @return
-     */
-    @Override
-    protected View inflate(LayoutInflater layoutInflater, ViewGroup viewGroup) {
-        return layoutInflater.inflate(R.layout.place_row, viewGroup, false);
-    }
+  /**
+   * Inflate the layout associated to this renderer
+   */
+  @Override protected View inflate(LayoutInflater layoutInflater, ViewGroup viewGroup) {
+    return layoutInflater.inflate(R.layout.place_row, viewGroup, false);
+  }
 
-    /**
-     * Render the PlaceViewModel information.
-     */
-    @Override
-    protected void render() {
-        PlaceViewModel place = getContent();
-        nameTextView.setText(place.getName());
-        Picasso.with(context).load(place.getPhoto()).placeholder(R.drawable.maps_placeholder).into(photoImageView);
-    }
+  /**
+   * Render the PlaceViewModel information.
+   */
+  @Override protected void render() {
+    PlaceViewModel place = getContent();
+    nameTextView.setText(place.getName());
+    Picasso.with(context)
+        .load(place.getPhoto())
+        .placeholder(R.drawable.maps_placeholder)
+        .into(photoImageView);
+  }
 }

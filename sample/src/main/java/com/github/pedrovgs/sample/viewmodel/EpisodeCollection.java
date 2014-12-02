@@ -16,81 +16,63 @@
 package com.github.pedrovgs.sample.viewmodel;
 
 import com.pedrogomez.renderers.AdapteeCollection;
-
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
- * EpisodeCollection implementation used to contains all the episodes information for each TvShowViewModel. This implementation
- * is based on a LinkedList.
+ * EpisodeCollection implementation used to contains all the episodes information for each
+ * TvShowViewModel. This implementation is based on a LinkedList.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
 public class EpisodeCollection implements AdapteeCollection<EpisodeViewModel> {
 
-    private final List<EpisodeViewModel> episodes;
+  private final List<EpisodeViewModel> episodes;
 
-    public EpisodeCollection() {
-        this.episodes = new LinkedList<EpisodeViewModel>();
-    }
+  public EpisodeCollection() {
+    this.episodes = new LinkedList<EpisodeViewModel>();
+  }
 
-    /**
-     * Return the number of episodes inside the collection.
-     *
-     * @return
-     */
-    @Override
-    public int size() {
-        return episodes.size();
-    }
+  /**
+   * Return the number of episodes inside the collection.
+   */
+  @Override public int size() {
+    return episodes.size();
+  }
 
-    /**
-     * Return a episode obtained by position.
-     *
-     * @param i
-     * @return
-     */
-    @Override
-    public EpisodeViewModel get(int i) {
-        return episodes.get(i);
-    }
+  /**
+   * Return a episode obtained by position.
+   */
+  @Override public EpisodeViewModel get(int i) {
+    return episodes.get(i);
+  }
 
-    /**
-     * Add an episode to the collection.
-     *
-     * @param episodeViewModel
-     */
-    @Override
-    public void add(EpisodeViewModel episodeViewModel) {
-        episodes.add(episodeViewModel);
-    }
+  /**
+   * Add an episode to the collection.
+   */
+  @Override public void add(EpisodeViewModel episodeViewModel) {
+    episodes.add(episodeViewModel);
+  }
 
-    /**
-     * Remove an episode from the collection.
-     *
-     * @param episodeViewModel
-     */
-    @Override
-    public void remove(EpisodeViewModel episodeViewModel) {
-        episodes.remove(episodeViewModel);
-    }
+  /**
+   * Remove an episode from the collection.
+   */
+  @Override public void remove(EpisodeViewModel episodeViewModel) {
+    episodes.remove(episodeViewModel);
+  }
 
-    /**
-     * Add a collection of EpisodeViewModel to the collection.
-     * @param episodeViewModels
-     */
-    @Override
-    public void addAll(Collection<EpisodeViewModel> episodeViewModels) {
-        episodes.addAll(episodeViewModels);
-    }
+  /**
+   * Add a collection of EpisodeViewModel to the collection.
+   */
+  @Override public void addAll(Collection<EpisodeViewModel> episodeViewModels) {
+    episodes.addAll(episodeViewModels);
+  }
 
-    /**
-     * Remove a collection of EpisodeViewModel to the collection.
-     * @param episodeViewModels
-     */
-    @Override
-    public void removeAll(Collection<EpisodeViewModel> episodeViewModels) {
-        episodes.removeAll(episodeViewModels);
-    }
+  /**
+   * Remove a collection of EpisodeViewModel to the collection.
+   */
+  @Override public void removeAll(Collection<EpisodeViewModel> episodeViewModels) {
+    episodes.removeAll(episodeViewModels);
+  }
 }

@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.github.pedrovgs">
 
-    <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="20" />
+  <uses-sdk
+      android:minSdkVersion="8"
+      android:targetSdkVersion="20"/>
 
 </manifest>

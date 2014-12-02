@@ -33,7 +33,6 @@ import com.pedrogomez.renderers.Renderer;
 import com.pedrogomez.renderers.RendererAdapter;
 import dagger.Module;
 import dagger.Provides;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -43,90 +42,72 @@ import java.util.List;
  * @author Pedro Vicente Gómez Sánchez.
  */
 @Module(injects = {
-        PlacesSampleActivity.class,
-        TvShowsActivity.class,
-        DraggablePanelApplication.class})
-public class MainModule {
+    PlacesSampleActivity.class, TvShowsActivity.class, DraggablePanelApplication.class
+}) public class MainModule {
 
-    private final Application application;
+  private final Application application;
 
-    public MainModule(Application application) {
-        this.application = application;
-    }
+  public MainModule(Application application) {
+    this.application = application;
+  }
 
-    /**
-     * Provisioning of a LayoutInflater instance obtained from the application context.
-     *
-     * @return
-     */
-    @Provides
-    protected LayoutInflater provideLayoutInflater() {
-        return LayoutInflater.from(application.getBaseContext());
-    }
+  /**
+   * Provisioning of a LayoutInflater instance obtained from the application context.
+   */
+  @Provides protected LayoutInflater provideLayoutInflater() {
+    return LayoutInflater.from(application.getBaseContext());
+  }
 
-    /**
-     * Provisioning of the base context obtained from the application.
-     *
-     * @return
-     */
-    @Provides
-    protected Context provideContext() {
-        return this.application.getBaseContext();
-    }
+  /**
+   * Provisioning of the base context obtained from the application.
+   */
+  @Provides protected Context provideContext() {
+    return this.application.getBaseContext();
+  }
 
-    /**
-     * Provisioning of a RendererBuilder implementation to work with places ListView. More information in this library:
-     * {@link https://github.com/pedrovgs/Renderers}
-     *
-     * @param context
-     * @return
-     */
-    @Provides
-    protected PlacesCollectionRendererBuilder providePlaceCollectionRendererBuilder(Context context) {
-        List<Renderer<PlaceViewModel>> prototypes = new LinkedList<Renderer<PlaceViewModel>>();
-        prototypes.add(new PlaceRenderer(context));
-        return new PlacesCollectionRendererBuilder(prototypes);
-    }
+  /**
+   * Provisioning of a RendererBuilder implementation to work with places ListView. More
+   * information in this library: {@link https://github.com/pedrovgs/Renderers}
+   */
+  @Provides protected PlacesCollectionRendererBuilder providePlaceCollectionRendererBuilder(
+      Context context) {
+    List<Renderer<PlaceViewModel>> prototypes = new LinkedList<Renderer<PlaceViewModel>>();
+    prototypes.add(new PlaceRenderer(context));
+    return new PlacesCollectionRendererBuilder(prototypes);
+  }
 
-    /**
-     * Provisioning of a RendererAdapter implementation to work with places ListView. More information in this library:
-     * {@link https://github.com/pedrovgs/Renderers}
-     *
-     * @param layoutInflater
-     * @param placesCollectionRendererBuilder
-     * @param placeCollectionViewModel
-     * @return
-     */
-    @Provides
-    protected RendererAdapter<PlaceViewModel> providePlacesRendererAdapter(LayoutInflater layoutInflater, PlacesCollectionRendererBuilder placesCollectionRendererBuilder, PlaceCollectionViewModel placeCollectionViewModel) {
-        return new RendererAdapter<PlaceViewModel>(layoutInflater, placesCollectionRendererBuilder, placeCollectionViewModel);
-    }
+  /**
+   * Provisioning of a RendererAdapter implementation to work with places ListView. More
+   * information in this library: {@link https://github.com/pedrovgs/Renderers}
+   */
+  @Provides protected RendererAdapter<PlaceViewModel> providePlacesRendererAdapter(
+      LayoutInflater layoutInflater,
+      PlacesCollectionRendererBuilder placesCollectionRendererBuilder,
+      PlaceCollectionViewModel placeCollectionViewModel) {
+    return new RendererAdapter<PlaceViewModel>(layoutInflater, placesCollectionRendererBuilder,
+        placeCollectionViewModel);
+  }
 
-    /**
-     * Provisioning of a RendererBuilder implementation to work with tv shows ListView. More information in this library:
-     * {@link https://github.com/pedrovgs/Renderers}
-     *
-     * @param context
-     * @return
-     */
-    @Provides
-    protected TvShowCollectionRendererBuilder provideTvShowCollectionRendererBuilder(Context context) {
-        List<Renderer<TvShowViewModel>> prototypes = new LinkedList<Renderer<TvShowViewModel>>();
-        prototypes.add(new TvShowRenderer(context));
-        return new TvShowCollectionRendererBuilder(prototypes);
-    }
+  /**
+   * Provisioning of a RendererBuilder implementation to work with tv shows ListView. More
+   * information in this library: {@link https://github.com/pedrovgs/Renderers}
+   */
+  @Provides protected TvShowCollectionRendererBuilder provideTvShowCollectionRendererBuilder(
+      Context context) {
+    List<Renderer<TvShowViewModel>> prototypes = new LinkedList<Renderer<TvShowViewModel>>();
+    prototypes.add(new TvShowRenderer(context));
+    return new TvShowCollectionRendererBuilder(prototypes);
+  }
 
-    /**
-     * Provisioning of a RendererAdapter implementation to work with tv shows ListView. More information in this library:
-     * {@link https://github.com/pedrovgs/Renderers}
-     *
-     * @param layoutInflater
-     * @param tvShowCollectionRendererBuilder
-     * @param tvShowCollectionViewModel
-     * @return
-     */
-    @Provides
-    protected RendererAdapter<TvShowViewModel> provideTvShowRendererAdapter(LayoutInflater layoutInflater, TvShowCollectionRendererBuilder tvShowCollectionRendererBuilder, TvShowCollectionViewModel tvShowCollectionViewModel) {
-        return new RendererAdapter<TvShowViewModel>(layoutInflater, tvShowCollectionRendererBuilder, tvShowCollectionViewModel);
-    }
+  /**
+   * Provisioning of a RendererAdapter implementation to work with tv shows ListView. More
+   * information in this library: {@link https://github.com/pedrovgs/Renderers}
+   */
+  @Provides protected RendererAdapter<TvShowViewModel> provideTvShowRendererAdapter(
+      LayoutInflater layoutInflater,
+      TvShowCollectionRendererBuilder tvShowCollectionRendererBuilder,
+      TvShowCollectionViewModel tvShowCollectionViewModel) {
+    return new RendererAdapter<TvShowViewModel>(layoutInflater, tvShowCollectionRendererBuilder,
+        tvShowCollectionViewModel);
+  }
 }

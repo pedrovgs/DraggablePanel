@@ -1,26 +1,24 @@
 buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:0.12.2'
-    }
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'com.android.tools.build:gradle:0.12.2'
+  }
 }
 
 allprojects {
 
-    version = VERSION_NAME
-    group = GROUP
+  version = VERSION_NAME
+  group = GROUP
 
-    repositories {
-        mavenCentral()
-        mavenLocal()
-    }
+  repositories {
+    mavenCentral()
+    mavenLocal()
+  }
 }
 
 def isReleaseBuild() {
-    return version.contains("SNAPSHOT") == false
+  return version.contains("SNAPSHOT") == false
 }
-
-
 

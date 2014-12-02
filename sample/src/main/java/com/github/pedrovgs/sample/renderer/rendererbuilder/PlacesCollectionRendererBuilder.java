@@ -19,23 +19,21 @@ import com.github.pedrovgs.sample.renderer.PlaceRenderer;
 import com.github.pedrovgs.sample.viewmodel.PlaceViewModel;
 import com.pedrogomez.renderers.Renderer;
 import com.pedrogomez.renderers.RendererBuilder;
-
 import java.util.Collection;
 
 /**
- * RendererBuilder implementation created to map PlaceViewModel with PlaceRenderer implementations. More info in
- * this link: {@link https://github.com/pedrovgs/Renderers}
+ * RendererBuilder implementation created to map PlaceViewModel with PlaceRenderer implementations.
+ * More info in this link: {@link https://github.com/pedrovgs/Renderers}
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
 public class PlacesCollectionRendererBuilder extends RendererBuilder<PlaceViewModel> {
 
-    public PlacesCollectionRendererBuilder(Collection<Renderer<PlaceViewModel>> prototypes) {
-        super(prototypes);
-    }
+  public PlacesCollectionRendererBuilder(Collection<Renderer<PlaceViewModel>> prototypes) {
+    super(prototypes);
+  }
 
-    @Override
-    protected Class getPrototypeClass(PlaceViewModel placeViewModel) {
-        return PlaceRenderer.class;
-    }
+  @Override protected Class getPrototypeClass(PlaceViewModel placeViewModel) {
+    return PlaceRenderer.class;
+  }
 }

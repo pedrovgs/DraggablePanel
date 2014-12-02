@@ -27,34 +27,29 @@ import com.github.pedrovgs.sample.R;
  */
 public class MainActivity extends Activity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.inject(this);
-    }
+  @Override protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    ButterKnife.inject(this);
+  }
 
-    @OnClick(R.id.iv_places)
-    void openSimpleSampleActivity() {
-        Intent intent = new Intent(this, PlacesSampleActivity.class);
-        startActivity(intent);
-    }
+  @OnClick(R.id.iv_places) void openSimpleSampleActivity() {
+    Intent intent = new Intent(this, PlacesSampleActivity.class);
+    startActivity(intent);
+  }
 
-    @OnClick(R.id.iv_tv_shows)
-    void openTvShowsSampleActivity() {
-        Intent intent = new Intent(this, TvShowsActivity.class);
-        startActivity(intent);
-    }
+  @OnClick(R.id.iv_tv_shows) void openTvShowsSampleActivity() {
+    Intent intent = new Intent(this, TvShowsActivity.class);
+    startActivity(intent);
+  }
 
-    @OnClick(R.id.iv_youtube)
-    void openYoutubeSampleActivity() {
-        Intent intent = new Intent(this, YoutubeSampleActivity.class);
-        startActivity(intent);
-    }
+  @OnClick(R.id.iv_youtube) void openYoutubeSampleActivity() {
+    Intent intent = new Intent(this, YoutubeSampleActivity.class);
+    startActivity(intent);
+  }
 
-    @OnClick(R.id.iv_video)
-    void openVideoSampleActivity() {
-        Intent intent = new Intent(this, VideoSampleActivity.class);
-        startActivity(intent);
-    }
+  @OnClick(R.id.iv_video) void openVideoSampleActivity() {
+    Intent intent = new Intent(this, VideoSampleActivity.class);
+    startActivity(intent);
+  }
 }

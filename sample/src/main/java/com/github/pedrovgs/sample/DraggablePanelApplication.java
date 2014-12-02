@@ -20,33 +20,30 @@ import com.github.pedrovgs.sample.di.MainModule;
 import dagger.ObjectGraph;
 
 /**
- * Application implementation created to handle the dependency container implementation provided by the ObjectGraph
- * entity.
+ * Application implementation created to handle the dependency container implementation provided by
+ * the ObjectGraph entity.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
 public class DraggablePanelApplication extends Application {
 
-    private ObjectGraph objectGraph;
+  private ObjectGraph objectGraph;
 
-    /**
-     * Override method used to initialize the dependency container graph with the MainModule.
-     */
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        MainModule mainModule = new MainModule(this);
-        objectGraph = ObjectGraph.create(mainModule);
-        objectGraph.inject(this);
-        objectGraph.injectStatics();
-    }
+  /**
+   * Override method used to initialize the dependency container graph with the MainModule.
+   */
+  @Override public void onCreate() {
+    super.onCreate();
+    MainModule mainModule = new MainModule(this);
+    objectGraph = ObjectGraph.create(mainModule);
+    objectGraph.inject(this);
+    objectGraph.injectStatics();
+  }
 
-    /**
-     * Inject an object to provide all the needed dependencies.
-     *
-     * @param object
-     */
-    public void inject(Object object) {
-        objectGraph.inject(object);
-    }
+  /**
+   * Inject an object to provide all the needed dependencies.
+   */
+  public void inject(Object object) {
+    objectGraph.inject(object);
+  }
 }

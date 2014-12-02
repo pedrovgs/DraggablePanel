@@ -16,50 +16,50 @@
 package com.github.pedrovgs.sample.viewmodel;
 
 /**
- * PlaceViewModel implementation created to contain all the place information and to keep all the representation
- * state of a place.
+ * PlaceViewModel implementation created to contain all the place information and to keep all the
+ * representation state of a place.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
 public class PlaceViewModel {
 
-    private final String name;
-    private final String photo;
-    private final double latitude;
-    private final double longitude;
+  private final String name;
+  private final String photo;
+  private final double latitude;
+  private final double longitude;
 
-    public PlaceViewModel(String name, String photo, double latitude, double longitude) {
-        this.name = name;
-        this.photo = photo;
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
+  public PlaceViewModel(String name, String photo, double latitude, double longitude) {
+    this.name = name;
+    this.photo = photo;
+    this.latitude = latitude;
+    this.longitude = longitude;
+  }
 
-    /**
-     * @return the place name.
-     */
-    public String getName() {
-        return name;
-    }
+  /**
+   * @return the place name.
+   */
+  public String getName() {
+    return name;
+  }
 
-    /**
-     * @return the place photo.
-     */
-    public String getPhoto() {
-        return photo;
-    }
+  /**
+   * @return the place photo.
+   */
+  public String getPhoto() {
+    return photo;
+  }
 
-    /**
-     * @return the place latitude.
-     */
-    public double getLatitude() {
-        return latitude;
-    }
+  /**
+   * @return the place latitude.
+   */
+  public double getLatitude() {
+    return latitude;
+  }
 
-    /**
-     * @return the place longitude.
-     */
-    public double getLongitude() {
-        return longitude;
-    }
+  /**
+   * @return the place longitude.
+   */
+  public double getLongitude() {
+    return longitude;
+  }
 }
