@@ -290,13 +290,15 @@ public class DraggableView extends RelativeLayout {
    * Override method to configure the dragged view and secondView layout properly.
    */
   @Override protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-    int newTop = (int) transformer.getViewHeight();
-    int lastTopPosition = transformer.getLastTopPosition();
-    int lastLeftPosition = transformer.getLastLeftPosition();
-    int newRight = transformer.getLastRightPosition();
-    int newBottom = lastTopPosition + newTop;
-    dragView.layout(lastLeftPosition, lastTopPosition, newRight, newBottom);
-    secondView.layout(0, (int) transformer.getOriginalHeight(), right, getHeight());
+    if (isInEditMode())
+      super.onLayout(changed, left, top, right, bottom);
+    else if (isDragViewAtTop()) {
+      dragView.layout(left, top, right, (int) transformer.getOriginalHeight());
+      secondView.layout(left, (int) transformer.getOriginalHeight(), right, bottom);
+
+      ViewHelper.setY(dragView, top);
+      ViewHelper.setY(secondView, transformer.getOriginalHeight());
+    }
   }
 
   /**

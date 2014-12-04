@@ -26,10 +26,10 @@ import android.view.View;
  */
 class DraggableViewCallback extends ViewDragHelper.Callback {
 
-  private static final int MINIMUN_DX_FOR_HORIZONTAL_DRAG = 25;
+  private static final int MINIMUM_DX_FOR_HORIZONTAL_DRAG = 10;
   private static final int MINIMUM_DY_FOR_VERTICAL_DRAG = 15;
-  private static final float X_MIN_VELOCITY = 1300;
-  private static final float Y_MIN_VELOCITY = 1300;
+  private static final float X_MIN_VELOCITY = 1500;
+  private static final float Y_MIN_VELOCITY = 1000;
 
   private DraggableView draggableView;
   private View draggedView;
@@ -108,7 +108,7 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
    */
   @Override public int clampViewPositionHorizontal(View child, int left, int dx) {
     int newLeft = draggedView.getLeft();
-    if ((draggableView.isMinimized() && Math.abs(dx) > MINIMUN_DX_FOR_HORIZONTAL_DRAG) || (
+    if ((draggableView.isMinimized() && Math.abs(dx) > MINIMUM_DX_FOR_HORIZONTAL_DRAG) || (
         draggableView.isDragViewAtBottom()
             && !draggableView.isDragViewAtRight())) {
       newLeft = left;
@@ -163,7 +163,7 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
    * the x axis velocity.
    */
   private void triggerOnReleaseActionsWhileHorizontalDrag(float xVel) {
-    if (xVel < 0 && xVel <= X_MIN_VELOCITY) {
+    if (xVel < 0 && xVel <= -X_MIN_VELOCITY) {
       draggableView.closeToLeft();
     } else if (xVel > 0 && xVel >= X_MIN_VELOCITY) {
       draggableView.closeToRight();
