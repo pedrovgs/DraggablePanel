@@ -32,38 +32,22 @@ class ScaleTransformer extends Transformer {
   }
 
   /**
-   * Uses Nineoldandroids to change the scale in the X axis.
+   * Uses Nineoldandroids to change the scale.
    *
    * @param verticalDragOffset used to calculate the new scale.
    */
-  @Override public void updateWidth(float verticalDragOffset) {
+  @Override public void updateScale(float verticalDragOffset) {
     ViewHelper.setScaleX(getView(), 1 - verticalDragOffset / getXScaleFactor());
-  }
-
-  /**
-   * Uses Nineoldandroids to change the scale in the Y axis.
-   *
-   * @param verticalDragOffset used to calculate the new scale.
-   */
-  @Override public void updateHeight(float verticalDragOffset) {
     ViewHelper.setScaleY(getView(), 1 - verticalDragOffset / getYScaleFactor());
   }
 
   /**
-   * Uses Nineoldandroids to change the X position of the view.
+   * Uses Nineoldandroids to change the position of the view.
    *
-   * @param verticalDragOffset used to calculate the new X position.
+   * @param verticalDragOffset used to calculate the new position.
    */
-  @Override public void updateXPosition(float verticalDragOffset) {
+  @Override public void updatePosition(float verticalDragOffset) {
     ViewHelper.setPivotX(getView(), getView().getWidth() - getMarginRight());
-  }
-
-  /**
-   * Uses Nineoldandroids to change the Y position of the view.
-   *
-   * @param verticalDragOffset used to calculate the new Y position.
-   */
-  @Override public void updateYPosition(float verticalDragOffset) {
     ViewHelper.setPivotY(getView(), getView().getHeight() - getMarginBottom());
   }
 

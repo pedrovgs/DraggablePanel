@@ -37,7 +37,6 @@ public abstract class Transformer {
   private final View view;
   private final View parent;
 
-  private int viewHeight;
   private int marginRight;
   private int marginBottom;
 
@@ -84,22 +83,17 @@ public abstract class Transformer {
     this.marginBottom = Math.round(marginBottom);
   }
 
-  public int getViewHeight() {
-    return viewHeight < 0f ? view.getMeasuredHeight() : viewHeight;
-  }
-
   /**
    * Change view height using the LayoutParams of the view.
    *
    * @param newHeight to change..
    */
   public void setViewHeight(int newHeight) {
-    viewHeight = newHeight;
-    if (viewHeight > 0) {
-      originalHeight = viewHeight;
+    if (newHeight > 0) {
+      originalHeight = newHeight;
       RelativeLayout.LayoutParams layoutParams =
           (RelativeLayout.LayoutParams) view.getLayoutParams();
-      layoutParams.height = viewHeight;
+      layoutParams.height = newHeight;
       view.setLayoutParams(layoutParams);
     }
   }
@@ -112,20 +106,16 @@ public abstract class Transformer {
     return parent;
   }
 
-  public abstract void updateXPosition(float verticalDragOffset);
+  public abstract void updatePosition(float verticalDragOffset);
 
-  public abstract void updateYPosition(float verticalDragOffset);
-
-  public abstract void updateWidth(float verticalDragOffset);
-
-  public abstract void updateHeight(float verticalDragOffset);
+  public abstract void updateScale(float verticalDragOffset);
 
   /**
    * @return height of the view before it has change the size.
    */
   public int getOriginalHeight() {
     if (originalHeight == 0) {
-      originalHeight = viewHeight < 0 ? view.getMeasuredHeight() : viewHeight;
+      originalHeight = view.getMeasuredHeight();
     }
     return originalHeight;
   }
@@ -138,13 +128,6 @@ public abstract class Transformer {
       originalWidth = view.getMeasuredWidth();
     }
     return originalWidth;
-  }
-
-  /**
-   * @return current width of the view.
-   */
-  public int getViewWidth() {
-    return getView().getMeasuredWidth();
   }
 
   public boolean isViewAtTop() {

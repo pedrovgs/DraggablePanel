@@ -355,8 +355,7 @@ public class DraggableView extends RelativeLayout {
    * displacement while the view is dragged.
    */
   void changeDragViewPosition() {
-    transformer.updateXPosition(getVerticalDragOffset());
-    transformer.updateYPosition(getVerticalDragOffset());
+    transformer.updatePosition(getVerticalDragOffset());
   }
 
   /**
@@ -370,8 +369,7 @@ public class DraggableView extends RelativeLayout {
    * Modify dragged view scale based on the dragged view vertical position and the scale factor.
    */
   void changeDragViewScale() {
-    transformer.updateWidth(getVerticalDragOffset());
-    transformer.updateHeight(getVerticalDragOffset());
+    transformer.updateScale(getVerticalDragOffset());
   }
 
   /**
