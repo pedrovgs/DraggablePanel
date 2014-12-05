@@ -173,5 +173,5 @@ public abstract class Transformer {
   /**
    * @return min possible width, after apply the transformation.
    */
-  public abstract int getMinWidth();
+  public abstract int getMinWidthPlusMarginRight();
 }

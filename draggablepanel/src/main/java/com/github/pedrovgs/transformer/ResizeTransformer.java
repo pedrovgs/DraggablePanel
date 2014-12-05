@@ -70,13 +70,13 @@ class ResizeTransformer extends Transformer {
    *
    * @param verticalDragOffset used to calculate the new X position.
    */
-  @Override public void updateXPosition(float verticalDragOffset) {
-    int left, top, right, bottom;
-    left = getOriginalWidth() - getViewWidth();
-    right = getViewRightPosition(verticalDragOffset);
+  @Override
+  public void updateXPosition(float verticalDragOffset) {
+    int right = getViewRightPosition(verticalDragOffset);
+    int left = right - getViewWidth();
+    int top = getView().getTop();
+    int bottom = top + getViewHeight();
 
-    top = getView().getTop();
-    bottom = getView().getBottom();
     getView().layout(left, top, right, bottom);
   }
 
@@ -129,8 +129,8 @@ class ResizeTransformer extends Transformer {
   /**
    * Uses the X scale factor to calculate the min possible width.
    */
-  @Override public int getMinWidth() {
-    return (int) (getOriginalWidth() / getXScaleFactor());
+  @Override public int getMinWidthPlusMarginRight() {
+    return (int) (getOriginalWidth() * (1 - 1 / getXScaleFactor()) + getMarginRight());
   }
 
   /**

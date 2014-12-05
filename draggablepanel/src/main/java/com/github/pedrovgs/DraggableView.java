@@ -555,7 +555,7 @@ public class DraggableView extends RelativeLayout {
    */
   private boolean smoothSlideTo(float slideOffset) {
     final int topBound = getPaddingTop();
-    int x = (int) (slideOffset * (getWidth() - transformer.getMinWidth()));
+    int x = (int) (slideOffset * (getWidth() - transformer.getMinWidthPlusMarginRight()));
     int y = (int) (topBound + slideOffset * getVerticalDragRange());
     if (viewDragHelper.smoothSlideViewTo(dragView, x, y)) {
       ViewCompat.postInvalidateOnAnimation(this);

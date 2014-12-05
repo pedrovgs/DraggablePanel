@@ -107,7 +107,7 @@ class ScaleTransformer extends Transformer {
   /**
    * @return min view width.
    */
-  @Override public int getMinWidth() {
+  @Override public int getMinWidthPlusMarginRight() {
     return (int) getOriginalWidth();
   }
 
