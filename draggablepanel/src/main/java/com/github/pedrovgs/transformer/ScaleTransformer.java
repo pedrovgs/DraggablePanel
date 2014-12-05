@@ -71,14 +71,14 @@ class ScaleTransformer extends Transformer {
    * @return true if the right corner of the view matches with the parent view width.
    */
   @Override public boolean isViewAtRight() {
-    return getView().getRight() == getParentView().getWidth();
+      return isEqualsIntegerFloat(getView().getRight(), getParentView().getWidth());
   }
 
   /**
    * @return true if the bottom corner of the view matches with the parent view height.
    */
   @Override public boolean isViewAtBottom() {
-    return getView().getBottom() == getParentView().getHeight();
+      return isEqualsIntegerFloat(getView().getBottom(), getParentView().getHeight());
   }
 
   /**

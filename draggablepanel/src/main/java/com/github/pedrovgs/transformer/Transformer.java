@@ -202,4 +202,9 @@ public abstract class Transformer {
    * @return min possible width, after apply the transformation.
    */
   public abstract int getMinWidth();
+
+  protected boolean isEqualsIntegerFloat(float floatValue, int integerValue){
+      int delta = Math.round(floatValue) - integerValue;
+      return Math.abs(delta) <= 1;
+  }
 }
