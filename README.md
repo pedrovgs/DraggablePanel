@@ -168,17 +168,6 @@ Do you want to resize the top view instead of scale it? Add ``dragable_view:top_
             draggable_view:top_view_resize="true">
 ```
 
-Building the sample app
------------------------
-
-youtube-android-player-api is required to successfully build and open the sample app in Android Studio.
-Unfortunately this library has not been published to Maven central, so you will need to download and deploy it locally.
-The [mvn-install-youtubeplayerapi.sh script][19] can be used to easily do this with the following three commands:
-
-    wget https://raw.githubusercontent.com/wuman/youtube-android-player-mvn-install/master/mvn-install-youtubeplayerapi.sh
-    chmod +x mvn-install-youtubeplayerapi.sh
-    ./mvn-install-youtubeplayerapi.sh
-
 
 Do you want to contribute? TODO
 -------------------------------
