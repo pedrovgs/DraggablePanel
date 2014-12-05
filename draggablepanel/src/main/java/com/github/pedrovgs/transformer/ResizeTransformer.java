@@ -98,7 +98,7 @@ class ResizeTransformer extends Transformer {
    * Uses the Y scale factor to calculate the min possible height.
    */
   @Override public int getMinHeightPlusMargin() {
-    return (int) ((getOriginalHeight() / getYScaleFactor()) + getMarginBottom());
+    return (int) (getOriginalHeight() * (1 - 1 / getYScaleFactor()) + getMarginBottom());
   }
 
   /**
