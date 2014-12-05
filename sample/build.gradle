@@ -9,7 +9,7 @@ dependencies {
   compile 'com.jakewharton:butterknife:4.0.1'
   compile 'com.squareup.dagger:dagger:1.1.0'
   compile 'com.github.pedrovgs:renderers:1.0.9'
-  compile 'com.google.android.gms:play-services:4.1.32'
+  compile 'com.google.android.gms:play-services:6.1.71'
   compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
   compile files('libs/YouTubeAndroidPlayerApi.jar')
 }
