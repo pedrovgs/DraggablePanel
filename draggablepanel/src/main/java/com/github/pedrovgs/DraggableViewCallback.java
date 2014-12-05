@@ -26,7 +26,7 @@ import android.view.View;
  */
 class DraggableViewCallback extends ViewDragHelper.Callback {
 
-  private static final int MINIMUN_DX_FOR_HORIZONTAL_DRAG = 25;
+  private static final int MINIMUN_DX_FOR_HORIZONTAL_DRAG = 5;
   private static final int MINIMUM_DY_FOR_VERTICAL_DRAG = 15;
   private static final float X_MIN_VELOCITY = 1300;
   private static final float Y_MIN_VELOCITY = 1300;
@@ -163,7 +163,7 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
    * the x axis velocity.
    */
   private void triggerOnReleaseActionsWhileHorizontalDrag(float xVel) {
-    if (xVel < 0 && xVel <= X_MIN_VELOCITY) {
+    if (xVel < 0 && xVel <= -X_MIN_VELOCITY) {
       draggableView.closeToLeft();
     } else if (xVel > 0 && xVel >= X_MIN_VELOCITY) {
       draggableView.closeToRight();
