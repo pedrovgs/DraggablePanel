@@ -66,19 +66,19 @@ class ScaleTransformer extends Transformer {
   }
 
   /**
-   * @return true if the left position of the view is to the right of the twenty five percent of
-   * the parent width.
-   */
-  @Override public boolean isNextToRightBound() {
-    return (getView().getRight() - getMarginRight()) > getParentView().getWidth() * 1.25;
-  }
-
-  /**
-   * @return true if the left position of the view is to the left of the twenty five percent of
-   * the parent width.
+   * @return true if the left position of the view is to the left of sixty percent of the parent
+   * width.
    */
   @Override public boolean isNextToLeftBound() {
     return (getView().getRight() - getMarginRight()) < getParentView().getWidth() * 0.6;
+  }
+
+  /**
+   * @return true if the right position of the view is to the right of the one hundred twenty five
+   * five percent of the parent view width.
+   */
+  @Override public boolean isNextToRightBound() {
+    return (getView().getRight() - getMarginRight()) > getParentView().getWidth() * 1.25;
   }
 
   /**
@@ -92,7 +92,7 @@ class ScaleTransformer extends Transformer {
    * @return min view width.
    */
   @Override public int getMinWidthPlusMarginRight() {
-    return (int) getOriginalWidth();
+    return getOriginalWidth();
   }
 
 }
