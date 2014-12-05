@@ -86,7 +86,7 @@ class ScaleTransformer extends Transformer {
    * the parent width.
    */
   @Override public boolean isNextToRightBound() {
-    return (getView().getLeft() - getMarginRight()) > getParentView().getWidth() * 0.25;
+    return (getView().getRight() - getMarginRight()) > getParentView().getWidth() * 1.25;
   }
 
   /**
@@ -94,7 +94,7 @@ class ScaleTransformer extends Transformer {
    * the parent width.
    */
   @Override public boolean isNextToLeftBound() {
-    return (getView().getLeft() - getMarginRight()) < getParentView().getWidth() * 0.25;
+    return (getView().getRight() - getMarginRight()) < getParentView().getWidth() * 0.6;
   }
 
   /**
