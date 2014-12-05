@@ -2,11 +2,15 @@ language: android
 
 android:
   components:
-    - build-tools-21.1.1
-    - android-21
+    - build-tools-20.0.0
+    - android-20
     - extra-google-google_play_services
     - extra-google-m2repository
 
+before_script:
+  - wget https://raw.githubusercontent.com/wuman/youtube-android-player-mvn-install/master/mvn-install-youtubeplayerapi.sh
+  - chmod +x mvn-install-youtubeplayerapi.sh
+  - ./mvn-install-youtubeplayerapi.sh
 
 script:
   ./gradlew checkstyle build
