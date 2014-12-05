@@ -41,7 +41,7 @@ class ResizeTransformer extends Transformer {
     RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) getView().getLayoutParams();
     int newWidth = (int) (getOriginalWidth() * (1 - verticalDragOffset / getXScaleFactor()));
     params.width = newWidth;
-    setLastLeftPosition((int) (getOriginalWidth() - newWidth));
+
     getView().setLayoutParams(params);
   }
 
@@ -74,7 +74,7 @@ class ResizeTransformer extends Transformer {
     int left, top, right, bottom;
     left = (int) (getOriginalWidth() - getViewWidth());
     right = getViewRightPosition(verticalDragOffset);
-    setLastRightPosition(right);
+
     top = getView().getTop();
     bottom = getView().getBottom();
     getView().layout(left, top, right, bottom);

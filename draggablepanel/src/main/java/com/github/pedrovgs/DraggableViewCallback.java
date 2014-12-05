@@ -54,7 +54,6 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
    * @param dy change in Y position from the last call.
    */
   @Override public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
-    draggableView.updateLastDragViewPosition(top, left);
     if (draggableView.isDragViewAtBottom()) {
       draggableView.changeDragViewViewAlpha();
     } else {

@@ -111,7 +111,4 @@ class ScaleTransformer extends Transformer {
     return (int) getOriginalWidth();
   }
 
-  @Override public int getLastLeftPosition() {
-    return 0;
-  }
 }

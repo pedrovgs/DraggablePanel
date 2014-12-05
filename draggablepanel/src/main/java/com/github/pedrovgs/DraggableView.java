@@ -351,15 +351,6 @@ public class DraggableView extends RelativeLayout {
   }
 
   /**
-   * Update the last top and left position when the view is dragged. This last positions are used
-   * to recreate the dragged view and secondView positions if the requestLayout method is called.
-   */
-  void updateLastDragViewPosition(int lastTopPosition, int lastLeftPosition) {
-    transformer.setLastTopPosition(lastTopPosition);
-    transformer.setLastLeftPosition(lastLeftPosition);
-  }
-
-  /**
    * Modify dragged view pivot based on the dragged view vertical position to simulate a horizontal
    * displacement while the view is dragged.
    */

@@ -42,9 +42,6 @@ public abstract class Transformer {
   private float yScaleFactor;
   private float marginRight;
   private float marginBottom;
-  private int lastTopPosition;
-  private int lastLeftPosition;
-  private int lastRightPosition;
   private float originalHeight;
   private float originalWidth;
 
@@ -103,33 +100,6 @@ public abstract class Transformer {
       layoutParams.height = (int) viewHeight;
       view.setLayoutParams(layoutParams);
     }
-  }
-
-  public int getLastRightPosition() {
-    if (lastRightPosition <= 0) {
-      lastRightPosition = view.getMeasuredWidth();
-    }
-    return lastRightPosition;
-  }
-
-  public void setLastRightPosition(int lastRightPosition) {
-    this.lastRightPosition = lastRightPosition;
-  }
-
-  public int getLastTopPosition() {
-    return lastTopPosition;
-  }
-
-  public void setLastTopPosition(int lastTopPosition) {
-    this.lastTopPosition = lastTopPosition;
-  }
-
-  public int getLastLeftPosition() {
-    return lastLeftPosition;
-  }
-
-  public void setLastLeftPosition(int lastLeftPosition) {
-    this.lastLeftPosition = lastLeftPosition;
   }
 
   protected View getView() {
