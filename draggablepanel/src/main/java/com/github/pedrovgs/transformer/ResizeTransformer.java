@@ -91,7 +91,7 @@ class ResizeTransformer extends Transformer {
    * the parent width.
    */
   @Override public boolean isNextToLeftBound() {
-    return (getView().getLeft() - getMarginRight()) < getParentView().getWidth() * 0.1;
+    return (getView().getLeft() - getMarginRight()) < getParentView().getWidth() * 0.05;
   }
 
   /**
