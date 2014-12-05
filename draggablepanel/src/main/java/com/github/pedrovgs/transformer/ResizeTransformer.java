@@ -31,7 +31,7 @@ class ResizeTransformer extends Transformer {
 
   ResizeTransformer(View view, View parent) {
     super(view, parent);
-    layoutParams = (RelativeLayout.LayoutParams)view.getLayoutParams();
+    layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
   }
 
   /**
