@@ -34,9 +34,9 @@ import android.widget.FrameLayout;
  */
 public class DraggablePanel extends FrameLayout {
 
-  private static final float DEFAULT_TOP_FRAGMENT_HEIGHT = 200;
+  private static final int DEFAULT_TOP_FRAGMENT_HEIGHT = 200;
+  private static final int DEFAULT_TOP_FRAGMENT_MARGIN = 0;
   private static final float DEFAULT_SCALE_FACTOR = 2;
-  private static final float DEFAULT_TOP_FRAGMENT_MARGIN = 0;
   private static final boolean DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT = true;
   private static final boolean DEFAULT_TOP_FRAGMENT_RESIZE = false;
 
@@ -46,9 +46,9 @@ public class DraggablePanel extends FrameLayout {
   private FragmentManager fragmentManager;
   private Fragment topFragment;
   private Fragment bottomFragment;
-  private float topFragmentHeight;
-  private float topFragmentMarginRight;
-  private float topFragmentMarginBottom;
+  private int topFragmentHeight;
+  private int topFragmentMarginRight;
+  private int topFragmentMarginBottom;
   private float xScaleFactor;
   private float yScaleFactor;
   private boolean enableHorizontalAlphaEffect;
@@ -99,7 +99,7 @@ public class DraggablePanel extends FrameLayout {
    *
    * @param topFragmentHeight in pixels.
    */
-  public void setTopViewHeight(float topFragmentHeight) {
+  public void setTopViewHeight(int topFragmentHeight) {
     this.topFragmentHeight = topFragmentHeight;
   }
 
@@ -124,7 +124,7 @@ public class DraggablePanel extends FrameLayout {
    *
    * @param topFragmentMarginRight in pixels.
    */
-  public void setTopFragmentMarginRight(float topFragmentMarginRight) {
+  public void setTopFragmentMarginRight(int topFragmentMarginRight) {
     this.topFragmentMarginRight = topFragmentMarginRight;
   }
 
@@ -133,7 +133,7 @@ public class DraggablePanel extends FrameLayout {
    *
    * @param topFragmentMarginBottom in pixels.
    */
-  public void setTopFragmentMarginBottom(float topFragmentMarginBottom) {
+  public void setTopFragmentMarginBottom(int topFragmentMarginBottom) {
     this.topFragmentMarginBottom = topFragmentMarginBottom;
   }
 
@@ -253,17 +253,17 @@ public class DraggablePanel extends FrameLayout {
   private void initializeAttrs(AttributeSet attrs) {
     TypedArray attributes = getContext().obtainStyledAttributes(attrs, R.styleable.draggable_panel);
     this.topFragmentHeight =
-        attributes.getDimension(R.styleable.draggable_panel_top_fragment_height,
+        attributes.getDimensionPixelSize(R.styleable.draggable_panel_top_fragment_height,
             DEFAULT_TOP_FRAGMENT_HEIGHT);
     this.xScaleFactor =
         attributes.getFloat(R.styleable.draggable_panel_x_scale_factor, DEFAULT_SCALE_FACTOR);
     this.yScaleFactor =
         attributes.getFloat(R.styleable.draggable_panel_y_scale_factor, DEFAULT_SCALE_FACTOR);
     this.topFragmentMarginRight =
-        attributes.getDimension(R.styleable.draggable_panel_top_fragment_margin_right,
+        attributes.getDimensionPixelSize(R.styleable.draggable_panel_top_fragment_margin_right,
             DEFAULT_TOP_FRAGMENT_MARGIN);
     this.topFragmentMarginBottom =
-        attributes.getDimension(R.styleable.draggable_panel_top_fragment_margin_bottom,
+        attributes.getDimensionPixelSize(R.styleable.draggable_panel_top_fragment_margin_bottom,
             DEFAULT_TOP_FRAGMENT_MARGIN);
     this.enableHorizontalAlphaEffect =
         attributes.getBoolean(R.styleable.draggable_panel_enable_horizontal_alpha_effect,

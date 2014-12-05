@@ -37,13 +37,15 @@ public abstract class Transformer {
   private final View view;
   private final View parent;
 
-  private float viewHeight;
+  private int viewHeight;
+  private int marginRight;
+  private int marginBottom;
+
   private float xScaleFactor;
   private float yScaleFactor;
-  private float marginRight;
-  private float marginBottom;
-  private float originalHeight;
-  private float originalWidth;
+
+  private int originalHeight;
+  private int originalWidth;
 
   public Transformer(View view, View parent) {
     this.view = view;
@@ -66,38 +68,38 @@ public abstract class Transformer {
     this.yScaleFactor = yScaleFactor;
   }
 
-  public float getMarginRight() {
+  public int getMarginRight() {
     return marginRight;
   }
 
-  public void setMarginRight(float marginRight) {
-    this.marginRight = marginRight;
+  public void setMarginRight(int marginRight) {
+    this.marginRight = Math.round(marginRight);
   }
 
-  public float getMarginBottom() {
+  public int getMarginBottom() {
     return marginBottom;
   }
 
-  public void setMarginBottom(float marginBottom) {
-    this.marginBottom = marginBottom;
+  public void setMarginBottom(int marginBottom) {
+    this.marginBottom = Math.round(marginBottom);
   }
 
-  public float getViewHeight() {
+  public int getViewHeight() {
     return viewHeight < 0f ? view.getMeasuredHeight() : viewHeight;
   }
 
   /**
    * Change view height using the LayoutParams of the view.
    *
-   * @param viewHeight to change..
+   * @param newHeight to change..
    */
-  public void setViewHeight(float viewHeight) {
-    this.viewHeight = viewHeight;
-    if (viewHeight > 0f) {
+  public void setViewHeight(int newHeight) {
+    viewHeight = newHeight;
+    if (viewHeight > 0) {
       originalHeight = viewHeight;
       RelativeLayout.LayoutParams layoutParams =
           (RelativeLayout.LayoutParams) view.getLayoutParams();
-      layoutParams.height = (int) viewHeight;
+      layoutParams.height = viewHeight;
       view.setLayoutParams(layoutParams);
     }
   }
@@ -121,7 +123,7 @@ public abstract class Transformer {
   /**
    * @return height of the view before it has change the size.
    */
-  public float getOriginalHeight() {
+  public int getOriginalHeight() {
     if (originalHeight == 0) {
       originalHeight = viewHeight < 0 ? view.getMeasuredHeight() : viewHeight;
     }
@@ -131,7 +133,7 @@ public abstract class Transformer {
   /**
    * @return width of the view before it has change the size.
    */
-  public float getOriginalWidth() {
+  public int getOriginalWidth() {
     if (originalWidth == 0) {
       originalWidth = view.getMeasuredWidth();
     }

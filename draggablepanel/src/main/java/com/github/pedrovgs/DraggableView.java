@@ -40,7 +40,7 @@ public class DraggableView extends RelativeLayout {
 
   private static final int DEFAULT_SCALE_FACTOR = 2;
   private static final int DEFAULT_TOP_VIEW_MARGIN = 30;
-  private static final float DEFAULT_TOP_VIEW_HEIGHT = -1;
+  private static final int DEFAULT_TOP_VIEW_HEIGHT = -1;
   private static final float SLIDE_TOP = 0f;
   private static final float SLIDE_BOTTOM = 1f;
   private static final boolean DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT = true;
@@ -96,14 +96,14 @@ public class DraggableView extends RelativeLayout {
    *
    * @param topFragmentMarginRight in pixels.
    */
-  public void setTopViewMarginRight(float topFragmentMarginRight) {
+  public void setTopViewMarginRight(int topFragmentMarginRight) {
     transformer.setMarginRight(topFragmentMarginRight);
   }
 
   /**
    * Configure the dragView margin bottom applied when the dragView is minimized.
    */
-  public void setTopViewMarginBottom(float topFragmentMarginBottom) {
+  public void setTopViewMarginBottom(int topFragmentMarginBottom) {
     transformer.setMarginBottom(topFragmentMarginBottom);
   }
 
@@ -517,7 +517,7 @@ public class DraggableView extends RelativeLayout {
         attributes.getBoolean(R.styleable.draggable_view_top_view_resize, DEFAULT_TOP_VIEW_RESIZE);
     TransformerFactory transformerFactory = new TransformerFactory();
     transformer = transformerFactory.getTransformer(topViewResize, dragView, this);
-    transformer.setViewHeight(attributes.getDimension(R.styleable.draggable_view_top_view_height,
+    transformer.setViewHeight(attributes.getDimensionPixelSize(R.styleable.draggable_view_top_view_height,
         DEFAULT_TOP_VIEW_HEIGHT));
     transformer.setXScaleFactor(
         attributes.getFloat(R.styleable.draggable_view_top_view_x_scale_factor,
@@ -526,10 +526,10 @@ public class DraggableView extends RelativeLayout {
         attributes.getFloat(R.styleable.draggable_view_top_view_y_scale_factor,
             DEFAULT_SCALE_FACTOR));
     transformer.setMarginRight(
-        attributes.getDimension(R.styleable.draggable_view_top_view_margin_right,
+        attributes.getDimensionPixelSize(R.styleable.draggable_view_top_view_margin_right,
             DEFAULT_TOP_VIEW_MARGIN));
     transformer.setMarginBottom(
-        attributes.getDimension(R.styleable.draggable_view_top_view_margin_bottom,
+        attributes.getDimensionPixelSize(R.styleable.draggable_view_top_view_margin_bottom,
             DEFAULT_TOP_VIEW_MARGIN));
   }
 
