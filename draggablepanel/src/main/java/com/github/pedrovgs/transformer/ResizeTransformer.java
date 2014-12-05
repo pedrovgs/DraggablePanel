@@ -16,7 +16,6 @@
 package com.github.pedrovgs.transformer;
 
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 /**
