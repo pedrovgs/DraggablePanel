@@ -172,7 +172,15 @@ Do you want to resize the top view instead of scale it? Add ``dragable_view:top_
 Do you want to contribute? TODO
 -------------------------------
 
-* Support Android Studio / IntelliJ layout preview mode.
+* Support landscape mode when DraggableView is using ResizeTransformer.
+
+Contributors
+------------
+
+* [Pedro Vicente Gómez Sánchez][20]
+* [Frieder Bluemle][21]
+* [Goldos] [22]
+* [Rafał Pluta][23]
 
 
 Developed By
@@ -243,4 +251,8 @@ License
 [16]: http://actionbarsherlock.com/
 [17]: https://developers.google.com/youtube/android/player/
 [18]: https://play.google.com/store/apps/details?id=com.nero.dudeperfect
-[19]: https://github.com/wuman/youtube-android-player-mvn-install
+[20]: https://github.com/pedro_g_s/
+[21]: https://github.com/friederbluemle/
+[22]: https://github.com/glodos/
+[23]: https://github.com/Fiddl3/
+
