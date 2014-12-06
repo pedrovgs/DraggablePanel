@@ -26,10 +26,10 @@ import android.view.View;
  */
 class DraggableViewCallback extends ViewDragHelper.Callback {
 
-  private static final int MINIMUN_DX_FOR_HORIZONTAL_DRAG = 5;
+  private static final int MINIMUM_DX_FOR_HORIZONTAL_DRAG = 5;
   private static final int MINIMUM_DY_FOR_VERTICAL_DRAG = 15;
-  private static final float X_MIN_VELOCITY = 1300;
-  private static final float Y_MIN_VELOCITY = 1300;
+  private static final float X_MIN_VELOCITY = 1500;
+  private static final float Y_MIN_VELOCITY = 1000;
 
   private DraggableView draggableView;
   private View draggedView;
@@ -54,7 +54,7 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
    * @param dy change in Y position from the last call.
    */
   @Override public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
-    draggableView.updateLastDragViewPosition(top, left);
+
     if (draggableView.isDragViewAtBottom()) {
       draggableView.changeDragViewViewAlpha();
     } else {
@@ -64,6 +64,9 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
       draggableView.changeSecondViewAlpha();
       draggableView.changeSecondViewPosition();
       draggableView.changeBackgroundAlpha();
+    }
+    if (0 == top) {
+      draggableView.requestLayout();
     }
   }
 
@@ -108,7 +111,7 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
    */
   @Override public int clampViewPositionHorizontal(View child, int left, int dx) {
     int newLeft = draggedView.getLeft();
-    if ((draggableView.isMinimized() && Math.abs(dx) > MINIMUN_DX_FOR_HORIZONTAL_DRAG) || (
+    if ((draggableView.isMinimized() && Math.abs(dx) > MINIMUM_DX_FOR_HORIZONTAL_DRAG) || (
         draggableView.isDragViewAtBottom()
             && !draggableView.isDragViewAtRight())) {
       newLeft = left;

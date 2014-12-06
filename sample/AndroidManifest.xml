@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.github.pedrovgs.sample"
-    android:versionCode="1"
-    android:versionName="1">
+    package="com.github.pedrovgs.sample">
 
-  <uses-sdk android:minSdkVersion="8"
-      android:targetSdkVersion="20"/>
+  <uses-sdk android:minSdkVersion="8"/>
 
   <!-- Permissions -->
 

@@ -26,66 +26,41 @@ import android.widget.RelativeLayout;
  */
 class ResizeTransformer extends Transformer {
 
-  private float lastHeight;
+  private final RelativeLayout.LayoutParams layoutParams;
 
   ResizeTransformer(View view, View parent) {
     super(view, parent);
+    layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
   }
 
   /**
-   * Changes view width using view's LayoutParam.
+   * Changes view scale using view's LayoutParam.
    *
-   * @param verticalDragOffset used to calculate the new width.
+   * @param verticalDragOffset used to calculate the new size.
    */
-  @Override public void updateWidth(float verticalDragOffset) {
-    RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) getView().getLayoutParams();
-    int newWidth = (int) (getOriginalWidth() * (1 - verticalDragOffset / getXScaleFactor()));
-    params.width = newWidth;
-    setLastLeftPosition((int) (getOriginalWidth() - newWidth));
-    getView().setLayoutParams(params);
+  @Override public void updateScale(float verticalDragOffset) {
+    layoutParams.width = (int) (getOriginalWidth() * (1 - verticalDragOffset / getXScaleFactor()));
+    layoutParams.height = (int) (getOriginalHeight() * (1 - verticalDragOffset / getYScaleFactor()));
+
+    getView().setLayoutParams(layoutParams);
   }
 
-  /**
-   * Changes view height using view's LayoutParam.
-   *
-   * @param verticalDragOffset used to calculate the new width.
-   */
-  @Override public void updateHeight(float verticalDragOffset) {
-    RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) getView().getLayoutParams();
-    int newHeight = (int) (getOriginalHeight() * (1 - verticalDragOffset / getYScaleFactor()));
-    params.height = newHeight;
-    lastHeight = newHeight;
-    getView().setLayoutParams(params);
-  }
-
-  /**
-   * @return last updated height or the view height if the view hasn't been changed yet.
-   */
-  @Override public float getViewHeight() {
-    return lastHeight == 0 ? super.getViewHeight() : lastHeight;
-  }
 
   /**
    * Changes X view position using layout() method.
    *
    * @param verticalDragOffset used to calculate the new X position.
    */
-  @Override public void updateXPosition(float verticalDragOffset) {
-    int left, top, right, bottom;
-    left = (int) (getOriginalWidth() - getViewWidth());
-    right = getViewRightPosition(verticalDragOffset);
-    setLastRightPosition(right);
-    top = getView().getTop();
-    bottom = getView().getBottom();
+  @Override
+  public void updatePosition(float verticalDragOffset) {
+    int right = getViewRightPosition(verticalDragOffset);
+    int left = right - layoutParams.width;
+    int top = getView().getTop();
+    int bottom = top + layoutParams.height;
+
     getView().layout(left, top, right, bottom);
   }
 
-  /**
-   * Empty implementation. ViewDragHelper already changes the Y position.
-   */
-  @Override public void updateYPosition(float verticalDragOffset) {
-    // Empty
-  }
 
   /**
    * @return true if the right position of the view plus the right margin is equals to the parent
@@ -116,21 +91,21 @@ class ResizeTransformer extends Transformer {
    * the parent width.
    */
   @Override public boolean isNextToLeftBound() {
-    return (getView().getLeft() - getMarginRight()) < getParentView().getWidth() * 0.25;
+    return (getView().getLeft() - getMarginRight()) < getParentView().getWidth() * 0.05;
   }
 
   /**
    * Uses the Y scale factor to calculate the min possible height.
    */
   @Override public int getMinHeightPlusMargin() {
-    return (int) ((getOriginalHeight() / getYScaleFactor()) + getMarginBottom());
+    return (int) (getOriginalHeight() * (1 - 1 / getYScaleFactor()) + getMarginBottom());
   }
 
   /**
    * Uses the X scale factor to calculate the min possible width.
    */
-  @Override public int getMinWidth() {
-    return (int) (getOriginalWidth() / getXScaleFactor());
+  @Override public int getMinWidthPlusMarginRight() {
+    return (int) (getOriginalWidth() * (1 - 1 / getXScaleFactor()) + getMarginRight());
   }
 
   /**
@@ -141,4 +116,5 @@ class ResizeTransformer extends Transformer {
   private int getViewRightPosition(float verticalDragOffset) {
     return (int) ((getOriginalWidth()) - getMarginRight() * verticalDragOffset);
   }
+
 }

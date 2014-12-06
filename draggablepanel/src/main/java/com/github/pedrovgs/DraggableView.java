@@ -40,7 +40,7 @@ public class DraggableView extends RelativeLayout {
 
   private static final int DEFAULT_SCALE_FACTOR = 2;
   private static final int DEFAULT_TOP_VIEW_MARGIN = 30;
-  private static final float DEFAULT_TOP_VIEW_HEIGHT = -1;
+  private static final int DEFAULT_TOP_VIEW_HEIGHT = -1;
   private static final float SLIDE_TOP = 0f;
   private static final float SLIDE_BOTTOM = 1f;
   private static final boolean DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT = true;
@@ -96,14 +96,14 @@ public class DraggableView extends RelativeLayout {
    *
    * @param topFragmentMarginRight in pixels.
    */
-  public void setTopViewMarginRight(float topFragmentMarginRight) {
+  public void setTopViewMarginRight(int topFragmentMarginRight) {
     transformer.setMarginRight(topFragmentMarginRight);
   }
 
   /**
    * Configure the dragView margin bottom applied when the dragView is minimized.
    */
-  public void setTopViewMarginBottom(float topFragmentMarginBottom) {
+  public void setTopViewMarginBottom(int topFragmentMarginBottom) {
     transformer.setMarginBottom(topFragmentMarginBottom);
   }
 
@@ -290,13 +290,15 @@ public class DraggableView extends RelativeLayout {
    * Override method to configure the dragged view and secondView layout properly.
    */
   @Override protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-    int newTop = (int) transformer.getViewHeight();
-    int lastTopPosition = transformer.getLastTopPosition();
-    int lastLeftPosition = transformer.getLastLeftPosition();
-    int newRight = transformer.getLastRightPosition();
-    int newBottom = lastTopPosition + newTop;
-    dragView.layout(lastLeftPosition, lastTopPosition, newRight, newBottom);
-    secondView.layout(0, (int) transformer.getOriginalHeight(), right, getHeight());
+    if (isInEditMode())
+      super.onLayout(changed, left, top, right, bottom);
+    else if (isDragViewAtTop()) {
+      dragView.layout(left, top, right, (int) transformer.getOriginalHeight());
+      secondView.layout(left, (int) transformer.getOriginalHeight(), right, bottom);
+
+      ViewHelper.setY(dragView, top);
+      ViewHelper.setY(secondView, transformer.getOriginalHeight());
+    }
   }
 
   /**
@@ -349,21 +351,11 @@ public class DraggableView extends RelativeLayout {
   }
 
   /**
-   * Update the last top and left position when the view is dragged. This last positions are used
-   * to recreate the dragged view and secondView positions if the requestLayout method is called.
-   */
-  void updateLastDragViewPosition(int lastTopPosition, int lastLeftPosition) {
-    transformer.setLastTopPosition(lastTopPosition);
-    transformer.setLastLeftPosition(lastLeftPosition);
-  }
-
-  /**
    * Modify dragged view pivot based on the dragged view vertical position to simulate a horizontal
    * displacement while the view is dragged.
    */
   void changeDragViewPosition() {
-    transformer.updateXPosition(getVerticalDragOffset());
-    transformer.updateYPosition(getVerticalDragOffset());
+    transformer.updatePosition(getVerticalDragOffset());
   }
 
   /**
@@ -377,8 +369,7 @@ public class DraggableView extends RelativeLayout {
    * Modify dragged view scale based on the dragged view vertical position and the scale factor.
    */
   void changeDragViewScale() {
-    transformer.updateWidth(getVerticalDragOffset());
-    transformer.updateHeight(getVerticalDragOffset());
+    transformer.updateScale(getVerticalDragOffset());
   }
 
   /**
@@ -524,7 +515,7 @@ public class DraggableView extends RelativeLayout {
         attributes.getBoolean(R.styleable.draggable_view_top_view_resize, DEFAULT_TOP_VIEW_RESIZE);
     TransformerFactory transformerFactory = new TransformerFactory();
     transformer = transformerFactory.getTransformer(topViewResize, dragView, this);
-    transformer.setViewHeight(attributes.getDimension(R.styleable.draggable_view_top_view_height,
+    transformer.setViewHeight(attributes.getDimensionPixelSize(R.styleable.draggable_view_top_view_height,
         DEFAULT_TOP_VIEW_HEIGHT));
     transformer.setXScaleFactor(
         attributes.getFloat(R.styleable.draggable_view_top_view_x_scale_factor,
@@ -533,10 +524,10 @@ public class DraggableView extends RelativeLayout {
         attributes.getFloat(R.styleable.draggable_view_top_view_y_scale_factor,
             DEFAULT_SCALE_FACTOR));
     transformer.setMarginRight(
-        attributes.getDimension(R.styleable.draggable_view_top_view_margin_right,
+        attributes.getDimensionPixelSize(R.styleable.draggable_view_top_view_margin_right,
             DEFAULT_TOP_VIEW_MARGIN));
     transformer.setMarginBottom(
-        attributes.getDimension(R.styleable.draggable_view_top_view_margin_bottom,
+        attributes.getDimensionPixelSize(R.styleable.draggable_view_top_view_margin_bottom,
             DEFAULT_TOP_VIEW_MARGIN));
   }
 
@@ -562,7 +553,7 @@ public class DraggableView extends RelativeLayout {
    */
   private boolean smoothSlideTo(float slideOffset) {
     final int topBound = getPaddingTop();
-    int x = (int) (slideOffset * (getWidth() - transformer.getMinWidth()));
+    int x = (int) (slideOffset * (getWidth() - transformer.getMinWidthPlusMarginRight()));
     int y = (int) (topBound + slideOffset * getVerticalDragRange());
     if (viewDragHelper.smoothSlideViewTo(dragView, x, y)) {
       ViewCompat.postInvalidateOnAnimation(this);

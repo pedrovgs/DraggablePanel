@@ -37,16 +37,14 @@ public abstract class Transformer {
   private final View view;
   private final View parent;
 
-  private float viewHeight;
+  private int marginRight;
+  private int marginBottom;
+
   private float xScaleFactor;
   private float yScaleFactor;
-  private float marginRight;
-  private float marginBottom;
-  private int lastTopPosition;
-  private int lastLeftPosition;
-  private int lastRightPosition;
-  private float originalHeight;
-  private float originalWidth;
+
+  private int originalHeight;
+  private int originalWidth;
 
   public Transformer(View view, View parent) {
     this.view = view;
@@ -69,67 +67,35 @@ public abstract class Transformer {
     this.yScaleFactor = yScaleFactor;
   }
 
-  public float getMarginRight() {
+  public int getMarginRight() {
     return marginRight;
   }
 
-  public void setMarginRight(float marginRight) {
-    this.marginRight = marginRight;
+  public void setMarginRight(int marginRight) {
+    this.marginRight = Math.round(marginRight);
   }
 
-  public float getMarginBottom() {
+  public int getMarginBottom() {
     return marginBottom;
   }
 
-  public void setMarginBottom(float marginBottom) {
-    this.marginBottom = marginBottom;
-  }
-
-  public float getViewHeight() {
-    return viewHeight < 0f ? view.getMeasuredHeight() : viewHeight;
+  public void setMarginBottom(int marginBottom) {
+    this.marginBottom = Math.round(marginBottom);
   }
 
   /**
    * Change view height using the LayoutParams of the view.
    *
-   * @param viewHeight to change..
+   * @param newHeight to change..
    */
-  public void setViewHeight(float viewHeight) {
-    this.viewHeight = viewHeight;
-    if (viewHeight > 0f) {
-      originalHeight = viewHeight;
+  public void setViewHeight(int newHeight) {
+    if (newHeight > 0) {
+      originalHeight = newHeight;
       RelativeLayout.LayoutParams layoutParams =
           (RelativeLayout.LayoutParams) view.getLayoutParams();
-      layoutParams.height = (int) viewHeight;
+      layoutParams.height = newHeight;
       view.setLayoutParams(layoutParams);
     }
-  }
-
-  public int getLastRightPosition() {
-    if (lastRightPosition <= 0) {
-      lastRightPosition = view.getMeasuredWidth();
-    }
-    return lastRightPosition;
-  }
-
-  public void setLastRightPosition(int lastRightPosition) {
-    this.lastRightPosition = lastRightPosition;
-  }
-
-  public int getLastTopPosition() {
-    return lastTopPosition;
-  }
-
-  public void setLastTopPosition(int lastTopPosition) {
-    this.lastTopPosition = lastTopPosition;
-  }
-
-  public int getLastLeftPosition() {
-    return lastLeftPosition;
-  }
-
-  public void setLastLeftPosition(int lastLeftPosition) {
-    this.lastLeftPosition = lastLeftPosition;
   }
 
   protected View getView() {
@@ -140,20 +106,16 @@ public abstract class Transformer {
     return parent;
   }
 
-  public abstract void updateXPosition(float verticalDragOffset);
+  public abstract void updatePosition(float verticalDragOffset);
 
-  public abstract void updateYPosition(float verticalDragOffset);
-
-  public abstract void updateWidth(float verticalDragOffset);
-
-  public abstract void updateHeight(float verticalDragOffset);
+  public abstract void updateScale(float verticalDragOffset);
 
   /**
    * @return height of the view before it has change the size.
    */
-  public float getOriginalHeight() {
+  public int getOriginalHeight() {
     if (originalHeight == 0) {
-      originalHeight = viewHeight < 0 ? view.getMeasuredHeight() : viewHeight;
+      originalHeight = view.getMeasuredHeight();
     }
     return originalHeight;
   }
@@ -161,18 +123,11 @@ public abstract class Transformer {
   /**
    * @return width of the view before it has change the size.
    */
-  public float getOriginalWidth() {
+  public int getOriginalWidth() {
     if (originalWidth == 0) {
       originalWidth = view.getMeasuredWidth();
     }
     return originalWidth;
-  }
-
-  /**
-   * @return current width of the view.
-   */
-  public int getViewWidth() {
-    return getView().getMeasuredWidth();
   }
 
   public boolean isViewAtTop() {
@@ -201,5 +156,5 @@ public abstract class Transformer {
   /**
    * @return min possible width, after apply the transformation.
    */
-  public abstract int getMinWidth();
+  public abstract int getMinWidthPlusMarginRight();
 }
