@@ -251,7 +251,7 @@ License
 [16]: http://actionbarsherlock.com/
 [17]: https://developers.google.com/youtube/android/player/
 [18]: https://play.google.com/store/apps/details?id=com.nero.dudeperfect
-[20]: https://github.com/pedro_g_s/
+[20]: https://github.com/pedrovgs/
 [21]: https://github.com/friederbluemle/
 [22]: https://github.com/glodos/
 [23]: https://github.com/Fiddl3/
