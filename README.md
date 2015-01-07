@@ -1,4 +1,4 @@
-Draggable Panel [![Build Status](https://travis-ci.org/pedrovgs/DraggablePanel.svg?branch=develop)](https://travis-ci.org/pedrovgs/DraggablePanel)
+Draggable Panel [![Build Status](https://travis-ci.org/pedrovgs/DraggablePanel.svg?branch=develop)](https://travis-ci.org/pedrovgs/DraggablePanel) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-DraggablePanel-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/244)
 ===============
 
 
