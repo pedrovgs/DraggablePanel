@@ -47,6 +47,8 @@ public class DraggableView extends RelativeLayout {
   private static final int ONE_HUNDRED = 100;
   private static final float SENSITIVITY = 1f;
   private static final boolean DEFAULT_TOP_VIEW_RESIZE = false;
+  
+  private boolean mEnableClickToExpand;
 
   private View dragView;
   private View secondView;
@@ -74,6 +76,21 @@ public class DraggableView extends RelativeLayout {
     super(context, attrs, defStyle);
     initializeAttributes(attrs);
   }
+
+/**
+     * Return if user can maximize on click on minimized view.
+     */
+    public boolean isEnableClickToExpand() {
+        return mEnableClickToExpand;
+    }
+
+    /**
+     * Allow to maximize when the user click on minimized view.
+     */
+    public void setEnableClickToExpand(boolean mEnableClickToExpand) {
+      this.mEnableClickToExpand = mEnableClickToExpand;
+    }
+
 
   /**
    * Configure the horizontal scale factor applied when the view is dragged to the bottom of the
@@ -253,6 +270,8 @@ public class DraggableView extends RelativeLayout {
   /**
    * Override method to dispatch touch event to the dragged view.
    *
+   * UPDATE: If user 
+   * 
    * @param ev captured.
    * @return true if the touch event is realized over the drag or second view.
    */
@@ -263,6 +282,11 @@ public class DraggableView extends RelativeLayout {
     }
     boolean isDragViewHit = isViewHit(dragView, (int) ev.getX(), (int) ev.getY());
     boolean isSecondViewHit = isViewHit(secondView, (int) ev.getX(), (int) ev.getY());
+    
+    if(isMinimized() && mEnableClickToExpand) {
+        maximize();
+    }
+    
     if (isMaximized()) {
       dragView.dispatchTouchEvent(ev);
     } else {
