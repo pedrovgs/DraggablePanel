@@ -47,8 +47,8 @@ public class DraggableView extends RelativeLayout {
   private static final int ONE_HUNDRED = 100;
   private static final float SENSITIVITY = 1f;
   private static final boolean DEFAULT_TOP_VIEW_RESIZE = false;
-  
-  private boolean mEnableClickToExpand;
+
+  private boolean mEnableClickToExpand = true;
 
   private View dragView;
   private View secondView;
@@ -62,6 +62,10 @@ public class DraggableView extends RelativeLayout {
   private boolean topViewResize;
 
   private DraggableListener listener;
+
+  private float x1;
+  private float x2;
+  private static final int MIN_DISTANCE = 10; //Influence to sliding
 
   public DraggableView(Context context) {
     super(context);
@@ -77,7 +81,7 @@ public class DraggableView extends RelativeLayout {
     initializeAttributes(attrs);
   }
 
-/**
+    /**
      * Return if user can maximize on click on minimized view.
      */
     public boolean isEnableClickToExpand() {
@@ -88,9 +92,8 @@ public class DraggableView extends RelativeLayout {
      * Allow to maximize when the user click on minimized view.
      */
     public void setEnableClickToExpand(boolean mEnableClickToExpand) {
-      this.mEnableClickToExpand = mEnableClickToExpand;
+        this.mEnableClickToExpand = mEnableClickToExpand;
     }
-
 
   /**
    * Configure the horizontal scale factor applied when the view is dragged to the bottom of the
@@ -249,7 +252,7 @@ public class DraggableView extends RelativeLayout {
     return isClosedAtLeft() || isClosedAtRight();
   }
 
-  /**
+    /**
    * Override method to intercept only touch events over the drag view and to cancel the drag when
    * the action associated to the MotionEvent is equals to ACTION_CANCEL or ACTION_UP.
    *
@@ -267,38 +270,57 @@ public class DraggableView extends RelativeLayout {
     return viewDragHelper.shouldInterceptTouchEvent(ev) || interceptTap;
   }
 
+
+
   /**
    * Override method to dispatch touch event to the dragged view.
    *
-   * UPDATE: If user 
-   * 
    * @param ev captured.
    * @return true if the touch event is realized over the drag or second view.
    */
   @Override public boolean onTouchEvent(MotionEvent ev) {
+
     viewDragHelper.processTouchEvent(ev);
     if (isClosed()) {
       return false;
     }
     boolean isDragViewHit = isViewHit(dragView, (int) ev.getX(), (int) ev.getY());
     boolean isSecondViewHit = isViewHit(secondView, (int) ev.getX(), (int) ev.getY());
-    
-    if(isMinimized() && mEnableClickToExpand) {
-        maximize();
-    }
-    
+    boolean interceptTap = viewDragHelper.isViewUnder(dragView, (int) ev.getX(), (int) ev.getY());
+
     if (isMaximized()) {
       dragView.dispatchTouchEvent(ev);
     } else {
       dragView.dispatchTouchEvent(cloneMotionEventWithAction(ev, MotionEvent.ACTION_CANCEL));
     }
+
+      switch(ev.getAction())
+      {
+          case MotionEvent.ACTION_DOWN:
+              x1 = ev.getX();
+              break;
+          case MotionEvent.ACTION_UP:
+              x2 = ev.getX();
+              float deltaX = x2 - x1;
+              if (Math.abs(deltaX) < MIN_DISTANCE
+                      && isMinimized()
+                      && mEnableClickToExpand
+                      && isDragViewHit
+                      && interceptTap
+                      && ev.getAction() != MotionEvent.ACTION_MOVE) {
+                  maximize();
+              }
+
+              break;
+      }
+
     return isDragViewHit || isSecondViewHit;
   }
 
   /**
    * Clone given motion event and set specified action. This method is useful, when we want to
    * cancel event propagation in child views by sending event with {@link
-   * MotionEvent#ACTION_CANCEL}
+   * android.view.MotionEvent#ACTION_CANCEL}
    * action.
    *
    * @param event event to clone
@@ -347,6 +369,7 @@ public class DraggableView extends RelativeLayout {
         attributes.getResourceId(R.styleable.draggable_view_bottom_view_id, R.id.second_view);
     dragView = findViewById(dragViewId);
     secondView = findViewById(secondViewId);
+
   }
 
   /**
@@ -528,8 +551,7 @@ public class DraggableView extends RelativeLayout {
    * Initialize the viewDragHelper.
    */
   private void initializeViewDragHelper() {
-    viewDragHelper =
-        ViewDragHelper.create(this, SENSITIVITY, new DraggableViewCallback(this, dragView));
+    viewDragHelper = ViewDragHelper.create(this, SENSITIVITY, new DraggableViewCallback(this, dragView));
   }
 
   /**
