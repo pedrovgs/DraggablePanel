@@ -125,7 +125,7 @@ You can customize some of the view effects programatically or using xml styleabl
 * Draggable view margin right applied when the view is minimized.
 * Draggable view margin bottom applied when the view is minimized.
 * Enable or disable the horizontal alpha effect applied while the view is being horizontally dragged.
-* [NEW] Enable or disable touch on minimized/maximized view to minimize/maximize.
+* Enable or disable touch on minimized/maximized view to minimize/maximize.
 
 ```xml
 <com.github.pedrovgs.DraggableView
