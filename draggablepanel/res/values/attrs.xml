@@ -15,7 +15,6 @@
     <attr name="top_view_height" format="dimension"/>
     <attr name="top_view_x_scale_factor" format="float"/>
     <attr name="top_view_y_scale_factor" format="float"/>
-    <attr name="min_sliding_distance_on_click" format="integer"/>
     <attr name="top_view_margin_right" format="dimension"/>
     <attr name="top_view_margin_bottom" format="dimension"/>
     <attr name="enable_minimized_horizontal_alpha_effect" format="boolean"/>
