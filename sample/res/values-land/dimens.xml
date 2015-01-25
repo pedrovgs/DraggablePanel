@@ -1,0 +1,4 @@
+<resources>
+  <dimen name="top_fragment_height">150dip</dimen>
+  <item name="x_scale_factor" format="float" type="dimen">1.5</item>
+</resources>

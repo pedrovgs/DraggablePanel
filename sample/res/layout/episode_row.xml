@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    style="@style/episode_row">
+
+  <!-- Episode number -->
+
+  <TextView android:id="@+id/tv_episode_number"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:layout_centerVertical="true"
+      style="@style/episode_number"/>
+
+  <!-- Episode title -->
+
+  <TextView android:id="@+id/tv_episode_title"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_toRightOf="@id/tv_episode_number"
+      style="@style/episode_title"/>
+
+  <!-- Episode publish date -->
+
+  <TextView android:id="@+id/tv_episode_publish_date"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_toRightOf="@id/tv_episode_number"
+      android:layout_below="@id/tv_episode_title"
+      android:gravity="bottom"
+      style="@style/episode_publish_date"/>
+</RelativeLayout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <!-- Movie Thumbnail -->
+
+  <ImageView
+      android:id="@+id/iv_poster"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      style="@style/image_view"/>
+
+  <!-- DraggableView -->
+
+  <com.github.pedrovgs.DraggableView
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:draggable_view="http://schemas.android.com/apk/res-auto"
+      android:id="@+id/draggable_view"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      draggable_view:top_view_id="@+id/video_view"
+      draggable_view:bottom_view_id="@+id/iv_thumbnail"
+      draggable_view:top_view_x_scale_factor="@dimen/x_scale_factor"
+      draggable_view:top_view_y_scale_factor="@dimen/y_scale_factor"
+      draggable_view:top_view_height="@dimen/top_fragment_height"
+      draggable_view:top_view_margin_right="@dimen/top_fragment_margin"
+      draggable_view:top_view_margin_bottom="@dimen/top_fragment_margin"
+      draggable_view:enable_minimized_horizontal_alpha_effect="false"
+      draggable_view:top_view_resize="true"
+      android:background="@color/black">
+
+    <!-- Video Thumbnail -->
+
+    <ImageView
+        android:id="@+id/iv_thumbnail"
+        android:layout_below="@+id/dragView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        style="@style/image_view"/>
+
+    <!-- VideoView -->
+
+    <VideoView
+        android:id="@+id/video_view"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_alignParentTop="true"/>
+
+  </com.github.pedrovgs.DraggableView>
+
+</FrameLayout>

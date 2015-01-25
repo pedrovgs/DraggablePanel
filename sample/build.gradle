@@ -1,0 +1,55 @@
+apply plugin: 'com.android.application'
+apply plugin: 'checkstyle'
+
+dependencies {
+  compile project(':draggablepanel')
+  compile 'com.squareup.picasso:picasso:2.1.1'
+  compile 'javax.inject:javax.inject:1@jar'
+  compile 'com.squareup.dagger:dagger-compiler:1.1.0'
+  compile 'com.jakewharton:butterknife:4.0.1'
+  compile 'com.squareup.dagger:dagger:1.1.0'
+  compile 'com.github.pedrovgs:renderers:1.0.9'
+  compile 'com.google.android.gms:play-services:4.1.32'
+  compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
+  compile files('libs/YouTubeAndroidPlayerApi.jar')
+}
+
+android {
+  packagingOptions {
+    exclude 'META-INF/services/javax.annotation.processing.Processor'
+  }
+  compileSdkVersion Integer.parseInt(project.ANDROID_COMPILE_SDK_VERSION)
+  buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION
+
+  defaultConfig {
+    versionName project.VERSION_NAME
+    versionCode Integer.parseInt(project.VERSION_CODE)
+
+    targetSdkVersion Integer.parseInt(project.ANDROID_TARGET_SDK_VERSION)
+  }
+
+
+
+  sourceSets {
+    main {
+      manifest.srcFile 'AndroidManifest.xml'
+      java.srcDirs = ['src/main/java']
+      res.srcDirs = ['res']
+    }
+  }
+
+  lintOptions {
+    abortOnError false
+  }
+}
+
+
+task checkstyle(type: Checkstyle) {
+  configFile file('../config/checkstyle/checkstyle.xml')
+  source 'src/main/java'
+  include '**/*.java'
+  exclude '**/gen/**'
+
+  classpath = files()
+}
+

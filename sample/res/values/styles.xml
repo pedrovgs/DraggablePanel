@@ -1,0 +1,96 @@
+<resources>
+
+  <!-- Application -->
+
+  <style name="AppTheme" parent="@style/Theme.Sherlock.Light"/>
+
+  <style name="image_view">
+    <item name="android:scaleType">centerCrop</item>
+  </style>
+
+  <!-- Main Activity -->
+
+  <style name="main_activity_button_title">
+    <item name="android:textSize">@dimen/button_title_text_size</item>
+    <item name="android:layout_marginTop">@dimen/button_title_margin_top</item>
+    <item name="android:layout_gravity">center_horizontal</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:textColor">@color/white</item>
+    <item name="android:background">@color/semi_transparent_black</item>
+    <item name="android:paddingLeft">@dimen/button_title_padding_left_right</item>
+    <item name="android:paddingRight">@dimen/button_title_padding_left_right</item>
+  </style>
+
+  <!-- Tv Shows Sample -->
+
+  <style name="tv_show_grid_view">
+    <item name="android:numColumns">@integer/grid_view_num_columns</item>
+    <item name="android:verticalSpacing">@dimen/grid_view_vertical_spacing</item>
+    <item name="android:horizontalSpacing">@dimen/grid_view_horizontal_spacing</item>
+    <item name="android:layout_margin">@dimen/grid_view_margin</item>
+  </style>
+
+  <style name="episodes_list_view">
+    <item name="android:dividerHeight">@dimen/divider_height</item>
+    <item name="android:divider">@color/soft_grey</item>
+    <item name="android:background">@color/white</item>
+  </style>
+
+  <style name="episodes_list_view_header">
+    <item name="android:background">@color/hard_grey</item>
+    <item name="android:textColor">@color/text_grey</item>
+    <item name="android:padding">@dimen/episodes_header_padding</item>
+    <item name="android:paddingLeft">@dimen/episodes_header_padding_left</item>
+  </style>
+
+  <style name="episode_row">
+    <item name="android:background">@color/soft_white</item>
+    <item name="android:paddingLeft">@dimen/episode_padding_left_right</item>
+    <item name="android:paddingRight">@dimen/episode_padding_left_right</item>
+  </style>
+
+  <style name="episode_number">
+    <item name="android:textSize">@dimen/episode_number</item>
+    <item name="android:textColor">@color/grey</item>
+  </style>
+
+  <style name="episode_title">
+    <item name="android:layout_marginTop">@dimen/episode_title_margin_top</item>
+    <item name="android:layout_marginLeft">@dimen/episode_title_margin_left</item>
+    <item name="android:textColor">@color/black</item>
+    <item name="android:textSize">@dimen/episode_title</item>
+  </style>
+
+  <style name="episode_publish_date">
+    <item name="android:layout_marginLeft">@dimen/episode_publish_date_margin_left</item>
+    <item name="android:layout_marginBottom">@dimen/episode_publish_date_margin_bottom</item>
+    <item name="android:textColor">@color/text_soft_grey</item>
+    <item name="android:fontFamily">sans-serif-light</item>
+  </style>
+
+  <style name="tv_show_title">
+    <item name="android:textColor">@color/text_hard_grey</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:maxLines">1</item>
+    <item name="android:ellipsize">end</item>
+    <item name="android:layout_marginLeft">@dimen/tv_show_title_margin_left_top</item>
+  </style>
+
+  <style name="tv_show_seasons_counter">
+    <item name="android:layout_marginLeft">@dimen/tv_show_margin_left</item>
+    <item name="android:layout_marginBottom">@dimen/tv_show_margin_bottom</item>
+  </style>
+
+  <!-- Places Sample -->
+
+  <style name="place_title">
+    <item name="android:background">@color/semi_transparent_black</item>
+    <item name="android:paddingLeft">@dimen/button_title_padding_left_right</item>
+    <item name="android:paddingRight">@dimen/button_title_padding_left_right</item>
+    <item name="android:layout_marginBottom">@dimen/place_title_margin</item>
+    <item name="android:layout_marginLeft">@dimen/place_title_margin</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:textColor">@color/white</item>
+  </style>
+
+</resources>

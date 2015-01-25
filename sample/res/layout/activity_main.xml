@@ -1,0 +1,114 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tableLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+  <!-- First row-->
+
+  <TableRow
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      android:layout_weight="1">
+
+    <!-- Places sample -->
+
+    <FrameLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_weight="1">
+
+      <ImageView
+          android:id="@+id/iv_places"
+          android:layout_width="fill_parent"
+          android:layout_height="fill_parent"
+          style="@style/image_view"
+          android:src="@drawable/places_button_image"/>
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/main_activity_places_button_title"
+          style="@style/main_activity_button_title"/>
+
+    </FrameLayout>
+
+    <!-- Tv Shows Sample -->
+
+    <FrameLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_weight="1">
+
+      <ImageView
+          android:id="@+id/iv_tv_shows"
+          android:layout_width="fill_parent"
+          android:layout_height="fill_parent"
+          android:src="@drawable/tv_show_button_image"
+          style="@style/image_view"/>
+
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/main_activity_tv_shows_button_title"
+          style="@style/main_activity_button_title"/>
+
+    </FrameLayout>
+
+  </TableRow>
+
+  <!-- Second row -->
+
+  <TableRow
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      android:layout_weight="1">
+
+    <!-- Youtube Sample -->
+
+    <FrameLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_weight="1">
+
+      <ImageView
+          android:id="@+id/iv_youtube"
+          android:layout_width="fill_parent"
+          android:layout_height="fill_parent"
+          android:src="@drawable/youtube_button_image"
+          style="@style/image_view"/>
+
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/main_activity_youtube_button_title"
+          style="@style/main_activity_button_title"/>
+
+    </FrameLayout>
+
+    <!-- Video Sample -->
+
+    <FrameLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_weight="1">
+
+      <ImageView
+          android:id="@+id/iv_video"
+          android:layout_width="fill_parent"
+          android:layout_height="fill_parent"
+          android:src="@drawable/video_button_image"
+          style="@style/image_view"/>
+
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/main_activity_video_view_button_title"
+          style="@style/main_activity_button_title"/>
+
+    </FrameLayout>
+
+  </TableRow>
+</TableLayout>

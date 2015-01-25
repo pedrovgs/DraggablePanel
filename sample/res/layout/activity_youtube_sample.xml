@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:draggable_panel="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fl_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <!-- Movie Thumbnail -->
+
+  <ImageView
+      android:id="@+id/iv_thumbnail"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      style="@style/image_view"/>
+
+  <!-- DraggablePanel -->
+
+  <com.github.pedrovgs.DraggablePanel
+      android:id="@+id/draggable_panel"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      draggable_panel:x_scale_factor="@dimen/x_scale_factor"
+      draggable_panel:y_scale_factor="@dimen/y_scale_factor"
+      draggable_panel:top_fragment_height="@dimen/top_fragment_height"
+      draggable_panel:top_fragment_margin_right="@dimen/top_fragment_margin"
+      draggable_panel:top_fragment_margin_bottom="@dimen/top_fragment_margin"
+      draggable_panel:enable_horizontal_alpha_effect="false"/>
+
+</FrameLayout>

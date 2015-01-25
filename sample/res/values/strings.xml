@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="app_name">Draggable Panel</string>
+
+  <!-- Activity name -->
+  <string name="places_sample_activity_title">Places Sample</string>
+  <string name="youtube_sample_activity_title">Youtube Sample</string>
+  <string name="video_sample_activity_title">Video Sample</string>
+
+  <!-- Buttons -->
+  <string name="places_sample_button">Places Sample</string>
+  <string name="youtube_sample_button">Youtube Sample</string>
+  <string name="video_sample_button">Video Sample</string>
+  <string name="tv_shows_sample_activity_title">TV Shows Sample</string>
+  <string name="tv_shows_sample_button">TV Shows Sample</string>
+  <string name="main_activity_places_button_title">Places</string>
+  <string name="main_activity_tv_shows_button_title">Tv Shows</string>
+  <string name="main_activity_youtube_button_title">Youtube</string>
+  <string name="main_activity_video_view_button_title">VideoView</string>
+
+</resources>

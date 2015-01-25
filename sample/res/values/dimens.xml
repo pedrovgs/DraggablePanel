@@ -1,0 +1,28 @@
+<resources>
+  <dimen name="top_fragment_height">200dip</dimen>
+  <dimen name="top_fragment_margin">10dip</dimen>
+  <dimen name="place_renderer_height">200dip</dimen>
+  <dimen name="tv_show_fan_art_height">150dip</dimen>
+  <dimen name="button_title_padding_left_right">10dip</dimen>
+  <dimen name="button_title_text_size">18sp</dimen>
+  <dimen name="button_title_margin_top">10dip</dimen>
+  <item name="x_scale_factor" format="float" type="dimen">2.3</item>
+  <item name="y_scale_factor" format="float" type="dimen">2.3</item>
+  <dimen name="grid_view_vertical_spacing">10dip</dimen>
+  <dimen name="grid_view_horizontal_spacing">10dip</dimen>
+  <dimen name="grid_view_margin">10dip</dimen>
+  <dimen name="divider_height">1dip</dimen>
+  <dimen name="episodes_header_padding">10dip</dimen>
+  <dimen name="episodes_header_padding_left">16dip</dimen>
+  <dimen name="episode_padding_left_right">6dip</dimen>
+  <dimen name="episode_number">38sp</dimen>
+  <dimen name="episode_title">20sp</dimen>
+  <dimen name="episode_title_margin_top">6dip</dimen>
+  <dimen name="episode_title_margin_left">8dip</dimen>
+  <dimen name="episode_publish_date_margin_left">8dip</dimen>
+  <dimen name="episode_publish_date_margin_bottom">2dip</dimen>
+  <dimen name="place_title_margin">5dip</dimen>
+  <dimen name="tv_show_title_margin_left_top">5dip</dimen>
+  <dimen name="tv_show_margin_left">5dip</dimen>
+  <dimen name="tv_show_margin_bottom">10dip</dimen>
+</resources>
