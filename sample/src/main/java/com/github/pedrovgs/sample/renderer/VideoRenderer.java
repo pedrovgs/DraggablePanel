@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Pedro Paulo de Amorim.
+ * Copyright (C) 2015 Pedro Paulo de Amorim.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -78,15 +78,15 @@ public class VideoRenderer extends Renderer<VideoViewModel> {
     }
 
     /**
-     * Render the PlaceViewModel information.
+     * Render the VideoViewModel information.
      */
     @Override
     protected void render() {
         VideoViewModel item = getContent();
-        frameTitle.setText(item.getTitle());
+        frameTitle.setText(context.getResources().getString(item.getTitle()));
         Picasso.with(context)
                 .load(item.getImage())
-                .placeholder(R.drawable.maps_placeholder)
+                .placeholder(R.color.soft_white)
                 .into(frameImage);
     }
 }

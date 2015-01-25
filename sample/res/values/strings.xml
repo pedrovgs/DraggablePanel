@@ -18,5 +18,10 @@
   <string name="main_activity_tv_shows_button_title">Tv Shows</string>
   <string name="main_activity_youtube_button_title">Youtube</string>
   <string name="main_activity_video_view_button_title">VideoView</string>
+  <string name="main_activity_video_texture_view_rtsp">Texture View\n(RTSP)</string>
+  <string name="main_activity_video_texture_view_mp4">Texture View\n(MP4)</string>
+  <string name="api_error">API needs to be > 14</string>
+  <string name="surfaceview_problem">I don\'t recommend using VideoView or SurfaceView for videos along with this library.\n Reason:
+VideoView extends SurfaceView, SurfaceView have trouble accomplishing to resize and transitions.\n I recommend using the TextureView.</string>
 
 </resources>

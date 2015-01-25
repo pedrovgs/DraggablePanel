@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <ImageView
+    android:id="@+id/background_image"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scaleType="centerCrop"/>
+
+  <!-- DraggableView -->
+
+  <com.github.pedrovgs.DraggableView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:draggable_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/draggable_view"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    draggable_view:top_view_id="@+id/texture_view_container"
+    draggable_view:bottom_view_id="@+id/container_bottom"
+    draggable_view:top_view_x_scale_factor="@dimen/x_scale_factor"
+    draggable_view:top_view_y_scale_factor="@dimen/y_scale_factor"
+    draggable_view:top_view_height="@dimen/top_fragment_height"
+    draggable_view:top_view_margin_right="@dimen/top_fragment_margin"
+    draggable_view:top_view_margin_bottom="@dimen/top_fragment_margin"
+    draggable_view:enable_minimized_horizontal_alpha_effect="false"
+    draggable_view:enable_click_to_maximize="true"
+    draggable_view:enable_click_to_minimize="true"
+    android:background="@color/black">
+
+      <!-- Video Thumbnail -->
+
+    <FrameLayout
+      android:id="@+id/container_bottom"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      android:background="@color/grey"
+      android:layout_below="@+id/dragView">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/surfaceview_problem"
+          android:textColor="@color/black"
+          android:textSize="18sp"
+          android:background="@color/white"
+          android:padding="16dp"
+          android:layout_gravity="center"
+          android:gravity="center"/>
+
+    </FrameLayout>
+
+    <!-- VideoView -->
+
+    <FrameLayout
+        android:id="@+id/texture_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/black">
+
+      <TextureView
+        tools:targetApi="14"
+        android:id="@+id/texture_view"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"/>
+
+    </FrameLayout>
+
+  </com.github.pedrovgs.DraggableView>
+
+</FrameLayout>

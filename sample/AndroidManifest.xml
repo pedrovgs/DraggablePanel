@@ -70,6 +70,12 @@
         android:label="@string/video_sample_activity_title">
     </activity>
 
+    <!-- RTSP Sample -->
+    <activity
+        android:name=".activity.RtspSampleActivity"
+        android:label="@string/main_activity_video_texture_view_rtsp">
+    </activity>
+
     <meta-data
         android:name="com.google.android.gms.version"
         android:value="@integer/google_play_services_version"/>

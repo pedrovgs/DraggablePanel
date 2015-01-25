@@ -22,6 +22,7 @@ import com.github.pedrovgs.sample.DraggablePanelApplication;
 import com.github.pedrovgs.sample.activity.MainActivity;
 import com.github.pedrovgs.sample.activity.PlacesSampleActivity;
 import com.github.pedrovgs.sample.activity.TvShowsActivity;
+import com.github.pedrovgs.sample.activity.VideoSampleActivity;
 import com.github.pedrovgs.sample.renderer.PlaceRenderer;
 import com.github.pedrovgs.sample.renderer.TvShowRenderer;
 import com.github.pedrovgs.sample.renderer.VideoRenderer;
@@ -47,7 +48,7 @@ import java.util.List;
  * @author Pedro Vicente Gómez Sánchez.
  */
 @Module(injects = {
-    PlacesSampleActivity.class, TvShowsActivity.class, DraggablePanelApplication.class, MainActivity.class
+    PlacesSampleActivity.class, TvShowsActivity.class, VideoSampleActivity.class, DraggablePanelApplication.class, MainActivity.class
 }) public class MainModule {
 
   private final Application application;

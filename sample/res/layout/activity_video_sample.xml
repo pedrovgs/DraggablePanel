@@ -21,7 +21,7 @@
       android:layout_width="fill_parent"
       android:layout_height="fill_parent"
       draggable_view:top_view_id="@+id/video_view"
-      draggable_view:bottom_view_id="@+id/iv_thumbnail"
+      draggable_view:bottom_view_id="@+id/container_bottom"
       draggable_view:top_view_x_scale_factor="@dimen/x_scale_factor"
       draggable_view:top_view_y_scale_factor="@dimen/y_scale_factor"
       draggable_view:top_view_height="@dimen/top_fragment_height"
@@ -31,16 +31,35 @@
       draggable_view:top_view_resize="true"
       draggable_view:enable_click_to_maximize="false"
       draggable_view:enable_click_to_minimize="true"
+      draggable_view:min_sliding_distance_on_click="10"
       android:background="@color/black">
 
     <!-- Video Thumbnail -->
 
+  <FrameLayout
+      android:id="@+id/container_bottom"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      android:layout_below="@+id/dragView">
+
     <ImageView
-        android:id="@+id/iv_thumbnail"
-        android:layout_below="@+id/dragView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        style="@style/image_view"/>
+      android:id="@+id/iv_thumbnail"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      style="@style/image_view"/>
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/surfaceview_problem"
+      android:textColor="@color/black"
+      android:textSize="18sp"
+      android:background="@color/white"
+      android:padding="16dp"
+      android:layout_gravity="center"
+      android:gravity="center"/>
+
+  </FrameLayout>
 
     <!-- VideoView -->
 

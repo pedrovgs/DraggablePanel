@@ -19,8 +19,18 @@ public class VideoCollectionViewModel implements AdapteeCollection<VideoViewMode
     @Inject
     public VideoCollectionViewModel() {
         this.videoList = new LinkedList<VideoViewModel>();
-        VideoViewModel videoViewModel = new VideoViewModel("teste", R.drawable.ic_launcher);
-        videoList.add(videoViewModel);
+        VideoViewModel places = new VideoViewModel(R.string.main_activity_places_button_title, R.drawable.places_button_image);
+        videoList.add(places);
+        VideoViewModel tvshow = new VideoViewModel(R.string.main_activity_tv_shows_button_title, R.drawable.tv_show_button_image);
+        videoList.add(tvshow);
+        VideoViewModel youtube = new VideoViewModel(R.string.youtube_sample_activity_title, R.drawable.youtube_button_image);
+        videoList.add(youtube);
+        VideoViewModel video = new VideoViewModel(R.string.video_sample_activity_title, R.drawable.video_button_image);
+        videoList.add(video);
+        VideoViewModel textureViewRtsp = new VideoViewModel(R.string.main_activity_video_texture_view_rtsp, R.drawable.textureview_image);
+        videoList.add(textureViewRtsp);
+        VideoViewModel textureViewMp4 = new VideoViewModel(R.string.main_activity_video_texture_view_mp4, R.drawable.bigbuckbunny);
+        videoList.add(textureViewMp4);
     }
 
     @Override

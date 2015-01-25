@@ -32,7 +32,7 @@ import com.pedrogomez.renderers.RendererBuilder;
 public class EpisodeRendererAdapter extends RendererAdapter<EpisodeViewModel> {
 
   public EpisodeRendererAdapter(LayoutInflater layoutInflater, RendererBuilder rendererBuilder,
-      AdapteeCollection<EpisodeViewModel> collection) {
+    AdapteeCollection<EpisodeViewModel> collection) {
     super(layoutInflater, rendererBuilder, collection);
   }
 

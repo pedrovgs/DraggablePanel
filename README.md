@@ -125,6 +125,7 @@ You can customize some of the view effects programatically or using xml styleabl
 * Draggable view margin right applied when the view is minimized.
 * Draggable view margin bottom applied when the view is minimized.
 * Enable or disable the horizontal alpha effect applied while the view is being horizontally dragged.
+* [NEW] Enable or disable touch on minimized/maximized view to minimize/maximize.
 
 ```xml
 <com.github.pedrovgs.DraggableView
@@ -139,6 +140,9 @@ You can customize some of the view effects programatically or using xml styleabl
         draggable_view:top_view_y_scale_factor="@dimen/y_scale_factor"
         draggable_view:top_view_margin_right="@dimen/top_fragment_margin"
         draggable_view:top_view_margin_bottom="@dimen/top_fragment_margin"
+        draggable_view:enable_click_to_maximize="false"
+        draggable_view:enable_click_to_minimize="true"
+        draggable_view:min_sliding_distance_on_click="15"
         android:background="@color/black">
 
         <!-- ....... -->

@@ -336,6 +336,8 @@ public class DraggableView extends RelativeLayout {
           }
         }
         break;
+      default:
+        break;
     }
   }
 

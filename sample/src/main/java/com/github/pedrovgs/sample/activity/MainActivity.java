@@ -15,24 +15,18 @@
  */
 package com.github.pedrovgs.sample.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
 
+import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.OnClick;
 import com.github.pedrovgs.sample.R;
-import com.github.pedrovgs.sample.viewmodel.TvShowViewModel;
 import com.github.pedrovgs.sample.viewmodel.VideoViewModel;
 import com.pedrogomez.renderers.RendererAdapter;
-import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -52,38 +46,53 @@ public class MainActivity extends DIFragmentActivity {
     initializeGridView();
   }
 
-    //  @OnClick(R.id.iv_places) void openSimpleSampleActivity() {
-//    Intent intent = new Intent(this, PlacesSampleActivity.class);
-//    startActivity(intent);
-//  }
-//
-//  @OnClick(R.id.iv_tv_shows) void openTvShowsSampleActivity() {
-//    Intent intent = new Intent(this, TvShowsActivity.class);
-//    startActivity(intent);
-//  }
-//
-//  @OnClick(R.id.iv_youtube) void openYoutubeSampleActivity() {
-//    Intent intent = new Intent(this, YoutubeSampleActivity.class);
-//    startActivity(intent);
-//  }
-//
-//  @OnClick(R.id.iv_video) void openVideoSampleActivity() {
-//    Intent intent = new Intent(this, VideoSampleActivity.class);
-//    startActivity(intent);
-//  }
+  /**
+   * Initialize GridView with some injected data and configure OnItemClickListener.
+   */
+  private void initializeGridView() {
+    gridView.setAdapter(adapter);
+    gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+      @Override public void onItemClick(AdapterView<?> adapterView, View view, int position,
+        long id) {
 
-    /**
-     * Initialize GridView with some injected data and configure OnItemClickListener.
-     */
-    private void initializeGridView() {
-        gridView.setAdapter(adapter);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override public void onItemClick(AdapterView<?> adapterView, View view, int position,
-              long id) {
-
+        Intent intent;
+        switch (position) {
+          case 0:
+            intent = new Intent(getApplicationContext(), PlacesSampleActivity.class);
+            break;
+          case 1:
+            intent = new Intent(getApplicationContext(), TvShowsActivity.class);
+            break;
+          case 2:
+            intent = new Intent(getApplicationContext(), YoutubeSampleActivity.class);
+            break;
+          case 3:
+            intent = new Intent(getApplicationContext(), VideoSampleActivity.class);
+            break;
+          case 4:
+            if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+              Toast.makeText(getApplicationContext(), R.string.api_error, Toast.LENGTH_LONG).show();
+              return;
             }
-        });
-    }
-
-
+            intent = new Intent(getApplicationContext(), RtspSampleActivity.class);
+            intent.putExtra(RtspSampleActivity.URL, "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov");
+            intent.putExtra(RtspSampleActivity.TYPE, "Texture View (RTSP)");
+            break;
+          case 5:
+            if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+              Toast.makeText(getApplicationContext(), R.string.api_error, Toast.LENGTH_LONG).show();
+              return;
+            }
+            intent = new Intent(getApplicationContext(), RtspSampleActivity.class);
+            intent.putExtra(RtspSampleActivity.URL, "http://techslides.com/demos/sample-videos/small.mp4");
+            intent.putExtra(RtspSampleActivity.TYPE, "Texture View (MP4)");
+            break;
+          default:
+            intent = new Intent(getApplicationContext(), VideoSampleActivity.class);
+            break;
+        }
+        startActivity(intent);
+      }
+    });
+  }
 }
