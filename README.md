@@ -142,7 +142,6 @@ You can customize some of the view effects programatically or using xml styleabl
         draggable_view:top_view_margin_bottom="@dimen/top_fragment_margin"
         draggable_view:enable_click_to_maximize="false"
         draggable_view:enable_click_to_minimize="true"
-        draggable_view:min_sliding_distance_on_click="15"
         android:background="@color/black">
 
         <!-- ....... -->
@@ -158,6 +157,8 @@ draggablePanel.setYScaleFactor(yScaleFactor);
 draggablePanel.setTopViewHeight(topViewHeight);
 draggablePanel.setTopFragmentMarginRight(topViewMarginRight);
 draggablePanel.setTopFragmentMarginBottom(topViewMargnBottom);
+draggablePanel.setClickToMaximizeEnabled(enableClickToMaximize);
+draggablePanel.setClickToMinimizeEnabled(enableClickToMinimize);
 ```
 
 Similar customizable attributes are available programatically or using styleable attributes in ``DraggableView``.
