@@ -38,6 +38,8 @@ public class DraggablePanel extends FrameLayout {
   private static final int DEFAULT_TOP_FRAGMENT_MARGIN = 0;
   private static final float DEFAULT_SCALE_FACTOR = 2;
   private static final boolean DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT = true;
+  private static final boolean DEFAULT_ENABLE_CLICK_TO_MAXIMIZE = false;
+  private static final boolean DEFAULT_ENABLE_CLICK_TO_MINIMIZE = false;
   private static final boolean DEFAULT_TOP_FRAGMENT_RESIZE = false;
 
   private DraggableView draggableView;
@@ -52,6 +54,8 @@ public class DraggablePanel extends FrameLayout {
   private float xScaleFactor;
   private float yScaleFactor;
   private boolean enableHorizontalAlphaEffect;
+  private boolean enableClickToMaximize;
+  private boolean enableClickToMinimize;
 
   public DraggablePanel(Context context) {
     super(context);
@@ -101,6 +105,38 @@ public class DraggablePanel extends FrameLayout {
    */
   public void setTopViewHeight(int topFragmentHeight) {
     this.topFragmentHeight = topFragmentHeight;
+  }
+
+  /**
+   * Return if user can maximize minimized view on click.
+   */
+  public boolean isClickToMaximizeEnabled() {
+    return enableClickToMaximize;
+  }
+
+  /**
+   * Enable or disable click to maximize view when dragged view is minimized
+   *
+   * @param enableClickToMaximize to enable or disable the click.
+   */
+  public void setClickToMaximizeEnabled(boolean enableClickToMaximize) {
+    this.enableClickToMaximize = enableClickToMaximize;
+  }
+
+  /**
+   * Return if user can minimize maximized view on click.
+   */
+  public boolean isClickToMinimizeEnabled() {
+    return enableClickToMinimize;
+  }
+
+  /**
+   * Enable or disable click to minimize view when dragged view is maximized
+   *
+   * @param enableClickToMinimize to enable or disable the click.
+   */
+  public void setClickToMinimizeEnabled(boolean enableClickToMinimize) {
+    this.enableClickToMinimize = enableClickToMinimize;
   }
 
   /**
@@ -207,6 +243,8 @@ public class DraggablePanel extends FrameLayout {
     draggableView.attachBottomFragment(bottomFragment);
     draggableView.setDraggableListener(draggableListener);
     draggableView.setHorizontalAlphaEffectEnabled(enableHorizontalAlphaEffect);
+    draggableView.setClickToMaximizeEnabled(enableClickToMaximize);
+    draggableView.setClickToMinimizeEnabled(enableClickToMinimize);
   }
 
   /**
@@ -266,6 +304,12 @@ public class DraggablePanel extends FrameLayout {
         attributes.getDimensionPixelSize(R.styleable.draggable_panel_top_fragment_margin_bottom,
             DEFAULT_TOP_FRAGMENT_MARGIN);
     this.enableHorizontalAlphaEffect =
+        attributes.getBoolean(R.styleable.draggable_panel_enable_horizontal_alpha_effect,
+            DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT);
+    this.enableClickToMaximize =
+        attributes.getBoolean(R.styleable.draggable_panel_enable_horizontal_alpha_effect,
+            DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT);
+    this.enableClickToMinimize =
         attributes.getBoolean(R.styleable.draggable_panel_enable_horizontal_alpha_effect,
             DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT);
     attributes.recycle();
