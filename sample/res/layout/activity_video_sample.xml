@@ -29,6 +29,8 @@
       draggable_view:top_view_margin_bottom="@dimen/top_fragment_margin"
       draggable_view:enable_minimized_horizontal_alpha_effect="false"
       draggable_view:top_view_resize="true"
+      draggable_view:enable_click_to_maximize="false"
+      draggable_view:enable_click_to_minimize="true"
       android:background="@color/black">
 
     <!-- Video Thumbnail -->
