@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2015 Pedro Paulo de Amorim.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.github.pedrovgs.sample.viewmodel;
 
 import com.github.pedrovgs.sample.R;
@@ -10,7 +25,10 @@ import java.util.List;
 import javax.inject.Inject;
 
 /**
- * Created by pedro on 1/25/15.
+ * VideoCollectionViewModel implementation used to contains all the video items information. This
+ * implementation is based on a LinkedList with hardcoded data.
+ *
+ * @author Pedro Paulo de Amorim.
  */
 public class VideoCollectionViewModel implements AdapteeCollection<VideoViewModel> {
 
@@ -33,33 +51,51 @@ public class VideoCollectionViewModel implements AdapteeCollection<VideoViewMode
         videoList.add(textureViewMp4);
     }
 
-    @Override
-    public int size() {
-        return videoList.size();
-    }
+  /**
+   * Return the number of videos inside the collection.
+   */
+  @Override
+  public int size() {
+    return videoList.size();
+  }
 
-    @Override
-    public VideoViewModel get(int i) {
-        return videoList.get(i);
-    }
+  /**
+   * Return a VideoViewModel obtained by position.
+   */
+  @Override
+  public VideoViewModel get(int i) {
+    return videoList.get(i);
+  }
 
-    @Override
-    public void add(VideoViewModel element) {
-        videoList.add(element);
-    }
+  /**
+   * Add a VideoViewModel to the collection.
+   */
+  @Override
+  public void add(VideoViewModel element) {
+    videoList.add(element);
+  }
 
-    @Override
-    public void remove(VideoViewModel element) {
-        videoList.remove(element);
-    }
+  /**
+   * Remove a VideoViewModel from the collection.
+   */
+  @Override
+  public void remove(VideoViewModel element) {
+    videoList.remove(element);
+  }
 
-    @Override
-    public void addAll(Collection<VideoViewModel> elements) {
-        videoList.addAll(elements);
-    }
+  /**
+   * Add a collection of VideoViewModel to the collection.
+   */
+  @Override
+  public void addAll(Collection<VideoViewModel> elements) {
+    videoList.addAll(elements);
+  }
 
-    @Override
-    public void removeAll(Collection<VideoViewModel> elements) {
-        videoList.removeAll(elements);
-    }
+  /**
+   * Remove a collection of VideoViewModel to the collection.
+   */
+  @Override
+  public void removeAll(Collection<VideoViewModel> elements) {
+    videoList.removeAll(elements);
+  }
 }
