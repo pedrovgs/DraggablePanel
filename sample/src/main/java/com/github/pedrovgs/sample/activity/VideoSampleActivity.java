@@ -26,6 +26,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import com.github.pedrovgs.DraggableListener;
 import com.github.pedrovgs.DraggableView;
+import com.github.pedrovgs.sample.DraggablePanelApplication;
 import com.github.pedrovgs.sample.R;
 import com.squareup.picasso.Picasso;
 
@@ -57,6 +58,7 @@ public class VideoSampleActivity extends FragmentActivity {
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_video_sample);
+    ((DraggablePanelApplication) getApplication()).inject(this);
     ButterKnife.inject(this);
     initializeVideoView();
     initializePoster();

@@ -18,38 +18,72 @@ package com.github.pedrovgs.sample.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.ImageView;
+
 import butterknife.ButterKnife;
+import butterknife.InjectView;
 import butterknife.OnClick;
 import com.github.pedrovgs.sample.R;
+import com.github.pedrovgs.sample.viewmodel.TvShowViewModel;
+import com.github.pedrovgs.sample.viewmodel.VideoViewModel;
+import com.pedrogomez.renderers.RendererAdapter;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+
+import javax.inject.Inject;
 
 /**
  * @author Pedro Vicente Gómez Sánchez.
  */
-public class MainActivity extends Activity {
+public class MainActivity extends DIFragmentActivity {
+
+  @InjectView(R.id.grid_view) GridView gridView;
+
+  @Inject RendererAdapter<VideoViewModel> adapter;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
+    setContentView(R.layout.activity_grid);
     ButterKnife.inject(this);
+    initializeGridView();
   }
 
-  @OnClick(R.id.iv_places) void openSimpleSampleActivity() {
-    Intent intent = new Intent(this, PlacesSampleActivity.class);
-    startActivity(intent);
-  }
+    //  @OnClick(R.id.iv_places) void openSimpleSampleActivity() {
+//    Intent intent = new Intent(this, PlacesSampleActivity.class);
+//    startActivity(intent);
+//  }
+//
+//  @OnClick(R.id.iv_tv_shows) void openTvShowsSampleActivity() {
+//    Intent intent = new Intent(this, TvShowsActivity.class);
+//    startActivity(intent);
+//  }
+//
+//  @OnClick(R.id.iv_youtube) void openYoutubeSampleActivity() {
+//    Intent intent = new Intent(this, YoutubeSampleActivity.class);
+//    startActivity(intent);
+//  }
+//
+//  @OnClick(R.id.iv_video) void openVideoSampleActivity() {
+//    Intent intent = new Intent(this, VideoSampleActivity.class);
+//    startActivity(intent);
+//  }
 
-  @OnClick(R.id.iv_tv_shows) void openTvShowsSampleActivity() {
-    Intent intent = new Intent(this, TvShowsActivity.class);
-    startActivity(intent);
-  }
+    /**
+     * Initialize GridView with some injected data and configure OnItemClickListener.
+     */
+    private void initializeGridView() {
+        gridView.setAdapter(adapter);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override public void onItemClick(AdapterView<?> adapterView, View view, int position,
+              long id) {
 
-  @OnClick(R.id.iv_youtube) void openYoutubeSampleActivity() {
-    Intent intent = new Intent(this, YoutubeSampleActivity.class);
-    startActivity(intent);
-  }
+            }
+        });
+    }
 
-  @OnClick(R.id.iv_video) void openVideoSampleActivity() {
-    Intent intent = new Intent(this, VideoSampleActivity.class);
-    startActivity(intent);
-  }
+
 }

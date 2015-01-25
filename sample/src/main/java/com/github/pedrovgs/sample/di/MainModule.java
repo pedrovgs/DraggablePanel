@@ -19,16 +19,21 @@ import android.app.Application;
 import android.content.Context;
 import android.view.LayoutInflater;
 import com.github.pedrovgs.sample.DraggablePanelApplication;
+import com.github.pedrovgs.sample.activity.MainActivity;
 import com.github.pedrovgs.sample.activity.PlacesSampleActivity;
 import com.github.pedrovgs.sample.activity.TvShowsActivity;
 import com.github.pedrovgs.sample.renderer.PlaceRenderer;
 import com.github.pedrovgs.sample.renderer.TvShowRenderer;
+import com.github.pedrovgs.sample.renderer.VideoRenderer;
 import com.github.pedrovgs.sample.renderer.rendererbuilder.PlacesCollectionRendererBuilder;
 import com.github.pedrovgs.sample.renderer.rendererbuilder.TvShowCollectionRendererBuilder;
+import com.github.pedrovgs.sample.renderer.rendererbuilder.VideoCollectionRendererBuilder;
 import com.github.pedrovgs.sample.viewmodel.PlaceCollectionViewModel;
 import com.github.pedrovgs.sample.viewmodel.PlaceViewModel;
 import com.github.pedrovgs.sample.viewmodel.TvShowCollectionViewModel;
 import com.github.pedrovgs.sample.viewmodel.TvShowViewModel;
+import com.github.pedrovgs.sample.viewmodel.VideoCollectionViewModel;
+import com.github.pedrovgs.sample.viewmodel.VideoViewModel;
 import com.pedrogomez.renderers.Renderer;
 import com.pedrogomez.renderers.RendererAdapter;
 import dagger.Module;
@@ -42,7 +47,7 @@ import java.util.List;
  * @author Pedro Vicente Gómez Sánchez.
  */
 @Module(injects = {
-    PlacesSampleActivity.class, TvShowsActivity.class, DraggablePanelApplication.class
+    PlacesSampleActivity.class, TvShowsActivity.class, DraggablePanelApplication.class, MainActivity.class
 }) public class MainModule {
 
   private final Application application;
@@ -109,5 +114,28 @@ import java.util.List;
       TvShowCollectionViewModel tvShowCollectionViewModel) {
     return new RendererAdapter<TvShowViewModel>(layoutInflater, tvShowCollectionRendererBuilder,
         tvShowCollectionViewModel);
+  }
+
+  /**
+   * Provisioning of a RendererBuilder implementation to work with video Gridview. More
+   * information in this library: {@link https://github.com/pedrovgs/Renderers}
+   */
+  @Provides protected VideoCollectionRendererBuilder provideVideoCollectionRendererBuilder(
+      Context context) {
+    List<Renderer<VideoViewModel>> prototypes = new LinkedList<Renderer<VideoViewModel>>();
+    prototypes.add(new VideoRenderer(context));
+    return new VideoCollectionRendererBuilder(prototypes);
+  }
+
+  /**
+   * Provisioning of a RendererAdapter implementation to work with video Gridview. More
+   * information in this library: {@link https://github.com/pedrovgs/Renderers}
+   */
+  @Provides protected RendererAdapter<VideoViewModel> provideVideoRendererAdapter(
+      LayoutInflater layoutInflater,
+      VideoCollectionRendererBuilder videoCollectionRendererBuilder,
+      VideoCollectionViewModel videoCollectionViewModel) {
+    return new RendererAdapter<VideoViewModel>(layoutInflater, videoCollectionRendererBuilder,
+            videoCollectionViewModel);
   }
 }
