@@ -307,10 +307,10 @@ public class DraggablePanel extends FrameLayout {
         attributes.getBoolean(R.styleable.draggable_panel_enable_horizontal_alpha_effect,
             DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT);
     this.enableClickToMaximize =
-        attributes.getBoolean(R.styleable.draggable_panel_enable_click_to_maximize,
+        attributes.getBoolean(R.styleable.draggable_panel_enable_click_to_maximize_view,
             DEFAULT_ENABLE_CLICK_TO_MAXIMIZE);
     this.enableClickToMinimize =
-        attributes.getBoolean(R.styleable.draggable_panel_enable_click_to_minimize,
+        attributes.getBoolean(R.styleable.draggable_panel_enable_click_to_minimize_view,
             DEFAULT_ENABLE_CLICK_TO_MINIMIZE);
     attributes.recycle();
   }
