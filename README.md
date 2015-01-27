@@ -206,7 +206,7 @@ Who's using it
 
 * [El Rubius Vídeos][9] using the first beta release.
 * [DudePerfect Vídeos] [18] using the first beta release.
-* [VejoaoVivo Mobile] [25] using the last release
+* [VejoaoVivo Mobile] [25] using the last release.
 
 *Does your app use DraggablePanel? If you want to be featured on this list tell me on [Twitter][10]
 
