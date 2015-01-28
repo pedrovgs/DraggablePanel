@@ -91,6 +91,8 @@ public class DraggableView extends RelativeLayout {
 
   /**
    * Enable or disable click to maximize view when dragged view is minimized
+   * If your content have a touch/click listener (like YoutubePlayer), you
+   * need disable it to active this feature.
    *
    * @param enableClickToMaximize to enable or disable the click.
    */
@@ -107,6 +109,8 @@ public class DraggableView extends RelativeLayout {
 
   /**
    * Enable or disable click to minimize view when dragged view is maximized
+   * If your content have a touch/click listener (like YoutubePlayer), you
+   * need disable it to active this feature.
    *
    * @param enableClickToMinimize to enable or disable the click.
    */
@@ -607,10 +611,10 @@ public class DraggableView extends RelativeLayout {
         attributes.getBoolean(R.styleable.draggable_view_enable_minimized_horizontal_alpha_effect,
             DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT);
     this.enableClickToMaximize =
-        attributes.getBoolean(R.styleable.draggable_view_enable_click_to_maximize,
+        attributes.getBoolean(R.styleable.draggable_view_enable_click_to_maximize_view,
             DEFAULT_ENABLE_CLICK_TO_MAXIMIZE);
     this.enableClickToMinimize =
-        attributes.getBoolean(R.styleable.draggable_view_enable_click_to_minimize,
+        attributes.getBoolean(R.styleable.draggable_view_enable_click_to_minimize_view,
             DEFAULT_ENABLE_CLICK_TO_MINIMIZE);
     this.attributes = attributes;
   }
