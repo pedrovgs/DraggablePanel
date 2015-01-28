@@ -139,6 +139,8 @@ public class DraggableView extends RelativeLayout {
   /**
    * Slide the view based on scroll of the nav drawer.
    * "setEnableTouchListener" user prevents click to expand while the drawer is moving.
+   * WHen the slideOffset is bigger than 0.1 and dragView isn't close, set the dragView
+   * to minimized.
    * It's only possible to maximize the view when @slideOffset is equals to 0.0,
    * in other words, closed.
    *
@@ -149,7 +151,7 @@ public class DraggableView extends RelativeLayout {
    */
   public void slideMinimizedView(float slideOffset, float drawerPosition, int width) {
     float slide = Math.abs(drawerPosition);
-    if(slideOffset > 0.1) {
+    if(slideOffset > 0.1 && !isClosed()) {
       minimize();
     }
     setEnableTouchListener(!(slideOffset > 0.1));
