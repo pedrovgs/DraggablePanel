@@ -46,6 +46,7 @@ public class DraggableView extends RelativeLayout {
   private static final boolean DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT = true;
   private static final boolean DEFAULT_ENABLE_CLICK_TO_MAXIMIZE = false;
   private static final boolean DEFAULT_ENABLE_CLICK_TO_MINIMIZE = false;
+  private static final boolean DEFAULT_ENABLE_TOUCH_LISTENER = true;
   private static final int MIN_SLIDING_DISTANCE_ON_CLICK = 10;
   private static final int ONE_HUNDRED = 100;
   private static final float SENSITIVITY = 1f;
@@ -65,6 +66,7 @@ public class DraggableView extends RelativeLayout {
   private boolean topViewResize;
   private boolean enableClickToMaximize;
   private boolean enableClickToMinimize;
+  private boolean enableTouchListener;
 
   private DraggableListener listener;
 
@@ -116,6 +118,42 @@ public class DraggableView extends RelativeLayout {
    */
   public void setClickToMinimizeEnabled(boolean enableClickToMinimize) {
     this.enableClickToMinimize = enableClickToMinimize;
+  }
+
+  /**
+   * Return if touch listener is enable or disable
+   */
+  public boolean isEnableTouchListener() {
+    return this.enableTouchListener;
+  }
+
+  /**
+   * Enable or disable the touch listener
+   *
+   * @param enableTouchListener to enable or disable the touch event.
+   */
+  public void setEnableTouchListener(boolean enableTouchListener) {
+    this.enableTouchListener = enableTouchListener;
+  }
+
+  /**
+   * Slide the view based on scroll of the nav drawer.
+   * "setEnableTouchListener" user prevents click to expand while the drawer is moving.
+   * It's only possible to maximize the view when @slideOffset is equals to 0.0,
+   * in other words, closed.
+   *
+   * @param slideOffset Value between 0 and 1, represent the value of slide:
+   * 0.0 is equal to close drawer and 1.0 equals open drawer.
+   * @param drawerPosition Represent the position of nav drawer on X axis.
+   * @param width Width of nav drawer
+   */
+  public void slideMinimizedView(float slideOffset, float drawerPosition, int width) {
+    float slide = Math.abs(drawerPosition);
+    if(slideOffset > 0.1) {
+      minimize();
+    }
+    setEnableTouchListener(!(slideOffset > 0.1));
+    ViewHelper.setX(this, width - slide);
   }
 
   /**
@@ -283,6 +321,9 @@ public class DraggableView extends RelativeLayout {
    * @return true if the view is going to process the touch event or false if not.
    */
   @Override public boolean onInterceptTouchEvent(MotionEvent ev) {
+    if(!enableTouchListener) {
+      return false;
+    }
     final int action = MotionEventCompat.getActionMasked(ev);
     if (action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_UP) {
       viewDragHelper.cancel();
@@ -616,6 +657,9 @@ public class DraggableView extends RelativeLayout {
     this.enableClickToMinimize =
         attributes.getBoolean(R.styleable.draggable_view_enable_click_to_minimize_view,
             DEFAULT_ENABLE_CLICK_TO_MINIMIZE);
+    this.enableTouchListener =
+        attributes.getBoolean(R.styleable.draggable_view_enable_touch_listener_view,
+            DEFAULT_ENABLE_TOUCH_LISTENER);
     this.attributes = attributes;
   }
 

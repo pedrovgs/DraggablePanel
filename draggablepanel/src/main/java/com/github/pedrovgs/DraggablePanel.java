@@ -21,6 +21,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
+import com.nineoldandroids.view.ViewHelper;
 
 /**
  * Custom view created to handle DraggableView using fragments. With this custom view the client
@@ -40,6 +41,7 @@ public class DraggablePanel extends FrameLayout {
   private static final boolean DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT = true;
   private static final boolean DEFAULT_ENABLE_CLICK_TO_MAXIMIZE = false;
   private static final boolean DEFAULT_ENABLE_CLICK_TO_MINIMIZE = false;
+  private static final boolean DEFAULT_ENABLE_TOUCH_LISTENER = true;
   private static final boolean DEFAULT_TOP_FRAGMENT_RESIZE = false;
 
   private DraggableView draggableView;
@@ -56,6 +58,7 @@ public class DraggablePanel extends FrameLayout {
   private boolean enableHorizontalAlphaEffect;
   private boolean enableClickToMaximize;
   private boolean enableClickToMinimize;
+  private boolean enableTouchListener;
 
   public DraggablePanel(Context context) {
     super(context);
@@ -141,6 +144,38 @@ public class DraggablePanel extends FrameLayout {
    */
   public void setClickToMinimizeEnabled(boolean enableClickToMinimize) {
     this.enableClickToMinimize = enableClickToMinimize;
+  }
+
+  /**
+   * Return if touch listener is enable or disable
+   */
+  public boolean isEnableTouchListener() {
+    return this.enableTouchListener;
+  }
+
+  /**
+   * Enable or disable the touch listener
+   *
+   * @param enableTouchListener to enable or disable the touch event.
+   */
+  public void setEnableTouchListener(boolean enableTouchListener) {
+    this.enableTouchListener = enableTouchListener;
+  }
+
+  /**
+   *
+   * Slide the view based on scroll of the nav drawer.
+   * "setEnableTouchListener" user prevents click to expand while the drawer is moving.
+   * It's only possible to maximize the view when @slideOffset is equals to 0.0,
+   * in other words, closed.
+   *
+   * @param slideOffset Value between 0 and 1, represent the value of slide:
+   * 0.0 is equal to close drawer and 1.0 equals open drawer.
+   * @param drawerPosition Represent the position of nav drawer on X axis.
+   * @param width Width of nav drawer
+   */
+  public void slideMinimizedView(float slideOffset, float drawerPosition, int width) {
+    draggableView.slideMinimizedView(slideOffset, drawerPosition, width);
   }
 
   /**
@@ -249,6 +284,7 @@ public class DraggablePanel extends FrameLayout {
     draggableView.setHorizontalAlphaEffectEnabled(enableHorizontalAlphaEffect);
     draggableView.setClickToMaximizeEnabled(enableClickToMaximize);
     draggableView.setClickToMinimizeEnabled(enableClickToMinimize);
+    draggableView.setEnableTouchListener(enableTouchListener);
   }
 
   /**
@@ -316,6 +352,9 @@ public class DraggablePanel extends FrameLayout {
     this.enableClickToMinimize =
         attributes.getBoolean(R.styleable.draggable_panel_enable_click_to_minimize_panel,
             DEFAULT_ENABLE_CLICK_TO_MINIMIZE);
+    this.enableTouchListener =
+        attributes.getBoolean(R.styleable.draggable_panel_enable_touch_listener_panel,
+            DEFAULT_ENABLE_TOUCH_LISTENER);
     attributes.recycle();
   }
 
