@@ -44,9 +44,14 @@ public class DraggableView extends RelativeLayout {
   private static final float SLIDE_TOP = 0f;
   private static final float SLIDE_BOTTOM = 1f;
   private static final boolean DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT = true;
+  private static final boolean DEFAULT_ENABLE_CLICK_TO_MAXIMIZE = false;
+  private static final boolean DEFAULT_ENABLE_CLICK_TO_MINIMIZE = false;
+  private static final int MIN_SLIDING_DISTANCE_ON_CLICK = 10;
   private static final int ONE_HUNDRED = 100;
   private static final float SENSITIVITY = 1f;
   private static final boolean DEFAULT_TOP_VIEW_RESIZE = false;
+
+  private float lastTouchActionDownXPosition;
 
   private View dragView;
   private View secondView;
@@ -58,6 +63,8 @@ public class DraggableView extends RelativeLayout {
 
   private boolean enableHorizontalAlphaEffect;
   private boolean topViewResize;
+  private boolean enableClickToMaximize;
+  private boolean enableClickToMinimize;
 
   private DraggableListener listener;
 
@@ -73,6 +80,42 @@ public class DraggableView extends RelativeLayout {
   public DraggableView(Context context, AttributeSet attrs, int defStyle) {
     super(context, attrs, defStyle);
     initializeAttributes(attrs);
+  }
+
+  /**
+   * Return if user can maximize minimized view on click.
+   */
+  public boolean isClickToMaximizeEnabled() {
+    return enableClickToMaximize;
+  }
+
+  /**
+   * Enable or disable click to maximize view when dragged view is minimized
+   * If your content have a touch/click listener (like YoutubePlayer), you
+   * need disable it to active this feature.
+   *
+   * @param enableClickToMaximize to enable or disable the click.
+   */
+  public void setClickToMaximizeEnabled(boolean enableClickToMaximize) {
+    this.enableClickToMaximize = enableClickToMaximize;
+  }
+
+  /**
+   * Return if user can minimize maximized view on click.
+   */
+  public boolean isClickToMinimizeEnabled() {
+    return enableClickToMinimize;
+  }
+
+  /**
+   * Enable or disable click to minimize view when dragged view is maximized
+   * If your content have a touch/click listener (like YoutubePlayer), you
+   * need disable it to active this feature.
+   *
+   * @param enableClickToMinimize to enable or disable the click.
+   */
+  public void setClickToMinimizeEnabled(boolean enableClickToMinimize) {
+    this.enableClickToMinimize = enableClickToMinimize;
   }
 
   /**
@@ -241,7 +284,6 @@ public class DraggableView extends RelativeLayout {
    */
   @Override public boolean onInterceptTouchEvent(MotionEvent ev) {
     final int action = MotionEventCompat.getActionMasked(ev);
-
     if (action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_UP) {
       viewDragHelper.cancel();
       return false;
@@ -263,6 +305,7 @@ public class DraggableView extends RelativeLayout {
     }
     boolean isDragViewHit = isViewHit(dragView, (int) ev.getX(), (int) ev.getY());
     boolean isSecondViewHit = isViewHit(secondView, (int) ev.getX(), (int) ev.getY());
+    analyzeTouchToMaximizeIfNeeded(ev, isDragViewHit);
     if (isMaximized()) {
       dragView.dispatchTouchEvent(ev);
     } else {
@@ -271,10 +314,36 @@ public class DraggableView extends RelativeLayout {
     return isDragViewHit || isSecondViewHit;
   }
 
+  private void analyzeTouchToMaximizeIfNeeded(MotionEvent ev, boolean isDragViewHit) {
+    switch(ev.getAction()) {
+      case MotionEvent.ACTION_DOWN:
+        lastTouchActionDownXPosition = ev.getX();
+        break;
+      case MotionEvent.ACTION_UP:
+        float clickOffset = ev.getX() - lastTouchActionDownXPosition;
+        if (shouldMaximizeOnClick(ev, clickOffset, isDragViewHit)) {
+          if (isMinimized() && isClickToMaximizeEnabled()) {
+            maximize();
+          } else if (isMaximized() && isClickToMinimizeEnabled()) {
+            minimize();
+          }
+        }
+        break;
+      default:
+        break;
+    }
+  }
+
+  public boolean shouldMaximizeOnClick(MotionEvent ev, float deltaX, boolean isDragViewHit) {
+    return (Math.abs(deltaX) < MIN_SLIDING_DISTANCE_ON_CLICK)
+        && ev.getAction() != MotionEvent.ACTION_MOVE
+        && isDragViewHit;
+  }
+
   /**
    * Clone given motion event and set specified action. This method is useful, when we want to
    * cancel event propagation in child views by sending event with {@link
-   * MotionEvent#ACTION_CANCEL}
+   * android.view.MotionEvent#ACTION_CANCEL}
    * action.
    *
    * @param event event to clone
@@ -504,8 +573,7 @@ public class DraggableView extends RelativeLayout {
    * Initialize the viewDragHelper.
    */
   private void initializeViewDragHelper() {
-    viewDragHelper =
-        ViewDragHelper.create(this, SENSITIVITY, new DraggableViewCallback(this, dragView));
+    viewDragHelper = ViewDragHelper.create(this, SENSITIVITY, new DraggableViewCallback(this, dragView));
   }
 
   /**
@@ -542,6 +610,12 @@ public class DraggableView extends RelativeLayout {
     this.enableHorizontalAlphaEffect =
         attributes.getBoolean(R.styleable.draggable_view_enable_minimized_horizontal_alpha_effect,
             DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT);
+    this.enableClickToMaximize =
+        attributes.getBoolean(R.styleable.draggable_view_enable_click_to_maximize_view,
+            DEFAULT_ENABLE_CLICK_TO_MAXIMIZE);
+    this.enableClickToMinimize =
+        attributes.getBoolean(R.styleable.draggable_view_enable_click_to_minimize_view,
+            DEFAULT_ENABLE_CLICK_TO_MINIMIZE);
     this.attributes = attributes;
   }
 

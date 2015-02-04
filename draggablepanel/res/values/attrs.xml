@@ -7,6 +7,8 @@
     <attr name="top_fragment_margin_right" format="dimension"/>
     <attr name="top_fragment_margin_bottom" format="dimension"/>
     <attr name="enable_horizontal_alpha_effect" format="boolean"/>
+    <attr name="enable_click_to_maximize_panel" format="boolean"/>
+    <attr name="enable_click_to_minimize_panel" format="boolean"/>
   </declare-styleable>
 
   <declare-styleable name="draggable_view">
@@ -18,6 +20,8 @@
     <attr name="top_view_margin_right" format="dimension"/>
     <attr name="top_view_margin_bottom" format="dimension"/>
     <attr name="enable_minimized_horizontal_alpha_effect" format="boolean"/>
+    <attr name="enable_click_to_maximize_view" format="boolean"/>
+    <attr name="enable_click_to_minimize_view" format="boolean"/>
     <attr name="top_view_resize" format="boolean"/>
   </declare-styleable>
 

@@ -14,9 +14,12 @@
   <!-- DraggablePanel -->
 
   <com.github.pedrovgs.DraggablePanel
+      xmlns:draggable_panel="http://schemas.android.com/apk/res-auto"
       android:id="@+id/draggable_panel"
       android:layout_width="fill_parent"
-      android:layout_height="fill_parent"/>
+      android:layout_height="fill_parent"
+      draggable_panel:enable_click_to_maximize_panel="true"
+      draggable_panel:enable_click_to_minimize_panel="true"/>
 
 
 </RelativeLayout>
