@@ -261,6 +261,6 @@ License
 [20]: https://github.com/pedrovgs/
 [21]: https://github.com/friederbluemle/
 [22]: https://github.com/glodos/
-[23]: https://github.com/Fiddl3
-[24]: https://github.com/ppamorim
+[23]: https://github.com/Fiddl3/
+[24]: https://github.com/ppamorim/
 [25]: https://play.google.com/store/apps/details?id=com.Tag_Interativa.vejo_ao_vivo.app
