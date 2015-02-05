@@ -21,7 +21,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
-import com.nineoldandroids.view.ViewHelper;
 
 /**
  * Custom view created to handle DraggableView using fragments. With this custom view the client

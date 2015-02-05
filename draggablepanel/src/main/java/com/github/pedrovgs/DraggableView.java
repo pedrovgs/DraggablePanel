@@ -151,7 +151,7 @@ public class DraggableView extends RelativeLayout {
    */
   public void slideMinimizedView(float slideOffset, float drawerPosition, int width) {
     float slide = Math.abs(drawerPosition);
-    if(slideOffset > 0.1 && !isClosed()) {
+    if (slideOffset > 0.1 && !isClosed()) {
       minimize();
     }
     setEnableTouchListener(!(slideOffset > 0.1));
@@ -323,7 +323,7 @@ public class DraggableView extends RelativeLayout {
    * @return true if the view is going to process the touch event or false if not.
    */
   @Override public boolean onInterceptTouchEvent(MotionEvent ev) {
-    if(!enableTouchListener) {
+    if (!enableTouchListener) {
       return false;
     }
     final int action = MotionEventCompat.getActionMasked(ev);
