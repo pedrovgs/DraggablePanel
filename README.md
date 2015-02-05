@@ -186,6 +186,7 @@ Contributors
 * [Frieder Bluemle][21]
 * [Goldos] [22]
 * [Rafał Pluta][23]
+* [Pedro Paulo de Amorim][24]
 
 
 Developed By
@@ -205,6 +206,7 @@ Who's using it
 
 * [El Rubius Vídeos][9] using the first beta release.
 * [DudePerfect Vídeos] [18] using the first beta release.
+* [VejoaoVivo Mobile] [25] using the last release.
 
 *Does your app use DraggablePanel? If you want to be featured on this list tell me on [Twitter][10]
 
@@ -260,4 +262,5 @@ License
 [21]: https://github.com/friederbluemle/
 [22]: https://github.com/glodos/
 [23]: https://github.com/Fiddl3/
-
+[24]: https://github.com/ppamorim/
+[25]: https://play.google.com/store/apps/details?id=com.Tag_Interativa.vejo_ao_vivo.app
