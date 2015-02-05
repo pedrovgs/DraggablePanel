@@ -86,14 +86,6 @@ private void initializeDraggablePanel() throws Resources.NotFoundException {
 </com.github.pedrovgs.DraggableView>
 ```
 
-Problems with SurfaceView or VideoView?
----------------------------------------
-
-First, VideoView is a implementation of SurfaceView and MediaPlayer.
-SurfaceView have a problem to resize and transform and It'll make your topView black because GPU can't handler this overlay while video is playing. 
-
-The solution is use the TextureView instead of these elements.
-
 Import DraggablePanel dependency
 --------------------------------
 
