@@ -146,15 +146,6 @@ public class DraggablePanel extends FrameLayout {
   }
 
   /**
-   * Enable or disable the touch listener
-   *
-   * @param enableTouchListener to enable or disable the touch event.
-   */
-  public void setEnableTouchListener(boolean enableTouchListener) {
-    this.enableTouchListener = enableTouchListener;
-  }
-
-  /**
    *
    * Slide the view based on scroll of the nav drawer.
    * "setEnableTouch" user prevents click to expand while the drawer is moving.
@@ -166,7 +157,7 @@ public class DraggablePanel extends FrameLayout {
    * @param drawerPosition Represent the position of nav drawer on X axis.
    * @param width Width of nav drawer
    */
-  public void slideMinimizedView(float slideOffset, float drawerPosition, int width) {
+  public void slideHorizontally(float slideOffset, float drawerPosition, int width) {
     draggableView.slideHorizontally(slideOffset, drawerPosition, width);
   }
 

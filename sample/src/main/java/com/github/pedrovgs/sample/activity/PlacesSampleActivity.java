@@ -306,7 +306,8 @@ public class PlacesSampleActivity extends DIFragmentActivity {
       @Override
       public void onDrawerSlide(View drawerView, float slideOffset) {
         super.onDrawerSlide(drawerView, slideOffset);
-        draggablePanel.slideMinimizedView(slideOffset, ViewHelper.getX(drawerView), drawerView.getWidth());
+        draggablePanel.slideHorizontally(slideOffset, ViewHelper.getX(drawerView),
+            drawerView.getWidth());
       }
     };
     mDrawerLayoutLeft.setDrawerListener(drawerToggle);
