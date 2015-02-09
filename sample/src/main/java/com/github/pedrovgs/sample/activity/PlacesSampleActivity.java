@@ -65,7 +65,7 @@ public class PlacesSampleActivity extends DIFragmentActivity {
 
   private int lastLoadedPlacePosition;
 
-  private ActionBarDrawerToggle mDrawerToggle;
+  private ActionBarDrawerToggle drawerToggle;
 
   /**
    * Initialize the Activity with some injected data.
@@ -86,13 +86,13 @@ public class PlacesSampleActivity extends DIFragmentActivity {
   @Override
   protected void onPostCreate(Bundle savedInstanceState) {
     super.onPostCreate(savedInstanceState);
-    mDrawerToggle.syncState();
+    drawerToggle.syncState();
   }
 
   @Override
   public void onConfigurationChanged(Configuration newConfig) {
     super.onConfigurationChanged(newConfig);
-    mDrawerToggle.onConfigurationChanged(newConfig);
+    drawerToggle.onConfigurationChanged(newConfig);
   }
 
   /**
@@ -286,7 +286,7 @@ public class PlacesSampleActivity extends DIFragmentActivity {
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     getSupportActionBar().setHomeButtonEnabled(true);
     mDrawerLayoutLeft.setDrawerShadow(R.drawable.drawer_shadow, Gravity.LEFT);
-    mDrawerToggle = new ActionBarDrawerToggle(
+    drawerToggle = new ActionBarDrawerToggle(
         this,
         mDrawerLayoutLeft,
         R.drawable.nav_drawer,
@@ -309,6 +309,6 @@ public class PlacesSampleActivity extends DIFragmentActivity {
         draggablePanel.slideMinimizedView(slideOffset, ViewHelper.getX(drawerView), drawerView.getWidth());
       }
     };
-    mDrawerLayoutLeft.setDrawerListener(mDrawerToggle);
+    mDrawerLayoutLeft.setDrawerListener(drawerToggle);
   }
 }

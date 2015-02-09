@@ -43,6 +43,7 @@ public class DraggableView extends RelativeLayout {
   private static final int DEFAULT_TOP_VIEW_HEIGHT = -1;
   private static final float SLIDE_TOP = 0f;
   private static final float SLIDE_BOTTOM = 1f;
+  private static final float MIN_SLIDE_OFFSET = 0.1f;
   private static final boolean DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT = true;
   private static final boolean DEFAULT_ENABLE_CLICK_TO_MAXIMIZE = false;
   private static final boolean DEFAULT_ENABLE_CLICK_TO_MINIMIZE = false;
@@ -66,7 +67,7 @@ public class DraggableView extends RelativeLayout {
   private boolean topViewResize;
   private boolean enableClickToMaximize;
   private boolean enableClickToMinimize;
-  private boolean enableTouchListener;
+  private boolean enableTouch;
 
   private DraggableListener listener;
 
@@ -123,23 +124,23 @@ public class DraggableView extends RelativeLayout {
   /**
    * Return if touch listener is enable or disable
    */
-  public boolean isEnableTouchListener() {
-    return this.enableTouchListener;
+  private boolean isEnableTouch() {
+    return this.enableTouch;
   }
 
   /**
    * Enable or disable the touch listener
    *
-   * @param enableTouchListener to enable or disable the touch event.
+   * @param enableTouch to enable or disable the touch event.
    */
-  public void setEnableTouchListener(boolean enableTouchListener) {
-    this.enableTouchListener = enableTouchListener;
+  public void setEnableTouch(boolean enableTouch) {
+    this.enableTouch = enableTouch;
   }
 
   /**
    * Slide the view based on scroll of the nav drawer.
-   * "setEnableTouchListener" user prevents click to expand while the drawer is moving.
-   * WHen the slideOffset is bigger than 0.1 and dragView isn't close, set the dragView
+   * "setEnableTouch" user prevents click to expand while the drawer is moving.
+   * When the slideOffset is bigger than 0.1 and dragView isn't close, set the dragView
    * to minimized.
    * It's only possible to maximize the view when @slideOffset is equals to 0.0,
    * in other words, closed.
@@ -149,12 +150,12 @@ public class DraggableView extends RelativeLayout {
    * @param drawerPosition Represent the position of nav drawer on X axis.
    * @param width Width of nav drawer
    */
-  public void slideMinimizedView(float slideOffset, float drawerPosition, int width) {
+  public void slideHorizontally(float slideOffset, float drawerPosition, int width) {
     float slide = Math.abs(drawerPosition);
-    if (slideOffset > 0.1 && !isClosed()) {
+    if (slideOffset > MIN_SLIDE_OFFSET && !isClosed()) {
       minimize();
     }
-    setEnableTouchListener(!(slideOffset > 0.1));
+    setEnableTouch(!(slideOffset <= MIN_SLIDE_OFFSET));
     ViewHelper.setX(this, width - slide);
   }
 
@@ -323,7 +324,7 @@ public class DraggableView extends RelativeLayout {
    * @return true if the view is going to process the touch event or false if not.
    */
   @Override public boolean onInterceptTouchEvent(MotionEvent ev) {
-    if (!enableTouchListener) {
+    if (!enableTouch) {
       return false;
     }
     final int action = MotionEventCompat.getActionMasked(ev);
@@ -659,9 +660,6 @@ public class DraggableView extends RelativeLayout {
     this.enableClickToMinimize =
         attributes.getBoolean(R.styleable.draggable_view_enable_click_to_minimize_view,
             DEFAULT_ENABLE_CLICK_TO_MINIMIZE);
-    this.enableTouchListener =
-        attributes.getBoolean(R.styleable.draggable_view_enable_touch_listener_view,
-            DEFAULT_ENABLE_TOUCH_LISTENER);
     this.attributes = attributes;
   }
 

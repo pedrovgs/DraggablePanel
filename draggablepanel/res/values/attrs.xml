@@ -23,7 +23,6 @@
     <attr name="enable_minimized_horizontal_alpha_effect" format="boolean"/>
     <attr name="enable_click_to_maximize_view" format="boolean"/>
     <attr name="enable_click_to_minimize_view" format="boolean"/>
-    <attr name="enable_touch_listener_view" format="boolean"/>
     <attr name="top_view_resize" format="boolean"/>
   </declare-styleable>
 
