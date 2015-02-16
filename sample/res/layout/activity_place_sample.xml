@@ -5,21 +5,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-  <!-- ListView places -->
-  <ListView
-      android:id="@+id/lv_places"
-      android:layout_width="fill_parent"
-      android:layout_height="fill_parent"/>
+  <android.support.v4.widget.DrawerLayout
+      android:id="@+id/drawer_left"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
 
-  <!-- DraggablePanel -->
+    <!-- ListView places -->
+    <ListView
+        android:id="@+id/lv_places"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
 
-  <com.github.pedrovgs.DraggablePanel
-      xmlns:draggable_panel="http://schemas.android.com/apk/res-auto"
-      android:id="@+id/draggable_panel"
-      android:layout_width="fill_parent"
-      android:layout_height="fill_parent"
-      draggable_panel:enable_click_to_maximize_panel="true"
-      draggable_panel:enable_click_to_minimize_panel="true"/>
+    <!-- DraggablePanel -->
 
+    <com.github.pedrovgs.DraggablePanel
+        xmlns:draggable_panel="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/draggable_panel"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        draggable_panel:enable_click_to_maximize_panel="true"
+        draggable_panel:enable_click_to_minimize_panel="true"/>
+
+    <FrameLayout
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/white">
+
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:src="@drawable/ic_launcher"
+          android:layout_gravity="center"/>
+
+    </FrameLayout>
+
+  </android.support.v4.widget.DrawerLayout>
 
 </RelativeLayout>
