@@ -10,7 +10,7 @@ This new component has been created using some concepts described on [Flavien La
 
 To create this library I've used an Android component called [ViewDragHelper][3] and [ViewDragHelper.Calback][4]. This component doesn't have too much documentation and that's the reason why I've added some javadoc to my code in order to clarify the component usage.
 
-This library works on Android 4.X because the scale effect is not going to work properly when the user try to drag the view. The clickable zone on a scaled view in Android 2.X is bigger than the real scaled zone.
+This library works on Android 4.X or higher versions but not in lower versions because the scale effect is not going to work properly when the user try to drag the view. The clickable zone on a scaled view in Android 2.X is bigger than the real scaled zone.
 
 Screenshots
 -----------
