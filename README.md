@@ -86,6 +86,8 @@ private void initializeDraggablePanel() throws Resources.NotFoundException {
 </com.github.pedrovgs.DraggableView>
 ```
 
+**If you are going to use ``DraggablePanel`` or ``DraggableView`` combined with a ``DrawerLayout`` review [Famous Places Sample Activity](https://github.com/pedrovgs/DraggablePanel/blob/develop/sample/src/main/java/com/github/pedrovgs/sample/activity/PlacesSampleActivity.java)
+
 Import DraggablePanel dependency
 --------------------------------
 
