@@ -59,7 +59,7 @@ public class PlacesSampleActivity extends DIFragmentActivity {
   @InjectView(R.id.lv_places) ListView placesListView;
   @InjectView(R.id.draggable_panel) DraggablePanel draggablePanel;
   @InjectView(R.id.drawer_left) DrawerLayout drawerlayoutLeft;
-  @InjectView(R.id.iv_drawer) ImageView iv_drawer;
+  @InjectView(R.id.iv_drawer) ImageView drawerImageView;
 
   @Inject RendererAdapter<PlaceViewModel> placesAdapter;
 
@@ -227,7 +227,7 @@ public class PlacesSampleActivity extends DIFragmentActivity {
         new GoogleMapOptions().mapType(GoogleMap.MAP_TYPE_SATELLITE));
     Picasso.with(this)
         .load("http://www.hdiphonewallpapers.us/phone-wallpapers/iphone-4-wallpapers/hd-iphone-3gs-wallpapers-496ios.jpg")
-        .into(iv_drawer);
+        .into(drawerImageView);
   }
 
   /**
