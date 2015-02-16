@@ -34,8 +34,8 @@ public class PlaceCollectionViewModel implements AdapteeCollection<PlaceViewMode
   @Inject public PlaceCollectionViewModel() {
     this.places = new LinkedList<PlaceViewModel>();
     this.add(new PlaceViewModel("Sailing Stones, Death Valley",
-        "http://2.bp.blogspot.com/-0ULv5dX_6Hs/TmeR3qEGVOI/AAAAAAAAChA/P7Yy6_WE9d0/s1600/sailing+stone+4.img_assist_custom-600x450.jpg",
-        36.5047681, -117.0744727));
+        "http://2.bp.blogspot.com/-0ULv5dX_6Hs/TmeR3qEGVOI/AAAAAAAAChA/P7Yy6_WE9d0/s1600/sailing"
+            + "+stone+4.img_assist_custom-600x450.jpg", 36.5047681, -117.0744727));
     this.add(new PlaceViewModel("The Wave, Arizona",
         "http://www.greenster.com/magazine/files/2012/04/The-Wave-Arizona.jpg", 36.995629,
         -112.00613));
@@ -55,8 +55,8 @@ public class PlaceCollectionViewModel implements AdapteeCollection<PlaceViewMode
         "http://www.wheatbelttourism.com/wp-content/uploads/2011/09/Wave-Rock-31.jpg", -32.441815,
         118.896991));
     this.add(new PlaceViewModel("Windjana Gorge National Park",
-        "http://www.kimberleywa.com/yahoo_site_admin/assets/images/winjana_gorge_photo.18275348_std.jpg",
-        -32.441815, 118.896991));
+        "http://www.kimberleywa.com/yahoo_site_admin/assets/images/winjana_gorge_photo.18275348_"
+            + "std.jpg", -32.441815, 118.896991));
     this.add(new PlaceViewModel("Ayers Rock",
         "http://www.travel4kids.com.au/wp-content/uploads/2013/02/ayers-rock.jpg", -25.3487497,
         131.0303833));
@@ -70,8 +70,8 @@ public class PlaceCollectionViewModel implements AdapteeCollection<PlaceViewMode
         "http://3.bp.blogspot.com/_ks7s40OFQT8/TBsikSDA5XI/AAAAAAAABhQ/Wf_Td8k639E/s1600/12.jpg",
         -14.2400732, -53.1805018));
     this.add(new PlaceViewModel("Canals of Venice",
-        "http://www.goparoo.com/europe/italy/veneto/venice/attractions/canals/images/canals-of-venice-home.jpg",
-        45.436357, 12.332249));
+        "http://www.goparoo.com/europe/italy/veneto/venice/attractions/canals/images/canals-of-"
+            + "venice-home.jpg", 45.436357, 12.332249));
     this.add(new PlaceViewModel("Amalfi",
         "http://i.telegraph.co.uk/multimedia/archive/02205/amalfi_2205267b.jpg", 40.6309889,
         14.5916613));
@@ -91,8 +91,8 @@ public class PlaceCollectionViewModel implements AdapteeCollection<PlaceViewMode
         "http://www.destination360.com/africa/egypt/images/s/valley-of-the-kings.jpg", 25.740165,
         32.601411));
     this.add(new PlaceViewModel("Murcia",
-        "http://www.inkacars.com/wp-content/uploads/2013/01/Murcia-Cathedral-AlquilerCochesAeropuertos.jpg",
-        37.9886177, -1.13004));
+        "http://www.inkacars.com/wp-content/uploads/2013/01/Murcia-Cathedral-AlquilerCoches"
+            + "Aeropuertos.jpg", 37.9886177, -1.13004));
   }
 
   /**
