@@ -267,7 +267,7 @@ public class DraggablePanel extends FrameLayout {
     draggableView.setHorizontalAlphaEffectEnabled(enableHorizontalAlphaEffect);
     draggableView.setClickToMaximizeEnabled(enableClickToMaximize);
     draggableView.setClickToMinimizeEnabled(enableClickToMinimize);
-    draggableView.setEnableTouch(enableTouchListener);
+    draggableView.setTouchEnabled(enableTouchListener);
   }
 
   /**

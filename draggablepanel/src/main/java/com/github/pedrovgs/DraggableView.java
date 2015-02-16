@@ -67,7 +67,7 @@ public class DraggableView extends RelativeLayout {
   private boolean topViewResize;
   private boolean enableClickToMaximize;
   private boolean enableClickToMinimize;
-  private boolean enableTouch;
+  private boolean touchEnabled;
 
   private DraggableListener listener;
 
@@ -124,22 +124,23 @@ public class DraggableView extends RelativeLayout {
   /**
    * Return if touch listener is enable or disable
    */
-  private boolean isEnableTouch() {
-    return this.enableTouch;
+  private boolean isTouchEnabled() {
+    return this.touchEnabled;
   }
 
   /**
    * Enable or disable the touch listener
    *
-   * @param enableTouch to enable or disable the touch event.
+   * @param touchEnabled to enable or disable the touch event.
    */
-  public void setEnableTouch(boolean enableTouch) {
-    this.enableTouch = enableTouch;
+  public void setTouchEnabled(boolean touchEnabled) {
+    this.touchEnabled = touchEnabled;
   }
 
   /**
    * Slide the view based on scroll of the nav drawer.
-   * "setEnableTouch" user prevents click to expand while the drawer is moving.
+   * "setEnableTouch" user prevents click to expand while the drawer is moving, it will be
+   * set to false when the @slideOffset is bigger than MIN_SLIDE_OFFSET.
    * When the slideOffset is bigger than 0.1 and dragView isn't close, set the dragView
    * to minimized.
    * It's only possible to maximize the view when @slideOffset is equals to 0.0,
@@ -151,12 +152,11 @@ public class DraggableView extends RelativeLayout {
    * @param width Width of nav drawer
    */
   public void slideHorizontally(float slideOffset, float drawerPosition, int width) {
-    float slide = Math.abs(drawerPosition);
-    if (slideOffset > MIN_SLIDE_OFFSET && !isClosed()) {
+    if (slideOffset > MIN_SLIDE_OFFSET && !isClosed() && isMaximized()) {
       minimize();
     }
-    setEnableTouch(!(slideOffset <= MIN_SLIDE_OFFSET));
-    ViewHelper.setX(this, width - slide);
+    setTouchEnabled(slideOffset <= MIN_SLIDE_OFFSET);
+    ViewHelper.setX(this, width - Math.abs(drawerPosition));
   }
 
   /**
@@ -324,7 +324,7 @@ public class DraggableView extends RelativeLayout {
    * @return true if the view is going to process the touch event or false if not.
    */
   @Override public boolean onInterceptTouchEvent(MotionEvent ev) {
-    if (!enableTouch) {
+    if (!isEnabled()) {
       return false;
     }
     final int action = MotionEventCompat.getActionMasked(ev);
