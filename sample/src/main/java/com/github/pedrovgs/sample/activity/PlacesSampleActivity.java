@@ -24,6 +24,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -39,6 +40,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.nineoldandroids.view.ViewHelper;
 import com.pedrogomez.renderers.RendererAdapter;
+import com.squareup.picasso.Picasso;
 import javax.inject.Inject;
 
 /**
@@ -56,7 +58,8 @@ public class PlacesSampleActivity extends DIFragmentActivity {
 
   @InjectView(R.id.lv_places) ListView placesListView;
   @InjectView(R.id.draggable_panel) DraggablePanel draggablePanel;
-  @InjectView(R.id.drawer_left) DrawerLayout mDrawerLayoutLeft;
+  @InjectView(R.id.drawer_left) DrawerLayout drawerlayoutLeft;
+  @InjectView(R.id.iv_drawer) ImageView drawerImageView;
 
   @Inject RendererAdapter<PlaceViewModel> placesAdapter;
 
@@ -83,14 +86,12 @@ public class PlacesSampleActivity extends DIFragmentActivity {
   /**
    * Sync the drawerToggle
    */
-  @Override
-  protected void onPostCreate(Bundle savedInstanceState) {
+  @Override protected void onPostCreate(Bundle savedInstanceState) {
     super.onPostCreate(savedInstanceState);
     drawerToggle.syncState();
   }
 
-  @Override
-  public void onConfigurationChanged(Configuration newConfig) {
+  @Override public void onConfigurationChanged(Configuration newConfig) {
     super.onConfigurationChanged(newConfig);
     drawerToggle.onConfigurationChanged(newConfig);
   }
@@ -222,6 +223,10 @@ public class PlacesSampleActivity extends DIFragmentActivity {
     placeFragment = new PlaceFragment();
     mapFragment = SupportMapFragment.newInstance(
         new GoogleMapOptions().mapType(GoogleMap.MAP_TYPE_SATELLITE));
+    Picasso.with(this)
+        .load("http://www.hdiphonewallpapers.us/phone-wallpapers/iphone-4-wallpapers/"
+            + "hd-iphone-3gs-wallpapers-496ios.jpg")
+        .into(drawerImageView);
   }
 
   /**
@@ -230,8 +235,8 @@ public class PlacesSampleActivity extends DIFragmentActivity {
   private void initializeListView() {
     placesListView.setAdapter(placesAdapter);
     placesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-      @Override public void onItemClick(AdapterView<?> adapterView, View view, int position,
-          long id) {
+      @Override
+      public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         lastLoadedPlacePosition = position;
         showPlace(position);
       }
@@ -273,7 +278,8 @@ public class PlacesSampleActivity extends DIFragmentActivity {
     float yScaleFactor = typedValue.getFloat();
     draggablePanel.setXScaleFactor(xScaleFactor);
     draggablePanel.setYScaleFactor(yScaleFactor);
-    draggablePanel.setTopViewHeight(getResources().getDimensionPixelSize(R.dimen.top_fragment_height));
+    draggablePanel.setTopViewHeight(
+        getResources().getDimensionPixelSize(R.dimen.top_fragment_height));
     draggablePanel.setTopFragmentMarginRight(
         getResources().getDimensionPixelSize(R.dimen.top_fragment_margin));
     draggablePanel.setTopFragmentMarginBottom(
@@ -285,31 +291,25 @@ public class PlacesSampleActivity extends DIFragmentActivity {
   private void configNavigationDrawer() {
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     getSupportActionBar().setHomeButtonEnabled(true);
-    mDrawerLayoutLeft.setDrawerShadow(R.drawable.drawer_shadow, Gravity.LEFT);
-    drawerToggle = new ActionBarDrawerToggle(
-        this,
-        mDrawerLayoutLeft,
-        R.drawable.nav_drawer,
-        R.string.app_name,
-        R.string.app_name) {
+    drawerlayoutLeft.setDrawerShadow(R.drawable.drawer_shadow, Gravity.LEFT);
+    drawerToggle =
+        new ActionBarDrawerToggle(this, drawerlayoutLeft, R.drawable.nav_drawer, R.string.app_name,
+            R.string.app_name) {
 
-      @Override
-      public void onDrawerOpened(View drawerView) {
-        super.onDrawerOpened(drawerView);
-      }
+          @Override public void onDrawerOpened(View drawerView) {
+            super.onDrawerOpened(drawerView);
+          }
 
-      @Override
-      public void onDrawerClosed(View drawerView) {
-        super.onDrawerClosed(drawerView);
-      }
+          @Override public void onDrawerClosed(View drawerView) {
+            super.onDrawerClosed(drawerView);
+          }
 
-      @Override
-      public void onDrawerSlide(View drawerView, float slideOffset) {
-        super.onDrawerSlide(drawerView, slideOffset);
-        draggablePanel.slideHorizontally(slideOffset, ViewHelper.getX(drawerView),
-            drawerView.getWidth());
-      }
-    };
-    mDrawerLayoutLeft.setDrawerListener(drawerToggle);
+          @Override public void onDrawerSlide(View drawerView, float slideOffset) {
+            super.onDrawerSlide(drawerView, slideOffset);
+            draggablePanel.slideHorizontally(slideOffset, ViewHelper.getX(drawerView),
+                drawerView.getWidth());
+          }
+        };
+    drawerlayoutLeft.setDrawerListener(drawerToggle);
   }
 }

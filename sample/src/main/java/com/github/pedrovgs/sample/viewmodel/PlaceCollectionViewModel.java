@@ -34,63 +34,65 @@ public class PlaceCollectionViewModel implements AdapteeCollection<PlaceViewMode
   @Inject public PlaceCollectionViewModel() {
     this.places = new LinkedList<PlaceViewModel>();
     this.add(new PlaceViewModel("Sailing Stones, Death Valley",
-        "http://static.environmentalgraffiti.com/sites/default/files/images/"
-            + "477px-20061205135618-DVNP-RACETRACKjpg", 36.5047681, -117.0744727));
+        "http://2.bp.blogspot.com/-0ULv5dX_6Hs/TmeR3qEGVOI/AAAAAAAAChA/P7Yy6_WE9d0/s1600/sailing"
+            + "+stone+4.img_assist_custom-600x450.jpg", 36.5047681, -117.0744727));
     this.add(new PlaceViewModel("The Wave, Arizona",
-        "http://static.environmentalgraffiti.com/sites/default/files/images/"
-            + "wave3jpg.img_assist_custom-600x401.jpg", 36.995629, -112.00613));
+        "http://www.greenster.com/magazine/files/2012/04/The-Wave-Arizona.jpg", 36.995629,
+        -112.00613));
     this.add(new PlaceViewModel("Antelope Canyon, Arizona",
-        "http://static.environmentalgraffiti.com/sites/default/files/images/"
-            + "450px-USAAntelope-Canyonjpg", 36.861897, -111.374438));
+        "http://www.hotelclub.com/blog/wp-content/uploads/2008/12/antelope_canyon2.jpg", 36.861897,
+        -111.374438));
     this.add(new PlaceViewModel("Haleakala",
-        "http://www.ohanafun.net/UserFiles/Image/tours/haleakala_sunrise.jpg", 20.7097222,
+        "http://www.aloha-hawaii.com/wp-content/uploads/2010/03/haleakala-sunset.jpg", 20.7097222,
         -156.2533333));
     this.add(new PlaceViewModel("Multnomah Falls",
-        "http://multnomahfallslodge.com/images/home_main2.jpg", 45.5761597, -122.1157756));
+        "http://columbiariverimages.com/Images/multnomah_falls_oregon_2005.jpg", 45.5761597,
+        -122.1157756));
     this.add(new PlaceViewModel("Bungle Bungles",
-        "http://static.environmentalgraffiti.com/sites/default/files/images/"
-            + "bungle2jpg.img_assist_custom-600x454.jpg", -17.489633, 128.375491));
+        "http://www.kimberleyaustralia.com/image-files/bungle-bungles-picture-piccaninny.jpg",
+        -17.489633, 128.375491));
     this.add(new PlaceViewModel("Wave Rock",
-        "http://static.environmentalgraffiti.com/sites/default/files/images/" + "800px-WaveRockjpg",
-        -32.441815, 118.896991));
-    this.add(new PlaceViewModel("Windjana Gorge National Park",
-        "http://travelblog.viator.com/wp-content/uploads/2009/02/wa-winjana-gorge.jpg", -32.441815,
+        "http://www.wheatbelttourism.com/wp-content/uploads/2011/09/Wave-Rock-31.jpg", -32.441815,
         118.896991));
+    this.add(new PlaceViewModel("Windjana Gorge National Park",
+        "http://www.kimberleywa.com/yahoo_site_admin/assets/images/winjana_gorge_photo.18275348_"
+            + "std.jpg", -32.441815, 118.896991));
     this.add(new PlaceViewModel("Ayers Rock",
-        "http://static1.absolutaustralia.com/wp-content/uploads/2009/08/ayers.jpg", -25.3487497,
+        "http://www.travel4kids.com.au/wp-content/uploads/2013/02/ayers-rock.jpg", -25.3487497,
         131.0303833));
     this.add(new PlaceViewModel("Great Barrier Reef",
-        "http://www.charterworld.com/news/wp-content/uploads/2012/"
-            + "08/Great-Barrier-Reef-one-of-the-most-fabulous-"
-            + "yacht-charter-destinations-in-Australia.jpg", -18.242835, 147.451012));
+        "http://i.telegraph.co.uk/multimedia/archive/02434/greatBarrierReef_2434464b.jpg",
+        -18.242835, 147.451012));
     this.add(new PlaceViewModel("Iguazu Falls",
-        "http://travel.lowerhotels.com/wp-content/uploads/2013/06/Iguazu-Falls-Beauty.jpg",
-        -25.695259, -54.436666));
+        "http://world.new7wonders.com/content/uploads/2011/10/Iguazu_2011.jpg", -25.695259,
+        -54.436666));
     this.add(new PlaceViewModel("Amazon Rain, Brazil",
-        "http://1.bp.blogspot.com/-zjvjWNPQczI/TfRQTEYMk7I/"
-            + "AAAAAAAAAK8/W9SrwEyYPJw/s1600/rainforest.jpg", -14.2400732, -53.1805018));
+        "http://3.bp.blogspot.com/_ks7s40OFQT8/TBsikSDA5XI/AAAAAAAABhQ/Wf_Td8k639E/s1600/12.jpg",
+        -14.2400732, -53.1805018));
     this.add(new PlaceViewModel("Canals of Venice",
-        "http://www.jds-jgp.net/016_Small_canal_-_Venice.jpg", 45.436357, 12.332249));
+        "http://www.goparoo.com/europe/italy/veneto/venice/attractions/canals/images/canals-of-"
+            + "venice-home.jpg", 45.436357, 12.332249));
     this.add(new PlaceViewModel("Amalfi",
-        "http://img.playasymar.com/wp-content/uploads/2010/12/amalfi.jpg", 40.6309889, 14.5916613));
+        "http://i.telegraph.co.uk/multimedia/archive/02205/amalfi_2205267b.jpg", 40.6309889,
+        14.5916613));
     this.add(new PlaceViewModel("Colosseum of Rome",
-        "http://www.fotos-bonitas.com/wp-content/uploads/2013/06/Bing_zh-CN.jpg", 41.89021,
+        "http://www.destination360.com/europe/italy/images/s/italy-rome-colosseum.jpg", 41.89021,
         12.492231));
     this.add(new PlaceViewModel("The Blue Grotto",
-        "http://static.environmentalgraffiti.com/sites/default/files/"
-            + "images/800px-BlueGrottoCapriInsidejpg.img_assist_custom-600x450.jpg", 40.91389,
+        "http://corural.com/wp-content/uploads/2014/11/blue-grotto-capri.jpg", 40.91389,
         14.208688));
     this.add(new PlaceViewModel("Karnak Temple",
-        "http://www.filmapia.com/sites/default/files/filmapia/pub/place/karnak-temple.jpg",
+        "http://i.livescience.com/images/i/000/033/999/i02/shutterstock_580417.jpg?1354320604",
         25.7178978, 32.658147));
     this.add(new PlaceViewModel("Nile River",
-        "http://www.holidayplanners.com/nitro/files/nileriver%20egypt.jpg", 30.8358821,
-        31.0784856));
+        "http://www.greenprophet.com/wp-content/uploads/nile-river-egypt-10085-Aswan.jpg",
+        30.8358821, 31.0784856));
     this.add(new PlaceViewModel("Valley of the Kings",
-        "http://upload.wikimedia.org/wikipedia/commons/0/0c/Luxor"
-            + ",_Tal_der_K%C3%B6nige_(1995,_860x605).jpg", 25.740165, 32.601411));
-    this.add(new PlaceViewModel("Murcia", "http://www.auriautos.es/ciudades/murcia.jpg", 37.9886177,
-        -1.13004));
+        "http://www.destination360.com/africa/egypt/images/s/valley-of-the-kings.jpg", 25.740165,
+        32.601411));
+    this.add(new PlaceViewModel("Murcia",
+        "http://www.inkacars.com/wp-content/uploads/2013/01/Murcia-Cathedral-AlquilerCoches"
+            + "Aeropuertos.jpg", 37.9886177, -1.13004));
   }
 
   /**
