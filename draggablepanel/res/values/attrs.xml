@@ -9,6 +9,7 @@
     <attr name="enable_horizontal_alpha_effect" format="boolean"/>
     <attr name="enable_click_to_maximize_panel" format="boolean"/>
     <attr name="enable_click_to_minimize_panel" format="boolean"/>
+    <attr name="enable_touch_listener_panel" format="boolean"/>
   </declare-styleable>
 
   <declare-styleable name="draggable_view">

@@ -40,6 +40,7 @@ public class DraggablePanel extends FrameLayout {
   private static final boolean DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT = true;
   private static final boolean DEFAULT_ENABLE_CLICK_TO_MAXIMIZE = false;
   private static final boolean DEFAULT_ENABLE_CLICK_TO_MINIMIZE = false;
+  private static final boolean DEFAULT_ENABLE_TOUCH_LISTENER = true;
   private static final boolean DEFAULT_TOP_FRAGMENT_RESIZE = false;
 
   private DraggableView draggableView;
@@ -56,6 +57,7 @@ public class DraggablePanel extends FrameLayout {
   private boolean enableHorizontalAlphaEffect;
   private boolean enableClickToMaximize;
   private boolean enableClickToMinimize;
+  private boolean enableTouchListener;
 
   public DraggablePanel(Context context) {
     super(context);
@@ -141,6 +143,22 @@ public class DraggablePanel extends FrameLayout {
    */
   public void setClickToMinimizeEnabled(boolean enableClickToMinimize) {
     this.enableClickToMinimize = enableClickToMinimize;
+  }
+
+  /**
+   *
+   * Slide the view based on scroll of the nav drawer.
+   * "setEnableTouch" user prevents click to expand while the drawer is moving.
+   * It's only possible to maximize the view when @slideOffset is equals to 0.0,
+   * in other words, closed.
+   *
+   * @param slideOffset Value between 0 and 1, represent the value of slide:
+   * 0.0 is equal to close drawer and 1.0 equals open drawer.
+   * @param drawerPosition Represent the position of nav drawer on X axis.
+   * @param width Width of nav drawer
+   */
+  public void slideHorizontally(float slideOffset, float drawerPosition, int width) {
+    draggableView.slideHorizontally(slideOffset, drawerPosition, width);
   }
 
   /**
@@ -249,6 +267,7 @@ public class DraggablePanel extends FrameLayout {
     draggableView.setHorizontalAlphaEffectEnabled(enableHorizontalAlphaEffect);
     draggableView.setClickToMaximizeEnabled(enableClickToMaximize);
     draggableView.setClickToMinimizeEnabled(enableClickToMinimize);
+    draggableView.setTouchEnabled(enableTouchListener);
   }
 
   /**
@@ -316,6 +335,9 @@ public class DraggablePanel extends FrameLayout {
     this.enableClickToMinimize =
         attributes.getBoolean(R.styleable.draggable_panel_enable_click_to_minimize_panel,
             DEFAULT_ENABLE_CLICK_TO_MINIMIZE);
+    this.enableTouchListener =
+        attributes.getBoolean(R.styleable.draggable_panel_enable_touch_listener_panel,
+            DEFAULT_ENABLE_TOUCH_LISTENER);
     attributes.recycle();
   }
 
