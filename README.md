@@ -12,10 +12,6 @@ To create this library I've used an Android component called [ViewDragHelper][3]
 
 This library works on Android 4.X because the scale effect is not going to work properly when the user try to drag the view. The clickable zone on a scaled view in Android 2.X is bigger than the real scaled zone.
 
-<a href="https://play.google.com/store/apps/details?id=com.github.pedrovgs.sample">
-  <img alt="Android app on Google Play" src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png" />
-</a>
-
 Screenshots
 -----------
 
