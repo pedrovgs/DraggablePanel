@@ -105,9 +105,7 @@ Or into your build.gradle
 
 ```groovy
 dependencies {
-    compile 'com.github.pedrovgs:draggablepanel:1.7@aar'
-    compile 'com.android.support:support-v4:19.1.+'
-    compile 'com.nineoldandroids:library:2.4.+'
+    compile 'com.github.pedrovgs:draggablepanel:1.7'
 }
 ```
 
