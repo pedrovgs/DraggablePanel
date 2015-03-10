@@ -18,6 +18,7 @@ package com.github.pedrovgs;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MotionEventCompat;
@@ -52,7 +53,9 @@ public class DraggableView extends RelativeLayout {
   private static final int ONE_HUNDRED = 100;
   private static final float SENSITIVITY = 1f;
   private static final boolean DEFAULT_TOP_VIEW_RESIZE = false;
+  private static final int INVALID_POINTER = -1;
 
+  private int mActivePointerId = INVALID_POINTER;
   private float lastTouchActionDownXPosition;
 
   private View dragView;
@@ -323,14 +326,24 @@ public class DraggableView extends RelativeLayout {
    * @param ev captured.
    * @return true if the view is going to process the touch event or false if not.
    */
-  @Override public boolean onInterceptTouchEvent(MotionEvent ev) {
+  @Override public boolean onInterceptTouchEvent(@NonNull MotionEvent ev) {
     if (!isEnabled()) {
       return false;
     }
-    final int action = MotionEventCompat.getActionMasked(ev);
-    if (action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_UP) {
-      viewDragHelper.cancel();
-      return false;
+    switch (MotionEventCompat.getActionMasked(ev) & MotionEventCompat.ACTION_MASK) {
+      case MotionEvent.ACTION_CANCEL:
+      case MotionEvent.ACTION_UP:
+        viewDragHelper.cancel();
+        return false;
+      case MotionEvent.ACTION_DOWN:
+        int index = MotionEventCompat.getActionIndex(ev);
+        mActivePointerId = MotionEventCompat.getPointerId(ev, index);
+        if (mActivePointerId == INVALID_POINTER) {
+          return false;
+        }
+        break;
+      default:
+        break;
     }
     boolean interceptTap = viewDragHelper.isViewUnder(dragView, (int) ev.getX(), (int) ev.getY());
     return viewDragHelper.shouldInterceptTouchEvent(ev) || interceptTap;
@@ -342,7 +355,14 @@ public class DraggableView extends RelativeLayout {
    * @param ev captured.
    * @return true if the touch event is realized over the drag or second view.
    */
-  @Override public boolean onTouchEvent(MotionEvent ev) {
+  @Override public boolean onTouchEvent(@NonNull MotionEvent ev) {
+    int actionMasked = MotionEventCompat.getActionMasked(ev);
+    if ((actionMasked & MotionEventCompat.ACTION_MASK) == MotionEvent.ACTION_DOWN) {
+      mActivePointerId = MotionEventCompat.getPointerId(ev, actionMasked);
+    }
+    if (mActivePointerId == INVALID_POINTER) {
+      return false;
+    }
     viewDragHelper.processTouchEvent(ev);
     if (isClosed()) {
       return false;
