@@ -336,8 +336,8 @@ public class DraggableView extends RelativeLayout {
         return false;
       case MotionEvent.ACTION_DOWN:
         int index = MotionEventCompat.getActionIndex(ev);
-        mActivePointerId = MotionEventCompat.getPointerId(ev, index);
-        if (mActivePointerId == INVALID_POINTER) {
+        activePointerId = MotionEventCompat.getPointerId(ev, index);
+        if (activePointerId == INVALID_POINTER) {
           return false;
         }
         break;
@@ -357,9 +357,9 @@ public class DraggableView extends RelativeLayout {
   @Override public boolean onTouchEvent(MotionEvent ev) {
     int actionMasked = MotionEventCompat.getActionMasked(ev);
     if ((actionMasked & MotionEventCompat.ACTION_MASK) == MotionEvent.ACTION_DOWN) {
-      mActivePointerId = MotionEventCompat.getPointerId(ev, actionMasked);
+      activePointerId = MotionEventCompat.getPointerId(ev, actionMasked);
     }
-    if (mActivePointerId == INVALID_POINTER) {
+    if (activePointerId == INVALID_POINTER) {
       return false;
     }
     viewDragHelper.processTouchEvent(ev);
