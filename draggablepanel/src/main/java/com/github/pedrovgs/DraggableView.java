@@ -55,7 +55,7 @@ public class DraggableView extends RelativeLayout {
   private static final boolean DEFAULT_TOP_VIEW_RESIZE = false;
   private static final int INVALID_POINTER = -1;
 
-  private int mActivePointerId = INVALID_POINTER;
+  private int activePointerId = INVALID_POINTER;
   private float lastTouchActionDownXPosition;
 
   private View dragView;
@@ -326,7 +326,7 @@ public class DraggableView extends RelativeLayout {
    * @param ev captured.
    * @return true if the view is going to process the touch event or false if not.
    */
-  @Override public boolean onInterceptTouchEvent(@NonNull MotionEvent ev) {
+  @Override public boolean onInterceptTouchEvent(MotionEvent ev) {
     if (!isEnabled()) {
       return false;
     }
@@ -355,7 +355,7 @@ public class DraggableView extends RelativeLayout {
    * @param ev captured.
    * @return true if the touch event is realized over the drag or second view.
    */
-  @Override public boolean onTouchEvent(@NonNull MotionEvent ev) {
+  @Override public boolean onTouchEvent(MotionEvent ev) {
     int actionMasked = MotionEventCompat.getActionMasked(ev);
     if ((actionMasked & MotionEventCompat.ACTION_MASK) == MotionEvent.ACTION_DOWN) {
       mActivePointerId = MotionEventCompat.getPointerId(ev, actionMasked);
