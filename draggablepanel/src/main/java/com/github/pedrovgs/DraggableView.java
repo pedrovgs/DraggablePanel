@@ -52,7 +52,9 @@ public class DraggableView extends RelativeLayout {
   private static final int ONE_HUNDRED = 100;
   private static final float SENSITIVITY = 1f;
   private static final boolean DEFAULT_TOP_VIEW_RESIZE = false;
+  private static final int INVALID_POINTER = -1;
 
+  private int activePointerId = INVALID_POINTER;
   private float lastTouchActionDownXPosition;
 
   private View dragView;
@@ -327,10 +329,20 @@ public class DraggableView extends RelativeLayout {
     if (!isEnabled()) {
       return false;
     }
-    final int action = MotionEventCompat.getActionMasked(ev);
-    if (action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_UP) {
-      viewDragHelper.cancel();
-      return false;
+    switch (MotionEventCompat.getActionMasked(ev) & MotionEventCompat.ACTION_MASK) {
+      case MotionEvent.ACTION_CANCEL:
+      case MotionEvent.ACTION_UP:
+        viewDragHelper.cancel();
+        return false;
+      case MotionEvent.ACTION_DOWN:
+        int index = MotionEventCompat.getActionIndex(ev);
+        activePointerId = MotionEventCompat.getPointerId(ev, index);
+        if (activePointerId == INVALID_POINTER) {
+          return false;
+        }
+        break;
+      default:
+        break;
     }
     boolean interceptTap = viewDragHelper.isViewUnder(dragView, (int) ev.getX(), (int) ev.getY());
     return viewDragHelper.shouldInterceptTouchEvent(ev) || interceptTap;
@@ -343,6 +355,13 @@ public class DraggableView extends RelativeLayout {
    * @return true if the touch event is realized over the drag or second view.
    */
   @Override public boolean onTouchEvent(MotionEvent ev) {
+    int actionMasked = MotionEventCompat.getActionMasked(ev);
+    if ((actionMasked & MotionEventCompat.ACTION_MASK) == MotionEvent.ACTION_DOWN) {
+      activePointerId = MotionEventCompat.getPointerId(ev, actionMasked);
+    }
+    if (activePointerId == INVALID_POINTER) {
+      return false;
+    }
     viewDragHelper.processTouchEvent(ev);
     if (isClosed()) {
       return false;
