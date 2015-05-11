@@ -58,9 +58,9 @@ public class VideoSampleActivity extends FragmentActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_video_sample);
     ButterKnife.inject(this);
+    hookDraggableViewListener();
     initializeVideoView();
     initializePoster();
-    hookDraggableViewListener();
   }
 
   /**
@@ -99,6 +99,10 @@ public class VideoSampleActivity extends FragmentActivity {
 
       @Override public void onClosedToRight() {
         pauseVideo();
+      }
+
+      @Override public void onTopViewSlide(float scroll) {
+
       }
     });
   }

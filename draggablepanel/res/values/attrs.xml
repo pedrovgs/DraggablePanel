@@ -4,12 +4,16 @@
     <attr name="top_fragment_height" format="dimension"/>
     <attr name="x_scale_factor" format="float"/>
     <attr name="y_scale_factor" format="float"/>
-    <attr name="top_fragment_margin_right" format="dimension"/>
+    <attr name="top_fragment_margin" format="dimension"/>
+    <attr name="top_fragment_margin_top" format="dimension"/>
     <attr name="top_fragment_margin_bottom" format="dimension"/>
+    <attr name="top_fragment_margin_left" format="dimension"/>
+    <attr name="top_fragment_margin_right" format="dimension"/>
     <attr name="enable_horizontal_alpha_effect" format="boolean"/>
     <attr name="enable_click_to_maximize_panel" format="boolean"/>
     <attr name="enable_click_to_minimize_panel" format="boolean"/>
     <attr name="enable_touch_listener_panel" format="boolean"/>
+    <attr name="drag_limit_panel" format="float"/>
   </declare-styleable>
 
   <declare-styleable name="draggable_view">
@@ -18,12 +22,24 @@
     <attr name="top_view_height" format="dimension"/>
     <attr name="top_view_x_scale_factor" format="float"/>
     <attr name="top_view_y_scale_factor" format="float"/>
-    <attr name="top_view_margin_right" format="dimension"/>
+    <attr name="top_view_margin" format="dimension"/>
+    <attr name="top_view_margin_top" format="dimension"/>
     <attr name="top_view_margin_bottom" format="dimension"/>
+    <attr name="top_view_margin_left" format="dimension"/>
+    <attr name="top_view_margin_right" format="dimension"/>
     <attr name="enable_minimized_horizontal_alpha_effect" format="boolean"/>
     <attr name="enable_click_to_maximize_view" format="boolean"/>
     <attr name="enable_click_to_minimize_view" format="boolean"/>
     <attr name="top_view_resize" format="boolean"/>
+    <attr name="drag_limit_view" format="float"/>
+  </declare-styleable>
+
+  <declare-styleable name="top_view_position">
+    <attr name="position" format="enum">
+      <enum name="left" value="0"/>
+      <enum name="center" value="1"/>
+      <enum name="right" value="2"/>
+    </attr>
   </declare-styleable>
 
 </resources>

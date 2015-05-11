@@ -31,6 +31,9 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
   private static final float X_MIN_VELOCITY = 1500;
   private static final float Y_MIN_VELOCITY = 1000;
 
+  private int verticalDragRange = 0;
+
+  private DraggableListener draggableListener;
   private DraggableView draggableView;
   private View draggedView;
 
@@ -39,9 +42,20 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
    *
    * @param draggableView instance used to apply some animations or visual effects.
    */
-  public DraggableViewCallback(DraggableView draggableView, View draggedView) {
+  public DraggableViewCallback(DraggableView draggableView, View draggedView,
+      DraggableListener draggableListener, int height) {
     this.draggableView = draggableView;
     this.draggedView = draggedView;
+    this.draggableListener = draggableListener;
+    this.verticalDragRange = height;
+  }
+
+  public void setDraggableListener(DraggableListener draggableListener) {
+    this.draggableListener = draggableListener;
+  }
+
+  private int getVerticalDragRange() {
+    return verticalDragRange;
   }
 
   /**
@@ -64,6 +78,16 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
       draggableView.changeSecondViewPosition();
       draggableView.changeBackgroundAlpha();
     }
+
+    if (draggableListener != null) {
+      float fractionScreen = (float) Math.abs(top) / (float) verticalDragRange;
+      if (fractionScreen >= 1) {
+        fractionScreen = 1;
+      }
+      if (fractionScreen >= 0.0) {
+        draggableListener.onTopViewSlide(fractionScreen);
+      }
+    }
   }
 
   /**
@@ -77,7 +101,6 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
    */
   @Override public void onViewReleased(View releasedChild, float xVel, float yVel) {
     super.onViewReleased(releasedChild, xVel, yVel);
-
     if (draggableView.isDragViewAtBottom() && !draggableView.isDragViewAtRight()) {
       triggerOnReleaseActionsWhileHorizontalDrag(xVel);
     } else {

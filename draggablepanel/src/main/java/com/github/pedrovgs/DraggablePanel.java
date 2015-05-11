@@ -21,6 +21,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
+import com.github.pedrovgs.transformer.Position;
+import com.github.pedrovgs.transformer.Transformer;
 
 /**
  * Custom view created to handle DraggableView using fragments. With this custom view the client
@@ -50,14 +52,19 @@ public class DraggablePanel extends FrameLayout {
   private Fragment topFragment;
   private Fragment bottomFragment;
   private int topFragmentHeight;
-  private int topFragmentMarginRight;
+  private int topFragmentMargin;
+  private int topFragmentMarginTop;
   private int topFragmentMarginBottom;
+  private int topFragmentMarginLeft;
+  private int topFragmentMarginRight;
   private float xScaleFactor;
   private float yScaleFactor;
   private boolean enableHorizontalAlphaEffect;
   private boolean enableClickToMaximize;
   private boolean enableClickToMinimize;
   private boolean enableTouchListener;
+  private float dragLimit;
+  private int dragViewPosition;
 
   public DraggablePanel(Context context) {
     super(context);
@@ -146,6 +153,24 @@ public class DraggablePanel extends FrameLayout {
   }
 
   /**
+   * Enable or disable touch listener on drag view
+   *
+   * @param enableTouchListener to enable or disable the touch.
+   */
+  public void setEnableTouchListener(boolean enableTouchListener) {
+    this.enableTouchListener = enableTouchListener;
+  }
+
+  /**
+   * Configure the drag view limit.
+   *
+   * @param dragLimit in pixels
+   */
+  public void setDragLimit(float dragLimit) {
+    this.dragLimit = dragLimit;
+  }
+
+  /**
    *
    * Slide the view based on scroll of the nav drawer.
    * "setEnableTouch" user prevents click to expand while the drawer is moving.
@@ -159,6 +184,21 @@ public class DraggablePanel extends FrameLayout {
    */
   public void slideHorizontally(float slideOffset, float drawerPosition, int width) {
     draggableView.slideHorizontally(slideOffset, drawerPosition, width);
+  }
+
+  /**
+   * Configure the position of the drag view then this is minimized, can be left, center or right.
+   */
+  public void setDragViewPosition(int dragViewPosition) {
+    this.dragViewPosition = dragViewPosition;
+  }
+
+  /**
+   * Configure the horizontal scale factor applied when the top fragment is dragged to the bottom
+   * of the custom view.
+   */
+  public void setTopFragmentHeight(int topFragmentHeight) {
+    this.topFragmentHeight = topFragmentHeight;
   }
 
   /**
@@ -178,12 +218,21 @@ public class DraggablePanel extends FrameLayout {
   }
 
   /**
-   * Configure the top Fragment margin right applied when the view has been minimized.
+   * Configure all margins of the dragView and are applied when the dragView is minimized.
    *
-   * @param topFragmentMarginRight in pixels.
+   * @param topFragmentMargin in pixels.
    */
-  public void setTopFragmentMarginRight(int topFragmentMarginRight) {
-    this.topFragmentMarginRight = topFragmentMarginRight;
+  public void setTopFragmentMargin(int topFragmentMargin) {
+    this.topFragmentMargin = topFragmentMargin;
+  }
+
+  /**
+   * Configure the top Fragment margin top applied when the view has been minimized.
+   *
+   * @param topFragmentMarginTop in pixels.
+   */
+  public void setTopFragmentMarginTop(int topFragmentMarginTop) {
+    this.topFragmentMarginTop = topFragmentMarginTop;
   }
 
   /**
@@ -193,6 +242,24 @@ public class DraggablePanel extends FrameLayout {
    */
   public void setTopFragmentMarginBottom(int topFragmentMarginBottom) {
     this.topFragmentMarginBottom = topFragmentMarginBottom;
+  }
+
+  /**
+   * Configure the top Fragment margin left applied when the view has been minimized.
+   *
+   * @param topFragmentMarginLeft in pixels.
+   */
+  public void setTopFragmentMarginLeft(int topFragmentMarginLeft) {
+    this.topFragmentMarginLeft = topFragmentMarginLeft;
+  }
+
+  /**
+   * Configure the top Fragment margin right applied when the view has been minimized.
+   *
+   * @param topFragmentMarginRight in pixels.
+   */
+  public void setTopFragmentMarginRight(int topFragmentMarginRight) {
+    this.topFragmentMarginRight = topFragmentMarginRight;
   }
 
   /**
@@ -252,7 +319,6 @@ public class DraggablePanel extends FrameLayout {
   public void initializeView() {
     checkFragmentConsistency();
     checkSupportFragmentManagerConsistency();
-
     inflate(getContext(), R.layout.draggable_panel, this);
     draggableView = (DraggableView) findViewById(R.id.draggable_view);
     draggableView.setTopViewHeight(topFragmentHeight);
@@ -260,14 +326,19 @@ public class DraggablePanel extends FrameLayout {
     draggableView.attachTopFragment(topFragment);
     draggableView.setXTopViewScaleFactor(xScaleFactor);
     draggableView.setYTopViewScaleFactor(yScaleFactor);
-    draggableView.setTopViewMarginRight(topFragmentMarginRight);
+    draggableView.setTopViewMargin(topFragmentMargin);
+    draggableView.setTopViewMarginTop(topFragmentMarginTop);
+    draggableView.setTopViewMarginLeft(topFragmentMarginLeft);
     draggableView.setTopViewMarginBottom(topFragmentMarginBottom);
+    draggableView.setTopViewMarginRight(topFragmentMarginRight);
     draggableView.attachBottomFragment(bottomFragment);
     draggableView.setDraggableListener(draggableListener);
     draggableView.setHorizontalAlphaEffectEnabled(enableHorizontalAlphaEffect);
     draggableView.setClickToMaximizeEnabled(enableClickToMaximize);
     draggableView.setClickToMinimizeEnabled(enableClickToMinimize);
     draggableView.setTouchEnabled(enableTouchListener);
+    draggableView.setDragLimit(dragLimit);
+    draggableView.setDragViewPosition(dragViewPosition);
   }
 
   /**
@@ -313,31 +384,35 @@ public class DraggablePanel extends FrameLayout {
    */
   private void initializeAttrs(AttributeSet attrs) {
     TypedArray attributes = getContext().obtainStyledAttributes(attrs, R.styleable.draggable_panel);
-    this.topFragmentHeight =
-        attributes.getDimensionPixelSize(R.styleable.draggable_panel_top_fragment_height,
-            DEFAULT_TOP_FRAGMENT_HEIGHT);
-    this.xScaleFactor =
-        attributes.getFloat(R.styleable.draggable_panel_x_scale_factor, DEFAULT_SCALE_FACTOR);
-    this.yScaleFactor =
-        attributes.getFloat(R.styleable.draggable_panel_y_scale_factor, DEFAULT_SCALE_FACTOR);
-    this.topFragmentMarginRight =
-        attributes.getDimensionPixelSize(R.styleable.draggable_panel_top_fragment_margin_right,
-            DEFAULT_TOP_FRAGMENT_MARGIN);
-    this.topFragmentMarginBottom =
-        attributes.getDimensionPixelSize(R.styleable.draggable_panel_top_fragment_margin_bottom,
-            DEFAULT_TOP_FRAGMENT_MARGIN);
-    this.enableHorizontalAlphaEffect =
-        attributes.getBoolean(R.styleable.draggable_panel_enable_horizontal_alpha_effect,
-            DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT);
-    this.enableClickToMaximize =
-        attributes.getBoolean(R.styleable.draggable_panel_enable_click_to_maximize_panel,
-            DEFAULT_ENABLE_CLICK_TO_MAXIMIZE);
-    this.enableClickToMinimize =
-        attributes.getBoolean(R.styleable.draggable_panel_enable_click_to_minimize_panel,
-            DEFAULT_ENABLE_CLICK_TO_MINIMIZE);
-    this.enableTouchListener =
-        attributes.getBoolean(R.styleable.draggable_panel_enable_touch_listener_panel,
-            DEFAULT_ENABLE_TOUCH_LISTENER);
+    setTopFragmentHeight(attributes.getDimensionPixelSize(R.styleable.draggable_panel_top_fragment_height,
+        DEFAULT_TOP_FRAGMENT_HEIGHT));
+    setXScaleFactor(attributes.getFloat(R.styleable.draggable_panel_x_scale_factor,
+        DEFAULT_SCALE_FACTOR));
+    setYScaleFactor(attributes.getFloat(R.styleable.draggable_panel_y_scale_factor,
+        DEFAULT_SCALE_FACTOR));
+    setTopFragmentMargin(attributes.getDimensionPixelSize(R.styleable.draggable_panel_top_fragment_margin,
+        DEFAULT_TOP_FRAGMENT_MARGIN));
+    setTopFragmentMarginTop(attributes.getDimensionPixelSize(R.styleable.draggable_panel_top_fragment_margin_top,
+        DEFAULT_TOP_FRAGMENT_MARGIN));
+    setTopFragmentMarginBottom(attributes.getDimensionPixelSize(R.styleable.draggable_panel_top_fragment_margin_bottom,
+        DEFAULT_TOP_FRAGMENT_MARGIN));
+    setTopFragmentMarginLeft(attributes.getDimensionPixelSize(R.styleable.draggable_panel_top_fragment_margin_left,
+        DEFAULT_TOP_FRAGMENT_MARGIN));
+    setTopFragmentMarginRight(attributes.getDimensionPixelSize(R.styleable.draggable_panel_top_fragment_margin_right,
+        DEFAULT_TOP_FRAGMENT_MARGIN));
+    setEnableHorizontalAlphaEffect(attributes.getBoolean(R.styleable.draggable_panel_enable_horizontal_alpha_effect,
+        DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT));
+    setClickToMaximizeEnabled(attributes.getBoolean(R.styleable.draggable_panel_enable_click_to_maximize_panel,
+        DEFAULT_ENABLE_CLICK_TO_MAXIMIZE));
+    setClickToMinimizeEnabled(attributes.getBoolean(R.styleable.draggable_panel_enable_click_to_minimize_panel,
+        DEFAULT_ENABLE_CLICK_TO_MINIMIZE));
+    setEnableTouchListener(attributes.getBoolean(R.styleable.draggable_panel_enable_touch_listener_panel,
+        DEFAULT_ENABLE_TOUCH_LISTENER));
+    setDragLimit(attributes.getFloat(R.styleable.draggable_panel_drag_limit_panel,
+        Transformer.DEFAULT_DRAG_LIMIT));
+    setDragViewPosition(getContext().obtainStyledAttributes(attrs, R.styleable.top_view_position)
+        .getInt(R.styleable.top_view_position_position,
+            Position.RIGHT));
     attributes.recycle();
   }
 

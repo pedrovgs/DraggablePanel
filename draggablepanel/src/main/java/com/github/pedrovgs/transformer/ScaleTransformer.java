@@ -47,8 +47,15 @@ class ScaleTransformer extends Transformer {
    * @param verticalDragOffset used to calculate the new position.
    */
   @Override public void updatePosition(float verticalDragOffset) {
-    ViewHelper.setPivotX(getView(), getView().getWidth() - getMarginRight());
-    ViewHelper.setPivotY(getView(), getView().getHeight() - getMarginBottom());
+    ViewHelper.setPivotX(getView(), generateHorizontalPivot());
+    ViewHelper.setPivotY(getView(), generateVerticalPivot());
+  }
+
+  /**
+   * @return true if the left corner of the view matches with the parent view width.
+   */
+  @Override public boolean isViewAtLeft() {
+    return getView().getLeft() == getParentView().getWidth();
   }
 
   /**
@@ -84,15 +91,31 @@ class ScaleTransformer extends Transformer {
   /**
    * @return min view height taking into account the configured margin.
    */
-  @Override public int getMinHeightPlusMargin() {
+  @Override public int getMinHeightPlusVerticalSides() {
     return getView().getHeight();
   }
 
   /**
    * @return min view width.
    */
-  @Override public int getMinWidthPlusMarginRight() {
+  @Override public int getMinWidthPlusMarginHorizontalSides() {
     return getOriginalWidth();
+  }
+
+  private float generateHorizontalPivot() {
+    switch (getViewPosition()) {
+      case Position.LEFT:
+        return getMarginLeft();
+      case Position.CENTER:
+        return getView().getWidth() / 2;
+      case Position.RIGHT:
+      default:
+        return getView().getWidth() - getMarginRight();
+    }
+  }
+
+  private float generateVerticalPivot() {
+    return getView().getHeight() - getMarginBottom();
   }
 
 }

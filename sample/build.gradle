@@ -43,7 +43,6 @@ android {
   }
 }
 
-
 task checkstyle(type: Checkstyle) {
   configFile file('../config/checkstyle/checkstyle.xml')
   source 'src/main/java'

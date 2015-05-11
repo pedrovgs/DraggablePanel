@@ -42,4 +42,12 @@ public interface DraggableListener {
    * Called when the view is closed to the right.
    */
   void onClosedToRight();
+
+  /**
+   * Called when the view is sliding.
+   *
+   * @param scroll return the scroll value, 0.0 is minimized and 1.0 is maximized.
+   */
+  void onTopViewSlide(float scroll);
+
 }

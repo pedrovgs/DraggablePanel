@@ -26,7 +26,7 @@ import android.view.View;
 public class TransformerFactory {
 
   public Transformer getTransformer(final boolean resize, final View view, final View parent) {
-    Transformer transformer = null;
+    Transformer transformer;
     if (resize) {
       transformer = new ResizeTransformer(view, parent);
     } else {

@@ -27,6 +27,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
+import com.github.pedrovgs.transformer.Position;
 import com.github.pedrovgs.transformer.Transformer;
 import com.github.pedrovgs.transformer.TransformerFactory;
 import com.nineoldandroids.view.ViewHelper;
@@ -41,13 +42,14 @@ public class DraggableView extends RelativeLayout {
   private static final int DEFAULT_SCALE_FACTOR = 2;
   private static final int DEFAULT_TOP_VIEW_MARGIN = 30;
   private static final int DEFAULT_TOP_VIEW_HEIGHT = -1;
+  private static final int MAX_ALPHA = 1;
+  private static final int MIN_ALPHA = 0;
   private static final float SLIDE_TOP = 0f;
   private static final float SLIDE_BOTTOM = 1f;
   private static final float MIN_SLIDE_OFFSET = 0.1f;
   private static final boolean DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT = true;
   private static final boolean DEFAULT_ENABLE_CLICK_TO_MAXIMIZE = false;
   private static final boolean DEFAULT_ENABLE_CLICK_TO_MINIMIZE = false;
-  private static final boolean DEFAULT_ENABLE_TOUCH_LISTENER = true;
   private static final int MIN_SLIDING_DISTANCE_ON_CLICK = 10;
   private static final int ONE_HUNDRED = 100;
   private static final float SENSITIVITY = 1f;
@@ -60,9 +62,11 @@ public class DraggableView extends RelativeLayout {
   private View dragView;
   private View secondView;
   private TypedArray attributes;
+  private TypedArray attributePosition;
 
   private FragmentManager fragmentManager;
   private ViewDragHelper viewDragHelper;
+  private DraggableViewCallback draggableViewCallback;
   private Transformer transformer;
 
   private boolean enableHorizontalAlphaEffect;
@@ -178,19 +182,55 @@ public class DraggableView extends RelativeLayout {
   }
 
   /**
+   * Configure all margins of the dragView and are applied when the dragView is minimized.
+   *
+   * @param topViewMargin in pixels.
+   */
+  public void setTopViewMargin(int topViewMargin) {
+    transformer.setMargins(topViewMargin);
+  }
+
+  /**
+   * Configure the dragView margin left applied when the dragView is minimized.
+   *
+   * @param topViewMarginLeft in pixels.
+   */
+  public void setTopViewMarginLeft(int topViewMarginLeft) {
+    transformer.setMarginLeft(topViewMarginLeft);
+  }
+
+  /**
    * Configure the dragged view margin right applied when the dragged view is minimized.
    *
-   * @param topFragmentMarginRight in pixels.
+   * @param topViewMarginRight in pixels.
    */
-  public void setTopViewMarginRight(int topFragmentMarginRight) {
-    transformer.setMarginRight(topFragmentMarginRight);
+  public void setTopViewMarginRight(int topViewMarginRight) {
+    transformer.setMarginRight(topViewMarginRight);
+  }
+
+  /**
+   * Configure the dragView margin top applied when the dragView is minimized.
+   *
+   * @param topViewMarginTop in pixels.
+   */
+  public void setTopViewMarginTop(int topViewMarginTop) {
+    transformer.setMarginTop(topViewMarginTop);
   }
 
   /**
    * Configure the dragView margin bottom applied when the dragView is minimized.
+   *
+   * @param topViewMarginBottom in pixels.
    */
-  public void setTopViewMarginBottom(int topFragmentMarginBottom) {
-    transformer.setMarginBottom(topFragmentMarginBottom);
+  public void setTopViewMarginBottom(int topViewMarginBottom) {
+    transformer.setMarginBottom(topViewMarginBottom);
+  }
+
+  /**
+   * Configure the position of the drag view then this is minimized, can be left, center or right.
+   */
+  public void setDragViewPosition(int dragViewPosition) {
+    transformer.setViewPosition(dragViewPosition);
   }
 
   /**
@@ -203,6 +243,15 @@ public class DraggableView extends RelativeLayout {
   }
 
   /**
+   * Configure the drag view limit.
+   *
+   * @param dragLimit, between 0.0 and 1.0
+   */
+  public void setDragLimit(float dragLimit) {
+    transformer.setDragLimit(dragLimit);
+  }
+
+  /**
    * Configure the disabling of the alpha effect applied when the dragView is dragged horizontally.
    */
   public void setHorizontalAlphaEffectEnabled(boolean enableHorizontalAlphaEffect) {
@@ -211,10 +260,11 @@ public class DraggableView extends RelativeLayout {
 
   /**
    * Configure the DraggableListener notified when the view is minimized, maximized, closed to the
-   * right or closed to the left.
+   * right or closed to the left and the actual position on Y axis.
    */
   public void setDraggableListener(DraggableListener listener) {
     this.listener = listener;
+    draggableViewCallback.setDraggableListener(listener);
   }
 
   /**
@@ -256,7 +306,7 @@ public class DraggableView extends RelativeLayout {
    */
   public void closeToRight() {
     if (viewDragHelper.smoothSlideViewTo(dragView, transformer.getOriginalWidth(),
-        getHeight() - transformer.getMinHeightPlusMargin())) {
+        getHeight() - transformer.getMinHeightPlusVerticalSides())) {
       ViewCompat.postInvalidateOnAnimation(this);
       notifyCloseToRightListener();
     }
@@ -267,7 +317,7 @@ public class DraggableView extends RelativeLayout {
    */
   public void closeToLeft() {
     if (viewDragHelper.smoothSlideViewTo(dragView, -transformer.getOriginalWidth(),
-        getHeight() - transformer.getMinHeightPlusMargin())) {
+        getHeight() - transformer.getMinHeightPlusVerticalSides())) {
       ViewCompat.postInvalidateOnAnimation(this);
       notifyCloseToLeftListener();
     }
@@ -422,9 +472,9 @@ public class DraggableView extends RelativeLayout {
    * Override method to configure the dragged view and secondView layout properly.
    */
   @Override protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-    if (isInEditMode())
+    if (isInEditMode()) {
       super.onLayout(changed, left, top, right, bottom);
-    else if (isDragViewAtTop()) {
+    } else if (isDragViewAtTop()) {
       dragView.layout(left, top, right, transformer.getOriginalHeight());
       secondView.layout(left, transformer.getOriginalHeight(), right, bottom);
       ViewHelper.setY(dragView, top);
@@ -512,7 +562,7 @@ public class DraggableView extends RelativeLayout {
   void changeBackgroundAlpha() {
     Drawable background = getBackground();
     if (background != null) {
-      int newAlpha = (int) (ONE_HUNDRED * (1 - getVerticalDragOffset()));
+      int newAlpha = (int) (ONE_HUNDRED * (MAX_ALPHA - getVerticalDragOffset()));
       background.setAlpha(newAlpha);
     }
   }
@@ -521,7 +571,7 @@ public class DraggableView extends RelativeLayout {
    * Modify the second view alpha based on dragged view vertical position.
    */
   void changeSecondViewAlpha() {
-    ViewHelper.setAlpha(secondView, 1 - getVerticalDragOffset());
+    ViewHelper.setAlpha(secondView, MAX_ALPHA - getVerticalDragOffset());
   }
 
   /**
@@ -530,9 +580,9 @@ public class DraggableView extends RelativeLayout {
    */
   void changeDragViewViewAlpha() {
     if (enableHorizontalAlphaEffect) {
-      float alpha = 1 - getHorizontalDragOffset();
-      if (alpha == 0) {
-        alpha = 1;
+      float alpha = MAX_ALPHA - getHorizontalDragOffset();
+      if (alpha == MIN_ALPHA) {
+        alpha = MAX_ALPHA;
       }
       ViewHelper.setAlpha(dragView, alpha);
     }
@@ -542,8 +592,8 @@ public class DraggableView extends RelativeLayout {
    * Restore view alpha to 1
    */
   void restoreAlpha() {
-    if (enableHorizontalAlphaEffect && ViewHelper.getAlpha(dragView) < 1) {
-      ViewHelper.setAlpha(dragView, 1);
+    if (enableHorizontalAlphaEffect && ViewHelper.getAlpha(dragView) < MAX_ALPHA) {
+      ViewHelper.setAlpha(dragView, MAX_ALPHA);
     }
   }
 
@@ -581,6 +631,15 @@ public class DraggableView extends RelativeLayout {
    */
   boolean isDragViewAtTop() {
     return transformer.isViewAtTop();
+  }
+
+  /**
+   * Check if dragged view is at the left of the custom view.
+   *
+   * @return true if dragged view left position is equals to custom view width.
+   */
+  boolean isDragViewAtLeft() {
+    return transformer.isViewAtLeft();
   }
 
   /**
@@ -636,7 +695,9 @@ public class DraggableView extends RelativeLayout {
    * Initialize the viewDragHelper.
    */
   private void initializeViewDragHelper() {
-    viewDragHelper = ViewDragHelper.create(this, SENSITIVITY, new DraggableViewCallback(this, dragView));
+    draggableViewCallback = new DraggableViewCallback(this, dragView, listener,
+        (int) getVerticalDragRange());
+    viewDragHelper = ViewDragHelper.create(this, SENSITIVITY, draggableViewCallback);
   }
 
   /**
@@ -647,20 +708,27 @@ public class DraggableView extends RelativeLayout {
         attributes.getBoolean(R.styleable.draggable_view_top_view_resize, DEFAULT_TOP_VIEW_RESIZE);
     TransformerFactory transformerFactory = new TransformerFactory();
     transformer = transformerFactory.getTransformer(topViewResize, dragView, this);
-    transformer.setViewHeight(attributes.getDimensionPixelSize(R.styleable.draggable_view_top_view_height,
+    setTopViewHeight(attributes.getDimensionPixelSize(R.styleable.draggable_view_top_view_height,
         DEFAULT_TOP_VIEW_HEIGHT));
-    transformer.setXScaleFactor(
-        attributes.getFloat(R.styleable.draggable_view_top_view_x_scale_factor,
-            DEFAULT_SCALE_FACTOR));
-    transformer.setYScaleFactor(
-        attributes.getFloat(R.styleable.draggable_view_top_view_y_scale_factor,
-            DEFAULT_SCALE_FACTOR));
-    transformer.setMarginRight(
-        attributes.getDimensionPixelSize(R.styleable.draggable_view_top_view_margin_right,
+    setXTopViewScaleFactor(attributes.getFloat(R.styleable.draggable_view_top_view_x_scale_factor,
+        DEFAULT_SCALE_FACTOR));
+    setYTopViewScaleFactor(attributes.getFloat(R.styleable.draggable_view_top_view_y_scale_factor,
+        DEFAULT_SCALE_FACTOR));
+    setTopViewMargin(attributes.getDimensionPixelOffset(R.styleable.draggable_view_top_view_margin,
+        DEFAULT_TOP_VIEW_MARGIN));
+    setTopViewMarginTop(attributes.getDimensionPixelSize(R.styleable.draggable_view_top_view_margin_top,
+        DEFAULT_TOP_VIEW_MARGIN));
+    setTopViewMarginBottom(attributes.getDimensionPixelSize(R.styleable.draggable_view_top_view_margin_bottom,
             DEFAULT_TOP_VIEW_MARGIN));
-    transformer.setMarginBottom(
-        attributes.getDimensionPixelSize(R.styleable.draggable_view_top_view_margin_bottom,
+    setTopViewMarginLeft(attributes.getDimensionPixelSize(R.styleable.draggable_view_top_view_margin_left,
+        DEFAULT_TOP_VIEW_MARGIN));
+    setTopViewMarginRight(attributes.getDimensionPixelSize(R.styleable.draggable_view_top_view_margin_right,
             DEFAULT_TOP_VIEW_MARGIN));
+    setDragLimit(attributes.getFloat(R.styleable.draggable_view_drag_limit_view,
+        Transformer.DEFAULT_DRAG_LIMIT));
+    setDragViewPosition(attributePosition.getInt(R.styleable.top_view_position_position,
+        Position.RIGHT));
+    attributes.recycle();
   }
 
   /**
@@ -670,15 +738,14 @@ public class DraggableView extends RelativeLayout {
    */
   private void initializeAttributes(AttributeSet attrs) {
     TypedArray attributes = getContext().obtainStyledAttributes(attrs, R.styleable.draggable_view);
-    this.enableHorizontalAlphaEffect =
-        attributes.getBoolean(R.styleable.draggable_view_enable_minimized_horizontal_alpha_effect,
-            DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT);
-    this.enableClickToMaximize =
-        attributes.getBoolean(R.styleable.draggable_view_enable_click_to_maximize_view,
-            DEFAULT_ENABLE_CLICK_TO_MAXIMIZE);
-    this.enableClickToMinimize =
-        attributes.getBoolean(R.styleable.draggable_view_enable_click_to_minimize_view,
-            DEFAULT_ENABLE_CLICK_TO_MINIMIZE);
+    setHorizontalAlphaEffectEnabled(attributes.getBoolean(
+        R.styleable.draggable_view_enable_minimized_horizontal_alpha_effect,
+        DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT));
+    setClickToMaximizeEnabled(attributes.getBoolean(R.styleable.draggable_view_enable_click_to_maximize_view,
+        DEFAULT_ENABLE_CLICK_TO_MAXIMIZE));
+    setClickToMinimizeEnabled(attributes.getBoolean(R.styleable.draggable_view_enable_click_to_minimize_view,
+        DEFAULT_ENABLE_CLICK_TO_MINIMIZE));
+    this.attributePosition = getContext().obtainStyledAttributes(attrs, R.styleable.top_view_position);
     this.attributes = attributes;
   }
 
@@ -691,7 +758,7 @@ public class DraggableView extends RelativeLayout {
    */
   private boolean smoothSlideTo(float slideOffset) {
     final int topBound = getPaddingTop();
-    int x = (int) (slideOffset * (getWidth() - transformer.getMinWidthPlusMarginRight()));
+    int x = (int) (slideOffset * (getWidth() - transformer.getMinWidthPlusMarginHorizontalSides()));
     int y = (int) (topBound + slideOffset * getVerticalDragRange());
     if (viewDragHelper.smoothSlideViewTo(dragView, x, y)) {
       ViewCompat.postInvalidateOnAnimation(this);
@@ -701,10 +768,24 @@ public class DraggableView extends RelativeLayout {
   }
 
   /**
+   * @return configured dragged view margin left configured.
+   */
+  private int getDragViewMarginLeft() {
+    return transformer.getMarginLeft();
+  }
+
+  /**
    * @return configured dragged view margin right configured.
    */
   private int getDragViewMarginRight() {
     return transformer.getMarginRight();
+  }
+
+  /**
+   * @return configured dragged view margin top.
+   */
+  private int getDragViewMarginTop() {
+    return transformer.getMarginTop();
   }
 
   /**
@@ -738,7 +819,7 @@ public class DraggableView extends RelativeLayout {
    * @return the difference between the custom view height and the dragged view height.
    */
   private float getVerticalDragRange() {
-    return getHeight() - transformer.getMinHeightPlusMargin();
+    return getHeight() - transformer.getMinHeightPlusVerticalSides();
   }
 
   /**
@@ -778,6 +859,6 @@ public class DraggableView extends RelativeLayout {
   }
 
   public int getDraggedViewHeightPlusMarginTop() {
-    return transformer.getMinHeightPlusMargin();
+    return transformer.getMinHeightPlusVerticalSides();
   }
 }

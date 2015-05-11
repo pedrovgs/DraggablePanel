@@ -61,8 +61,8 @@ public class YoutubeSampleActivity extends FragmentActivity {
     setContentView(R.layout.activity_youtube_sample);
     ButterKnife.inject(this);
     initializeYoutubeFragment();
-    initializeDraggablePanel();
     hookDraggablePanelListeners();
+    initializeDraggablePanel();
   }
 
   /**
@@ -123,9 +123,7 @@ public class YoutubeSampleActivity extends FragmentActivity {
         playVideo();
       }
 
-      @Override public void onMinimized() {
-        //Empty
-      }
+      @Override public void onMinimized() { }
 
       @Override public void onClosedToLeft() {
         pauseVideo();
@@ -134,6 +132,8 @@ public class YoutubeSampleActivity extends FragmentActivity {
       @Override public void onClosedToRight() {
         pauseVideo();
       }
+
+      @Override public void onTopViewSlide(float scroll) { }
     });
   }
 

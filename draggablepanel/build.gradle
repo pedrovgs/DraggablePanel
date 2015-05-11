@@ -30,7 +30,7 @@ android {
   }
 }
 
-apply from: 'https://raw.github.com/jpardogo/gradle-mvn-push/master/gradle-mvn-push.gradle'
+//apply from: 'https://raw.github.com/jpardogo/gradle-mvn-push/master/gradle-mvn-push.gradle'
 
 
 task checkstyle(type: Checkstyle) {

@@ -53,14 +53,38 @@ class ResizeTransformer extends Transformer {
    */
   @Override
   public void updatePosition(float verticalDragOffset) {
-    int right = getViewRightPosition(verticalDragOffset);
-    int left = right - layoutParams.width;
+
+    int right;
+    int left;
     int top = getView().getTop();
     int bottom = top + layoutParams.height;
+
+    switch (getViewPosition()) {
+      case Position.LEFT:
+        left = getViewLeftPosition(verticalDragOffset);
+        right = layoutParams.width;
+        break;
+      case Position.CENTER:
+        right = layoutParams.width / 2;
+        left = right;
+        break;
+      case Position.RIGHT:
+      default:
+        right = getViewRightPosition(verticalDragOffset);
+        left = right - layoutParams.width;
+        break;
+    }
 
     getView().layout(left, top, right, bottom);
   }
 
+  /**
+   * @return true if the left position of the view plus the right left is equals to the parent
+   * width.
+   */
+  @Override public boolean isViewAtLeft() {
+    return getView().getLeft() + getMarginLeft() == getParentView().getWidth();
+  }
 
   /**
    * @return true if the right position of the view plus the right margin is equals to the parent
@@ -97,15 +121,15 @@ class ResizeTransformer extends Transformer {
   /**
    * Uses the Y scale factor to calculate the min possible height.
    */
-  @Override public int getMinHeightPlusMargin() {
-    return (int) (getOriginalHeight() * (1 - 1 / getYScaleFactor()) + getMarginBottom());
+  @Override public int getMinHeightPlusVerticalSides() {
+    return (int) (getOriginalHeight() * (1 - 1 / getYScaleFactor()) + getMarginTop() + getMarginBottom());
   }
 
   /**
    * Uses the X scale factor to calculate the min possible width.
    */
-  @Override public int getMinWidthPlusMarginRight() {
-    return (int) (getOriginalWidth() * (1 - 1 / getXScaleFactor()) + getMarginRight());
+  @Override public int getMinWidthPlusMarginHorizontalSides() {
+    return (int) (getOriginalWidth() * (1 - 1 / getXScaleFactor()) + getMarginLeft() + getMarginRight());
   }
 
   /**
@@ -115,6 +139,10 @@ class ResizeTransformer extends Transformer {
    */
   private int getViewRightPosition(float verticalDragOffset) {
     return (int) ((getOriginalWidth()) - getMarginRight() * verticalDragOffset);
+  }
+
+  private int getViewLeftPosition(float verticalDragOffset) {
+    return (int) ((getOriginalWidth()) - getMarginLeft() * verticalDragOffset);
   }
 
 }
