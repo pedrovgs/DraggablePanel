@@ -136,8 +136,8 @@ You can customize some of the view effects programatically or using xml styleabl
         draggable_view:top_view_y_scale_factor="@dimen/y_scale_factor"
         draggable_view:top_view_margin_right="@dimen/top_fragment_margin"
         draggable_view:top_view_margin_bottom="@dimen/top_fragment_margin"
-        draggable_view:enable_click_to_maximize="false"
-        draggable_view:enable_click_to_minimize="true"
+        draggable_view:enable_click_to_maximize_view="false"
+        draggable_view:enable_click_to_minimize_view="true"
         android:background="@color/black">
 
         <!-- ....... -->
