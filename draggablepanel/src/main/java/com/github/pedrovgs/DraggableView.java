@@ -24,10 +24,10 @@ import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
+
 import com.github.pedrovgs.transformer.Transformer;
 import com.github.pedrovgs.transformer.TransformerFactory;
 import com.nineoldandroids.view.ViewHelper;
@@ -531,7 +531,8 @@ public class DraggableView extends RelativeLayout {
    */
   void changeDragViewViewAlpha() {
     if (enableHorizontalAlphaEffect) {
-      // in old logic, alpha value varies with dragView.getLeft() which means that it increases when we drag it to the left ...
+      // in old logic, alpha value varies with dragView.getLeft()
+      // which means that it increases when we drag it to the left ...
       // this doesn't make sense
 
       // float alpha = 1.0f - getHorizontalDragOffset();
