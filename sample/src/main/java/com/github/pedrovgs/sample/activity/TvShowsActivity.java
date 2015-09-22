@@ -15,6 +15,7 @@
  */
 package com.github.pedrovgs.sample.activity;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -88,12 +89,16 @@ public class TvShowsActivity extends DIFragmentActivity {
    */
   private void initializeDraggableView() {
     Handler handler = new Handler();
-    handler.postDelayed(new Runnable() {
-      @Override public void run() {
-        draggableView.setVisibility(View.GONE);
-        draggableView.closeToRight();
-      }
-    }, DELAY_MILLIS);
+    handler.postDelayed(
+        new Runnable(){
+
+          @Override
+          public void run(){
+            draggableView.setVisibility(View.GONE);
+            draggableView.closeToRight();
+          }
+        }, DELAY_MILLIS
+    );
   }
 
   /**
@@ -101,21 +106,26 @@ public class TvShowsActivity extends DIFragmentActivity {
    */
   private void initializeGridView() {
     tvShowsGridView.setAdapter(adapter);
-    tvShowsGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-      @Override public void onItemClick(AdapterView<?> adapterView, View view, int position,
-          long id) {
-        TvShowViewModel tvShow = adapter.getItem(position);
-        tvShowSelected = tvShow;
-        Picasso.with(getBaseContext())
-            .load(tvShow.getFanArt())
-            .placeholder(R.drawable.tv_show_placeholder)
-            .into(fanArtImageView);
-        renderEpisodesHeader(tvShow);
-        renderEpisodes(tvShow);
-        draggableView.setVisibility(View.VISIBLE);
-        draggableView.maximize();
-      }
-    });
+    tvShowsGridView.setOnItemClickListener(
+        new AdapterView.OnItemClickListener(){
+
+          @Override
+          public void onItemClick(
+              AdapterView<?> adapterView, View view, int position, long id
+          ){
+            TvShowViewModel tvShow = adapter.getItem(position);
+            tvShowSelected = tvShow;
+            Picasso.with(getBaseContext())
+                .load(tvShow.getFanArt())
+                .placeholder(R.drawable.tv_show_placeholder)
+                .into(fanArtImageView);
+            renderEpisodesHeader(tvShow);
+            renderEpisodes(tvShow);
+            draggableView.setVisibility(View.VISIBLE);
+            draggableView.maximize();
+          }
+        }
+    );
   }
 
   /**
@@ -123,23 +133,33 @@ public class TvShowsActivity extends DIFragmentActivity {
    * information.
    */
   private void hookListeners() {
-    draggableView.setDraggableListener(new DraggableListener() {
-      @Override public void onMaximized() {
-        updateActionBarTitle();
-      }
+    draggableView.setDraggableListener(
+        new DraggableListener(){
 
-      @Override public void onMinimized() {
-        updateActionBarTitle();
-      }
+          @Override
+          public void onMaximized(){
+            updateActionBarTitle();
+          }
 
-      @Override public void onClosedToLeft() {
-        resetActionBarTitle();
-      }
 
-      @Override public void onClosedToRight() {
-        resetActionBarTitle();
-      }
-    });
+          @Override
+          public void onMinimized(){
+            updateActionBarTitle();
+          }
+
+
+          @Override
+          public void onClosedToLeft(){
+            resetActionBarTitle();
+          }
+
+
+          @Override
+          public void onClosedToRight(){
+            resetActionBarTitle();
+          }
+        }
+    );
   }
 
   /**
@@ -185,18 +205,29 @@ public class TvShowsActivity extends DIFragmentActivity {
     header.setText(tvShow.getTitle().toUpperCase() + " - SEASON 1");
     episodesListView.setAdapter(null);
     episodesListView.addHeaderView(header);
-    episodesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-      @Override public void onItemClick(AdapterView<?> adapterView, View view, int position,
-          long id) {
-        if (tvShowSelected != null) {
-          if (position > 0) {
-            EpisodeViewModel episodeViewModel = tvShowSelected.getEpisodes().get(position - 1);
-            Toast.makeText(getBaseContext(),
-                tvShowSelected.getTitle() + " - " + episodeViewModel.getTitle(), Toast.LENGTH_LONG)
-                .show();
+    episodesListView.setOnItemClickListener(
+        new AdapterView.OnItemClickListener(){
+
+          @Override
+          public void onItemClick(
+              AdapterView<?> adapterView, View view, int position, long id
+          ){
+            if(tvShowSelected != null){
+              if(position > 0){
+                EpisodeViewModel episodeViewModel = tvShowSelected.getEpisodes().get(position - 1);
+                Toast.makeText(
+                    getBaseContext(), tvShowSelected.getTitle() + " - " + episodeViewModel.getTitle(), Toast.LENGTH_LONG
+                ).show();
+              }
+            }
           }
         }
-      }
-    });
+    );
+  }
+
+
+  public void onConfigurationChanged(Configuration newConfig){
+    super.onConfigurationChanged(newConfig);
+
   }
 }
