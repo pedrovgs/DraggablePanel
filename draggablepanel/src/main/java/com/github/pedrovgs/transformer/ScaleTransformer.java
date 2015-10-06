@@ -94,5 +94,4 @@ class ScaleTransformer extends Transformer {
   @Override public int getMinWidthPlusMarginRight() {
     return getOriginalWidth();
   }
-
 }

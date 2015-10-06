@@ -40,19 +40,18 @@ class ResizeTransformer extends Transformer {
    */
   @Override public void updateScale(float verticalDragOffset) {
     layoutParams.width = (int) (getOriginalWidth() * (1 - verticalDragOffset / getXScaleFactor()));
-    layoutParams.height = (int) (getOriginalHeight() * (1 - verticalDragOffset / getYScaleFactor()));
+    layoutParams.height =
+        (int) (getOriginalHeight() * (1 - verticalDragOffset / getYScaleFactor()));
 
     getView().setLayoutParams(layoutParams);
   }
-
 
   /**
    * Changes X view position using layout() method.
    *
    * @param verticalDragOffset used to calculate the new X position.
    */
-  @Override
-  public void updatePosition(float verticalDragOffset) {
+  @Override public void updatePosition(float verticalDragOffset) {
     int right = getViewRightPosition(verticalDragOffset);
     int left = right - layoutParams.width;
     int top = getView().getTop();
@@ -60,7 +59,6 @@ class ResizeTransformer extends Transformer {
 
     getView().layout(left, top, right, bottom);
   }
-
 
   /**
    * @return true if the right position of the view plus the right margin is equals to the parent
@@ -116,5 +114,4 @@ class ResizeTransformer extends Transformer {
   private int getViewRightPosition(float verticalDragOffset) {
     return (int) ((getOriginalWidth()) - getMarginRight() * verticalDragOffset);
   }
-
 }

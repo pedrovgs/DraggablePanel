@@ -15,6 +15,7 @@
  */
 package com.github.pedrovgs.sample.activity;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.widget.ImageView;
@@ -81,19 +82,20 @@ public class YoutubeSampleActivity extends FragmentActivity {
     youtubeFragment = new YouTubePlayerSupportFragment();
     youtubeFragment.initialize(YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener() {
 
-      @Override public void onInitializationSuccess(YouTubePlayer.Provider provider,
-          YouTubePlayer player, boolean wasRestored) {
-        if (!wasRestored) {
-          youtubePlayer = player;
-          youtubePlayer.loadVideo(VIDEO_KEY);
-          youtubePlayer.setShowFullscreenButton(true);
-        }
-      }
+          @Override
+          public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player,
+              boolean wasRestored) {
+            if (!wasRestored) {
+              youtubePlayer = player;
+              youtubePlayer.loadVideo(VIDEO_KEY);
+              youtubePlayer.setShowFullscreenButton(true);
+            }
+          }
 
-      @Override public void onInitializationFailure(YouTubePlayer.Provider provider,
-          YouTubeInitializationResult error) {
-      }
-    });
+          @Override public void onInitializationFailure(YouTubePlayer.Provider provider,
+              YouTubeInitializationResult error) {
+          }
+        });
   }
 
   /**
@@ -119,22 +121,23 @@ public class YoutubeSampleActivity extends FragmentActivity {
    */
   private void hookDraggablePanelListeners() {
     draggablePanel.setDraggableListener(new DraggableListener() {
-      @Override public void onMaximized() {
-        playVideo();
-      }
 
-      @Override public void onMinimized() {
-        //Empty
-      }
+          @Override public void onMaximized() {
+            playVideo();
+          }
 
-      @Override public void onClosedToLeft() {
-        pauseVideo();
-      }
+          @Override public void onMinimized() {
 
-      @Override public void onClosedToRight() {
-        pauseVideo();
-      }
-    });
+          }
+
+          @Override public void onClosedToLeft() {
+            pauseVideo();
+          }
+
+          @Override public void onClosedToRight() {
+            pauseVideo();
+          }
+        });
   }
 
   /**
@@ -153,5 +156,9 @@ public class YoutubeSampleActivity extends FragmentActivity {
     if (!youtubePlayer.isPlaying()) {
       youtubePlayer.play();
     }
+  }
+
+  public void onConfigurationChanged(Configuration newConfig) {
+    super.onConfigurationChanged(newConfig);
   }
 }

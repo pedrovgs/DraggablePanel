@@ -15,6 +15,7 @@
  */
 package com.github.pedrovgs.sample.activity;
 
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -84,23 +85,24 @@ public class VideoSampleActivity extends FragmentActivity {
    */
   private void hookDraggableViewListener() {
     draggableView.setDraggableListener(new DraggableListener() {
-      @Override public void onMaximized() {
-        startVideo();
-      }
 
-      //Empty
-      @Override public void onMinimized() {
-        //Empty
-      }
+          @Override public void onMaximized() {
+            startVideo();
+          }
 
-      @Override public void onClosedToLeft() {
-        pauseVideo();
-      }
+          //Empty
+          @Override public void onMinimized() {
+            //Empty
+          }
 
-      @Override public void onClosedToRight() {
-        pauseVideo();
-      }
-    });
+          @Override public void onClosedToLeft() {
+            pauseVideo();
+          }
+
+          @Override public void onClosedToRight() {
+            pauseVideo();
+          }
+        });
   }
 
   /**
@@ -142,5 +144,9 @@ public class VideoSampleActivity extends FragmentActivity {
         .load(VIDEO_THUMBNAIL)
         .placeholder(R.drawable.spiderman_placeholder)
         .into(thumbnailImageView);
+  }
+
+  public void onConfigurationChanged(Configuration newConfig) {
+    super.onConfigurationChanged(newConfig);
   }
 }

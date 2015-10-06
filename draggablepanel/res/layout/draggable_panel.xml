@@ -5,19 +5,22 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     draggable_view:bottom_view_id="@+id/second_view"
-    draggable_view:top_view_id="@+id/drag_view">
+    draggable_view:top_view_id="@+id/drag_view"
+    >
 
   <FrameLayout
       android:id="@+id/second_view"
       android:layout_width="fill_parent"
       android:layout_height="fill_parent"
-      android:layout_below="@+id/drag_view"/>
+      android:layout_below="@+id/drag_view"
+      />
 
   <FrameLayout
       android:id="@+id/drag_view"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:layout_alignParentTop="true"
-      android:orientation="vertical"/>
+      android:orientation="vertical"
+      />
 
 </com.github.pedrovgs.DraggableView>
