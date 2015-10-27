@@ -15,6 +15,7 @@
  */
 package com.github.pedrovgs.sample.activity;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.github.pedrovgs.sample.DraggablePanelApplication;
@@ -31,5 +32,11 @@ public class DIFragmentActivity extends SherlockFragmentActivity {
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     ((DraggablePanelApplication) getApplication()).inject(this);
+  }
+
+
+  public void onConfigurationChanged(Configuration newConfig){
+    super.onConfigurationChanged(newConfig);
+
   }
 }

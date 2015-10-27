@@ -58,6 +58,7 @@ public class DraggablePanel extends FrameLayout {
   private boolean enableClickToMaximize;
   private boolean enableClickToMinimize;
   private boolean enableTouchListener;
+  private boolean initialised = false;
 
   public DraggablePanel(Context context) {
     super(context);
@@ -109,6 +110,15 @@ public class DraggablePanel extends FrameLayout {
     this.topFragmentHeight = topFragmentHeight;
   }
 
+  public void setFullScreen(boolean fullScreen) {
+    setLockDragMode(fullScreen);
+    if (fullScreen) {
+      draggableView.setTopViewHeight(getResources().getDisplayMetrics().heightPixels);
+    } else {
+      draggableView.setTopViewHeight(topFragmentHeight);
+    }
+  }
+
   /**
    * Return if user can maximize minimized view on click.
    */
@@ -146,7 +156,30 @@ public class DraggablePanel extends FrameLayout {
   }
 
   /**
+   * Disables dragging the view
    *
+   * @param lock - true to disable, false to enable
+   */
+  public void setLockDragMode(boolean lock) {
+    if (initialised) {
+      draggableView.setLockDragMode(lock);
+    } else {
+      throw new IllegalStateException("You have to initialise draggable panel first");
+    }
+  }
+
+  /**
+   * Return if dragging is locked or unlocked
+   */
+  public boolean isLockDragMode() {
+    if (initialised) {
+      return draggableView.isLockDragMode();
+    } else {
+      throw new IllegalStateException("You have to initialise draggable panel first");
+    }
+  }
+
+  /**
    * Slide the view based on scroll of the nav drawer.
    * "setEnableTouch" user prevents click to expand while the drawer is moving.
    * It's only possible to maximize the view when @slideOffset is equals to 0.0,
@@ -268,6 +301,7 @@ public class DraggablePanel extends FrameLayout {
     draggableView.setClickToMaximizeEnabled(enableClickToMaximize);
     draggableView.setClickToMinimizeEnabled(enableClickToMinimize);
     draggableView.setTouchEnabled(enableTouchListener);
+    initialised = true;
   }
 
   /**

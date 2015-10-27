@@ -81,8 +81,9 @@ public class YoutubeSampleActivity extends FragmentActivity {
     youtubeFragment = new YouTubePlayerSupportFragment();
     youtubeFragment.initialize(YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener() {
 
-      @Override public void onInitializationSuccess(YouTubePlayer.Provider provider,
-          YouTubePlayer player, boolean wasRestored) {
+      @Override
+      public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player,
+          boolean wasRestored) {
         if (!wasRestored) {
           youtubePlayer = player;
           youtubePlayer.loadVideo(VIDEO_KEY);
@@ -119,6 +120,7 @@ public class YoutubeSampleActivity extends FragmentActivity {
    */
   private void hookDraggablePanelListeners() {
     draggablePanel.setDraggableListener(new DraggableListener() {
+
       @Override public void onMaximized() {
         playVideo();
       }
@@ -154,4 +156,13 @@ public class YoutubeSampleActivity extends FragmentActivity {
       youtubePlayer.play();
     }
   }
+
+  //public void onConfigurationChanged(Configuration newConfig) {
+  //  super.onConfigurationChanged(newConfig);
+  //  if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+  //    draggablePanel.setLockDragMode(true);
+  //  } else {
+  //    draggablePanel.setLockDragMode(false);
+  //  }
+  //}
 }

@@ -17,6 +17,7 @@ package com.github.pedrovgs.sample.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -51,5 +52,11 @@ public class MainActivity extends Activity {
   @OnClick(R.id.iv_video) void openVideoSampleActivity() {
     Intent intent = new Intent(this, VideoSampleActivity.class);
     startActivity(intent);
+  }
+
+
+  public void onConfigurationChanged(Configuration newConfig){
+    super.onConfigurationChanged(newConfig);
+
   }
 }

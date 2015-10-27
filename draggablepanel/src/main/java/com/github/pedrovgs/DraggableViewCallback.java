@@ -108,8 +108,7 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
   @Override public int clampViewPositionHorizontal(View child, int left, int dx) {
     int newLeft = draggedView.getLeft();
     if ((draggableView.isMinimized() && Math.abs(dx) > MINIMUM_DX_FOR_HORIZONTAL_DRAG) || (
-        draggableView.isDragViewAtBottom()
-            && !draggableView.isDragViewAtRight())) {
+        draggableView.isDragViewAtBottom() && !draggableView.isDragViewAtRight())) {
       newLeft = left;
     }
     return newLeft;
@@ -126,13 +125,13 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
    */
   @Override public int clampViewPositionVertical(View child, int top, int dy) {
     int newTop = draggableView.getHeight() - draggableView.getDraggedViewHeightPlusMarginTop();
-    if (draggableView.isMinimized() && Math.abs(dy) >= MINIMUM_DY_FOR_VERTICAL_DRAG
-        || (!draggableView.isMinimized() && !draggableView.isDragViewAtBottom())) {
+    if (draggableView.isMinimized() && Math.abs(dy) >= MINIMUM_DY_FOR_VERTICAL_DRAG || (
+        !draggableView.isMinimized() && !draggableView.isDragViewAtBottom())) {
 
       final int topBound = draggableView.getPaddingTop();
-      final int bottomBound = draggableView.getHeight()
-          - draggableView.getDraggedViewHeightPlusMarginTop()
-          - draggedView.getPaddingBottom();
+      final int bottomBound =
+          draggableView.getHeight() - draggableView.getDraggedViewHeightPlusMarginTop()
+              - draggedView.getPaddingBottom();
 
       newTop = Math.min(Math.max(top, topBound), bottomBound);
     }
