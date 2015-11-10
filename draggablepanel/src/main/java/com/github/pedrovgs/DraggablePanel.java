@@ -214,6 +214,13 @@ public class DraggablePanel extends FrameLayout {
   }
 
   /**
+   * Configure the top Fragment to resize instead of scale it.
+   */
+  public void setTopFragmentResize(boolean topViewResize) {
+    draggableView.setTopViewResize(topViewResize);
+  }
+
+  /**
    * Close the custom view applying an animation to close the view to the left side of the screen.
    */
   public void closeToLeft() {
