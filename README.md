@@ -175,16 +175,6 @@ Do you want to contribute? TODO
 
 * Support landscape mode when DraggableView is using ResizeTransformer.
 
-Contributors
-------------
-
-* [Pedro Vicente Gómez Sánchez][20]
-* [Frieder Bluemle][21]
-* [Goldos] [22]
-* [Rafał Pluta][23]
-* [Pedro Paulo de Amorim][24]
-
-
 Developed By
 ------------
 
@@ -196,13 +186,6 @@ Developed By
 <a href="https://es.linkedin.com/in/pedrovgs">
   <img alt="Add me to Linkedin" src="http://imageshack.us/a/img41/7877/smallld.png" />
 </a>
-
-Who's using it
---------------
-
-* [El Rubius Vídeos][9] using the first beta release.
-* [DudePerfect Vídeos] [18] using the first beta release.
-* [VejoaoVivo Mobile] [25] using the last release.
 
 *Does your app use DraggablePanel? If you want to be featured on this list tell me on [Twitter][10]
 
@@ -244,7 +227,6 @@ License
 [6]: ./art/screenshot2.gif
 [7]: ./art/screenshot3.gif
 [8]: ./art/screenshot4.gif
-[9]: https://play.google.com/store/apps/details?id=com.nero.elrubiusomg
 [10]: https://twitter.com/pedro_g_s
 [11]: https://github.com/pedrovgs/Renderers
 [12]: https://github.com/square/dagger
@@ -253,10 +235,3 @@ License
 [15]: https://github.com/square/picasso
 [16]: http://actionbarsherlock.com/
 [17]: https://developers.google.com/youtube/android/player/
-[18]: https://play.google.com/store/apps/details?id=com.nero.dudeperfect
-[20]: https://github.com/pedrovgs/
-[21]: https://github.com/friederbluemle/
-[22]: https://github.com/glodos/
-[23]: https://github.com/Fiddl3/
-[24]: https://github.com/ppamorim/
-[25]: https://play.google.com/store/apps/details?id=com.Tag_Interativa.vejo_ao_vivo.app
