@@ -181,10 +181,10 @@ Developed By
 * Pedro Vicente Gómez Sánchez - <pedrovicente.gomez@gmail.com>
 
 <a href="https://twitter.com/pedro_g_s">
-  <img alt="Follow me on Twitter" src="https://image.freepik.com/iconos-gratis/twitter-logo_318-40209.jpg" height="100" width="100"/>
+  <img alt="Follow me on Twitter" src="https://image.freepik.com/iconos-gratis/twitter-logo_318-40209.jpg" height="60" width="60"/>
 </a>
 <a href="https://es.linkedin.com/in/pedrovgs">
-  <img alt="Add me to Linkedin" src="https://image.freepik.com/iconos-gratis/boton-del-logotipo-linkedin_318-84979.png" height="100" width="100"/>
+  <img alt="Add me to Linkedin" src="https://image.freepik.com/iconos-gratis/boton-del-logotipo-linkedin_318-84979.png" height="60" width="60"/>
 </a>
 
 *Does your app use DraggablePanel? If you want to be featured on this list tell me on [Twitter][10]
