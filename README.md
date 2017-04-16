@@ -1,6 +1,7 @@
 Draggable Panel [![Build Status](https://travis-ci.org/pedrovgs/DraggablePanel.svg?branch=develop)](https://travis-ci.org/pedrovgs/DraggablePanel)  [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.pedrovgs/draggablepanel/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.pedrovgs/draggablepanel) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-DraggablePanel-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/244) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c4bb6558f6df4236835f66ef01711121)](https://www.codacy.com/app/DraggablePannel/DraggablePanel)
 ===============
 
+**DEPRECATED**
 
 Draggable Panel is an Android library created to build a draggable user interface similar to the new YouTube draggable video component based on Fragments or Views.
 
