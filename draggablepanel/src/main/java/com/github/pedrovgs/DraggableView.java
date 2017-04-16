@@ -27,6 +27,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
+
 import com.github.pedrovgs.transformer.Transformer;
 import com.github.pedrovgs.transformer.TransformerFactory;
 import com.nineoldandroids.view.ViewHelper;
@@ -529,10 +530,20 @@ public class DraggableView extends RelativeLayout {
    */
   void changeDragViewViewAlpha() {
     if (enableHorizontalAlphaEffect) {
-      float alpha = 1 - getHorizontalDragOffset();
-      if (alpha == 0) {
+      // in old logic, alpha value varies with dragView.getLeft()
+      // which means that it increases when we drag it to the left ...
+      // this doesn't make sense
+
+      // float alpha = 1.0f - getHorizontalDragOffset();
+      float alpha = getHorizontalDragOffset();
+      if (alpha < 0) {
+        alpha = 0;
+      }
+
+      if (alpha > 1) {
         alpha = 1;
       }
+
       ViewHelper.setAlpha(dragView, alpha);
     }
   }
@@ -724,7 +735,7 @@ public class DraggableView extends RelativeLayout {
    * @return absolute value between the dragged view  left position divided by custon view width
    */
   private float getHorizontalDragOffset() {
-    return (float) Math.abs(dragView.getLeft()) / (float) getWidth();
+    return (float) Math.abs(dragView.getLeft()) / (float) getHorizontalDragRange();
   }
 
   /**
@@ -744,6 +755,16 @@ public class DraggableView extends RelativeLayout {
   private float getVerticalDragRange() {
     return getHeight() - transformer.getMinHeightPlusMargin();
   }
+
+  /**
+   * Calculate the horizontal drag range between the custom view and dragged view.
+   *
+   * @return the difference between the custom view width and the dragged view width.
+   */
+  private float getHorizontalDragRange() {
+    return getWidth() - transformer.getMinWidthPlusMarginRight();
+  }
+
 
   /**
    * Notify te view is maximized to the DraggableListener
