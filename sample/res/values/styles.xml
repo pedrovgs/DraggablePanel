@@ -2,7 +2,7 @@
 
   <!-- Application -->
 
-  <style name="AppTheme" parent="@style/Theme.Sherlock.Light"/>
+  <style name="AppTheme" parent="@style/Theme.AppCompat.Light"/>
 
   <style name="image_view">
     <item name="android:scaleType">centerCrop</item>

@@ -19,6 +19,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -38,7 +39,6 @@ import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.nineoldandroids.view.ViewHelper;
 import com.pedrogomez.renderers.RendererAdapter;
 import com.squareup.picasso.Picasso;
 import javax.inject.Inject;
@@ -306,7 +306,7 @@ public class PlacesSampleActivity extends DIFragmentActivity {
 
           @Override public void onDrawerSlide(View drawerView, float slideOffset) {
             super.onDrawerSlide(drawerView, slideOffset);
-            draggablePanel.slideHorizontally(slideOffset, ViewHelper.getX(drawerView),
+            draggablePanel.slideHorizontally(slideOffset, ViewCompat.getX(drawerView),
                 drawerView.getWidth());
           }
         };

@@ -10,7 +10,7 @@ dependencies {
   compile 'com.squareup.dagger:dagger:1.1.0'
   compile 'com.github.pedrovgs:renderers:1.0.9'
   compile 'com.google.android.gms:play-services:4.1.32'
-  compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
+  compile 'com.android.support:appcompat-v7:23.1.1'
   compile files('libs/YouTubeAndroidPlayerApi.jar')
 }
 
