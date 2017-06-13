@@ -4,6 +4,7 @@
     android:id="@+id/iv_thumbnail"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    style="@style/image_view">
+    style="@style/image_view"
+    >
 
 </ImageView>

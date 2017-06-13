@@ -17,6 +17,7 @@ package com.github.pedrovgs.sample.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.MotionEvent;
 import android.widget.ImageView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -81,8 +82,9 @@ public class YoutubeSampleActivity extends FragmentActivity {
     youtubeFragment = new YouTubePlayerSupportFragment();
     youtubeFragment.initialize(YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener() {
 
-      @Override public void onInitializationSuccess(YouTubePlayer.Provider provider,
-          YouTubePlayer player, boolean wasRestored) {
+      @Override
+      public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player,
+          boolean wasRestored) {
         if (!wasRestored) {
           youtubePlayer = player;
           youtubePlayer.loadVideo(VIDEO_KEY);
@@ -133,6 +135,22 @@ public class YoutubeSampleActivity extends FragmentActivity {
 
       @Override public void onClosedToRight() {
         pauseVideo();
+      }
+
+      @Override public void onTouchListener(MotionEvent ev) {
+
+      }
+
+      @Override public void onClickedToMaximize() {
+
+      }
+
+      @Override public void onClickedToMinimize() {
+
+      }
+
+      @Override public void onSmoothSlide() {
+
       }
     });
   }

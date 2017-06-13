@@ -17,6 +17,7 @@ package com.github.pedrovgs.sample.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -102,8 +103,8 @@ public class TvShowsActivity extends DIFragmentActivity {
   private void initializeGridView() {
     tvShowsGridView.setAdapter(adapter);
     tvShowsGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-      @Override public void onItemClick(AdapterView<?> adapterView, View view, int position,
-          long id) {
+      @Override
+      public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         TvShowViewModel tvShow = adapter.getItem(position);
         tvShowSelected = tvShow;
         Picasso.with(getBaseContext())
@@ -138,6 +139,22 @@ public class TvShowsActivity extends DIFragmentActivity {
 
       @Override public void onClosedToRight() {
         resetActionBarTitle();
+      }
+
+      @Override public void onTouchListener(MotionEvent ev) {
+
+      }
+
+      @Override public void onClickedToMaximize() {
+
+      }
+
+      @Override public void onClickedToMinimize() {
+
+      }
+
+      @Override public void onSmoothSlide() {
+
       }
     });
   }
@@ -186,8 +203,8 @@ public class TvShowsActivity extends DIFragmentActivity {
     episodesListView.setAdapter(null);
     episodesListView.addHeaderView(header);
     episodesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-      @Override public void onItemClick(AdapterView<?> adapterView, View view, int position,
-          long id) {
+      @Override
+      public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         if (tvShowSelected != null) {
           if (position > 0) {
             EpisodeViewModel episodeViewModel = tvShowSelected.getEpisodes().get(position - 1);

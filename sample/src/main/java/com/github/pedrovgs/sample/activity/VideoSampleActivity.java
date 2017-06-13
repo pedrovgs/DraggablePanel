@@ -18,6 +18,7 @@ package com.github.pedrovgs.sample.activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.MotionEvent;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -99,6 +100,22 @@ public class VideoSampleActivity extends FragmentActivity {
 
       @Override public void onClosedToRight() {
         pauseVideo();
+      }
+
+      @Override public void onTouchListener(MotionEvent ev) {
+
+      }
+
+      @Override public void onClickedToMaximize() {
+
+      }
+
+      @Override public void onClickedToMinimize() {
+
+      }
+
+      @Override public void onSmoothSlide() {
+
       }
     });
   }

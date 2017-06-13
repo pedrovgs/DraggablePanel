@@ -4,7 +4,8 @@
     android:id="@+id/ll_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f1f1f1">
+    android:background="#f1f1f1"
+    >
 
   <!-- Grid View -->
 
@@ -12,7 +13,8 @@
       android:id="@+id/gv_tv_shows"
       android:layout_width="fill_parent"
       android:layout_height="fill_parent"
-      style="@style/tv_show_grid_view"/>
+      style="@style/tv_show_grid_view"
+      />
 
   <!-- Draggable View -->
 
@@ -22,13 +24,14 @@
       android:id="@+id/draggable_view"
       android:layout_width="fill_parent"
       android:layout_height="fill_parent"
-      draggable_view:top_view_id="@+id/iv_fan_art"
+      android:background="@color/black"
       draggable_view:bottom_view_id="@+id/lv_episodes"
+      draggable_view:top_view_id="@+id/iv_fan_art"
+      draggable_view:top_view_margin_bottom="@dimen/top_fragment_margin"
+      draggable_view:top_view_margin_right="@dimen/top_fragment_margin"
       draggable_view:top_view_x_scale_factor="@dimen/x_scale_factor"
       draggable_view:top_view_y_scale_factor="@dimen/y_scale_factor"
-      draggable_view:top_view_margin_right="@dimen/top_fragment_margin"
-      draggable_view:top_view_margin_bottom="@dimen/top_fragment_margin"
-      android:background="@color/black">
+      >
 
     <!-- ListView Episodes -->
 
@@ -37,7 +40,8 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@+id/iv_fan_art"
-        style="@style/episodes_list_view"/>
+        style="@style/episodes_list_view"
+        />
 
     <!-- TvShow Fan Art -->
 
@@ -46,7 +50,8 @@
         android:layout_width="fill_parent"
         android:layout_height="@dimen/tv_show_fan_art_height"
         android:layout_alignParentTop="true"
-        style="@style/image_view"/>
+        style="@style/image_view"
+        />
 
   </com.github.pedrovgs.DraggableView>
 

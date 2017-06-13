@@ -3,27 +3,31 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/drawer_left"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
   <!-- ListView places -->
   <ListView
       android:id="@+id/lv_places"
       android:layout_width="fill_parent"
-      android:layout_height="fill_parent"/>
+      android:layout_height="fill_parent"
+      />
 
   <!-- DraggablePanel -->
 
   <com.github.pedrovgs.DraggablePanel
       android:id="@+id/draggable_panel"
       android:layout_width="fill_parent"
-      android:layout_height="fill_parent"/>
+      android:layout_height="fill_parent"
+      />
 
   <ImageView
       android:id="@+id/iv_drawer"
       android:layout_width="280dp"
       android:layout_height="match_parent"
       android:layout_gravity="start"
+      android:background="@color/white"
       android:scaleType="centerCrop"
-      android:background="@color/white"/>
+      />
 
 </android.support.v4.widget.DrawerLayout>

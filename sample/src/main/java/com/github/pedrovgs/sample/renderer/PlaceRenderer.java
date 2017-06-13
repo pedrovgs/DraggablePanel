@@ -36,10 +36,9 @@ import com.squareup.picasso.Picasso;
  */
 public class PlaceRenderer extends Renderer<PlaceViewModel> {
 
-  private Context context;
-
   @InjectView(R.id.tv_name) TextView nameTextView;
   @InjectView(R.id.iv_photo) ImageView photoImageView;
+  private Context context;
 
   public PlaceRenderer(Context context) {
     this.context = context;

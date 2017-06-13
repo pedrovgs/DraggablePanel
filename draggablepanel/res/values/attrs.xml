@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <declare-styleable name="draggable_panel">
-    <attr name="top_fragment_height" format="dimension"/>
-    <attr name="x_scale_factor" format="float"/>
-    <attr name="y_scale_factor" format="float"/>
-    <attr name="top_fragment_margin_right" format="dimension"/>
-    <attr name="top_fragment_margin_bottom" format="dimension"/>
-    <attr name="enable_horizontal_alpha_effect" format="boolean"/>
-    <attr name="enable_click_to_maximize_panel" format="boolean"/>
-    <attr name="enable_click_to_minimize_panel" format="boolean"/>
-    <attr name="enable_touch_listener_panel" format="boolean"/>
+    <attr format="dimension" name="top_fragment_height"/>
+    <attr format="float" name="x_scale_factor"/>
+    <attr format="float" name="y_scale_factor"/>
+    <attr format="dimension" name="top_fragment_margin_right"/>
+    <attr format="dimension" name="top_fragment_margin_bottom"/>
+    <attr format="boolean" name="enable_horizontal_alpha_effect"/>
+    <attr format="boolean" name="enable_click_to_maximize_panel"/>
+    <attr format="boolean" name="enable_click_to_minimize_panel"/>
+    <attr format="boolean" name="enable_touch_listener_panel"/>
   </declare-styleable>
 
   <declare-styleable name="draggable_view">
-    <attr name="top_view_id" format="reference"/>
-    <attr name="bottom_view_id" format="reference"/>
-    <attr name="top_view_height" format="dimension"/>
-    <attr name="top_view_x_scale_factor" format="float"/>
-    <attr name="top_view_y_scale_factor" format="float"/>
-    <attr name="top_view_margin_right" format="dimension"/>
-    <attr name="top_view_margin_bottom" format="dimension"/>
-    <attr name="enable_minimized_horizontal_alpha_effect" format="boolean"/>
-    <attr name="enable_click_to_maximize_view" format="boolean"/>
-    <attr name="enable_click_to_minimize_view" format="boolean"/>
-    <attr name="top_view_resize" format="boolean"/>
+    <attr format="reference" name="top_view_id"/>
+    <attr format="reference" name="bottom_view_id"/>
+    <attr format="dimension" name="top_view_height"/>
+    <attr format="float" name="top_view_x_scale_factor"/>
+    <attr format="float" name="top_view_y_scale_factor"/>
+    <attr format="dimension" name="top_view_margin_right"/>
+    <attr format="dimension" name="top_view_margin_bottom"/>
+    <attr format="string" name="orientation_for_events"/>
+    <attr format="boolean" name="enable_minimized_horizontal_alpha_effect"/>
+    <attr format="boolean" name="enable_click_to_maximize_view"/>
+    <attr format="boolean" name="enable_click_to_minimize_view"/>
+    <attr format="boolean" name="top_view_resize"/>
   </declare-styleable>
 
 </resources>

@@ -146,7 +146,6 @@ public class DraggablePanel extends FrameLayout {
   }
 
   /**
-   *
    * Slide the view based on scroll of the nav drawer.
    * "setEnableTouch" user prevents click to expand while the drawer is moving.
    * It's only possible to maximize the view when @slideOffset is equals to 0.0,
